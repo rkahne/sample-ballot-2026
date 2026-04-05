@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//f/robert_kahne/kentucky-political-data/shapefiles/louisville_precincts_2026/**)",
+      "Read(//mnt/f/robert_kahne/kentucky-political-data/shapefiles/**)",
+      "Bash(cd /tmp)",
+      "Bash(curl -L -o 2026-candidate-filing.pdf \"https://elections.jeffersoncountyclerk.org/pdfs/2026-candidate-filing.pdf\")",
+      "Bash(python3 -c \":*)",
+      "Bash(python -c \":*)",
+      "Bash(python -c \"import flask; print\\(''Flask:'', flask.__version__\\)\")",
+      "Bash(python -c \"import requests; print\\(''requests OK''\\)\")",
+      "Bash(curl -s http://localhost:5000/)",
+      "Bash(xargs ls:*)",
+      "mcp__Claude_Preview__preview_start"
+    ]
+  }
+}
