@@ -11,7 +11,9 @@
       "Bash(python -c \"import requests; print\\(''requests OK''\\)\")",
       "Bash(curl -s http://localhost:5000/)",
       "Bash(xargs ls:*)",
-      "mcp__Claude_Preview__preview_start"
+      "mcp__Claude_Preview__preview_start",
+      "Bash(curl -s -X POST http://localhost:5000/api/lookup -H \"Content-Type: application/json\" -d '{\"\"\"\"address\"\"\"\":\"\"\"\"1800 S Shelby St\"\"\"\"}')",
+      "Bash(python -m json.tool)"
     ]
   }
 }

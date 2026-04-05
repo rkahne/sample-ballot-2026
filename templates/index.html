@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Louisville Democrat – 2026 Sample Ballot</title>
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
   <style>
     /* ── Variables ── */
     :root {
@@ -237,8 +238,11 @@
     .legend-swatch { width: 13px; height: 13px; border-radius: 3px; }
     .legend-swatch.endorsed { background: var(--endorse-bg); border: 1.5px solid var(--endorse-border); }
 
-    /* ── Print bar (bottom, hidden now that button is in header) ── */
+    /* ── Print bar (unused) ── */
     .print-bar { display: none; }
+
+    /* ── Saving spinner ── */
+    .btn-print-header:disabled { opacity: 0.6; cursor: default; }
 
     .endorse-note {
       background: #e8f5ed;
@@ -254,101 +258,13 @@
       padding: 12px 18px; border-top: 1px solid var(--border);
     }
 
-    /* ══════════════════════════════════════
-       PRINT / PDF — single page, phone portrait
-    ══════════════════════════════════════ */
-    @media print {
-      @page {
-        size: 390px 844px;
-        margin: 6px 8px;
-      }
-
-      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-
-      body { background: #fff; }
-
-      .site-header, .lookup-card, .precinct-bar, .print-bar, .legend,
-      .btn-print-header, .endorse-note { display: none !important; }
-
-      #ballot { display: block !important; margin: 0; page-break-inside: avoid; }
-
-      /* Shrink the whole ballot to guarantee single page */
-      .ballot-header,
-      .ballot-body,
-      .ballot-footer { zoom: 0.72; }
-
-      .ballot-header {
-        border-radius: 0;
-        padding: 5px 10px 4px;
-        background: var(--navy) !important;
-      }
-      .ballot-header h2 { font-size: 11pt; }
-      .ballot-header p  { font-size: 7.5pt; }
-
-      .ballot-body { border: none; border-radius: 0; }
-
-      /* No page breaks within sections */
-      .ballot-section { border-bottom: 1px solid #bbb; page-break-inside: avoid; }
-
-      .section-header {
-        padding: 3px 8px;
-        font-size: 6pt;
-        letter-spacing: .08em;
-      }
-      .section-header.nonpartisan { background: #37474f !important; }
-      .section-header.partisan    { background: #1a4a8a !important; }
-
-      .race { padding: 4px 8px; border-bottom: 1px solid #e8e8e8; }
-      .race:last-child { border-bottom: none; }
-      .race-title { font-size: 6pt; margin-bottom: 3px; }
-      .race-note  { font-size: 5.5pt; margin-bottom: 2px; }
-
-      /* Remove all box styling from candidates — pure flat list */
-      .candidate {
-        border: none !important;
-        border-radius: 0 !important;
-        padding: 1px 0 !important;
-        gap: 4px;
-        background: none !important;
-      }
-      .candidate.endorsed { background: none !important; }
-
-      /* No bubbles in print */
-      .bubble { display: none !important; }
-
-      /* Candidate name */
-      .cand-name { font-size: 7pt; font-weight: 600; }
-
-      /* Endorsement: just a star + colored text instead of a badge */
-      .endorsed-badge { display: none !important; }
-      .candidate.endorsed .cand-name {
-        color: var(--endorse) !important;
-        font-weight: 800;
-      }
-      .candidate.endorsed::before {
-        content: "★";
-        color: var(--endorse);
-        font-size: 7pt;
-        flex-shrink: 0;
-      }
-
-      /* 3-column for Mayor (most candidates), 2-col elsewhere */
-      .mayor-list {
-        display: grid !important;
-        grid-template-columns: 1fr 1fr 1fr !important;
-        gap: 0 4px !important;
-      }
-      .candidate-list {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 0 4px;
-      }
-
-      .ballot-footer { font-size: 5pt; padding: 3px 8px; border-top: 1px solid #ddd; }
-
-      .print-precinct { display: block !important; font-size: 5.5pt; color: #555; text-align: center; padding: 1px 0 3px; }
-    }
-    .print-precinct { display: none; }
+    /* Image capture overlay */
+    .capturing .site-header,
+    .capturing .lookup-card,
+    .capturing .precinct-bar,
+    .capturing .legend,
+    .capturing .print-bar { display: none !important; }
+    .capturing { background: #fff; }
   </style>
 </head>
 <body>
@@ -361,13 +277,13 @@
       <h1>Louisville Democratic Party<br>2026 Sample Ballot</h1>
       <p>Primary Election &mdash; May 19, 2026 &nbsp;|&nbsp; Jefferson County, KY</p>
     </div>
-    <button class="btn-print-header" onclick="window.print()">
+    <button class="btn-print-header" id="saveImgBtn" onclick="saveAsImage()">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="6 9 6 2 18 2 18 9"></polyline>
-        <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
-        <rect x="6" y="14" width="12" height="8"></rect>
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+        <polyline points="7 10 12 15 17 10"></polyline>
+        <line x1="12" y1="15" x2="12" y2="3"></line>
       </svg>
-      Save as PDF
+      Save as Image
     </button>
   </div>
   <div class="header-bar"></div>
@@ -405,8 +321,6 @@
 
   <!-- ═══ BALLOT ═══ -->
   <div id="ballot">
-    <div class="print-precinct" id="printPrecinct"></div>
-
     <div class="ballot-header">
       <h2>Your 2026 Democratic Primary Sample Ballot</h2>
       <p id="ballotSubhead">Primary Election &mdash; May 19, 2026</p>
@@ -674,8 +588,6 @@ async function doLookup() {
 
     document.getElementById('ballotSubhead').textContent =
       `Primary Election — May 19, 2026  |  Precinct ${data.precinct}  |  Metro Council District ${data.council_district}`;
-    document.getElementById('printPrecinct').textContent =
-      `${data.matched_address}  |  Precinct: ${data.precinct}  |  Council: ${data.council_district}  |  Commissioner: ${data.commissioner_district}`;
 
     document.getElementById('ballotBody').innerHTML = buildBallot(data);
     document.getElementById('ballot').classList.add('visible');
@@ -692,6 +604,53 @@ async function doLookup() {
 document.getElementById('addrInput').addEventListener('keydown', e => {
   if (e.key === 'Enter') doLookup();
 });
+
+// ── Save ballot as PNG image ──
+async function saveAsImage() {
+  const ballot = document.getElementById('ballot');
+  if (!ballot.classList.contains('visible')) {
+    alert('Please look up your address first to generate your ballot.');
+    return;
+  }
+
+  const btn = document.getElementById('saveImgBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Saving…';
+
+  // Capture only the ballot element at 390px width (phone portrait)
+  const originalWidth  = ballot.style.width;
+  const originalMaxWidth = ballot.style.maxWidth;
+  ballot.style.width    = '390px';
+  ballot.style.maxWidth = '390px';
+
+  try {
+    const canvas = await html2canvas(ballot, {
+      scale: 2,
+      useCORS: true,
+      backgroundColor: '#ffffff',
+      scrollX: 0,
+      scrollY: -window.scrollY,
+      width: 390,
+      windowWidth: 390,
+    });
+
+    ballot.style.width    = originalWidth;
+    ballot.style.maxWidth = originalMaxWidth;
+
+    const link = document.createElement('a');
+    link.download = 'my-2026-sample-ballot.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  } catch (err) {
+    ballot.style.width    = originalWidth;
+    ballot.style.maxWidth = originalMaxWidth;
+    alert('Image save failed. Try again.');
+    console.error(err);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> Save as Image';
+  }
+}
 </script>
 </body>
 </html>
