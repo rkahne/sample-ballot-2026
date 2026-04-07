@@ -437,7 +437,7 @@
       <div class="legend-item"><div class="legend-swatch endorsed"></div> LDP Endorsed</div>
       <div class="legend-item"><span class="party-badge D" style="font-size:.7rem">D</span> Democrat</div>
       <div class="legend-item"><span class="party-badge R" style="font-size:.7rem">R</span> Republican</div>
-      <div class="legend-item"><span class="party-badge U" style="font-size:.7rem">?</span> Registration unverified</div>
+      <div class="legend-item"><span class="party-badge U" style="font-size:.7rem">O</span> Other / unverified</div>
     </div>
 
     <div class="polls-note">
@@ -494,16 +494,16 @@ const ENDORSEMENTS = {
 
 // Mayor: nonpartisan — party = voter registration ('D','R', or null = unverified)
 const MAYOR_CANDIDATES = [
-  { name: 'Jody Hurt',                  party: null },
-  { name: 'Douglas Lattimore',          party: null },
-  { name: 'Bill Wells',                 party: null },
+  { name: 'Jody Hurt',                  party: null },  // Libertarian
+  { name: 'Douglas Lattimore',          party: null },  // Other Party
+  { name: 'Bill Wells',                 party: 'D'  },
   { name: 'Craig Greenberg',            party: 'D'  },
-  { name: 'Tina Burnell',              party: null },
-  { name: 'Bob DeVore',                party: null },
-  { name: 'Lisa M. Holliday Harris',   party: null },
-  { name: 'Jeffrey Yocum',             party: null },
-  { name: 'Matthew Solomon Bailey',    party: null },
-  { name: 'S. "The D" Dattilo',        party: null },
+  { name: 'Tina Burnell',              party: 'R'  },
+  { name: 'Bob DeVore',                party: 'R'  },
+  { name: 'Lisa M. Holliday Harris',   party: 'D'  },
+  { name: 'Jeffrey Yocum',             party: 'R'  },
+  { name: 'Matthew Solomon Bailey',    party: 'D'  },
+  { name: 'S. "The D" Dattilo',        party: 'R'  },
   { name: 'Shameka L. Parrish-Wright', party: 'D'  },
 ];
 
@@ -511,39 +511,39 @@ const MAYOR_CANDIDATES = [
 // Candidates are objects { name, party }
 const COUNCIL_CANDIDATES = {
   3:  [
-    { name: 'Kumar Rashad',  party: 'D'   },
-    { name: 'Keisha Dorsey', party: null  },
-    { name: 'Shaun Spencer', party: null  },
+    { name: 'Kumar Rashad',  party: 'D' },
+    { name: 'Keisha Dorsey', party: 'D' },
+    { name: 'Shaun Spencer', party: 'D' },
   ],
   5:  [
-    { name: 'Betty Bailey',              party: null },
-    { name: 'Dave Duncan',               party: null },
-    { name: 'Wallace Garner III',        party: null },
-    { name: 'Ray "Sir Friendly" Barker', party: null },
-    { name: 'Aprile Hearn',              party: 'D'  },
-    { name: 'Donna Lyvette Purvis',      party: null },
+    { name: 'Betty Bailey',              party: 'D'   },
+    { name: 'Dave Duncan',               party: 'D'   },
+    { name: 'Wallace Garner III',        party: null  },  // Independent
+    { name: 'Ray "Sir Friendly" Barker', party: 'D'   },
+    { name: 'Aprile Hearn',              party: 'D'   },
+    { name: 'Donna Lyvette Purvis',      party: 'D'   },
   ],
   9:  [
-    { name: 'Charles Todd',         party: null },
-    { name: 'Alison Brotzge-Elder', party: null },
-    { name: 'Andrea R. Parr',       party: null },
-    { name: 'Mark England',         party: null },
+    { name: 'Charles Todd',         party: 'D' },
+    { name: 'Alison Brotzge-Elder', party: 'D' },
+    { name: 'Andrea R. Parr',       party: 'D' },
+    { name: 'Mark England',         party: 'D' },
   ],
   17: [
-    { name: 'Merideth Booth',      party: null },
-    { name: 'Markus Winkler',      party: 'D'  },
-    { name: 'Nancy-Lynne Walters', party: null },
+    { name: 'Merideth Booth',      party: 'D' },
+    { name: 'Markus Winkler',      party: 'D' },
+    { name: 'Nancy-Lynne Walters', party: 'R' },
   ],
   21: [
-    { name: 'Ben Spalding',    party: null },
-    { name: 'Betsy Ruhe',      party: 'D'  },
-    { name: 'Lonnie Joseph',   party: null },
-    { name: 'Savannah Hughes', party: null },
+    { name: 'Ben Spalding',    party: 'D' },
+    { name: 'Betsy Ruhe',      party: 'D' },
+    { name: 'Lonnie Joseph',   party: 'R' },
+    { name: 'Savannah Hughes', party: 'D' },
   ],
   23: [
-    { name: 'Jeff Hudson',    party: null },
-    { name: 'Ainsley Jones',  party: 'D'  },
-    { name: 'David R. Steff', party: null },
+    { name: 'Jeff Hudson',    party: 'R' },
+    { name: 'Ainsley Jones',  party: 'D' },
+    { name: 'David R. Steff', party: 'R' },
   ],
 };
 
@@ -591,7 +591,7 @@ function starSvg() {
 function partyBadge(party) {
   if (party === 'D') return `<span class="party-badge D">D</span>`;
   if (party === 'R') return `<span class="party-badge R">R</span>`;
-  return `<span class="party-badge U">?</span>`;
+  return `<span class="party-badge U">O</span>`;
 }
 
 let raceCounter = 0;

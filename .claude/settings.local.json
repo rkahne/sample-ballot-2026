@@ -13,7 +13,10 @@
       "Bash(xargs ls:*)",
       "mcp__Claude_Preview__preview_start",
       "Bash(curl -s -X POST http://localhost:5000/api/lookup -H \"Content-Type: application/json\" -d '{\"\"\"\"address\"\"\"\":\"\"\"\"1800 S Shelby St\"\"\"\"}')",
-      "Bash(python -m json.tool)"
+      "Bash(python -m json.tool)",
+      "Bash(curl -s -X POST http://localhost:5000/api/contact -H \"Content-Type: application/json\" -d '{\"\"\"\"name\"\"\"\":\"\"\"\"Test User\"\"\"\",\"\"\"\"email\"\"\"\":\"\"\"\"test@louisvilledems.com\"\"\"\",\"\"\"\"phone\"\"\"\":\"\"\"\"502-555-0100\"\"\"\"}')",
+      "Bash(curl -s -L -w \"\\\\nHTTP_STATUS:%{http_code}\" -X POST \"https://script.google.com/a/macros/louisvilledems.com/s/AKfycbzZ69a66stnlFhsjqfr9K5ZMXBD5jn4ODnRpgdLNMLG9PlEXCE_adeICA1fR-RngK6KXg/exec\" -H \"Content-Type: application/json\" -d '{\"\"\"\"name\"\"\"\":\"\"\"\"Test\"\"\"\",\"\"\"\"email\"\"\"\":\"\"\"\"test@test.com\"\"\"\",\"\"\"\"phone\"\"\"\":\"\"\"\"\"\"\"\"}')",
+      "Bash(curl -s -L -w \"\\\\nHTTP_STATUS:%{http_code}\" -X POST \"https://script.google.com/a/macros/louisvilledems.com/s/AKfycbzZ69a66stnlFhsjqfr9K5ZMXBD5jn4ODnRpgdLNMLG9PlEXCE_adeICA1fR-RngK6KXg/exec\" -H \"Content-Type: application/json\" -d '{\"\"\"\"name\"\"\"\":\"\"\"\"Test User\"\"\"\",\"\"\"\"email\"\"\"\":\"\"\"\"test@louisvilledems.com\"\"\"\",\"\"\"\"phone\"\"\"\":\"\"\"\"502-555-0100\"\"\"\"}')"
     ]
   }
 }
