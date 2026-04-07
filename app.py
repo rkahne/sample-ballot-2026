@@ -2,7 +2,6 @@
 Louisville Democratic Party - 2026 Sample Ballot App
 """
 import os
-import json
 import requests
 from flask import Flask, render_template, request, jsonify, send_from_directory
 import geopandas as gpd
@@ -100,6 +99,36 @@ def lookup():
         "state_senate_district": int(row["SENDIST"]),
         "commissioner_district": str(row["COMMDIST"]),
     })
+
+
+SHEETS_WEBHOOK = (
+    "https://script.google.com/a/macros/louisvilledems.com/s/"
+    "AKfycbzZ69a66stnlFhsjqfr9K5ZMXBD5jn4ODnRpgdLNMLG9PlEXCE_adeICA1fR-RngK6KXg/exec"
+)
+
+
+@app.route("/api/contact", methods=["POST"])
+def contact():
+    data = request.get_json(force=True)
+    name  = (data.get("name")  or "").strip()
+    email = (data.get("email") or "").strip()
+    phone = (data.get("phone") or "").strip()
+
+    if not email and not phone:
+        return jsonify({"error": "Email or phone required."}), 400
+
+    try:
+        resp = requests.post(
+            SHEETS_WEBHOOK,
+            json={"name": name, "email": email, "phone": phone},
+            timeout=10,
+        )
+        resp.raise_for_status()
+    except Exception as exc:
+        print(f"Sheets webhook error: {exc}")
+        return jsonify({"error": "Could not save — please try again."}), 502
+
+    return jsonify({"ok": True})
 
 
 if __name__ == "__main__":

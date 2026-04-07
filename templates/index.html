@@ -3,306 +3,411 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Louisville Democrat – 2026 Sample Ballot</title>
+  <title>Louisville Democratic Party — 2026 Voter Guide</title>
   <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
   <style>
-    /* ── Variables ── */
     :root {
-      --navy:   #1a2e5a;
-      --blue:   #2356a8;
-      --endorse:#1a6b35;
-      --endorse-bg:#e8f5ed;
+      --navy:          #1a2e5a;
+      --blue:          #2356a8;
+      --endorse:       #1a6b35;
+      --endorse-bg:    #e8f5ed;
       --endorse-border:#4caf50;
-      --gray:   #f4f6f9;
-      --border: #d0d7e3;
-      --text:   #1a1a2e;
-      --muted:  #5a6580;
-      --dem:    #1565c0;
+      --gray:          #f4f6f9;
+      --border:        #d0d7e3;
+      --text:          #1a1a2e;
+      --muted:         #5a6580;
+      --dem:           #1565c0;
+      --rep:           #b71c1c;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      background: var(--gray);
-      color: var(--text);
-      min-height: 100vh;
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--gray); color: var(--text); min-height: 100vh; }
+
+    /* ── Disclaimer banner ── */
+    .disclaimer-banner {
+      background: #fff3cd;
+      border-bottom: 1px solid #ffc107;
+      text-align: center;
+      padding: 8px 16px;
+      font-size: 0.78rem;
+      color: #5a4000;
     }
+    .disclaimer-banner strong { color: #3a2800; }
 
     /* ── Header ── */
     .site-header { background: var(--navy); color: #fff; }
     .header-inner {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 20px 20px 16px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
+      max-width: 880px; margin: 0 auto;
+      padding: 18px 20px 14px;
+      display: flex; align-items: center; gap: 14px;
     }
-    .ldp-logo {
-      flex-shrink: 0;
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid rgba(255,255,255,0.3);
-    }
+    .ldp-logo { flex-shrink: 0; width: 68px; height: 68px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(255,255,255,.3); }
     .header-text { flex: 1; }
-    .header-text h1 { font-size: 1.5rem; font-weight: 800; line-height: 1.15; }
-    .header-text p  { font-size: 0.88rem; opacity: 0.78; margin-top: 3px; }
+    .header-text h1 { font-size: 1.35rem; font-weight: 800; line-height: 1.2; }
+    .header-text p  { font-size: 0.82rem; opacity: .78; margin-top: 3px; }
     .header-bar { background: var(--blue); height: 4px; }
 
-    /* ── Print button in header ── */
-    .btn-print-header {
+    .btn-save {
       display: flex; align-items: center; gap: 7px;
-      background: rgba(255,255,255,0.15);
-      color: #fff;
-      border: 1.5px solid rgba(255,255,255,0.4);
-      padding: 9px 18px;
-      border-radius: 7px;
-      font-size: 0.88rem; font-weight: 600;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: background .2s;
-      flex-shrink: 0;
+      background: rgba(255,255,255,.15); color: #fff;
+      border: 1.5px solid rgba(255,255,255,.4);
+      padding: 9px 16px; border-radius: 7px;
+      font-size: 0.85rem; font-weight: 600;
+      cursor: pointer; white-space: nowrap;
+      transition: background .2s; flex-shrink: 0;
     }
-    .btn-print-header:hover { background: rgba(255,255,255,0.25); }
+    .btn-save:hover    { background: rgba(255,255,255,.25); }
+    .btn-save:disabled { opacity: .6; cursor: default; }
 
-    /* ── Main ── */
-    .container { max-width: 860px; margin: 0 auto; padding: 24px 20px 60px; }
+    /* ── Container ── */
+    .container { max-width: 880px; margin: 0 auto; padding: 22px 20px 60px; }
+
+    /* ── Explainer card ── */
+    .explainer-card {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: 10px; padding: 20px 22px;
+      margin-bottom: 18px;
+      box-shadow: 0 2px 6px rgba(0,0,0,.05);
+    }
+    .explainer-card h2 { font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+    .explainer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 560px) { .explainer-grid { grid-template-columns: 1fr; } }
+    .explainer-item { background: var(--gray); border-radius: 7px; padding: 12px 14px; }
+    .explainer-item h3 { font-size: 0.82rem; font-weight: 700; color: var(--navy); margin-bottom: 5px; }
+    .explainer-item p  { font-size: 0.8rem; color: var(--muted); line-height: 1.45; }
 
     /* ── Lookup card ── */
     .lookup-card {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 24px;
-      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+      background: #fff; border: 1px solid var(--border);
+      border-radius: 10px; padding: 22px;
+      box-shadow: 0 2px 6px rgba(0,0,0,.05);
     }
-    .lookup-card h2 { font-size: 1.1rem; font-weight: 700; color: var(--navy); margin-bottom: 5px; }
-    .lookup-card p  { font-size: 0.88rem; color: var(--muted); margin-bottom: 16px; }
+    .lookup-card h2 { font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: 5px; }
+    .lookup-card > p { font-size: 0.86rem; color: var(--muted); margin-bottom: 14px; }
 
     .addr-row { display: flex; gap: 10px; flex-wrap: wrap; }
-    .addr-input-wrap {
-      flex: 1 1 280px;
-      position: relative;
-    }
+    .addr-input-wrap { flex: 1 1 260px; position: relative; }
     .addr-suffix {
-      position: absolute;
-      right: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 0.85rem;
-      color: var(--muted);
-      pointer-events: none;
-      white-space: nowrap;
+      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+      font-size: 0.82rem; color: var(--muted); pointer-events: none; white-space: nowrap;
     }
     .addr-row input {
-      width: 100%;
-      padding: 12px 120px 12px 14px;
-      border: 1.5px solid var(--border);
-      border-radius: 7px;
-      font-size: 1rem;
-      color: var(--text);
-      outline: none;
+      width: 100%; padding: 11px 130px 11px 13px;
+      border: 1.5px solid var(--border); border-radius: 7px;
+      font-size: 1rem; color: var(--text); outline: none;
       transition: border-color .2s;
     }
     .addr-row input:focus { border-color: var(--blue); }
-
     .btn-primary {
-      background: var(--blue);
-      color: #fff;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 7px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: background .2s;
+      background: var(--blue); color: #fff;
+      border: none; padding: 11px 22px;
+      border-radius: 7px; font-size: 1rem; font-weight: 600;
+      cursor: pointer; white-space: nowrap; transition: background .2s;
     }
     .btn-primary:hover    { background: var(--navy); }
     .btn-primary:disabled { background: #9ab; cursor: default; }
 
-    .status-msg { margin-top: 12px; font-size: 0.88rem; color: var(--muted); min-height: 18px; }
+    .status-msg { margin-top: 10px; font-size: 0.86rem; color: var(--muted); min-height: 18px; }
     .status-msg.error { color: #c62828; }
 
     /* ── Precinct bar ── */
     .precinct-bar {
-      background: var(--navy);
-      color: #fff;
-      border-radius: 8px;
-      padding: 12px 18px;
-      margin-top: 18px;
-      display: none;
-      flex-wrap: wrap;
-      gap: 8px 24px;
-      align-items: center;
-      font-size: 0.86rem;
+      background: var(--navy); color: #fff;
+      border-radius: 8px; padding: 11px 16px;
+      margin-top: 16px; display: none;
+      flex-wrap: wrap; gap: 8px 22px; align-items: center;
     }
     .precinct-bar.visible { display: flex; }
-    .precinct-bar .addr-label { flex-basis: 100%; font-size: 0.8rem; opacity: .72; margin-bottom: 2px; }
+    .precinct-bar .addr-label { flex-basis: 100%; font-size: 0.78rem; opacity: .7; margin-bottom: 2px; }
     .pi-item { display: flex; flex-direction: column; }
-    .pi-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: .06em; opacity: .6; }
-    .pi-val   { font-weight: 700; font-size: 0.95rem; }
+    .pi-label { font-size: 0.66rem; text-transform: uppercase; letter-spacing: .06em; opacity: .6; }
+    .pi-val   { font-weight: 700; font-size: 0.9rem; }
 
     /* ── Ballot ── */
-    #ballot { display: none; margin-top: 24px; }
+    #ballot { display: none; margin-top: 22px; }
     #ballot.visible { display: block; }
 
     .ballot-header {
-      background: var(--navy);
-      color: #fff;
+      background: var(--navy); color: #fff;
       border-radius: 10px 10px 0 0;
-      padding: 18px 22px 14px;
-      text-align: center;
+      padding: 16px 20px 12px; text-align: center;
     }
-    .ballot-header h2 { font-size: 1.3rem; font-weight: 800; }
-    .ballot-header p  { font-size: 0.82rem; opacity: .78; margin-top: 3px; }
+    .ballot-header h2 { font-size: 1.2rem; font-weight: 800; }
+    .ballot-header p  { font-size: 0.8rem; opacity: .78; margin-top: 3px; }
 
     .ballot-body {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-top: none;
-      border-radius: 0 0 10px 10px;
-      overflow: hidden;
+      background: #fff; border: 1px solid var(--border);
+      border-top: none; border-radius: 0 0 10px 10px; overflow: hidden;
     }
 
     .ballot-section { border-bottom: 2px solid var(--border); }
     .ballot-section:last-child { border-bottom: none; }
 
     .section-header {
-      padding: 9px 18px;
-      font-size: 0.74rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .1em;
-      color: #fff;
+      padding: 8px 16px; font-size: 0.72rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .1em; color: #fff;
     }
     .section-header.nonpartisan { background: #37474f; }
     .section-header.partisan    { background: #1a4a8a; }
 
-    .race { border-bottom: 1px solid var(--border); padding: 14px 18px; }
+    .section-note {
+      font-size: 0.75rem; color: var(--muted); font-style: italic;
+      padding: 7px 16px 0; margin-bottom: -4px;
+    }
+
+    .race { border-bottom: 1px solid var(--border); padding: 13px 16px; }
     .race:last-child { border-bottom: none; }
     .race-title {
-      font-size: 0.78rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .06em;
-      color: var(--muted);
-      margin-bottom: 8px;
+      font-size: 0.76rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .06em;
+      color: var(--muted); margin-bottom: 8px;
     }
-    .race-note { font-size: 0.74rem; color: var(--muted); font-style: italic; margin-bottom: 7px; }
+    .race-note { font-size: 0.72rem; color: var(--muted); font-style: italic; margin-bottom: 6px; }
+    .race-no-primary {
+      font-size: 0.82rem; color: var(--muted);
+      background: var(--gray); border-radius: 6px;
+      padding: 10px 13px; line-height: 1.45;
+    }
 
-    .candidate-list { display: flex; flex-direction: column; gap: 7px; }
+    .candidate-list { display: flex; flex-direction: column; gap: 6px; }
     .candidate {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 9px 12px;
-      border: 1.5px solid var(--border);
-      border-radius: 6px;
+      display: flex; align-items: center; gap: 9px;
+      padding: 8px 11px; border: 1.5px solid var(--border); border-radius: 6px;
+      cursor: pointer; user-select: none;
+      transition: background .12s;
     }
+    .candidate:hover { background: #f0f4ff; }
+    .candidate.endorsed:hover { background: #d6eddf; }
     .candidate.endorsed { border-color: var(--endorse-border); background: var(--endorse-bg); }
+
+    /* Bubble — oval like a real ballot */
     .bubble {
-      width: 20px; height: 20px;
+      width: 22px; height: 16px;
       border-radius: 50%;
       border: 2px solid #9ab;
       flex-shrink: 0;
       background: #fff;
+      transition: background .15s, border-color .15s;
+      position: relative;
     }
     .candidate.endorsed .bubble { border-color: var(--endorse-border); }
-    .cand-name { font-weight: 600; font-size: 0.97rem; flex: 1; }
-    .party-badge {
-      font-size: 0.7rem; font-weight: 700;
-      border-radius: 4px; padding: 2px 6px;
-      background: #dbeafe; color: var(--dem);
+
+    /* Filled state */
+    .candidate.selected .bubble {
+      background: var(--navy);
+      border-color: var(--navy);
     }
+    .candidate.selected .bubble::after {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      border-radius: 50%;
+      background: #fff;
+      opacity: 0.3;
+    }
+    .candidate.selected { border-color: var(--navy) !important; background: #eef2ff !important; }
+    .candidate.selected.endorsed { border-color: var(--navy) !important; background: #d8e8ff !important; }
+    .cand-name { font-weight: 600; font-size: 0.94rem; flex: 1; }
+
+    /* Party badge */
+    .party-badge {
+      font-size: 0.68rem; font-weight: 700;
+      border-radius: 4px; padding: 2px 6px;
+      flex-shrink: 0; white-space: nowrap;
+    }
+    .party-badge.D { background: #dbeafe; color: var(--dem); }
+    .party-badge.R { background: #fee2e2; color: var(--rep); }
+    .party-badge.U { background: #f0f0f0; color: #888; font-weight: 500; font-style: italic; }
+
     .endorsed-badge {
       display: flex; align-items: center; gap: 3px;
-      background: var(--endorse);
-      color: #fff;
-      font-size: 0.68rem; font-weight: 700;
+      background: var(--endorse); color: #fff;
+      font-size: 0.66rem; font-weight: 700;
       border-radius: 4px; padding: 3px 7px;
-      white-space: nowrap;
+      white-space: nowrap; flex-shrink: 0;
+    }
+
+    /* ── Endorse note ── */
+    .endorse-note {
+      background: var(--endorse-bg); border-left: 4px solid var(--endorse-border);
+      border-radius: 0 5px 5px 0; padding: 8px 13px;
+      font-size: 0.78rem; color: var(--endorse);
+      margin: 0 16px 10px;
     }
 
     /* ── Legend ── */
     .legend {
-      display: flex; gap: 18px; flex-wrap: wrap; align-items: center;
-      padding: 12px 18px;
-      background: #f8f9fc;
+      display: flex; gap: 16px; flex-wrap: wrap; align-items: center;
+      padding: 11px 16px; background: #f8f9fc;
       border-top: 1px solid var(--border);
-      font-size: 0.78rem; color: var(--muted);
+      font-size: 0.76rem; color: var(--muted);
     }
-    .legend-item { display: flex; align-items: center; gap: 6px; }
-    .legend-swatch { width: 13px; height: 13px; border-radius: 3px; }
+    .legend-item { display: flex; align-items: center; gap: 5px; }
+    .legend-swatch { width: 12px; height: 12px; border-radius: 3px; }
     .legend-swatch.endorsed { background: var(--endorse-bg); border: 1.5px solid var(--endorse-border); }
 
-    /* ── Print bar (unused) ── */
-    .print-bar { display: none; }
-
-    /* ── Saving spinner ── */
-    .btn-print-header:disabled { opacity: 0.6; cursor: default; }
-
-    .endorse-note {
-      background: #e8f5ed;
-      border-left: 4px solid var(--endorse-border);
-      border-radius: 0 5px 5px 0;
-      padding: 9px 13px;
-      font-size: 0.8rem; color: var(--endorse);
-      margin: 0 18px 12px;
+    /* ── Take-to-polls note ── */
+    .polls-note {
+      background: #fffbeb; border: 1px solid #fcd34d;
+      border-radius: 8px; padding: 12px 16px;
+      margin: 16px 0 0;
+      font-size: 0.82rem; color: #78350f; line-height: 1.5;
     }
+    .polls-note strong { color: #451a03; }
 
-    .ballot-footer {
-      text-align: center; font-size: 0.75rem; color: var(--muted);
-      padding: 12px 18px; border-top: 1px solid var(--border);
+    /* ── Share prompt ── */
+    .share-prompt {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: 10px; padding: 20px 22px;
+      margin-top: 18px;
+      box-shadow: 0 2px 6px rgba(0,0,0,.05);
     }
+    .share-prompt h3 { font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+    .share-prompt p  { font-size: 0.84rem; color: var(--muted); margin-bottom: 14px; }
+    .share-row { display: flex; gap: 8px; flex-wrap: wrap; }
+    .share-url-input {
+      flex: 1 1 220px; padding: 9px 12px;
+      border: 1.5px solid var(--border); border-radius: 7px;
+      font-size: 0.84rem; color: var(--muted); background: var(--gray);
+    }
+    .btn-copy {
+      background: var(--blue); color: #fff; border: none;
+      padding: 9px 18px; border-radius: 7px;
+      font-size: 0.88rem; font-weight: 600; cursor: pointer;
+      white-space: nowrap; transition: background .2s;
+    }
+    .btn-copy:hover { background: var(--navy); }
+    .share-sub { font-size: 0.76rem; color: var(--muted); margin-top: 8px !important; }
 
-    /* Image capture overlay */
-    .capturing .site-header,
-    .capturing .lookup-card,
-    .capturing .precinct-bar,
-    .capturing .legend,
-    .capturing .print-bar { display: none !important; }
-    .capturing { background: #fff; }
+    /* ── Contact modal ── */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,.55); z-index: 1000;
+      align-items: center; justify-content: center;
+      padding: 20px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-box {
+      background: #fff; border-radius: 12px;
+      padding: 28px 26px; max-width: 420px; width: 100%;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(0,0,0,.3);
+    }
+    .modal-close {
+      position: absolute; top: 14px; right: 16px;
+      background: none; border: none; font-size: 1.4rem;
+      color: var(--muted); cursor: pointer; line-height: 1;
+    }
+    .modal-logo {
+      width: 52px; height: 52px; border-radius: 50%;
+      object-fit: cover; display: block; margin: 0 auto 14px;
+      border: 3px solid var(--border);
+    }
+    .modal-box h3 { font-size: 1.1rem; font-weight: 800; color: var(--navy); text-align: center; margin-bottom: 6px; }
+    .modal-box > p { font-size: 0.85rem; color: var(--muted); text-align: center; margin-bottom: 18px; line-height: 1.45; }
+    .modal-field { margin-bottom: 11px; }
+    .modal-field input {
+      width: 100%; padding: 10px 13px;
+      border: 1.5px solid var(--border); border-radius: 7px;
+      font-size: 0.95rem; color: var(--text); outline: none;
+      transition: border-color .2s;
+    }
+    .modal-field input:focus { border-color: var(--blue); }
+    .modal-submit {
+      width: 100%; background: var(--blue); color: #fff; border: none;
+      padding: 12px; border-radius: 7px;
+      font-size: 1rem; font-weight: 700; cursor: pointer;
+      margin-top: 4px; transition: background .2s;
+    }
+    .modal-submit:hover { background: var(--navy); }
+    .modal-skip {
+      display: block; width: 100%; background: none; border: none;
+      color: var(--muted); font-size: 0.84rem; cursor: pointer;
+      margin-top: 10px; text-align: center;
+      text-decoration: underline;
+    }
+    .modal-success { text-align: center; padding: 10px 0; }
+    .modal-success p { font-size: 0.9rem; color: var(--endorse); font-weight: 600; }
+
+    /* ── Capture-mode: compact image layout ── */
+    #ballot.capture-mode .endorse-note { padding: 4px 10px; font-size: 0.7rem; margin: 0 10px 7px; }
+    #ballot.capture-mode .section-note { display: none; }
+    #ballot.capture-mode .polls-note   { display: none; }
+    #ballot.capture-mode .legend       { display: none; }
+    #ballot.capture-mode .race { padding: 7px 12px; }
+    #ballot.capture-mode .race-title { font-size: 0.65rem; margin-bottom: 5px; }
+    #ballot.capture-mode .race-note  { font-size: 0.62rem; }
+    #ballot.capture-mode .bubble { width: 14px; height: 10px; border-width: 1.5px; }
+    #ballot.capture-mode .candidate.selected .bubble { background: var(--navy) !important; border-color: var(--navy) !important; }
+    #ballot.capture-mode .candidate { padding: 4px 8px; gap: 6px; border-width: 1px; }
+    #ballot.capture-mode .cand-name { font-size: 0.8rem; }
+    #ballot.capture-mode .party-badge { font-size: 0.58rem; padding: 1px 4px; }
+    #ballot.capture-mode .endorsed-badge { font-size: 0.58rem; padding: 2px 5px; }
+    #ballot.capture-mode .candidate-list { gap: 3px; }
+    #ballot.capture-mode .mayor-list {
+      display: grid !important;
+      grid-template-columns: 1fr 1fr 1fr !important;
+      gap: 3px !important;
+    }
+    #ballot.capture-mode .race-no-primary { font-size: 0.72rem; padding: 6px 10px; }
+    #ballot.capture-mode .section-header { padding: 5px 12px; font-size: 0.62rem; }
+    #ballot.capture-mode .ballot-header  { padding: 10px 14px 8px; }
+    #ballot.capture-mode .ballot-header h2 { font-size: 0.95rem; }
+    #ballot.capture-mode .ballot-header p  { font-size: 0.7rem; }
   </style>
 </head>
 <body>
 
-<!-- ═══ HEADER ═══ -->
+<!-- ── Disclaimer ── -->
+<div class="disclaimer-banner">
+  <strong>Unofficial Voter Guide</strong> &mdash; Produced by the Louisville Democratic Party &mdash; Not an official government document &mdash; <strong>It is legal to bring this guide to the polls</strong>
+</div>
+
+<!-- ── Header ── -->
 <header class="site-header">
   <div class="header-inner">
     <img src="/static/logo.jpg" alt="Louisville Democratic Party" class="ldp-logo" />
     <div class="header-text">
-      <h1>Louisville Democratic Party<br>2026 Sample Ballot</h1>
-      <p>Primary Election &mdash; May 19, 2026 &nbsp;|&nbsp; Jefferson County, KY</p>
+      <h1>Louisville Democratic Party<br>2026 Voter Guide</h1>
+      <p>Democratic Primary &mdash; May 19, 2026 &nbsp;|&nbsp; Jefferson County, KY</p>
     </div>
-    <button class="btn-print-header" id="saveImgBtn" onclick="saveAsImage()">
+    <button class="btn-save" id="saveImgBtn" onclick="saveAsImage()">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
         <polyline points="7 10 12 15 17 10"></polyline>
         <line x1="12" y1="15" x2="12" y2="3"></line>
       </svg>
-      Save as Image
+      Save &amp; Share
     </button>
   </div>
   <div class="header-bar"></div>
 </header>
 
-<!-- ═══ MAIN ═══ -->
+<!-- ── Main ── -->
 <main class="container">
 
+  <!-- Explainer -->
+  <div class="explainer-card">
+    <h2>About the May 19, 2026 Primary Election</h2>
+    <div class="explainer-grid">
+      <div class="explainer-item">
+        <h3>Democratic Primary Races</h3>
+        <p>Only registered Democrats vote in these races. Only <strong>contested</strong> races (2+ candidates) appear on the primary ballot — uncontested candidates go directly to the November general election.</p>
+      </div>
+      <div class="explainer-item">
+        <h3>Nonpartisan Races (Mayor &amp; Metro Council)</h3>
+        <p>All voters participate regardless of party. These races are nonpartisan — <strong>party affiliation will NOT appear on your official ballot</strong>. We've included registration info here so you know who you're voting for. Only races with 3+ candidates have a primary.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lookup -->
   <div class="lookup-card">
-    <h2>Find Your Sample Ballot</h2>
-    <p>Enter your Louisville street address to see every race on your Democratic Primary ballot, with Louisville Democratic Party endorsements highlighted.</p>
+    <h2>Find Your Voter Guide</h2>
+    <p>Enter your Louisville street address to see the races on your ballot, with Louisville Democratic Party endorsements highlighted.</p>
     <div class="addr-row">
       <div class="addr-input-wrap">
-        <input
-          type="text"
-          id="addrInput"
-          placeholder="e.g. 527 W Jefferson St"
-          autocomplete="street-address"
-        />
+        <input type="text" id="addrInput" placeholder="e.g. 527 W Jefferson St" autocomplete="street-address" />
         <span class="addr-suffix">Louisville, KY</span>
       </div>
       <button class="btn-primary" id="lookupBtn" onclick="doLookup()">Find My Ballot</button>
@@ -319,231 +424,280 @@
     </div>
   </div>
 
-  <!-- ═══ BALLOT ═══ -->
+  <!-- Ballot -->
   <div id="ballot">
     <div class="ballot-header">
-      <h2>Your 2026 Democratic Primary Sample Ballot</h2>
-      <p id="ballotSubhead">Primary Election &mdash; May 19, 2026</p>
+      <h2>Your 2026 Louisville Democratic Party Voter Guide</h2>
+      <p id="ballotSubhead">Democratic Primary &mdash; May 19, 2026</p>
     </div>
-
     <div class="ballot-body" id="ballotBody"></div>
 
     <div class="legend">
       <strong>Legend:</strong>
-      <div class="legend-item">
-        <div class="legend-swatch endorsed"></div>
-        Louisville Democratic Party Endorsed Candidate
-      </div>
-      <div class="legend-item" style="color:#777">
-        Reflects the May 19, 2026 Democratic Primary and nonpartisan primary ballots.
-      </div>
+      <div class="legend-item"><div class="legend-swatch endorsed"></div> LDP Endorsed</div>
+      <div class="legend-item"><span class="party-badge D" style="font-size:.7rem">D</span> Democrat</div>
+      <div class="legend-item"><span class="party-badge R" style="font-size:.7rem">R</span> Republican</div>
+      <div class="legend-item"><span class="party-badge U" style="font-size:.7rem">?</span> Registration unverified</div>
     </div>
 
-    <div class="print-bar">
-      <button class="btn-print" onclick="window.print()">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="6 9 6 2 18 2 18 9"></polyline>
-          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
-          <rect x="6" y="14" width="12" height="8"></rect>
-        </svg>
-        Save / Print as PDF
-      </button>
+    <div class="polls-note">
+      <strong>📋 Tap any candidate to mark your choice, then save the image to bring to the polls.</strong> Party labels in nonpartisan races (Mayor, Metro Council) will <em>not</em> appear on your official ballot — bring this guide with you so you know who you're voting for. This is an unofficial voter guide produced by the Louisville Democratic Party.
     </div>
+  </div>
+
+  <!-- Share prompt (shown after ballot loads) -->
+  <div id="sharePrompt" class="share-prompt" style="display:none">
+    <h3>Know someone who needs this?</h3>
+    <p>Share this link — anyone can enter their address to get their own personalized voter guide.</p>
+    <div class="share-row">
+      <input type="text" class="share-url-input" id="shareUrlInput" readonly />
+      <button class="btn-copy" id="copyBtn" onclick="copyShareLink()">Copy Link</button>
+    </div>
+    <p class="share-sub">The link pre-fills your address so they can see your ballot, then enter their own.</p>
   </div>
 
 </main>
 
+<!-- ── Contact modal ── -->
+<div class="modal-overlay" id="contactModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <img src="/static/logo.jpg" alt="LDP" class="modal-logo" />
+    <h3>Stay in the loop!</h3>
+    <p>Get voting reminders, endorsement updates, and news from the Louisville Democratic Party.</p>
+    <div id="modalForm">
+      <div class="modal-field"><input type="text"  id="cName"  placeholder="Your name" /></div>
+      <div class="modal-field"><input type="email" id="cEmail" placeholder="Email address" /></div>
+      <div class="modal-field"><input type="tel"   id="cPhone" placeholder="Phone number (optional)" /></div>
+      <div id="modalError" style="color:#c62828;font-size:.8rem;margin-bottom:8px;display:none"></div>
+      <button class="modal-submit" onclick="submitContact()">Sign me up!</button>
+      <button class="modal-skip"  onclick="closeModal()">No thanks</button>
+    </div>
+    <div class="modal-success" id="modalSuccess" style="display:none">
+      <p>✅ Thanks! We'll be in touch before May 19.</p>
+      <button class="modal-skip" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+</div>
+
 <script>
 // ══════════════════════════════════════════════════════════════════════
-//  CANDIDATE DATA  (Democrats only — KY closed primary)
+//  DATA
 // ══════════════════════════════════════════════════════════════════════
 
 const ENDORSEMENTS = {
   mayor: ['Craig Greenberg'],
-  council: {
-    1:  ['Tammy Hawkins'],
-    3:  ['Kumar Rashad'],
-    5:  ['Aprile Hearn'],
-    7:  ['Paula McCraney'],
-    11: ['Melina Hettiaratchi'],
-    15: ['Jennifer Chappell'],
-    17: ['Markus Winkler'],
-    21: ['Betsy Ruhe'],
-    23: ['Ainsley Jones'],
-  }
+  council: { 1:['Tammy Hawkins'], 3:['Kumar Rashad'], 5:['Aprile Hearn'], 7:['Paula McCraney'],
+    11:['Melina Hettiaratchi'], 15:['Jennifer Chappell'], 17:['Markus Winkler'],
+    21:['Betsy Ruhe'], 23:['Ainsley Jones'] }
 };
 
+// Mayor: nonpartisan — party = voter registration ('D','R', or null = unverified)
 const MAYOR_CANDIDATES = [
-  'Jody Hurt', 'Douglas Lattimore', 'Bill Wells', 'Craig Greenberg',
-  'Tina Burnell', 'Bob DeVore', 'Lisa M. Holliday Harris', 'Jeffrey Yocum',
-  'Matthew Solomon Bailey', 'S. "The D" Dattilo', 'Shameka L. Parrish-Wright',
+  { name: 'Jody Hurt',                  party: null },
+  { name: 'Douglas Lattimore',          party: null },
+  { name: 'Bill Wells',                 party: null },
+  { name: 'Craig Greenberg',            party: 'D'  },
+  { name: 'Tina Burnell',              party: null },
+  { name: 'Bob DeVore',                party: null },
+  { name: 'Lisa M. Holliday Harris',   party: null },
+  { name: 'Jeffrey Yocum',             party: null },
+  { name: 'Matthew Solomon Bailey',    party: null },
+  { name: 'S. "The D" Dattilo',        party: null },
+  { name: 'Shameka L. Parrish-Wright', party: 'D'  },
 ];
 
+// Metro Council: only districts with 3+ candidates have a primary
+// Candidates are objects { name, party }
 const COUNCIL_CANDIDATES = {
-  1:  ['JaRee Gardner', 'Tammy Hawkins'],
-  3:  ['Kumar Rashad', 'Keisha Dorsey', 'Shaun Spencer'],
-  5:  ['Betty Bailey', 'Dave Duncan', 'Wallace Garner III', 'Ray "Sir Friendly" Barker', 'Aprile Hearn', 'Donna Lyvette Purvis'],
-  7:  ['Paula McCraney', 'Catherine "Cat" Timmerman'],
-  9:  ['Charles Todd', 'Alison Brotzge-Elder', 'Andrea R. Parr', 'Mark England'],
-  11: ['Kevin Kramer', 'Melina Hettiaratchi'],
-  13: ['Dan Seum Jr.', 'Ernie Brummitt'],
-  15: ['Jennifer Chappell'],
-  17: ['Merideth Booth', 'Markus Winkler', 'Nancy-Lynne Walters'],
-  19: ['Alex Feria', 'Anthony Piagentini'],
-  21: ['Ben Spalding', 'Betsy Ruhe', 'Lonnie Joseph', 'Savannah Hughes'],
-  23: ['Jeff Hudson', 'Ainsley Jones', 'David R. Steff'],
-  25: ['Khalil "Charlie" Batshon'],
+  3:  [
+    { name: 'Kumar Rashad',  party: 'D'   },
+    { name: 'Keisha Dorsey', party: null  },
+    { name: 'Shaun Spencer', party: null  },
+  ],
+  5:  [
+    { name: 'Betty Bailey',              party: null },
+    { name: 'Dave Duncan',               party: null },
+    { name: 'Wallace Garner III',        party: null },
+    { name: 'Ray "Sir Friendly" Barker', party: null },
+    { name: 'Aprile Hearn',              party: 'D'  },
+    { name: 'Donna Lyvette Purvis',      party: null },
+  ],
+  9:  [
+    { name: 'Charles Todd',         party: null },
+    { name: 'Alison Brotzge-Elder', party: null },
+    { name: 'Andrea R. Parr',       party: null },
+    { name: 'Mark England',         party: null },
+  ],
+  17: [
+    { name: 'Merideth Booth',      party: null },
+    { name: 'Markus Winkler',      party: 'D'  },
+    { name: 'Nancy-Lynne Walters', party: null },
+  ],
+  21: [
+    { name: 'Ben Spalding',    party: null },
+    { name: 'Betsy Ruhe',      party: 'D'  },
+    { name: 'Lonnie Joseph',   party: null },
+    { name: 'Savannah Hughes', party: null },
+  ],
+  23: [
+    { name: 'Jeff Hudson',    party: null },
+    { name: 'Ainsley Jones',  party: 'D'  },
+    { name: 'David R. Steff', party: null },
+  ],
 };
 
-// Democrats only — no Republicans shown on Democratic primary ballot
+// Partisan: only contested Democrat-vs-Democrat races (2+ D candidates)
+// Single-candidate partisan races have no primary
 const PARTISAN_RACES = [
-  {
-    title: 'Property Valuation Administrator (PVA)',
-    scope: 'countywide',
-    candidates: ['Colleen Younger'],
-  },
-  {
-    title: 'County Judge/Executive',
-    scope: 'countywide',
-    candidates: ['Queenie Averette'],
-  },
   {
     title: 'County Attorney',
     scope: 'countywide',
-    note: 'Vote for one',
-    candidates: ['Sarah Martin', 'Karl Price'],
+    note: 'Vote for one — Democratic Primary',
+    candidates: [
+      { name: 'Sarah Martin', party: 'D' },
+      { name: 'Karl Price',   party: 'D' },
+    ],
   },
   {
     title: 'County Clerk',
     scope: 'countywide',
-    note: 'Vote for one',
-    candidates: ['Rosalind "Roz" Welch', 'David Yates'],
+    note: 'Vote for one — Democratic Primary',
+    candidates: [
+      { name: 'Rosalind "Roz" Welch', party: 'D' },
+      { name: 'David Yates',          party: 'D' },
+    ],
   },
   {
     title: 'County Sheriff',
     scope: 'countywide',
-    note: 'Vote for one',
-    candidates: ['Richard Breen', 'Steve Healey', 'Stephen Yancey'],
-  },
-  {
-    title: 'County Coroner',
-    scope: 'countywide',
-    candidates: ['Jo-Ann Farmer'],
-  },
-  {
-    title: 'County Commissioner — "A" District',
-    scope: 'commA',
-    note: 'Voters in Commissioner District A only',
-    candidates: ['Joyce Cooper'],
-  },
-  {
-    title: 'Justice of the Peace — District 1',
-    scope: 'commA',
-    candidates: ['Mera Kathryn Corlett'],
-  },
-  {
-    title: 'Justice of the Peace — District 2',
-    scope: 'commB',
-    candidates: ['Gary Fields'],
-  },
-  {
-    title: 'Justice of the Peace — District 3',
-    scope: 'commC',
-    note: 'No candidates have filed',
-    candidates: [],
-  },
-  {
-    title: 'Constable — District 1',
-    scope: 'commA',
-    candidates: ['Christopher James Bayer'],
-  },
-  {
-    title: 'Constable — District 2',
-    scope: 'commB',
-    candidates: ['Shannon T. Leach'],
-  },
-  {
-    title: 'Constable — District 3',
-    scope: 'commC',
-    candidates: ['Monica Flowers'],
+    note: 'Vote for one — Democratic Primary',
+    candidates: [
+      { name: 'Richard Breen',  party: 'D' },
+      { name: 'Steve Healey',   party: 'D' },
+      { name: 'Stephen Yancey', party: 'D' },
+    ],
   },
 ];
 
-// ── Helpers ──
-function isEndorsed(list, name) { return list.includes(name); }
+// ══════════════════════════════════════════════════════════════════════
+//  HTML BUILDERS
+// ══════════════════════════════════════════════════════════════════════
 
 function starSvg() {
   return `<svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`;
 }
 
-function candidateHTML(name, endorsed) {
+function partyBadge(party) {
+  if (party === 'D') return `<span class="party-badge D">D</span>`;
+  if (party === 'R') return `<span class="party-badge R">R</span>`;
+  return `<span class="party-badge U">?</span>`;
+}
+
+let raceCounter = 0;
+
+function candidateHTML(cand, endorsed, raceId) {
+  const name = cand.name || cand;
+  const party = cand.party !== undefined ? cand.party : null;
   return `
-    <div class="candidate${endorsed ? ' endorsed' : ''}">
+    <div class="candidate${endorsed ? ' endorsed' : ''}" onclick="selectCandidate(this, '${raceId}')">
       <div class="bubble"></div>
       <span class="cand-name">${esc(name)}</span>
+      ${partyBadge(party)}
       ${endorsed ? `<span class="endorsed-badge">${starSvg()} LDP Endorsed</span>` : ''}
     </div>`;
 }
 
 function raceHTML(title, rows, note, extraClass) {
   const noteHTML = note ? `<div class="race-note">${esc(note)}</div>` : '';
-  const listClass = 'candidate-list' + (extraClass ? ' ' + extraClass : '');
+  const cls = 'candidate-list' + (extraClass ? ' ' + extraClass : '');
   const body = rows.length
-    ? `<div class="${listClass}">${rows.join('')}</div>`
-    : `<div class="race-note">No candidates have filed.</div>`;
+    ? `<div class="${cls}">${rows.join('')}</div>`
+    : `<div class="race-note">No candidates filed.</div>`;
   return `<div class="race"><div class="race-title">${esc(title)}</div>${noteHTML}${body}</div>`;
+}
+
+function selectCandidate(el, raceId) {
+  // Deselect all in this race
+  document.querySelectorAll(`.candidate[onclick*="'${raceId}'"]`).forEach(c => c.classList.remove('selected'));
+  // Select clicked
+  el.classList.add('selected');
 }
 
 function esc(s) {
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-// ── Build ballot HTML ──
+// ── Build ballot ──
 function buildBallot({ council_district, commissioner_district }) {
   let html = '';
+  raceCounter = 0;
   const commScope = 'comm' + commissioner_district.toUpperCase();
+  const isOdd = council_district % 2 !== 0;
+  const hasPrimary = !!COUNCIL_CANDIDATES[council_district];
 
-  // 1. Mayor
+  // ── 1. MAYOR ──
+  const mayorRaceId = 'race' + (++raceCounter);
   html += `<div class="ballot-section">
-    <div class="section-header nonpartisan">Nonpartisan — Mayor of Louisville Metro</div>
-    <div class="endorse-note">${starSvg()} Green = Louisville Democratic Party endorsed</div>`;
-  html += raceHTML('Mayor of Louisville Metro (Vote for One)',
-    MAYOR_CANDIDATES.map(n => candidateHTML(n, isEndorsed(ENDORSEMENTS.mayor, n))),
-    null, 'mayor-list');
+    <div class="section-header nonpartisan">Nonpartisan Race — Mayor of Louisville Metro</div>
+    <div class="endorse-note">${starSvg()} Green = Louisville Democratic Party endorsed &nbsp;|&nbsp; Party labels from voter registration — will NOT appear on official ballot</div>`;
+  html += raceHTML(
+    'Mayor of Louisville Metro (Vote for One)',
+    MAYOR_CANDIDATES.map(c => candidateHTML(c, ENDORSEMENTS.mayor.includes(c.name), mayorRaceId)),
+    null, 'mayor-list'
+  );
   html += '</div>';
 
-  // 2. Metro Council
-  const isOdd = council_district % 2 !== 0;
+  // ── 2. METRO COUNCIL ──
   html += `<div class="ballot-section">
-    <div class="section-header nonpartisan">Nonpartisan — Metro Council District ${council_district}</div>`;
-  if (isOdd && COUNCIL_CANDIDATES[council_district]) {
+    <div class="section-header nonpartisan">Nonpartisan Race — Metro Council District ${council_district}</div>`;
+
+  if (!isOdd) {
+    html += `<div class="race"><div class="race-no-primary">Metro Council District ${council_district} is not on the 2026 ballot — even-numbered districts are elected in the November general election on off years.</div></div>`;
+  } else if (!hasPrimary) {
+    html += `<div class="race"><div class="race-no-primary">
+      <strong>No primary for District ${council_district}.</strong> With 1–2 candidates, all advance directly to the November general election — this race will not appear on the May 19 primary ballot.
+    </div></div>`;
+  } else {
+    const councilRaceId = 'race' + (++raceCounter);
     const endorsed = ENDORSEMENTS.council[council_district] || [];
+    html += `<div class="section-note">Party labels from voter registration — will NOT appear on your official ballot.</div>`;
     html += raceHTML(
       `Metro Council — District ${council_district} (Vote for One)`,
-      COUNCIL_CANDIDATES[council_district].map(n => candidateHTML(n, isEndorsed(endorsed, n))),
+      COUNCIL_CANDIDATES[council_district].map(c => candidateHTML(c, endorsed.includes(c.name), councilRaceId)),
       null
     );
-  } else if (!isOdd) {
-    html += `<div class="race"><div class="race-note">Metro Council District ${council_district} is not on the 2026 ballot (even-numbered districts are elected in off years).</div></div>`;
-  } else {
-    html += `<div class="race"><div class="race-note">No candidates filed for Metro Council District ${council_district}.</div></div>`;
   }
   html += '</div>';
 
-  // 3. Partisan (Dem primary only)
+  // ── 3. PARTISAN (Democratic Primary) ──
   html += `<div class="ballot-section">
-    <div class="section-header partisan">Democratic Primary Races — May 19, 2026</div>`;
+    <div class="section-header partisan">Democratic Primary Races — May 19, 2026</div>
+    <div class="section-note">Registered Democrats only. Only contested races appear on the primary ballot.</div>`;
+
   for (const race of PARTISAN_RACES) {
     if (race.scope !== 'countywide' && race.scope !== commScope) continue;
-    html += raceHTML(race.title, race.candidates.map(n => candidateHTML(n, false)), race.note || null);
+    const raceId = 'race' + (++raceCounter);
+    html += raceHTML(race.title, race.candidates.map(c => candidateHTML(c, false, raceId)), race.note || null);
   }
   html += '</div>';
 
-  html += `<div class="ballot-footer">Unofficial sample ballot &mdash; Jefferson County Clerk data (rev. 4/3/2026) &mdash; Louisville Democratic Party 2026</div>`;
+  html += `<div class="race" style="padding:10px 16px">
+    <div style="font-size:0.73rem;color:var(--muted);text-align:center">
+      Candidate data: Jefferson County Clerk (rev. 4/3/2026) &nbsp;·&nbsp;
+      <span style="font-style:italic">Party labels for nonpartisan races may require verification — visit <strong>jeffersoncountyclerk.org</strong></span>
+    </div>
+  </div>`;
+
   return html;
 }
 
-// ── Lookup & render ──
+// ══════════════════════════════════════════════════════════════════════
+//  LOOKUP
+// ══════════════════════════════════════════════════════════════════════
+
+let currentAddress = '';
+
 async function doLookup() {
   const input = document.getElementById('addrInput');
   const btn   = document.getElementById('lookupBtn');
@@ -573,11 +727,14 @@ async function doLookup() {
       msg.className = 'status-msg error';
       document.getElementById('ballot').classList.remove('visible');
       document.getElementById('precinctBar').classList.remove('visible');
+      document.getElementById('sharePrompt').style.display = 'none';
       return;
     }
 
     msg.textContent = '';
+    currentAddress = addr;
 
+    // Precinct bar
     document.getElementById('matchedAddr').textContent = '📍 ' + data.matched_address;
     document.getElementById('piPrecinct').textContent  = data.precinct;
     document.getElementById('piCouncil').textContent   = 'District ' + data.council_district;
@@ -586,12 +743,22 @@ async function doLookup() {
     document.getElementById('piCongress').textContent  = 'KY-' + data.congressional_district;
     document.getElementById('precinctBar').classList.add('visible');
 
+    // Ballot header
     document.getElementById('ballotSubhead').textContent =
-      `Primary Election — May 19, 2026  |  Precinct ${data.precinct}  |  Metro Council District ${data.council_district}`;
+      `Democratic Primary — May 19, 2026  ·  Precinct ${data.precinct}  ·  Metro Council District ${data.council_district}`;
 
+    // Build ballot
     document.getElementById('ballotBody').innerHTML = buildBallot(data);
     document.getElementById('ballot').classList.add('visible');
     document.getElementById('ballot').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    // Share prompt
+    const shareUrl = window.location.origin + '/?addr=' + encodeURIComponent(addr);
+    document.getElementById('shareUrlInput').value = shareUrl;
+    document.getElementById('sharePrompt').style.display = 'block';
+
+    // Update URL without reload
+    history.replaceState(null, '', '/?addr=' + encodeURIComponent(addr));
 
   } catch (err) {
     msg.textContent = 'Network error. Is the server running?';
@@ -605,50 +772,153 @@ document.getElementById('addrInput').addEventListener('keydown', e => {
   if (e.key === 'Enter') doLookup();
 });
 
-// ── Save ballot as PNG image ──
+// Auto-load from URL param
+window.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(window.location.search);
+  const addr = params.get('addr');
+  if (addr) {
+    document.getElementById('addrInput').value = addr;
+    doLookup();
+  }
+});
+
+// ══════════════════════════════════════════════════════════════════════
+//  SAVE & SHARE IMAGE
+// ══════════════════════════════════════════════════════════════════════
+
 async function saveAsImage() {
   const ballot = document.getElementById('ballot');
   if (!ballot.classList.contains('visible')) {
-    alert('Please look up your address first to generate your ballot.');
+    alert('Please look up your address first to generate your voter guide.');
     return;
   }
 
   const btn = document.getElementById('saveImgBtn');
   btn.disabled = true;
-  btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Saving…';
+  btn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Saving…`;
 
-  // Capture only the ballot element at 390px width (phone portrait)
-  const originalWidth  = ballot.style.width;
-  const originalMaxWidth = ballot.style.maxWidth;
+  // Apply compact capture mode
+  ballot.classList.add('capture-mode');
+  const origWidth    = ballot.style.width;
+  const origMaxWidth = ballot.style.maxWidth;
   ballot.style.width    = '390px';
   ballot.style.maxWidth = '390px';
 
   try {
     const canvas = await html2canvas(ballot, {
-      scale: 2,
-      useCORS: true,
-      backgroundColor: '#ffffff',
-      scrollX: 0,
-      scrollY: -window.scrollY,
-      width: 390,
-      windowWidth: 390,
+      scale: 2, useCORS: true, backgroundColor: '#ffffff',
+      scrollX: 0, scrollY: -window.scrollY,
+      width: 390, windowWidth: 390,
     });
 
-    ballot.style.width    = originalWidth;
-    ballot.style.maxWidth = originalMaxWidth;
+    ballot.classList.remove('capture-mode');
+    ballot.style.width    = origWidth;
+    ballot.style.maxWidth = origMaxWidth;
 
+    // Try Web Share API (mobile — saves to Photos/Files with native sheet)
+    if (navigator.share) {
+      const blob = await new Promise(res => canvas.toBlob(res, 'image/png'));
+      const file = new File([blob], 'my-2026-voter-guide.png', { type: 'image/png' });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          title: '2026 Louisville Democratic Party Voter Guide',
+          text: 'My voter guide for the May 19, 2026 Democratic Primary',
+          files: [file],
+        });
+        showModal();
+        return;
+      }
+      // Web Share without file (URL only)
+      await navigator.share({
+        title: '2026 Louisville Democratic Party Voter Guide',
+        url: document.getElementById('shareUrlInput').value,
+      });
+      showModal();
+      return;
+    }
+
+    // Desktop fallback: download
     const link = document.createElement('a');
-    link.download = 'my-2026-sample-ballot.png';
+    link.download = 'my-2026-voter-guide.png';
     link.href = canvas.toDataURL('image/png');
     link.click();
+    setTimeout(showModal, 800);
+
   } catch (err) {
-    ballot.style.width    = originalWidth;
-    ballot.style.maxWidth = originalMaxWidth;
-    alert('Image save failed. Try again.');
-    console.error(err);
+    ballot.classList.remove('capture-mode');
+    ballot.style.width    = origWidth;
+    ballot.style.maxWidth = origMaxWidth;
+    if (err.name !== 'AbortError') {
+      alert('Could not save image. Try again.');
+      console.error(err);
+    }
   } finally {
     btn.disabled = false;
-    btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> Save as Image';
+    btn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> Save &amp; Share`;
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════════
+//  COPY SHARE LINK
+// ══════════════════════════════════════════════════════════════════════
+
+async function copyShareLink() {
+  const url = document.getElementById('shareUrlInput').value;
+  try {
+    await navigator.clipboard.writeText(url);
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = '✓ Copied!';
+    setTimeout(() => { btn.textContent = 'Copy Link'; }, 2500);
+  } catch {
+    document.getElementById('shareUrlInput').select();
+    document.execCommand('copy');
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════════
+//  CONTACT MODAL
+// ══════════════════════════════════════════════════════════════════════
+
+function showModal() {
+  document.getElementById('modalForm').style.display = 'block';
+  document.getElementById('modalSuccess').style.display = 'none';
+  document.getElementById('modalError').style.display = 'none';
+  document.getElementById('contactModal').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('contactModal').classList.remove('open');
+}
+
+// Close on overlay click
+document.getElementById('contactModal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+async function submitContact() {
+  const name  = document.getElementById('cName').value.trim();
+  const email = document.getElementById('cEmail').value.trim();
+  const phone = document.getElementById('cPhone').value.trim();
+  const errEl = document.getElementById('modalError');
+
+  if (!email && !phone) {
+    errEl.textContent = 'Please enter an email address or phone number.';
+    errEl.style.display = 'block';
+    return;
+  }
+  errEl.style.display = 'none';
+
+  try {
+    await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, phone }),
+    });
+    document.getElementById('modalForm').style.display = 'none';
+    document.getElementById('modalSuccess').style.display = 'block';
+  } catch {
+    errEl.textContent = 'Something went wrong. Please try again.';
+    errEl.style.display = 'block';
   }
 }
 </script>
