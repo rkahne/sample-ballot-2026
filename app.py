@@ -46,35 +46,54 @@ def lookup():
     if "louisville" not in address.lower() and "jefferson" not in address.lower():
         address = address + ", Louisville, KY"
 
-    # 1. Geocode with U.S. Census Bureau (no API key required)
+    # 1. Geocode — Census Bureau first, ArcGIS fallback (both free, no API key)
+    lon = lat = matched_address = None
+
     try:
         geo_resp = requests.get(
             "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress",
-            params={
-                "address": address,
-                "benchmark": "Public_AR_Current",
-                "format": "json",
-            },
+            params={"address": address, "benchmark": "Public_AR_Current", "format": "json"},
             timeout=15,
         )
         geo_resp.raise_for_status()
-        geo_data = geo_resp.json()
-    except Exception as exc:
-        return jsonify({"error": f"Geocoding service error: {exc}"}), 502
+        matches = geo_resp.json().get("result", {}).get("addressMatches", [])
+        if matches:
+            m = matches[0]
+            lon = m["coordinates"]["x"]
+            lat = m["coordinates"]["y"]
+            matched_address = m.get("matchedAddress", address)
+    except Exception:
+        pass  # fall through to ArcGIS
 
-    matches = geo_data.get("result", {}).get("addressMatches", [])
-    if not matches:
+    if lon is None:
+        try:
+            arc_resp = requests.get(
+                "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates",
+                params={
+                    "SingleLine": address,
+                    "outFields": "Match_addr",
+                    "maxLocations": 1,
+                    "f": "json",
+                },
+                timeout=15,
+            )
+            arc_resp.raise_for_status()
+            candidates = arc_resp.json().get("candidates", [])
+            if candidates and candidates[0].get("score", 0) >= 80:
+                c = candidates[0]
+                lon = c["location"]["x"]
+                lat = c["location"]["y"]
+                matched_address = c.get("address", address)
+        except Exception as exc:
+            return jsonify({"error": f"Geocoding service error: {exc}"}), 502
+
+    if lon is None:
         return jsonify({
             "error": (
                 "Address not found. Try including your city and state, "
                 "e.g. '123 Main St, Louisville KY'."
             )
         }), 404
-
-    match = matches[0]
-    lon = match["coordinates"]["x"]
-    lat = match["coordinates"]["y"]
-    matched_address = match.get("matchedAddress", address)
 
     # 2. Point-in-polygon – which precinct contains this point?
     point = Point(lon, lat)

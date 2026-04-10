@@ -49,15 +49,25 @@
 
     .btn-save {
       display: flex; align-items: center; gap: 7px;
-      background: rgba(255,255,255,.15); color: #fff;
-      border: 1.5px solid rgba(255,255,255,.4);
+      background: #c0392b; color: #fff;
+      border: none;
       padding: 9px 16px; border-radius: 7px;
-      font-size: 0.85rem; font-weight: 600;
+      font-size: 0.85rem; font-weight: 700;
       cursor: pointer; white-space: nowrap;
       transition: background .2s; flex-shrink: 0;
+      text-transform: uppercase; letter-spacing: 0.03em;
     }
-    .btn-save:hover    { background: rgba(255,255,255,.25); }
+    .btn-save:hover    { background: #a93226; }
     .btn-save:disabled { opacity: .6; cursor: default; }
+    .btn-save-bottom {
+      display: block; width: 100%; max-width: 340px;
+      margin: 16px auto 0; padding: 13px 20px;
+      background: #c0392b; color: #fff; border: none; border-radius: 8px;
+      font-size: 1rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.04em; cursor: pointer; transition: background .2s;
+    }
+    .btn-save-bottom:hover    { background: #a93226; }
+    .btn-save-bottom:disabled { opacity: .6; cursor: default; }
 
     /* ── Container ── */
     .container { max-width: 880px; margin: 0 auto; padding: 22px 20px 60px; }
@@ -217,6 +227,7 @@
     }
     .party-badge.D { background: #dbeafe; color: var(--dem); }
     .party-badge.R { background: #fee2e2; color: var(--rep); }
+    .party-badge.L { background: #fef9c3; color: #92700a; }
     .party-badge.U { background: #f0f0f0; color: #888; font-weight: 500; font-style: italic; }
 
     .endorsed-badge {
@@ -360,7 +371,7 @@
 
 <!-- ── Disclaimer ── -->
 <div class="disclaimer-banner">
-  <strong>Unofficial Voter Guide</strong> &mdash; Produced by the Louisville Democratic Party &mdash; Not an official government document &mdash; <strong>It is legal to bring this guide to the polls</strong>
+  <strong>This is NOT an official ballot. Filling this out does NOT count as voting.</strong> &mdash; Unofficial Voter Guide produced by the Louisville Democratic Party &mdash; Not an official government document &mdash; It is legal to bring this guide to the polls.
 </div>
 
 <!-- ── Header ── -->
@@ -368,7 +379,7 @@
   <div class="header-inner">
     <img src="/static/logo.jpg" alt="Louisville Democratic Party" class="ldp-logo" />
     <div class="header-text">
-      <h1>Louisville Democratic Party<br>2026 Voter Guide</h1>
+      <h1>Louisville Democratic Party<br>Primary Election Ballot Guide</h1>
       <p>Democratic Primary &mdash; May 19, 2026 &nbsp;|&nbsp; Jefferson County, KY</p>
     </div>
     <button class="btn-save" id="saveImgBtn" onclick="saveAsImage()">
@@ -377,7 +388,7 @@
         <polyline points="7 10 12 15 17 10"></polyline>
         <line x1="12" y1="15" x2="12" y2="3"></line>
       </svg>
-      Save &amp; Share
+      SAVE YOUR BALLOT!
     </button>
   </div>
   <div class="header-bar"></div>
@@ -389,15 +400,9 @@
   <!-- Explainer -->
   <div class="explainer-card">
     <h2>About the May 19, 2026 Primary Election</h2>
-    <div class="explainer-grid">
-      <div class="explainer-item">
-        <h3>Democratic Primary Races</h3>
-        <p>Only registered Democrats vote in these races. Only <strong>contested</strong> races (2+ candidates) appear on the primary ballot — uncontested candidates go directly to the November general election.</p>
-      </div>
-      <div class="explainer-item">
-        <h3>Nonpartisan Races (Mayor &amp; Metro Council)</h3>
-        <p>All voters participate regardless of party. These races are nonpartisan — <strong>party affiliation will NOT appear on your official ballot</strong>. We've included registration info here so you know who you're voting for. Only races with 3+ candidates have a primary.</p>
-      </div>
+    <div class="explainer-item" style="border:none;padding:0">
+      <h3>NEW FOR 2026</h3>
+      <p>Mayor and Metro Council races are now nonpartisan. All voters — including independents — can participate. Because these races are nonpartisan, party affiliation will <strong>NOT</strong> appear on your official ballot. We have included the candidate's party here so you can make an informed vote.</p>
     </div>
   </div>
 
@@ -430,6 +435,11 @@
       <h2>Your 2026 Louisville Democratic Party Voter Guide</h2>
       <p id="ballotSubhead">Democratic Primary &mdash; May 19, 2026</p>
     </div>
+
+    <div class="polls-note">
+      <strong>📋 Tap any candidate to mark your choice, then save the image to bring to the polls.</strong> Party labels in nonpartisan races (Mayor, Metro Council) will <em>not</em> appear on your official ballot — <strong>bring your ballot guide</strong> with you so you know who you're voting for. This is an unofficial voter guide produced by the Louisville Democratic Party. If you would like to confirm your ballot with the Jefferson County Clerk, <a href="https://jeffersoncountyclerk.org/wheredoivote/" target="_blank" rel="noopener">click here</a>.
+    </div>
+
     <div class="ballot-body" id="ballotBody"></div>
 
     <div class="legend">
@@ -437,11 +447,17 @@
       <div class="legend-item"><div class="legend-swatch endorsed"></div> LDP Endorsed</div>
       <div class="legend-item"><span class="party-badge D" style="font-size:.7rem">D</span> Democrat</div>
       <div class="legend-item"><span class="party-badge R" style="font-size:.7rem">R</span> Republican</div>
+      <div class="legend-item"><span class="party-badge L" style="font-size:.7rem">L</span> Libertarian</div>
       <div class="legend-item"><span class="party-badge U" style="font-size:.7rem">O</span> Other / unverified</div>
     </div>
 
-    <div class="polls-note">
-      <strong>📋 Tap any candidate to mark your choice, then save the image to bring to the polls.</strong> Party labels in nonpartisan races (Mayor, Metro Council) will <em>not</em> appear on your official ballot — bring this guide with you so you know who you're voting for. This is an unofficial voter guide produced by the Louisville Democratic Party.
+    <button class="btn-save-bottom" onclick="saveAsImage()">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:6px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+      SAVE YOUR BALLOT!
+    </button>
+
+    <div style="text-align:center;padding:10px 16px;font-size:0.7rem;color:var(--muted)">
+      Party labels were verified after the candidate filing date closed on January 9, 2026 via Open Records Request.
     </div>
   </div>
 
@@ -450,10 +466,9 @@
     <h3>Know someone who needs this?</h3>
     <p>Share this link — anyone can enter their address to get their own personalized voter guide.</p>
     <div class="share-row">
-      <input type="text" class="share-url-input" id="shareUrlInput" readonly />
       <button class="btn-copy" id="copyBtn" onclick="copyShareLink()">Copy Link</button>
     </div>
-    <p class="share-sub">The link pre-fills your address so they can see your ballot, then enter their own.</p>
+    <p style="margin-top:14px;font-size:0.85rem">Have questions on when or where to vote? <a href="https://www.louisvilledems.com/2026-voter-guide" target="_blank" rel="noopener"><strong>Click here!</strong></a></p>
   </div>
 
 </main>
@@ -494,13 +509,13 @@ const ENDORSEMENTS = {
 
 // Mayor: nonpartisan — party = voter registration ('D','R', or null = unverified)
 const MAYOR_CANDIDATES = [
-  { name: 'Jody Hurt',                  party: null },  // Libertarian
+  { name: 'Jody Hurt',                  party: 'L'  },  // Libertarian
   { name: 'Douglas Lattimore',          party: null },  // Other Party
   { name: 'Bill Wells',                 party: 'D'  },
   { name: 'Craig Greenberg',            party: 'D'  },
   { name: 'Tina Burnell',              party: 'R'  },
   { name: 'Bob DeVore',                party: 'R'  },
-  { name: 'Lisa M. Holliday Harris',   party: 'D'  },
+  { name: 'Lisa M. Holliday Harris',   party: 'R'  },
   { name: 'Jeffrey Yocum',             party: 'R'  },
   { name: 'Matthew Solomon Bailey',    party: 'D'  },
   { name: 'S. "The D" Dattilo',        party: 'R'  },
@@ -547,7 +562,39 @@ const COUNCIL_CANDIDATES = {
   ],
 };
 
-// Partisan: only contested Democrat-vs-Democrat races (2+ D candidates)
+// US Senate — applies to every precinct
+const US_SENATE_CANDIDATES = [
+  { name: 'Joshua Blanton',   party: 'D' },
+  { name: 'Charles Booker',   party: 'D' },
+  { name: 'Logan Forsythe',   party: 'D' },
+  { name: 'Amy McGrath',      party: 'D' },
+  { name: 'Dale Romans',      party: 'D' },
+  { name: 'Pamela Stevenson', party: 'D' },
+  { name: 'Vincent Thompson', party: 'D' },
+];
+
+// KY State Senate — only Jefferson County districts with contested Dem primaries
+const KY_SENATE_CANDIDATES = {
+  6:  [{ name: 'Christian Furman', party: 'D' }, { name: 'Chaz Stoess',    party: 'D' }],
+  36: [{ name: 'Sarah McIntosh',   party: 'D' }, { name: 'Luke Whitehead', party: 'D' }],
+};
+
+// KY State House — only Jefferson County districts with contested Dem primaries
+const KY_HOUSE_CANDIDATES = {
+  30: [
+    { name: 'Daniel Grossberg', party: 'D' },
+    { name: 'Cassie Lyles',     party: 'D' },
+    { name: 'Max Morley',       party: 'D' },
+    { name: 'Mitra Subedi',     party: 'D' },
+  ],
+  33: [{ name: 'Jennifer Hardin',       party: 'D' }, { name: 'Tarah LeBlanc',   party: 'D' }],
+  40: [{ name: 'Patrick Dunegan',       party: 'D' }, { name: 'Nima Kulkarni',   party: 'D' }],
+  43: [{ name: 'Robert Bell',           party: 'D' }, { name: 'Joi McAtee',      party: 'D' }],
+  44: [{ name: 'Beverly Chester-Burton', party: 'D' }, { name: 'Jesten Slaw',   party: 'D' }, { name: 'Kenya Wade', party: 'D' }],
+  48: [{ name: 'Nathan Bellows',        party: 'D' }, { name: 'Suhas Kulkarni', party: 'D' }],
+};
+
+// County partisan: only contested Democrat-vs-Democrat races (2+ D candidates)
 // Single-candidate partisan races have no primary
 const PARTISAN_RACES = [
   {
@@ -591,6 +638,7 @@ function starSvg() {
 function partyBadge(party) {
   if (party === 'D') return `<span class="party-badge D">D</span>`;
   if (party === 'R') return `<span class="party-badge R">R</span>`;
+  if (party === 'L') return `<span class="party-badge L">L</span>`;
   return `<span class="party-badge U">O</span>`;
 }
 
@@ -629,7 +677,7 @@ function esc(s) {
 }
 
 // ── Build ballot ──
-function buildBallot({ council_district, commissioner_district }) {
+function buildBallot({ council_district, commissioner_district, state_house_district, state_senate_district }) {
   let html = '';
   raceCounter = 0;
   const commScope = 'comm' + commissioner_district.toUpperCase();
@@ -653,7 +701,7 @@ function buildBallot({ council_district, commissioner_district }) {
     <div class="section-header nonpartisan">Nonpartisan Race — Metro Council District ${council_district}</div>`;
 
   if (!isOdd) {
-    html += `<div class="race"><div class="race-no-primary">Metro Council District ${council_district} is not on the 2026 ballot — even-numbered districts are elected in the November general election on off years.</div></div>`;
+    html += `<div class="race"><div class="race-no-primary">Metro Council District ${council_district} is not on the 2026 ballot.</div></div>`;
   } else if (!hasPrimary) {
     html += `<div class="race"><div class="race-no-primary">
       <strong>No primary for District ${council_district}.</strong> With 1–2 candidates, all advance directly to the November general election — this race will not appear on the May 19 primary ballot.
@@ -675,6 +723,31 @@ function buildBallot({ council_district, commissioner_district }) {
     <div class="section-header partisan">Democratic Primary Races — May 19, 2026</div>
     <div class="section-note">Registered Democrats only. Only contested races appear on the primary ballot.</div>`;
 
+  // US Senate — everyone
+  const usSenRaceId = 'race' + (++raceCounter);
+  html += raceHTML('U.S. Senate (Vote for One)',
+    US_SENATE_CANDIDATES.map(c => candidateHTML(c, false, usSenRaceId)),
+    'Vote for one — Democratic Primary');
+
+  // KY State Senate — only if this district has a contested Dem primary
+  if (KY_SENATE_CANDIDATES[state_senate_district]) {
+    const kysenRaceId = 'race' + (++raceCounter);
+    html += raceHTML(
+      `KY State Senate — District ${state_senate_district} (Vote for One)`,
+      KY_SENATE_CANDIDATES[state_senate_district].map(c => candidateHTML(c, false, kysenRaceId)),
+      'Vote for one — Democratic Primary');
+  }
+
+  // KY State House — only if this district has a contested Dem primary
+  if (KY_HOUSE_CANDIDATES[state_house_district]) {
+    const kyhouseRaceId = 'race' + (++raceCounter);
+    html += raceHTML(
+      `KY State House — District ${state_house_district} (Vote for One)`,
+      KY_HOUSE_CANDIDATES[state_house_district].map(c => candidateHTML(c, false, kyhouseRaceId)),
+      'Vote for one — Democratic Primary');
+  }
+
+  // County races
   for (const race of PARTISAN_RACES) {
     if (race.scope !== 'countywide' && race.scope !== commScope) continue;
     const raceId = 'race' + (++raceCounter);
@@ -684,8 +757,7 @@ function buildBallot({ council_district, commissioner_district }) {
 
   html += `<div class="race" style="padding:10px 16px">
     <div style="font-size:0.73rem;color:var(--muted);text-align:center">
-      Candidate data: Jefferson County Clerk (rev. 4/3/2026) &nbsp;·&nbsp;
-      <span style="font-style:italic">Party labels for nonpartisan races may require verification — visit <strong>jeffersoncountyclerk.org</strong></span>
+      Party labels were verified after the candidate filing date closed on January 9 via Open Records Request.
     </div>
   </div>`;
 
@@ -723,7 +795,7 @@ async function doLookup() {
     const data = await resp.json();
 
     if (!resp.ok) {
-      msg.textContent = data.error || 'Lookup failed. Please try again.';
+      msg.innerHTML = `Occasionally, an address will not show up in the look up. Please email us at <a href="mailto:info@louisvilledems.com">info@louisvilledems.com</a> with your address and we will send you the elections and candidates on your ballot!`;
       msg.className = 'status-msg error';
       document.getElementById('ballot').classList.remove('visible');
       document.getElementById('precinctBar').classList.remove('visible');
@@ -753,8 +825,6 @@ async function doLookup() {
     document.getElementById('ballot').scrollIntoView({ behavior: 'smooth', block: 'start' });
 
     // Share prompt
-    const shareUrl = window.location.origin + '/?addr=' + encodeURIComponent(addr);
-    document.getElementById('shareUrlInput').value = shareUrl;
     document.getElementById('sharePrompt').style.display = 'block';
 
     // Update URL without reload
@@ -815,11 +885,12 @@ async function saveAsImage() {
     ballot.style.width    = origWidth;
     ballot.style.maxWidth = origMaxWidth;
 
-    // Try Web Share API (mobile — saves to Photos/Files with native sheet)
-    if (navigator.share) {
-      const blob = await new Promise(res => canvas.toBlob(res, 'image/png'));
-      const file = new File([blob], 'my-2026-voter-guide.png', { type: 'image/png' });
-      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+    const blob = await new Promise(res => canvas.toBlob(res, 'image/png'));
+    const file = new File([blob], 'my-2026-voter-guide.png', { type: 'image/png' });
+
+    // Try Web Share API with file (iOS/Android native sheet → Save to Photos)
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      try {
         await navigator.share({
           title: '2026 Louisville Democratic Party Voter Guide',
           text: 'My voter guide for the May 19, 2026 Democratic Primary',
@@ -827,12 +898,18 @@ async function saveAsImage() {
         });
         showModal();
         return;
+      } catch (shareErr) {
+        if (shareErr.name === 'AbortError') return;
+        // Fall through to other methods
       }
-      // Web Share without file (URL only)
-      await navigator.share({
-        title: '2026 Louisville Democratic Party Voter Guide',
-        url: document.getElementById('shareUrlInput').value,
-      });
+    }
+
+    // iOS fallback: open image in new tab so user can long-press → Save to Photos
+    const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+    if (isIOS) {
+      const dataUrl = canvas.toDataURL('image/png');
+      const win = window.open();
+      win.document.write(`<html><body style="margin:0;background:#000"><img src="${dataUrl}" style="max-width:100%;display:block"><p style="color:#fff;font-family:sans-serif;text-align:center;padding:10px">Press and hold the image, then tap <strong>Save to Photos</strong></p></body></html>`);
       showModal();
       return;
     }
@@ -854,7 +931,7 @@ async function saveAsImage() {
     }
   } finally {
     btn.disabled = false;
-    btn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> Save &amp; Share`;
+    btn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> SAVE YOUR BALLOT!`;
   }
 }
 
@@ -863,15 +940,14 @@ async function saveAsImage() {
 // ══════════════════════════════════════════════════════════════════════
 
 async function copyShareLink() {
-  const url = document.getElementById('shareUrlInput').value;
+  const url = window.location.href;
   try {
     await navigator.clipboard.writeText(url);
     const btn = document.getElementById('copyBtn');
     btn.textContent = '✓ Copied!';
     setTimeout(() => { btn.textContent = 'Copy Link'; }, 2500);
   } catch {
-    document.getElementById('shareUrlInput').select();
-    document.execCommand('copy');
+    prompt('Copy this link:', url);
   }
 }
 
