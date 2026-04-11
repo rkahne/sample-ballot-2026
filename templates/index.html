@@ -23,16 +23,19 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--gray); color: var(--text); min-height: 100vh; }
 
-    /* ── Disclaimer banner ── */
-    .disclaimer-banner {
-      background: #fff3cd;
-      border-bottom: 1px solid #ffc107;
+    /* ── Not-a-ballot warning box ── */
+    .not-ballot-box {
+      background: #c0392b; color: #fff;
       text-align: center;
-      padding: 8px 16px;
-      font-size: 0.78rem;
-      color: #5a4000;
+      padding: 14px 20px;
+      font-size: 0.95rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.04em;
+      line-height: 1.4;
     }
-    .disclaimer-banner strong { color: #3a2800; }
+    .not-ballot-box span {
+      display: block; font-size: 0.78rem; font-weight: 500;
+      text-transform: none; letter-spacing: 0; margin-top: 4px; opacity: 0.92;
+    }
 
     /* ── Header ── */
     .site-header { background: var(--navy); color: #fff; }
@@ -369,11 +372,6 @@
 </head>
 <body>
 
-<!-- ── Disclaimer ── -->
-<div class="disclaimer-banner">
-  <strong>This is NOT an official ballot. Filling this out does NOT count as voting.</strong> &mdash; Unofficial Voter Guide produced by the Louisville Democratic Party &mdash; Not an official government document &mdash; It is legal to bring this guide to the polls.
-</div>
-
 <!-- ── Header ── -->
 <header class="site-header">
   <div class="header-inner">
@@ -382,17 +380,15 @@
       <h1>Louisville Democratic Party<br>Primary Election Ballot Guide</h1>
       <p>Democratic Primary &mdash; May 19, 2026 &nbsp;|&nbsp; Jefferson County, KY</p>
     </div>
-    <button class="btn-save" id="saveImgBtn" onclick="saveAsImage()">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-        <polyline points="7 10 12 15 17 10"></polyline>
-        <line x1="12" y1="15" x2="12" y2="3"></line>
-      </svg>
-      SAVE YOUR BALLOT!
-    </button>
   </div>
   <div class="header-bar"></div>
 </header>
+
+<!-- ── Not-a-ballot warning ── -->
+<div class="not-ballot-box">
+  This is NOT an official ballot. You still need to go vote!
+  <span>Unofficial voter guide produced by the Louisville Democratic Party &mdash; It is legal to bring this guide to the polls &mdash; After filling out your choices below, save the image to bring with you.</span>
+</div>
 
 <!-- ── Main ── -->
 <main class="container">
@@ -451,7 +447,7 @@
       <div class="legend-item"><span class="party-badge U" style="font-size:.7rem">O</span> Other / unverified</div>
     </div>
 
-    <button class="btn-save-bottom" onclick="saveAsImage()">
+    <button class="btn-save-bottom" id="saveImgBtn" onclick="saveAsImage()">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:6px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
       SAVE YOUR BALLOT!
     </button>
@@ -864,8 +860,7 @@ async function saveAsImage() {
   }
 
   const btn = document.getElementById('saveImgBtn');
-  btn.disabled = true;
-  btn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Saving…`;
+  if (btn) { btn.disabled = true; btn.textContent = 'Saving…'; }
 
   // Apply compact capture mode
   ballot.classList.add('capture-mode');
@@ -931,7 +926,7 @@ async function saveAsImage() {
     }
   } finally {
     btn.disabled = false;
-    btn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> SAVE YOUR BALLOT!`;
+    if (btn) { btn.disabled = false; btn.textContent = 'SAVE YOUR BALLOT!'; }
   }
 }
 
