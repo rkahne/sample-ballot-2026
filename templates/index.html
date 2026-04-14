@@ -399,6 +399,7 @@
     <div class="explainer-item" style="border:none;padding:0">
       <h3>NEW FOR 2026</h3>
       <p>Mayor and Metro Council races are now nonpartisan. All voters — including independents — can participate. Because these races are nonpartisan, party affiliation will <strong>NOT</strong> appear on your official ballot. We have included the candidate's party here so you can make an informed vote.</p>
+      <p style="margin-top:10px;font-size:0.82rem;color:var(--muted)">🔒 Your candidate selections are <strong>not recorded or stored</strong> by the Louisville Democratic Party. This tool runs entirely in your browser.</p>
     </div>
   </div>
 
@@ -413,6 +414,7 @@
       </div>
       <button class="btn-primary" id="lookupBtn" onclick="doLookup()">Find My Ballot</button>
     </div>
+    <p style="font-size:0.78rem;color:var(--muted);margin-top:8px">Occasionally, a valid Louisville address will not show up in the lookup. Please email <a href="mailto:info@louisvilledems.com">info@louisvilledems.com</a> with your address and we will send you the elections and candidates on your ballot!</p>
     <div class="status-msg" id="statusMsg"></div>
 
     <div class="precinct-bar" id="precinctBar">
@@ -474,8 +476,8 @@
   <div class="modal-box">
     <button class="modal-close" onclick="closeModal()">×</button>
     <img src="/static/logo.jpg" alt="LDP" class="modal-logo" />
-    <h3>Stay in the loop!</h3>
-    <p>Get voting reminders, endorsement updates, and news from the Louisville Democratic Party.</p>
+    <h3>Election info and reminders!</h3>
+    <p>Get Early Voting and Election Day locations and updates from the Louisville Democratic Party.</p>
     <div id="modalForm">
       <div class="modal-field"><input type="text"  id="cName"  placeholder="Your name" /></div>
       <div class="modal-field"><input type="email" id="cEmail" placeholder="Email address" /></div>
