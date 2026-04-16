@@ -297,14 +297,16 @@
     .modal-overlay {
       display: none; position: fixed; inset: 0;
       background: rgba(0,0,0,.55); z-index: 1000;
-      align-items: center; justify-content: center;
+      align-items: flex-start; justify-content: center;
       padding: 20px;
+      overflow-y: auto;
     }
     .modal-overlay.open { display: flex; }
     .modal-box {
       background: #fff; border-radius: 12px;
       padding: 28px 26px; max-width: 420px; width: 100%;
       position: relative;
+      margin: auto 0;
       box-shadow: 0 20px 60px rgba(0,0,0,.3);
     }
     .modal-close {
@@ -908,14 +910,23 @@ async function saveAsImage() {
     // Safari (desktop + iOS fallback) and mobile fallback:
     // Open image in a new tab with clear save instructions
     if (isSafari || isMobile) {
-      const win = window.open();
-      win.document.write(`<!DOCTYPE html><html><head><title>Save Your Ballot</title></head>
-        <body style="margin:0;background:#1a1a2e;font-family:sans-serif;text-align:center;padding:20px">
-          <div style="background:#c0392b;color:#fff;padding:14px;font-weight:700;font-size:1rem;border-radius:8px;margin-bottom:16px">
-            📥 Press and hold (mobile) or right-click (desktop) the image below → <strong>Save Image</strong>
-          </div>
-          <img src="${dataUrl}" style="max-width:100%;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,.5)">
-        </body></html>`);
+      const win = window.open('', '_blank');
+      if (win) {
+        win.document.write(`<!DOCTYPE html><html><head><title>Save Your Ballot</title></head>
+          <body style="margin:0;background:#1a1a2e;font-family:sans-serif;text-align:center;padding:20px">
+            <div style="background:#c0392b;color:#fff;padding:14px;font-weight:700;font-size:1rem;border-radius:8px;margin-bottom:16px">
+              📥 Press and hold (mobile) or right-click (desktop) the image below → <strong>Save Image</strong>
+            </div>
+            <img src="${dataUrl}" style="max-width:100%;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,.5)">
+          </body></html>`);
+        win.document.close();
+      } else {
+        // Popup blocked — offer direct download as last resort
+        const link = document.createElement('a');
+        link.download = 'my-2026-voter-guide.png';
+        link.href = dataUrl;
+        link.click();
+      }
       showModal();
       return;
     }
