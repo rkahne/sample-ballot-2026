@@ -885,8 +885,12 @@ async function saveAsImage() {
     const blob = await new Promise(res => canvas.toBlob(res, 'image/png'));
     const file = new File([blob], 'my-2026-voter-guide.png', { type: 'image/png' });
 
-    // Try Web Share API with file (iOS/Android native sheet → Save to Photos)
-    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+    const dataUrl = canvas.toDataURL('image/png');
+    const isMobile = /iphone|ipad|ipod|android/i.test(navigator.userAgent);
+    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+    // Mobile: try Web Share API with file (native sheet → Save to Photos/Files)
+    if (isMobile && navigator.canShare && navigator.canShare({ files: [file] })) {
       try {
         await navigator.share({
           title: '2026 Louisville Democratic Party Voter Guide',
@@ -897,24 +901,29 @@ async function saveAsImage() {
         return;
       } catch (shareErr) {
         if (shareErr.name === 'AbortError') return;
-        // Fall through to other methods
+        // Fall through to new-tab method
       }
     }
 
-    // iOS fallback: open image in new tab so user can long-press → Save to Photos
-    const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
-    if (isIOS) {
-      const dataUrl = canvas.toDataURL('image/png');
+    // Safari (desktop + iOS fallback) and mobile fallback:
+    // Open image in a new tab with clear save instructions
+    if (isSafari || isMobile) {
       const win = window.open();
-      win.document.write(`<html><body style="margin:0;background:#000"><img src="${dataUrl}" style="max-width:100%;display:block"><p style="color:#fff;font-family:sans-serif;text-align:center;padding:10px">Press and hold the image, then tap <strong>Save to Photos</strong></p></body></html>`);
+      win.document.write(`<!DOCTYPE html><html><head><title>Save Your Ballot</title></head>
+        <body style="margin:0;background:#1a1a2e;font-family:sans-serif;text-align:center;padding:20px">
+          <div style="background:#c0392b;color:#fff;padding:14px;font-weight:700;font-size:1rem;border-radius:8px;margin-bottom:16px">
+            📥 Press and hold (mobile) or right-click (desktop) the image below → <strong>Save Image</strong>
+          </div>
+          <img src="${dataUrl}" style="max-width:100%;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,.5)">
+        </body></html>`);
       showModal();
       return;
     }
 
-    // Desktop fallback: download
+    // Chrome / Firefox desktop: direct download
     const link = document.createElement('a');
     link.download = 'my-2026-voter-guide.png';
-    link.href = canvas.toDataURL('image/png');
+    link.href = dataUrl;
     link.click();
     setTimeout(showModal, 800);
 
