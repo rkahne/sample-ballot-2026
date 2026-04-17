@@ -621,7 +621,7 @@ const PARTISAN_RACES = [
   {
     title: 'County Attorney',
     scope: 'countywide',
-    note: 'Vote for one — Democratic Primary',
+    note: 'Select One — Democratic Primary',
     candidates: [
       { name: 'Sarah Martin', party: 'D' },
       { name: 'Karl Price',   party: 'D' },
@@ -630,7 +630,7 @@ const PARTISAN_RACES = [
   {
     title: 'County Clerk',
     scope: 'countywide',
-    note: 'Vote for one — Democratic Primary',
+    note: 'Select One — Democratic Primary',
     candidates: [
       { name: 'Rosalind "Roz" Welch', party: 'D' },
       { name: 'David Yates',          party: 'D' },
@@ -639,7 +639,7 @@ const PARTISAN_RACES = [
   {
     title: 'County Sheriff',
     scope: 'countywide',
-    note: 'Vote for one — Democratic Primary',
+    note: 'Select One — Democratic Primary',
     candidates: [
       { name: 'Richard Breen',  party: 'D' },
       { name: 'Steve Healey',   party: 'D' },
@@ -716,7 +716,7 @@ function buildBallot({ council_district, commissioner_district, state_house_dist
 
   // ── 1. US SENATOR ──
   const usSenRaceId = 'race' + (++raceCounter);
-  html += raceHTML('United States Senator (Vote for One)',
+  html += raceHTML('United States Senator (Select One)',
     US_SENATE_CANDIDATES.map(c => candidateHTML(c, false, usSenRaceId)),
     'Democratic Primary');
 
@@ -724,7 +724,7 @@ function buildBallot({ council_district, commissioner_district, state_house_dist
   if (KY_SENATE_CANDIDATES[state_senate_district]) {
     const kysenRaceId = 'race' + (++raceCounter);
     html += raceHTML(
-      `State Senator — ${state_senate_district}th Senatorial District (Vote for One)`,
+      `State Senator — ${state_senate_district}th Senatorial District (Select One)`,
       KY_SENATE_CANDIDATES[state_senate_district].map(c => candidateHTML(c, false, kysenRaceId)),
       'Democratic Primary');
   }
@@ -733,7 +733,7 @@ function buildBallot({ council_district, commissioner_district, state_house_dist
   if (KY_HOUSE_CANDIDATES[state_house_district]) {
     const kyhouseRaceId = 'race' + (++raceCounter);
     html += raceHTML(
-      `State Representative — ${state_house_district}th Representative District (Vote for One)`,
+      `State Representative — ${state_house_district}th Representative District (Select One)`,
       KY_HOUSE_CANDIDATES[state_house_district].map(c => candidateHTML(c, false, kyhouseRaceId)),
       'Democratic Primary');
   }
@@ -755,7 +755,7 @@ function buildBallot({ council_district, commissioner_district, state_house_dist
   // ── 7. MAYOR ──
   const mayorRaceId = 'race' + (++raceCounter);
   html += `<div class="race nonpartisan-race">
-    <div class="race-title">Louisville Metro Mayor (Vote for One) <span class="nonpartisan-tag">Nonpartisan</span></div>
+    <div class="race-title">Louisville Metro Mayor (Select One) <span class="nonpartisan-tag">Nonpartisan</span></div>
     <div class="candidate-list mayor-list">${
       MAYOR_CANDIDATES.map(c => candidateHTML(c, ENDORSEMENTS.mayor.includes(c.name), mayorRaceId)).join('')
     }</div>
@@ -766,7 +766,7 @@ function buildBallot({ council_district, commissioner_district, state_house_dist
     const councilRaceId = 'race' + (++raceCounter);
     const endorsed = ENDORSEMENTS.council[council_district] || [];
     html += `<div class="race nonpartisan-race">
-      <div class="race-title">Louisville Metro Council — District ${council_district} (Vote for One) <span class="nonpartisan-tag">Nonpartisan</span></div>
+      <div class="race-title">Louisville Metro Council — District ${council_district} (Select One) <span class="nonpartisan-tag">Nonpartisan</span></div>
       <div class="candidate-list">${
         COUNCIL_CANDIDATES[council_district].map(c => candidateHTML(c, endorsed.includes(c.name), councilRaceId)).join('')
       }</div>
