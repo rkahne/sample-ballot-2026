@@ -868,17 +868,29 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // Fix modal keyboard coverage on Facebook IAB and mobile WebViews.
   // visualViewport shrinks when the keyboard opens; window.innerHeight does not.
+  // NOTE: inset:0 in CSS sets bottom:0 — we must set bottom:auto in JS or it
+  //       conflicts with our explicit height, causing the modal to be mispositioned.
   if (window.visualViewport) {
     const overlay = document.getElementById('contactModal');
     const syncModal = () => {
       if (overlay.classList.contains('open')) {
-        const vvh = window.visualViewport.height;
-        overlay.style.height = vvh + 'px';
-        overlay.style.top    = window.visualViewport.offsetTop + 'px';
+        const vv = window.visualViewport;
+        overlay.style.top    = vv.offsetTop + 'px';
+        overlay.style.height = vv.height + 'px';
+        overlay.style.bottom = 'auto'; // override inset:0's bottom:0
       }
     };
     window.visualViewport.addEventListener('resize', syncModal);
     window.visualViewport.addEventListener('scroll', syncModal);
+
+    // Re-sync after keyboard animation completes when an input is focused
+    document.getElementById('contactModal').addEventListener('focusin', () => {
+      setTimeout(syncModal, 100);
+      setTimeout(syncModal, 350);
+    });
+
+    // Expose syncModal so showModal() can call it immediately
+    window._syncModal = syncModal;
   }
 });
 
@@ -939,21 +951,39 @@ async function saveAsImage() {
       }
     }
 
-    // Facebook IAB / Safari / mobile fallback:
-    // Use a blob: URL to open the image in a new tab — avoids document.write() which FB IAB blocks.
-    if (isSafari || isMobile || isFBIAB) {
+    // Facebook / Instagram IAB: window.open() opens a raw PNG with no UI around it.
+    // Always use an inline overlay so we can show clear save instructions.
+    if (isFBIAB) {
+      const overlay = document.createElement('div');
+      overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:9999;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:20px;text-align:center';
+      overlay.innerHTML = `
+        <div style="color:#fff;font-size:1.15rem;font-weight:800;margin-bottom:14px">Save Your Ballot Guide</div>
+        <div style="background:#c0392b;color:#fff;padding:14px 16px;font-weight:700;font-size:0.95rem;border-radius:8px;margin-bottom:16px;line-height:1.6">
+          📥 <strong>Press and hold the image below</strong>, then tap<br>
+          <strong>"Save to Photos"</strong> or <strong>"Save Image"</strong>
+        </div>
+        <img src="${dataUrl}" style="max-width:100%;border-radius:8px;display:block;margin:0 auto">
+        <button onclick="this.parentNode.remove()" style="margin-top:18px;padding:12px 30px;background:#fff;border:none;border-radius:8px;font-weight:700;font-size:1rem;cursor:pointer">✕ Close</button>`;
+      document.body.appendChild(overlay);
+      showModal();
+      return;
+    }
+
+    // Safari / other mobile fallback: open blob URL in new tab
+    if (isSafari || isMobile) {
       const blobUrl = URL.createObjectURL(blob);
       const win = window.open(blobUrl, '_blank');
       if (!win) {
         // Popup fully blocked — show inline image overlay instead
         const overlay = document.createElement('div');
-        overlay.style.cssText = 'position:fixed;inset:0;background:#1a1a2e;z-index:9999;overflow-y:auto;padding:20px;text-align:center';
+        overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:9999;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:20px;text-align:center';
         overlay.innerHTML = `
-          <div style="background:#c0392b;color:#fff;padding:14px;font-weight:700;font-size:1rem;border-radius:8px;margin-bottom:16px">
-            📥 Press and hold the image below, then tap <strong>Save Image</strong>
+          <div style="color:#fff;font-size:1.15rem;font-weight:800;margin-bottom:14px">Save Your Ballot Guide</div>
+          <div style="background:#c0392b;color:#fff;padding:14px;font-weight:700;font-size:0.95rem;border-radius:8px;margin-bottom:16px;line-height:1.6">
+            📥 <strong>Press and hold the image below</strong>, then tap <strong>Save Image</strong>
           </div>
-          <img src="${dataUrl}" style="max-width:100%;border-radius:8px">
-          <br><button onclick="this.parentNode.remove()" style="margin-top:16px;padding:10px 24px;background:#fff;border:none;border-radius:6px;font-weight:700;cursor:pointer">Close</button>`;
+          <img src="${dataUrl}" style="max-width:100%;border-radius:8px;display:block;margin:0 auto">
+          <button onclick="this.parentNode.remove()" style="margin-top:18px;padding:12px 30px;background:#fff;border:none;border-radius:8px;font-weight:700;font-size:1rem;cursor:pointer">✕ Close</button>`;
         document.body.appendChild(overlay);
       }
       setTimeout(() => URL.revokeObjectURL(blobUrl), 60000);
@@ -1007,6 +1037,8 @@ function showModal() {
   document.getElementById('modalSuccess').style.display = 'none';
   document.getElementById('modalError').style.display = 'none';
   document.getElementById('contactModal').classList.add('open');
+  // Immediately constrain overlay to the visible viewport (keyboard may already be open)
+  if (window._syncModal) window._syncModal();
 }
 
 function closeModal() {
@@ -1014,6 +1046,7 @@ function closeModal() {
   overlay.classList.remove('open');
   overlay.style.height = '';
   overlay.style.top    = '';
+  overlay.style.bottom = '';
 }
 
 // Close on overlay click
