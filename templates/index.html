@@ -307,6 +307,11 @@
       align-items: flex-start; justify-content: center;
       padding: 20px;
       overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    /* dvh = dynamic viewport height: shrinks automatically when keyboard opens (iOS 15.4+) */
+    @supports (height: 100dvh) {
+      .modal-overlay.open { height: 100dvh; }
     }
     .modal-overlay.open { display: flex; }
     .modal-box {
@@ -867,31 +872,41 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   // Fix modal keyboard coverage on Facebook IAB and mobile WebViews.
-  // visualViewport shrinks when the keyboard opens; window.innerHeight does not.
-  // NOTE: inset:0 in CSS sets bottom:0 — we must set bottom:auto in JS or it
-  //       conflicts with our explicit height, causing the modal to be mispositioned.
+  // Strategy: constrain the overlay to the visual viewport (shrinks when keyboard opens),
+  // then scroll the focused input into view within the now-smaller overlay.
+  const overlay = document.getElementById('contactModal');
+
+  const syncModal = () => {
+    if (!overlay.classList.contains('open')) return;
+    requestAnimationFrame(() => {
+      const vv = window.visualViewport || { offsetTop: 0, offsetLeft: 0, width: window.innerWidth, height: window.innerHeight };
+      overlay.style.top    = vv.offsetTop  + 'px';
+      overlay.style.left   = vv.offsetLeft + 'px';
+      overlay.style.width  = vv.width      + 'px';
+      overlay.style.height = vv.height     + 'px';
+      overlay.style.bottom = 'auto'; // override inset:0's bottom:0
+      overlay.style.right  = 'auto'; // override inset:0's right:0
+    });
+  };
+
   if (window.visualViewport) {
-    const overlay = document.getElementById('contactModal');
-    const syncModal = () => {
-      if (overlay.classList.contains('open')) {
-        const vv = window.visualViewport;
-        overlay.style.top    = vv.offsetTop + 'px';
-        overlay.style.height = vv.height + 'px';
-        overlay.style.bottom = 'auto'; // override inset:0's bottom:0
-      }
-    };
     window.visualViewport.addEventListener('resize', syncModal);
     window.visualViewport.addEventListener('scroll', syncModal);
-
-    // Re-sync after keyboard animation completes when an input is focused
-    document.getElementById('contactModal').addEventListener('focusin', () => {
-      setTimeout(syncModal, 100);
-      setTimeout(syncModal, 350);
-    });
-
-    // Expose syncModal so showModal() can call it immediately
-    window._syncModal = syncModal;
   }
+
+  // When an input is focused, re-sync size AND scroll it into view inside the overlay.
+  // Keyboard animation takes ~300ms on iOS; stagger the attempts.
+  overlay.addEventListener('focusin', (e) => {
+    [150, 350, 600].forEach(ms => setTimeout(() => {
+      syncModal();
+      if (e.target && e.target.scrollIntoView) {
+        e.target.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }, ms));
+  });
+
+  // Expose so showModal() can call immediately on open
+  window._syncModal = syncModal;
 });
 
 // ══════════════════════════════════════════════════════════════════════
@@ -1044,9 +1059,12 @@ function showModal() {
 function closeModal() {
   const overlay = document.getElementById('contactModal');
   overlay.classList.remove('open');
-  overlay.style.height = '';
   overlay.style.top    = '';
+  overlay.style.left   = '';
+  overlay.style.width  = '';
+  overlay.style.height = '';
   overlay.style.bottom = '';
+  overlay.style.right  = '';
 }
 
 // Close on overlay click
