@@ -705,13 +705,14 @@ function buildBallot({ council_district, commissioner_district, state_house_dist
   const isOdd = council_district % 2 !== 0;
   const hasPrimary = !!COUNCIL_CANDIDATES[council_district];
 
-  // Ballot order matches official Jefferson County ballot exactly:
-  // 1. US Senator  2. Mayor (nonpartisan)  3. KY State Senator  4. KY State Rep
-  // 5. County Attorney  6. Metro Council (nonpartisan)  7. County Clerk  8. Sheriff
+  // Correct column order (left column first, then right column — matching official ballot):
+  // LEFT  (partisan):    US Senator → KY State Senator → KY State Rep → County Attorney → County Clerk → Sheriff
+  // RIGHT (nonpartisan): Louisville Metro Mayor → Louisville Metro Council
 
+  // ══ PARTISAN SECTION ══
   html += `<div class="ballot-section">
     <div class="section-header partisan">Democratic Primary — May 19, 2026</div>
-    <div class="section-note">Registered Democrats only &nbsp;·&nbsp; Only contested races appear on the primary ballot &nbsp;·&nbsp; <span style="color:var(--endorse);font-weight:600">${starSvg()} Green = LDP Endorsed</span> &nbsp;·&nbsp; Party labels from voter registration (nonpartisan races) will NOT appear on your official ballot</div>`;
+    <div class="section-note">Registered Democrats only &nbsp;·&nbsp; Only contested races appear on the primary ballot &nbsp;·&nbsp; <span style="color:var(--endorse);font-weight:600">${starSvg()} Green = LDP Endorsed</span></div>`;
 
   // ── 1. US SENATOR ──
   const usSenRaceId = 'race' + (++raceCounter);
@@ -719,16 +720,7 @@ function buildBallot({ council_district, commissioner_district, state_house_dist
     US_SENATE_CANDIDATES.map(c => candidateHTML(c, false, usSenRaceId)),
     'Democratic Primary');
 
-  // ── 2. MAYOR (nonpartisan) ──
-  const mayorRaceId = 'race' + (++raceCounter);
-  html += `<div class="race nonpartisan-race">
-    <div class="race-title">Louisville Metro Mayor (Vote for One) <span class="nonpartisan-tag">Nonpartisan</span></div>
-    <div class="candidate-list mayor-list">${
-      MAYOR_CANDIDATES.map(c => candidateHTML(c, ENDORSEMENTS.mayor.includes(c.name), mayorRaceId)).join('')
-    }</div>
-  </div>`;
-
-  // ── 3. KY STATE SENATOR (if contested Dem primary in this district) ──
+  // ── 2. KY STATE SENATOR (if contested Dem primary in this district) ──
   if (KY_SENATE_CANDIDATES[state_senate_district]) {
     const kysenRaceId = 'race' + (++raceCounter);
     html += raceHTML(
@@ -737,7 +729,7 @@ function buildBallot({ council_district, commissioner_district, state_house_dist
       'Democratic Primary');
   }
 
-  // ── 4. KY STATE REPRESENTATIVE (if contested Dem primary in this district) ──
+  // ── 3. KY STATE REPRESENTATIVE (if contested Dem primary in this district) ──
   if (KY_HOUSE_CANDIDATES[state_house_district]) {
     const kyhouseRaceId = 'race' + (++raceCounter);
     html += raceHTML(
@@ -746,14 +738,30 @@ function buildBallot({ council_district, commissioner_district, state_house_dist
       'Democratic Primary');
   }
 
-  // ── 5. COUNTY ATTORNEY ──
-  const caRace = PARTISAN_RACES.find(r => r.title === 'County Attorney');
-  if (caRace) {
+  // ── 4. COUNTY ATTORNEY  5. COUNTY CLERK  6. SHERIFF ──
+  for (const race of PARTISAN_RACES) {
+    if (race.scope !== 'countywide' && race.scope !== commScope) continue;
     const raceId = 'race' + (++raceCounter);
-    html += raceHTML(caRace.title, caRace.candidates.map(c => candidateHTML(c, false, raceId)), 'Democratic Primary');
+    html += raceHTML(race.title, race.candidates.map(c => candidateHTML(c, false, raceId)), 'Democratic Primary');
   }
 
-  // ── 6. METRO COUNCIL (nonpartisan) — only show if there's actually a primary ──
+  html += '</div>';
+
+  // ══ NONPARTISAN SECTION ══
+  html += `<div class="ballot-section">
+    <div class="section-header nonpartisan">Nonpartisan Races — All Voters May Participate</div>
+    <div class="section-note">Party labels from voter registration are shown here for your information — they will <strong>NOT</strong> appear on your official ballot</div>`;
+
+  // ── 7. MAYOR ──
+  const mayorRaceId = 'race' + (++raceCounter);
+  html += `<div class="race nonpartisan-race">
+    <div class="race-title">Louisville Metro Mayor (Vote for One) <span class="nonpartisan-tag">Nonpartisan</span></div>
+    <div class="candidate-list mayor-list">${
+      MAYOR_CANDIDATES.map(c => candidateHTML(c, ENDORSEMENTS.mayor.includes(c.name), mayorRaceId)).join('')
+    }</div>
+  </div>`;
+
+  // ── 8. METRO COUNCIL (nonpartisan) — only show if there's actually a primary ──
   if (isOdd && hasPrimary) {
     const councilRaceId = 'race' + (++raceCounter);
     const endorsed = ENDORSEMENTS.council[council_district] || [];
@@ -763,14 +771,6 @@ function buildBallot({ council_district, commissioner_district, state_house_dist
         COUNCIL_CANDIDATES[council_district].map(c => candidateHTML(c, endorsed.includes(c.name), councilRaceId)).join('')
       }</div>
     </div>`;
-  }
-
-  // ── 7. COUNTY CLERK  8. SHERIFF ──
-  for (const race of PARTISAN_RACES) {
-    if (race.title === 'County Attorney') continue; // already rendered above
-    if (race.scope !== 'countywide' && race.scope !== commScope) continue;
-    const raceId = 'race' + (++raceCounter);
-    html += raceHTML(race.title, race.candidates.map(c => candidateHTML(c, false, raceId)), 'Democratic Primary');
   }
 
   html += '</div>';
@@ -984,24 +984,21 @@ async function saveAsImage() {
       return;
     }
 
-    // Safari / other mobile fallback: open blob URL in new tab
+    // Safari / other mobile fallback: inline overlay with save instructions.
+    // Opening a raw blob: URL in a new tab shows just the PNG with no UI — same problem
+    // we had with FB IAB. Show the inline overlay instead so instructions are always visible.
     if (isSafari || isMobile) {
-      const blobUrl = URL.createObjectURL(blob);
-      const win = window.open(blobUrl, '_blank');
-      if (!win) {
-        // Popup fully blocked — show inline image overlay instead
-        const overlay = document.createElement('div');
-        overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:9999;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:20px;text-align:center';
-        overlay.innerHTML = `
-          <div style="color:#fff;font-size:1.15rem;font-weight:800;margin-bottom:14px">Save Your Ballot Guide</div>
-          <div style="background:#c0392b;color:#fff;padding:14px;font-weight:700;font-size:0.95rem;border-radius:8px;margin-bottom:16px;line-height:1.6">
-            📥 <strong>Press and hold the image below</strong>, then tap <strong>Save Image</strong>
-          </div>
-          <img src="${dataUrl}" style="max-width:100%;border-radius:8px;display:block;margin:0 auto">
-          <button onclick="this.parentNode.remove()" style="margin-top:18px;padding:12px 30px;background:#fff;border:none;border-radius:8px;font-weight:700;font-size:1rem;cursor:pointer">✕ Close</button>`;
-        document.body.appendChild(overlay);
-      }
-      setTimeout(() => URL.revokeObjectURL(blobUrl), 60000);
+      const overlay = document.createElement('div');
+      overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:9999;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:20px;text-align:center';
+      overlay.innerHTML = `
+        <div style="color:#fff;font-size:1.15rem;font-weight:800;margin-bottom:14px">Save Your Ballot Guide</div>
+        <div style="background:#c0392b;color:#fff;padding:14px 16px;font-weight:700;font-size:0.95rem;border-radius:8px;margin-bottom:16px;line-height:1.6">
+          📥 <strong>Press and hold the image below</strong>, then tap<br>
+          <strong>"Save to Photos"</strong> or <strong>"Save Image"</strong>
+        </div>
+        <img src="${dataUrl}" style="max-width:100%;border-radius:8px;display:block;margin:0 auto">
+        <button onclick="this.parentNode.remove()" style="margin-top:18px;padding:12px 30px;background:#fff;border:none;border-radius:8px;font-weight:700;font-size:1rem;cursor:pointer">✕ Close</button>`;
+      document.body.appendChild(overlay);
       showModal();
       return;
     }
