@@ -410,7 +410,8 @@
     <h2>About the May 19, 2026 Primary Election</h2>
     <div class="explainer-item" style="border:none;padding:0">
       <h3>NEW FOR 2026</h3>
-      <p>Mayor and Metro Council races are now nonpartisan. All voters — including independents — can participate. Because these races are nonpartisan, party affiliation will <strong>NOT</strong> appear on your official ballot. We have included the candidate's party here so you can make an informed vote.</p>
+      <p>Due to the state legislature, mayoral and Metro Council races will be non-partisan elections beginning this year. Because of this, the Louisville Democratic Party is making endorsements in these races. Democratic Party bylaws prevent us from endorsing in partisan Democratic primaries.</p>
+      <p style="margin-top:10px">Because these races are nonpartisan, party affiliation will <strong>NOT</strong> appear on your official ballot. We have included the candidate's party here so you can make an informed vote.</p>
       <p style="margin-top:10px;font-size:0.82rem;color:var(--muted)">🔒 Your candidate selections are <strong>not recorded or stored</strong> by the Louisville Democratic Party. This tool runs entirely in your browser.</p>
     </div>
   </div>
@@ -504,7 +505,6 @@
     <div id="modalForm">
       <div class="modal-field"><input type="text"  id="cName"  placeholder="Your name" /></div>
       <div class="modal-field"><input type="email" id="cEmail" placeholder="Email address" /></div>
-      <div class="modal-field"><input type="tel"   id="cPhone" placeholder="Phone number (optional)" /></div>
       <div id="modalError" style="color:#c62828;font-size:.8rem;margin-bottom:8px;display:none"></div>
       <button class="modal-submit" onclick="submitContact()">Sign me up!</button>
       <button class="modal-skip"  onclick="closeModal()">No thanks</button>
@@ -512,6 +512,13 @@
     <div class="modal-success" id="modalSuccess" style="display:none">
       <p>✅ Thanks! We'll be in touch before May 19.</p>
       <button class="modal-skip" onclick="closeModal()">Close</button>
+    </div>
+    <div style="background:#f0f4ff;border:1px solid #c5d0e8;border-radius:8px;margin-top:18px;padding:14px 16px;font-size:0.84rem;line-height:1.6">
+      <strong>📌 Reminders</strong>
+      <ul style="margin:8px 0 0 18px;padding:0">
+        <li>You still need to vote! Find voting locations, dates, and times in our voter guide: <a href="https://www.louisvilledems.com/2026-voter-guide" target="_blank" rel="noopener"><strong>louisvilledems.com/2026-voter-guide</strong></a></li>
+        <li style="margin-top:6px">If you have questions or need help, reach out to <a href="mailto:info@louisvilledems.com">info@louisvilledems.com</a></li>
+      </ul>
     </div>
   </div>
 </div>
@@ -1072,11 +1079,10 @@ document.getElementById('contactModal').addEventListener('click', function(e) {
 async function submitContact() {
   const name  = document.getElementById('cName').value.trim();
   const email = document.getElementById('cEmail').value.trim();
-  const phone = document.getElementById('cPhone').value.trim();
   const errEl = document.getElementById('modalError');
 
-  if (!email && !phone) {
-    errEl.textContent = 'Please enter an email address or phone number.';
+  if (!email) {
+    errEl.textContent = 'Please enter an email address.';
     errEl.style.display = 'block';
     return;
   }
@@ -1086,7 +1092,7 @@ async function submitContact() {
     await fetch('/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, phone }),
+      body: JSON.stringify({ name, email }),
     });
     document.getElementById('modalForm').style.display = 'none';
     document.getElementById('modalSuccess').style.display = 'block';
