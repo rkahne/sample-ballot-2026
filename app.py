@@ -129,9 +129,10 @@ SHEETS_WEBHOOK = (
 @app.route("/api/contact", methods=["POST"])
 def contact():
     data = request.get_json(force=True)
-    name  = (data.get("name")  or "").strip()
-    email = (data.get("email") or "").strip()
-    phone = (data.get("phone") or "").strip()
+    first_name = (data.get("first_name") or "").strip()
+    last_name  = (data.get("last_name")  or "").strip()
+    email      = (data.get("email")      or "").strip()
+    phone      = (data.get("phone")      or "").strip()
 
     if not email and not phone:
         return jsonify({"error": "Email or phone required."}), 400
@@ -139,7 +140,7 @@ def contact():
     try:
         resp = requests.post(
             SHEETS_WEBHOOK,
-            json={"name": name, "email": email, "phone": phone},
+            json={"first_name": first_name, "last_name": last_name, "email": email, "phone": phone},
             timeout=10,
         )
         resp.raise_for_status()

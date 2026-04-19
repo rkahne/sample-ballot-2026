@@ -503,8 +503,12 @@
     <h3>Election info and reminders!</h3>
     <p>Get Early Voting and Election Day locations and updates from the Louisville Democratic Party.</p>
     <div id="modalForm">
-      <div class="modal-field"><input type="text"  id="cName"  placeholder="Your name" /></div>
-      <div class="modal-field"><input type="email" id="cEmail" placeholder="Email address" /></div>
+      <div style="display:flex;gap:8px">
+        <div class="modal-field" style="flex:1;margin-bottom:0"><input type="text" id="cFirstName" placeholder="First name" /></div>
+        <div class="modal-field" style="flex:1;margin-bottom:0"><input type="text" id="cLastName"  placeholder="Last name"  /></div>
+      </div>
+      <div class="modal-field" style="margin-top:11px"><input type="email" id="cEmail" placeholder="Email address" /></div>
+      <div class="modal-field"><input type="tel"   id="cPhone" placeholder="Phone number (optional)" /></div>
       <div id="modalError" style="color:#c62828;font-size:.8rem;margin-bottom:8px;display:none"></div>
       <button class="modal-submit" onclick="submitContact()">Sign me up!</button>
       <button class="modal-skip"  onclick="closeModal()">No thanks</button>
@@ -1077,12 +1081,14 @@ document.getElementById('contactModal').addEventListener('click', function(e) {
 });
 
 async function submitContact() {
-  const name  = document.getElementById('cName').value.trim();
-  const email = document.getElementById('cEmail').value.trim();
-  const errEl = document.getElementById('modalError');
+  const firstName = document.getElementById('cFirstName').value.trim();
+  const lastName  = document.getElementById('cLastName').value.trim();
+  const email     = document.getElementById('cEmail').value.trim();
+  const phone     = document.getElementById('cPhone').value.trim();
+  const errEl     = document.getElementById('modalError');
 
-  if (!email) {
-    errEl.textContent = 'Please enter an email address.';
+  if (!email && !phone) {
+    errEl.textContent = 'Please enter an email address or phone number.';
     errEl.style.display = 'block';
     return;
   }
@@ -1092,7 +1098,7 @@ async function submitContact() {
     await fetch('/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email }),
+      body: JSON.stringify({ first_name: firstName, last_name: lastName, email, phone }),
     });
     document.getElementById('modalForm').style.display = 'none';
     document.getElementById('modalSuccess').style.display = 'block';
