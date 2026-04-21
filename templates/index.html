@@ -1098,7 +1098,7 @@ async function submitContact() {
     await fetch('/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ first_name: firstName, last_name: lastName, email, phone }),
+      body: JSON.stringify({ first_name: firstName, last_name: lastName, email, phone, address: currentAddress }),
     });
     document.getElementById('modalForm').style.display = 'none';
     document.getElementById('modalSuccess').style.display = 'block';

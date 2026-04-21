@@ -133,6 +133,7 @@ def contact():
     last_name  = (data.get("last_name")  or "").strip()
     email      = (data.get("email")      or "").strip()
     phone      = (data.get("phone")      or "").strip()
+    address    = (data.get("address")    or "").strip()
 
     if not email and not phone:
         return jsonify({"error": "Email or phone required."}), 400
@@ -140,7 +141,7 @@ def contact():
     try:
         resp = requests.post(
             SHEETS_WEBHOOK,
-            json={"first_name": first_name, "last_name": last_name, "email": email, "phone": phone},
+            json={"first_name": first_name, "last_name": last_name, "email": email, "phone": phone, "address": address},
             timeout=10,
         )
         resp.raise_for_status()
