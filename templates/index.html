@@ -288,6 +288,17 @@
       font-size: 0.84rem; font-weight: 600; cursor: pointer;
       padding: 6px 0 0; display: block;
     }
+    .ev-item.ev-closest {
+      border: 2px solid var(--endorse-border);
+      background: var(--endorse-bg);
+    }
+    .ev-item.ev-closest .ev-name { color: var(--endorse); }
+    .ev-closest-label {
+      display: inline-block; font-size: 0.68rem; font-weight: 700;
+      background: var(--endorse); color: #fff;
+      border-radius: 4px; padding: 1px 6px; margin-bottom: 3px;
+      text-transform: uppercase; letter-spacing: 0.04em;
+    }
 
     /* ── Take-to-polls note ── */
     .polls-note {
@@ -913,6 +924,27 @@ async function doLookup() {
     // Ballot header
     document.getElementById('ballotSubhead').textContent =
       `Democratic Primary — May 19, 2026  ·  Precinct ${data.precinct}  ·  Metro Council District ${data.council_district}`;
+
+    // Closest early voting location
+    if (typeof data.closest_ev_index === 'number') {
+      // Clear any previous highlight
+      document.querySelectorAll('.ev-item').forEach(el => {
+        el.classList.remove('ev-closest');
+        const lbl = el.querySelector('.ev-closest-label');
+        if (lbl) lbl.remove();
+      });
+      const evItems = document.querySelectorAll('.ev-item');
+      const closest = evItems[data.closest_ev_index];
+      if (closest) {
+        closest.classList.add('ev-closest');
+        const label = document.createElement('div');
+        label.className = 'ev-closest-label';
+        label.textContent = '★ Closest to you';
+        closest.prepend(label);
+        // Auto-expand the list if the closest is hidden
+        if (closest.style.display === 'none') toggleEV();
+      }
+    }
 
     // Polling place
     const ppCard = document.getElementById('pollingPlaceCard');
