@@ -267,38 +267,40 @@
     .legend-swatch { width: 12px; height: 12px; border-radius: 3px; }
     .legend-swatch.endorsed { background: var(--endorse-bg); border: 1.5px solid var(--endorse-border); }
 
-    /* ── Early voting card ── */
-    .early-voting-card {
-      background: #fff; border: 1px solid var(--border);
-      border-radius: 10px; padding: 20px 22px;
-      margin-bottom: 18px;
+    /* ── Voting location cards (shown after lookup) ── */
+    .voting-cards-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px;
+    }
+    @media (max-width: 600px) { .voting-cards-grid { grid-template-columns: 1fr; } }
+    .voting-card {
+      border-radius: 10px; padding: 14px 18px;
       box-shadow: 0 2px 6px rgba(0,0,0,.05);
     }
-    .early-voting-card h2 { font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
-    .early-voting-card .ev-subtitle { font-size: 0.84rem; color: var(--muted); margin-bottom: 14px; }
-    .ev-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+    .voting-card.election-day { border: 1.5px solid var(--endorse-border); background: #fff; }
+    .voting-card.early-voting { border: 1.5px solid var(--blue); background: #fff; }
+    .vc-label {
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .08em; margin-bottom: 5px;
     }
-    @media (max-width: 560px) { .ev-grid { grid-template-columns: 1fr; } }
-    .ev-item { background: var(--gray); border-radius: 7px; padding: 10px 13px; }
-    .ev-item .ev-name { font-size: 0.84rem; font-weight: 600; color: var(--navy); }
-    .ev-item .ev-addr { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
-    .ev-toggle {
+    .election-day .vc-label { color: #1a6b35; }
+    .early-voting  .vc-label { color: var(--blue); }
+    .vc-note  { font-size: 0.75rem; color: var(--muted); margin-bottom: 8px; line-height: 1.4; }
+    .vc-name  { font-weight: 700; font-size: 0.98rem; color: var(--navy); }
+    .vc-addr  { font-size: 0.84rem; color: var(--muted); margin-top: 3px; }
+    .vc-link  { display: inline-block; margin-top: 8px; font-size: 0.78rem; color: var(--blue); }
+    .other-ev-btn {
       background: none; border: none; color: var(--blue);
-      font-size: 0.84rem; font-weight: 600; cursor: pointer;
-      padding: 6px 0 0; display: block;
+      font-size: 0.8rem; font-weight: 600; cursor: pointer;
+      padding: 8px 0 0; display: block; text-align: left;
     }
-    .ev-item.ev-closest {
-      border: 2px solid var(--endorse-border);
-      background: var(--endorse-bg);
+    .other-ev-list {
+      margin-top: 10px; border-top: 1px solid var(--border); padding-top: 8px;
+      max-height: 210px; overflow-y: auto;
     }
-    .ev-item.ev-closest .ev-name { color: var(--endorse); }
-    .ev-closest-label {
-      display: inline-block; font-size: 0.68rem; font-weight: 700;
-      background: var(--endorse); color: #fff;
-      border-radius: 4px; padding: 1px 6px; margin-bottom: 3px;
-      text-transform: uppercase; letter-spacing: 0.04em;
-    }
+    .oev-entry { padding: 5px 0; border-bottom: 1px solid var(--border); }
+    .oev-entry:last-child { border-bottom: none; }
+    .oev-name { font-size: 0.82rem; font-weight: 600; color: var(--navy); }
+    .oev-addr { font-size: 0.76rem; color: var(--muted); }
 
     /* ── Take-to-polls note ── */
     .polls-note {
@@ -449,41 +451,6 @@
     </div>
   </div>
 
-  <!-- Early Voting -->
-  <div class="early-voting-card">
-    <h2>🗳️ Early Voting Locations — 2026 Primary</h2>
-    <p class="ev-subtitle">Early voting is available at any of the 24 locations below. You do <strong>not</strong> need to vote at your assigned polling place during early voting.</p>
-    <div class="ev-grid" id="evGrid">
-      <!-- first 6 shown by default -->
-      <div class="ev-item"><div class="ev-name">Americana World Community Center</div><div class="ev-addr">4801 Southside Drive, 40214</div></div>
-      <div class="ev-item"><div class="ev-name">The Arterburn</div><div class="ev-addr">310 Ten Pin Ln., 40207</div></div>
-      <div class="ev-item"><div class="ev-name">Berrytown Recreation Center</div><div class="ev-addr">1300 Heafer Rd., 40223</div></div>
-      <div class="ev-item"><div class="ev-name">Cyril Allgeier Community Center</div><div class="ev-addr">4101 Cadillac Ct., 40213</div></div>
-      <div class="ev-item"><div class="ev-name">Epiphany United Methodist Church</div><div class="ev-addr">7032 Southside Dr., 40214</div></div>
-      <div class="ev-item"><div class="ev-name">Goodwill Opportunity Campus — Broadway</div><div class="ev-addr">2820 W. Broadway, 40211</div></div>
-      <!-- remaining 18 hidden until expanded -->
-      <div class="ev-item ev-extra" style="display:none"><div class="ev-name">Goodwill Opportunity Campus — Preston</div><div class="ev-addr">6201 Preston Hwy., 40219</div></div>
-      <div class="ev-item ev-extra" style="display:none"><div class="ev-name">The Heritage — Shively Park</div><div class="ev-addr">1901 Park Rd., 40216</div></div>
-      <div class="ev-item ev-extra" style="display:none"><div class="ev-name">Immanuel United Church of Christ</div><div class="ev-addr">2300 Taylorsville Rd., 40205</div></div>
-      <div class="ev-item ev-extra" style="display:none"><div class="ev-name">The Jeffersonian</div><div class="ev-addr">10617 Taylorsville Rd., 40299</div></div>
-      <div class="ev-item ev-extra" style="display:none"><div class="ev-name">Jefferson County Clerk's Office — Downtown</div><div class="ev-addr">200 S. Fifth St. Suite 228, First Trust Centre, 40202</div></div>
-      <div class="ev-item ev-extra" style="display:none"><div class="ev-name">Jefferson County Clerk's Office — East Branch</div><div class="ev-addr">12312-A Shelbyville Rd., 40243</div></div>
-      <div class="ev-item ev-extra" style="display:none"><div class="ev-name">Jefferson County Clerk's Office — Fairdale Branch</div><div class="ev-addr">10616 W. Manslick Rd., 40118</div></div>
-      <div class="ev-item ev-extra" style="display:none"><div class="ev-name">Jefferson County Clerk's Office — West Branch</div><div class="ev-addr">French Plaza — 228 Amy Ave., 40212</div></div>
-      <div class="ev-item ev-extra" style="display:none"><div class="ev-name">Kentucky Center for African American Heritage</div><div class="ev-addr">1701 W. Muhammad Ali Blvd., 40203</div></div>
-      <div class="ev-item ev-extra" style="display:none"><div class="ev-name">Lyndon Elks Lodge #2052</div><div class="ev-addr">904 Ormsby Ln., 40242</div></div>
-      <div class="ev-item ev-extra" style="display:none"><div class="ev-name">New Zion Baptist Church</div><div class="ev-addr">1501 Louis Coleman Jr. Dr., 40211</div></div>
-      <div class="ev-item ev-extra" style="display:none"><div class="ev-name">Old Forester's Paristown Hall</div><div class="ev-addr">724 Brent St., 40204</div></div>
-      <div class="ev-item ev-extra" style="display:none"><div class="ev-name">St. Andrew United Church of Christ</div><div class="ev-addr">2608 Browns Ln., 40220</div></div>
-      <div class="ev-item ev-extra" style="display:none"><div class="ev-name">Sts. Simon and Jude Catholic Church</div><div class="ev-addr">4335 Hazelwood Dr., 40215</div></div>
-      <div class="ev-item ev-extra" style="display:none"><div class="ev-name">Sun Valley Community Center</div><div class="ev-addr">6505 Bethany Ln., 40272</div></div>
-      <div class="ev-item ev-extra" style="display:none"><div class="ev-name">Teamsters Local Union #783</div><div class="ev-addr">7711 Beulah Church Rd., 40228</div></div>
-      <div class="ev-item ev-extra" style="display:none"><div class="ev-name">Triple Crown Pavilion</div><div class="ev-addr">1780 Plantside Dr., 40299</div></div>
-      <div class="ev-item ev-extra" style="display:none"><div class="ev-name">U of L Shelby Campus — Founders Union Bldg. Rm. 218</div><div class="ev-addr">450 N. Whittington Pkwy., 40222</div></div>
-    </div>
-    <button class="ev-toggle" id="evToggle" onclick="toggleEV()">▼ See all 24 early voting locations</button>
-  </div>
-
   <!-- Lookup -->
   <div class="lookup-card">
     <h2>Find Your Ballot Guide</h2>
@@ -507,11 +474,29 @@
       <div class="pi-item"><span class="pi-label">US Congress</span><span class="pi-val" id="piCongress">—</span></div>
     </div>
 
-    <div id="pollingPlaceCard" style="display:none;background:#fff;border:1.5px solid #4caf50;border-radius:10px;padding:14px 18px;margin-top:14px;box-shadow:0 2px 6px rgba(0,0,0,.05)">
-      <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#1a6b35;margin-bottom:6px">📍 Your Polling Place — May 19, 2026</div>
-      <div style="font-weight:700;font-size:1rem;color:#1a2e5a" id="pollingPlaceName"></div>
-      <div style="font-size:0.88rem;color:#5a6580;margin-top:2px" id="pollingPlaceAddress"></div>
-      <a id="pollingPlaceLink" href="https://jeffersoncountyclerk.org/wheredoivote/" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;font-size:0.78rem;color:#2356a8">Verify on Jefferson County Clerk website →</a>
+    <div id="votingCardsRow" style="display:none">
+      <div class="voting-cards-grid">
+
+        <!-- Election Day polling place -->
+        <div class="voting-card election-day">
+          <div class="vc-label">📍 Election Day Polling Place</div>
+          <div class="vc-note">May 19, 2026 — you must vote at this location on Election Day</div>
+          <div class="vc-name" id="pollingPlaceName"></div>
+          <div class="vc-addr" id="pollingPlaceAddress"></div>
+          <a href="https://jeffersoncountyclerk.org/wheredoivote/" target="_blank" rel="noopener" class="vc-link">Verify on Clerk's website →</a>
+        </div>
+
+        <!-- Closest early voting site -->
+        <div class="voting-card early-voting">
+          <div class="vc-label">🗳️ Closest Early Voting Site</div>
+          <div class="vc-note"><strong>May 14–16, 2026 only.</strong> Vote at <strong>any</strong> early voting site — no precinct restriction</div>
+          <div class="vc-name" id="evClosestName"></div>
+          <div class="vc-addr" id="evClosestAddr"></div>
+          <button class="other-ev-btn" id="otherEvBtn" onclick="toggleOtherEV()">▼ Other early voting locations</button>
+          <div id="otherEvList" style="display:none" class="other-ev-list"></div>
+        </div>
+
+      </div>
     </div>
   </div>
 
@@ -925,36 +910,24 @@ async function doLookup() {
     document.getElementById('ballotSubhead').textContent =
       `Democratic Primary — May 19, 2026  ·  Precinct ${data.precinct}  ·  Metro Council District ${data.council_district}`;
 
-    // Closest early voting location
+    // Voting location cards
+    const votingRow = document.getElementById('votingCardsRow');
+    document.getElementById('pollingPlaceName').textContent    = data.polling_place_name    || 'See Clerk\'s website';
+    document.getElementById('pollingPlaceAddress').textContent = data.polling_place_address || '';
     if (typeof data.closest_ev_index === 'number') {
-      // Clear any previous highlight
-      document.querySelectorAll('.ev-item').forEach(el => {
-        el.classList.remove('ev-closest');
-        const lbl = el.querySelector('.ev-closest-label');
-        if (lbl) lbl.remove();
-      });
-      const evItems = document.querySelectorAll('.ev-item');
-      const closest = evItems[data.closest_ev_index];
-      if (closest) {
-        closest.classList.add('ev-closest');
-        const label = document.createElement('div');
-        label.className = 'ev-closest-label';
-        label.textContent = '★ Closest to you';
-        closest.prepend(label);
-        // Auto-expand the list if the closest is hidden
-        if (closest.style.display === 'none') toggleEV();
-      }
+      const ev = EARLY_VOTING_LOCATIONS[data.closest_ev_index];
+      document.getElementById('evClosestName').textContent = ev.name;
+      document.getElementById('evClosestAddr').textContent = ev.address;
+      // Build "other" list
+      const otherList = document.getElementById('otherEvList');
+      otherList.innerHTML = EARLY_VOTING_LOCATIONS
+        .filter((_, i) => i !== data.closest_ev_index)
+        .map(loc => `<div class="oev-entry"><div class="oev-name">${loc.name}</div><div class="oev-addr">${loc.address}</div></div>`)
+        .join('');
+      document.getElementById('otherEvBtn').textContent = '▼ Other early voting locations (23)';
+      document.getElementById('otherEvList').style.display = 'none';
     }
-
-    // Polling place
-    const ppCard = document.getElementById('pollingPlaceCard');
-    if (data.polling_place_name) {
-      document.getElementById('pollingPlaceName').textContent    = data.polling_place_name;
-      document.getElementById('pollingPlaceAddress').textContent = data.polling_place_address || '';
-      ppCard.style.display = 'block';
-    } else {
-      ppCard.style.display = 'none';
-    }
+    votingRow.style.display = 'block';
 
     // Build ballot
     document.getElementById('ballotBody').innerHTML = buildBallot(data);
@@ -1142,17 +1115,43 @@ async function saveAsImage() {
 }
 
 // ══════════════════════════════════════════════════════════════════════
-//  EARLY VOTING TOGGLE
+//  EARLY VOTING DATA & TOGGLE
+//  Order must match EARLY_VOTING_LOCATIONS in app.py (index 0-23)
 // ══════════════════════════════════════════════════════════════════════
 
-function toggleEV() {
-  const extras  = document.querySelectorAll('.ev-extra');
-  const btn     = document.getElementById('evToggle');
-  const visible = extras[0].style.display !== 'none';
-  extras.forEach(el => el.style.display = visible ? 'none' : '');
-  btn.textContent = visible
-    ? '▼ See all 24 early voting locations'
-    : '▲ Show fewer';
+const EARLY_VOTING_LOCATIONS = [
+  { name: 'Americana World Community Center',              address: '4801 Southside Drive, 40214' },
+  { name: 'The Arterburn',                                 address: '310 Ten Pin Ln., 40207' },
+  { name: 'Berrytown Recreation Center',                   address: '1300 Heafer Rd., 40223' },
+  { name: 'Cyril Allgeier Community Center',               address: '4101 Cadillac Ct., 40213' },
+  { name: 'Epiphany United Methodist Church',              address: '7032 Southside Dr., 40214' },
+  { name: 'Goodwill Opportunity Campus — Broadway',        address: '2820 W. Broadway, 40211' },
+  { name: 'Goodwill Opportunity Campus — Preston',         address: '6201 Preston Hwy., 40219' },
+  { name: 'The Heritage — Shively Park',                   address: '1901 Park Rd., 40216' },
+  { name: 'Immanuel United Church of Christ',              address: '2300 Taylorsville Rd., 40205' },
+  { name: 'The Jeffersonian',                              address: '10617 Taylorsville Rd., 40299' },
+  { name: "Jefferson County Clerk's Office — Downtown",    address: '200 S. Fifth St., Suite 228, 40202' },
+  { name: "Jefferson County Clerk's Office — East Branch", address: '12312-A Shelbyville Rd., 40243' },
+  { name: "Jefferson County Clerk's Office — Fairdale",    address: '10616 W. Manslick Rd., 40118' },
+  { name: "Jefferson County Clerk's Office — West Branch", address: 'French Plaza — 228 Amy Ave., 40212' },
+  { name: 'Kentucky Center for African American Heritage', address: '1701 W. Muhammad Ali Blvd., 40203' },
+  { name: 'Lyndon Elks Lodge #2052',                       address: '904 Ormsby Ln., 40242' },
+  { name: 'New Zion Baptist Church',                       address: '1501 Louis Coleman Jr. Dr., 40211' },
+  { name: "Old Forester's Paristown Hall",                 address: '724 Brent St., 40204' },
+  { name: 'St. Andrew United Church of Christ',            address: '2608 Browns Ln., 40220' },
+  { name: 'Sts. Simon and Jude Catholic Church',           address: '4335 Hazelwood Dr., 40215' },
+  { name: 'Sun Valley Community Center',                   address: '6505 Bethany Ln., 40272' },
+  { name: 'Teamsters Local Union #783',                    address: '7711 Beulah Church Rd., 40228' },
+  { name: 'Triple Crown Pavilion',                         address: '1780 Plantside Dr., 40299' },
+  { name: 'U of L Shelby Campus — Founders Union Bldg.',   address: '450 N. Whittington Pkwy., 40222' },
+];
+
+function toggleOtherEV() {
+  const list = document.getElementById('otherEvList');
+  const btn  = document.getElementById('otherEvBtn');
+  const open = list.style.display !== 'none';
+  list.style.display = open ? 'none' : 'block';
+  btn.textContent = open ? '▼ Other early voting locations (23)' : '▲ Hide other locations';
 }
 
 // ══════════════════════════════════════════════════════════════════════
