@@ -438,6 +438,13 @@
       <div class="pi-item"><span class="pi-label">State Senate</span><span class="pi-val" id="piSenate">—</span></div>
       <div class="pi-item"><span class="pi-label">US Congress</span><span class="pi-val" id="piCongress">—</span></div>
     </div>
+
+    <div id="pollingPlaceCard" style="display:none;background:#fff;border:1.5px solid #4caf50;border-radius:10px;padding:14px 18px;margin-top:14px;box-shadow:0 2px 6px rgba(0,0,0,.05)">
+      <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#1a6b35;margin-bottom:6px">📍 Your Polling Place — May 19, 2026</div>
+      <div style="font-weight:700;font-size:1rem;color:#1a2e5a" id="pollingPlaceName"></div>
+      <div style="font-size:0.88rem;color:#5a6580;margin-top:2px" id="pollingPlaceAddress"></div>
+      <a id="pollingPlaceLink" href="https://jeffersoncountyclerk.org/wheredoivote/" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;font-size:0.78rem;color:#2356a8">Verify on Jefferson County Clerk website →</a>
+    </div>
   </div>
 
   <!-- Ballot -->
@@ -849,6 +856,16 @@ async function doLookup() {
     // Ballot header
     document.getElementById('ballotSubhead').textContent =
       `Democratic Primary — May 19, 2026  ·  Precinct ${data.precinct}  ·  Metro Council District ${data.council_district}`;
+
+    // Polling place
+    const ppCard = document.getElementById('pollingPlaceCard');
+    if (data.polling_place_name) {
+      document.getElementById('pollingPlaceName').textContent    = data.polling_place_name;
+      document.getElementById('pollingPlaceAddress').textContent = data.polling_place_address || '';
+      ppCard.style.display = 'block';
+    } else {
+      ppCard.style.display = 'none';
+    }
 
     // Build ballot
     document.getElementById('ballotBody').innerHTML = buildBallot(data);

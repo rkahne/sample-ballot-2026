@@ -2,6 +2,7 @@
 Louisville Democratic Party - 2026 Sample Ballot App
 """
 import os
+import re
 import requests
 from flask import Flask, render_template, request, jsonify, send_from_directory
 import geopandas as gpd
@@ -20,6 +21,76 @@ precincts_gdf = gpd.read_file(GEOJSON)
 if precincts_gdf.crs and precincts_gdf.crs.to_epsg() != 4326:
     precincts_gdf = precincts_gdf.to_crs(epsg=4326)
 print(f"Loaded {len(precincts_gdf)} precincts.")
+
+
+# ---------------------------------------------------------------------------
+# Polling place lookup (Jefferson County Clerk scraper)
+# ---------------------------------------------------------------------------
+_CLERK_URL = "https://jeffersoncountyclerk.org/wheredoivote/"
+_CLERK_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+    "Referer": _CLERK_URL,
+}
+_polling_cache = {}  # simple in-memory cache keyed by uppercased street address
+
+
+def get_polling_place(street_address: str) -> dict:
+    """
+    Look up polling place for a Jefferson County address via the Clerk's website.
+    street_address should be street-only (no city/state/zip), e.g. '527 W Jefferson St'.
+    Returns dict with polling_place_name and polling_place_address, or None values on failure.
+    """
+    street_only = street_address.split(",")[0].strip()
+    cache_key = street_only.upper()
+    if cache_key in _polling_cache:
+        return _polling_cache[cache_key]
+
+    try:
+        session = requests.Session()
+        session.headers.update(_CLERK_HEADERS)
+
+        # Step 1: GET page to obtain fresh ASP.NET session tokens
+        r = session.get(_CLERK_URL, timeout=10)
+        r.raise_for_status()
+
+        def _val(html, field_id):
+            m = re.search(rf'id="{field_id}"\s+value="([^"]*)"', html)
+            return m.group(1) if m else ""
+
+        post_data = {
+            "__LASTFOCUS":          "",
+            "sm1_HiddenField":      "",
+            "__EVENTTARGET":        "",
+            "__EVENTARGUMENT":      "",
+            "__VIEWSTATE":          _val(r.text, "__VIEWSTATE"),
+            "__VIEWSTATEGENERATOR": _val(r.text, "__VIEWSTATEGENERATOR"),
+            "__EVENTVALIDATION":    _val(r.text, "__EVENTVALIDATION"),
+            "txtStreet":            street_only,
+            "cmdDisplay":           "Search",
+        }
+
+        # Step 2: POST the address form
+        r2 = session.post(_CLERK_URL, data=post_data, timeout=10)
+        r2.raise_for_status()
+        html = r2.text
+
+        def _tag_text(html, eid):
+            m = re.search(rf'id="{eid}"[^>]*>(?:<[^>]+>)*([^<]+)', html)
+            return m.group(1).strip() if m else None
+
+        result = {
+            "polling_place_name":    _tag_text(html, "lblLocation"),
+            "polling_place_address": _tag_text(html, "lblAddress"),
+        }
+
+        if result["polling_place_name"]:
+            _polling_cache[cache_key] = result
+
+        return result
+
+    except Exception as exc:
+        print(f"Polling place lookup error: {exc}")
+        return {"polling_place_name": None, "polling_place_address": None}
 
 
 # ---------------------------------------------------------------------------
@@ -109,14 +180,19 @@ def lookup():
 
     row = hits.iloc[0]
 
+    # 3. Polling place lookup (non-fatal — returns None values if it fails)
+    polling = get_polling_place(matched_address or address)
+
     return jsonify({
-        "matched_address": matched_address,
-        "precinct": str(row["PRECINCT"]),
-        "council_district": int(row["COUNDIST"]),
-        "congressional_district": int(row["CONGDIST"]),
-        "state_house_district": int(row["LEGISDIST"]),
+        "matched_address":       matched_address,
+        "precinct":              str(row["PRECINCT"]),
+        "council_district":      int(row["COUNDIST"]),
+        "congressional_district":int(row["CONGDIST"]),
+        "state_house_district":  int(row["LEGISDIST"]),
         "state_senate_district": int(row["SENDIST"]),
         "commissioner_district": str(row["COMMDIST"]),
+        "polling_place_name":    polling.get("polling_place_name"),
+        "polling_place_address": polling.get("polling_place_address"),
     })
 
 
