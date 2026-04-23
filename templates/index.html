@@ -267,6 +267,28 @@
     .legend-swatch { width: 12px; height: 12px; border-radius: 3px; }
     .legend-swatch.endorsed { background: var(--endorse-bg); border: 1.5px solid var(--endorse-border); }
 
+    /* ── Early voting card ── */
+    .early-voting-card {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: 10px; padding: 20px 22px;
+      margin-bottom: 18px;
+      box-shadow: 0 2px 6px rgba(0,0,0,.05);
+    }
+    .early-voting-card h2 { font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+    .early-voting-card .ev-subtitle { font-size: 0.84rem; color: var(--muted); margin-bottom: 14px; }
+    .ev-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+    }
+    @media (max-width: 560px) { .ev-grid { grid-template-columns: 1fr; } }
+    .ev-item { background: var(--gray); border-radius: 7px; padding: 10px 13px; }
+    .ev-item .ev-name { font-size: 0.84rem; font-weight: 600; color: var(--navy); }
+    .ev-item .ev-addr { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+    .ev-toggle {
+      background: none; border: none; color: var(--blue);
+      font-size: 0.84rem; font-weight: 600; cursor: pointer;
+      padding: 6px 0 0; display: block;
+    }
+
     /* ── Take-to-polls note ── */
     .polls-note {
       background: #fffbeb; border: 1px solid #fcd34d;
@@ -414,6 +436,41 @@
       <p style="margin-top:10px">Because these races are nonpartisan, party affiliation will <strong>NOT</strong> appear on your official ballot. We have included the candidate's party here so you can make an informed vote.</p>
       <p style="margin-top:10px;font-size:0.82rem;color:var(--muted)">🔒 Your candidate selections are <strong>not recorded or stored</strong> by the Louisville Democratic Party. This tool runs entirely in your browser.</p>
     </div>
+  </div>
+
+  <!-- Early Voting -->
+  <div class="early-voting-card">
+    <h2>🗳️ Early Voting Locations — 2026 Primary</h2>
+    <p class="ev-subtitle">Early voting is available at any of the 24 locations below. You do <strong>not</strong> need to vote at your assigned polling place during early voting.</p>
+    <div class="ev-grid" id="evGrid">
+      <!-- first 6 shown by default -->
+      <div class="ev-item"><div class="ev-name">Americana World Community Center</div><div class="ev-addr">4801 Southside Drive, 40214</div></div>
+      <div class="ev-item"><div class="ev-name">The Arterburn</div><div class="ev-addr">310 Ten Pin Ln., 40207</div></div>
+      <div class="ev-item"><div class="ev-name">Berrytown Recreation Center</div><div class="ev-addr">1300 Heafer Rd., 40223</div></div>
+      <div class="ev-item"><div class="ev-name">Cyril Allgeier Community Center</div><div class="ev-addr">4101 Cadillac Ct., 40213</div></div>
+      <div class="ev-item"><div class="ev-name">Epiphany United Methodist Church</div><div class="ev-addr">7032 Southside Dr., 40214</div></div>
+      <div class="ev-item"><div class="ev-name">Goodwill Opportunity Campus — Broadway</div><div class="ev-addr">2820 W. Broadway, 40211</div></div>
+      <!-- remaining 18 hidden until expanded -->
+      <div class="ev-item ev-extra" style="display:none"><div class="ev-name">Goodwill Opportunity Campus — Preston</div><div class="ev-addr">6201 Preston Hwy., 40219</div></div>
+      <div class="ev-item ev-extra" style="display:none"><div class="ev-name">The Heritage — Shively Park</div><div class="ev-addr">1901 Park Rd., 40216</div></div>
+      <div class="ev-item ev-extra" style="display:none"><div class="ev-name">Immanuel United Church of Christ</div><div class="ev-addr">2300 Taylorsville Rd., 40205</div></div>
+      <div class="ev-item ev-extra" style="display:none"><div class="ev-name">The Jeffersonian</div><div class="ev-addr">10617 Taylorsville Rd., 40299</div></div>
+      <div class="ev-item ev-extra" style="display:none"><div class="ev-name">Jefferson County Clerk's Office — Downtown</div><div class="ev-addr">200 S. Fifth St. Suite 228, First Trust Centre, 40202</div></div>
+      <div class="ev-item ev-extra" style="display:none"><div class="ev-name">Jefferson County Clerk's Office — East Branch</div><div class="ev-addr">12312-A Shelbyville Rd., 40243</div></div>
+      <div class="ev-item ev-extra" style="display:none"><div class="ev-name">Jefferson County Clerk's Office — Fairdale Branch</div><div class="ev-addr">10616 W. Manslick Rd., 40118</div></div>
+      <div class="ev-item ev-extra" style="display:none"><div class="ev-name">Jefferson County Clerk's Office — West Branch</div><div class="ev-addr">French Plaza — 228 Amy Ave., 40212</div></div>
+      <div class="ev-item ev-extra" style="display:none"><div class="ev-name">Kentucky Center for African American Heritage</div><div class="ev-addr">1701 W. Muhammad Ali Blvd., 40203</div></div>
+      <div class="ev-item ev-extra" style="display:none"><div class="ev-name">Lyndon Elks Lodge #2052</div><div class="ev-addr">904 Ormsby Ln., 40242</div></div>
+      <div class="ev-item ev-extra" style="display:none"><div class="ev-name">New Zion Baptist Church</div><div class="ev-addr">1501 Louis Coleman Jr. Dr., 40211</div></div>
+      <div class="ev-item ev-extra" style="display:none"><div class="ev-name">Old Forester's Paristown Hall</div><div class="ev-addr">724 Brent St., 40204</div></div>
+      <div class="ev-item ev-extra" style="display:none"><div class="ev-name">St. Andrew United Church of Christ</div><div class="ev-addr">2608 Browns Ln., 40220</div></div>
+      <div class="ev-item ev-extra" style="display:none"><div class="ev-name">Sts. Simon and Jude Catholic Church</div><div class="ev-addr">4335 Hazelwood Dr., 40215</div></div>
+      <div class="ev-item ev-extra" style="display:none"><div class="ev-name">Sun Valley Community Center</div><div class="ev-addr">6505 Bethany Ln., 40272</div></div>
+      <div class="ev-item ev-extra" style="display:none"><div class="ev-name">Teamsters Local Union #783</div><div class="ev-addr">7711 Beulah Church Rd., 40228</div></div>
+      <div class="ev-item ev-extra" style="display:none"><div class="ev-name">Triple Crown Pavilion</div><div class="ev-addr">1780 Plantside Dr., 40299</div></div>
+      <div class="ev-item ev-extra" style="display:none"><div class="ev-name">U of L Shelby Campus — Founders Union Bldg. Rm. 218</div><div class="ev-addr">450 N. Whittington Pkwy., 40222</div></div>
+    </div>
+    <button class="ev-toggle" id="evToggle" onclick="toggleEV()">▼ See all 24 early voting locations</button>
   </div>
 
   <!-- Lookup -->
@@ -1050,6 +1107,20 @@ async function saveAsImage() {
     btn.disabled = false;
     if (btn) { btn.disabled = false; btn.textContent = 'SAVE YOUR BALLOT!'; }
   }
+}
+
+// ══════════════════════════════════════════════════════════════════════
+//  EARLY VOTING TOGGLE
+// ══════════════════════════════════════════════════════════════════════
+
+function toggleEV() {
+  const extras  = document.querySelectorAll('.ev-extra');
+  const btn     = document.getElementById('evToggle');
+  const visible = extras[0].style.display !== 'none';
+  extras.forEach(el => el.style.display = visible ? 'none' : '');
+  btn.textContent = visible
+    ? '▼ See all 24 early voting locations'
+    : '▲ Show fewer';
 }
 
 // ══════════════════════════════════════════════════════════════════════
