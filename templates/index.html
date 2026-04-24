@@ -771,6 +771,7 @@ function partyBadge(party) {
   if (party === 'D') return `<span class="party-badge D">D</span>`;
   if (party === 'R') return `<span class="party-badge R">R</span>`;
   if (party === 'L') return `<span class="party-badge L">L</span>`;
+  if (!party) return '';
   return `<span class="party-badge U">O</span>`;
 }
 

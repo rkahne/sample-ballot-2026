@@ -35,7 +35,12 @@
       "Bash(curl -s \"https://jeffersoncountyclerk.org/wheredoivote/\" -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36\")",
       "Bash(python3 -)",
       "Bash(curl -s \"https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=4801+Southside+Drive+Louisville+KY+40214&benchmark=Public_AR_Current&format=json\")",
-      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); m=d['result']['addressMatches']; print\\(m[0]['coordinates'] if m else 'NO MATCH'\\)\")"
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); m=d['result']['addressMatches']; print\\(m[0]['coordinates'] if m else 'NO MATCH'\\)\")",
+      "Bash(taskkill /F /IM python.exe)",
+      "Bash(python3 -c ' *)",
+      "Bash(python3 discover_ballots.py)",
+      "Bash(python3 parse_ballots.py \"C:/Users/Robert/AppData/Local/Temp/jc_ballots_95n2af02\")",
+      "Bash(python -c ' *)"
     ]
   }
 }
