@@ -719,6 +719,46 @@ const PARTISAN_RACES = [
   },
 ];
 
+// US Representative in Congress — only CD-2 has a contested Dem primary
+const KY_CONGRESS_CANDIDATES = {
+  2: [
+    { name: 'David S. Hatfield',      party: 'D' },
+    { name: 'Megan Wingfield',        party: 'D' },
+    { name: 'Hank Linderman',         party: 'D' },
+    { name: 'William Dakota Compton', party: 'D' },
+  ],
+};
+
+// Jeffersontown City Council — nonpartisan, select up to 8
+const JTOWN_PRECINCTS = new Set([
+  'D116','D117','D120','D122','D137','D139','D141','D142',
+  'D146','D147','D148','D149','D152','D158','D159','D160',
+  'D164','D165','D166','D167','G185',
+  'Q163','Q164','Q168',
+  'V101','V106','V116','V133','V134',
+]);
+const JTOWN_COUNCIL_CANDIDATES = [
+  'Debi Pridemore Sanning',
+  'Pamela Thomas Hickey',
+  'Donald Lee Hickey',
+  'Cynthia Kinnard',
+  'Matt Bowdy',
+  'Vincent Grisanti',
+  'Jeff Hensel',
+  'Pam Ware',
+  'Mark Blum',
+  'Ruth Gao',
+  'Ray "Chubby Ray" Perkins',
+  'Nita Cox',
+  'Randy Lawson',
+  'Dan Wright',
+  'Bryan K. Wimsatt',
+  'Trena Smith',
+  'Allison Neal Head',
+  'Richard "Dickie" Dunn',
+  'Mark Russell',
+];
+
 // ══════════════════════════════════════════════════════════════════════
 //  HTML BUILDERS
 // ══════════════════════════════════════════════════════════════════════
@@ -736,11 +776,11 @@ function partyBadge(party) {
 
 let raceCounter = 0;
 
-function candidateHTML(cand, endorsed, raceId) {
+function candidateHTML(cand, endorsed, raceId, maxSelect = 1) {
   const name = cand.name || cand;
   const party = cand.party !== undefined ? cand.party : null;
   return `
-    <div class="candidate${endorsed ? ' endorsed' : ''}" onclick="selectCandidate(this, '${raceId}')">
+    <div class="candidate${endorsed ? ' endorsed' : ''}" onclick="selectCandidate(this, '${raceId}', ${maxSelect})">
       <div class="bubble"></div>
       <span class="cand-name">${esc(name)}</span>
       ${partyBadge(party)}
@@ -757,11 +797,22 @@ function raceHTML(title, rows, note, extraClass) {
   return `<div class="race"><div class="race-title">${esc(title)}</div>${noteHTML}${body}</div>`;
 }
 
-function selectCandidate(el, raceId) {
-  // Deselect all in this race
-  document.querySelectorAll(`.candidate[onclick*="'${raceId}'"]`).forEach(c => c.classList.remove('selected'));
-  // Select clicked
-  el.classList.add('selected');
+function selectCandidate(el, raceId, maxSelect = 1) {
+  if (maxSelect === 1) {
+    // Single-select: deselect all others, select this one
+    document.querySelectorAll(`.candidate[onclick*="'${raceId}'"]`).forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+  } else {
+    // Multi-select: toggle this candidate, enforce max limit
+    if (el.classList.contains('selected')) {
+      el.classList.remove('selected');
+    } else {
+      const alreadySelected = document.querySelectorAll(`.candidate[onclick*="'${raceId}'"].selected`).length;
+      if (alreadySelected < maxSelect) {
+        el.classList.add('selected');
+      }
+    }
+  }
 }
 
 function esc(s) {
@@ -769,16 +820,17 @@ function esc(s) {
 }
 
 // ── Build ballot ──
-function buildBallot({ council_district, commissioner_district, state_house_district, state_senate_district }) {
+function buildBallot({ council_district, commissioner_district, state_house_district, state_senate_district, congressional_district, precinct }) {
   let html = '';
   raceCounter = 0;
   const commScope = 'comm' + commissioner_district.toUpperCase();
   const isOdd = council_district % 2 !== 0;
   const hasPrimary = !!COUNCIL_CANDIDATES[council_district];
+  const isJtown = JTOWN_PRECINCTS.has(precinct);
 
   // Correct column order (left column first, then right column — matching official ballot):
-  // LEFT  (partisan):    US Senator → KY State Senator → KY State Rep → County Attorney → County Clerk → Sheriff
-  // RIGHT (nonpartisan): Louisville Metro Mayor → Louisville Metro Council
+  // LEFT  (partisan):    US Senator → US Representative (CD-2 only) → KY State Senator → KY State Rep → County Attorney → County Clerk → Sheriff
+  // RIGHT (nonpartisan): Louisville Metro Mayor → Louisville Metro Council → J-town City Council (J-town precincts only)
 
   // ══ PARTISAN SECTION ══
   html += `<div class="ballot-section">
@@ -791,7 +843,16 @@ function buildBallot({ council_district, commissioner_district, state_house_dist
     US_SENATE_CANDIDATES.map(c => candidateHTML(c, false, usSenRaceId)),
     'Democratic Primary');
 
-  // ── 2. KY STATE SENATOR (if contested Dem primary in this district) ──
+  // ── 2. US REPRESENTATIVE IN CONGRESS (CD-2 only, if contested Dem primary) ──
+  if (KY_CONGRESS_CANDIDATES[congressional_district]) {
+    const congressRaceId = 'race' + (++raceCounter);
+    html += raceHTML(
+      `United States Representative in Congress — ${congressional_district}nd Congressional District (Select One)`,
+      KY_CONGRESS_CANDIDATES[congressional_district].map(c => candidateHTML(c, false, congressRaceId)),
+      'Democratic Primary');
+  }
+
+  // ── 3. KY STATE SENATOR (if contested Dem primary in this district) ──
   if (KY_SENATE_CANDIDATES[state_senate_district]) {
     const kysenRaceId = 'race' + (++raceCounter);
     html += raceHTML(
@@ -800,7 +861,7 @@ function buildBallot({ council_district, commissioner_district, state_house_dist
       'Democratic Primary');
   }
 
-  // ── 3. KY STATE REPRESENTATIVE (if contested Dem primary in this district) ──
+  // ── 4. KY STATE REPRESENTATIVE (if contested Dem primary in this district) ──
   if (KY_HOUSE_CANDIDATES[state_house_district]) {
     const kyhouseRaceId = 'race' + (++raceCounter);
     html += raceHTML(
@@ -809,7 +870,7 @@ function buildBallot({ council_district, commissioner_district, state_house_dist
       'Democratic Primary');
   }
 
-  // ── 4. COUNTY ATTORNEY  5. COUNTY CLERK  6. SHERIFF ──
+  // ── 5. COUNTY ATTORNEY  6. COUNTY CLERK  7. SHERIFF ──
   for (const race of PARTISAN_RACES) {
     if (race.scope !== 'countywide' && race.scope !== commScope) continue;
     const raceId = 'race' + (++raceCounter);
@@ -823,7 +884,7 @@ function buildBallot({ council_district, commissioner_district, state_house_dist
     <div class="section-header nonpartisan">Nonpartisan Races — All Voters May Participate</div>
     <div class="section-note">Party labels from voter registration are shown here for your information — they will <strong>NOT</strong> appear on your official ballot</div>`;
 
-  // ── 7. MAYOR ──
+  // ── Louisville Metro Mayor ──
   const mayorRaceId = 'race' + (++raceCounter);
   html += `<div class="race nonpartisan-race">
     <div class="race-title">Louisville Metro Mayor (Select One) <span class="nonpartisan-tag">Nonpartisan</span></div>
@@ -832,7 +893,7 @@ function buildBallot({ council_district, commissioner_district, state_house_dist
     }</div>
   </div>`;
 
-  // ── 8. METRO COUNCIL (nonpartisan) — only show if there's actually a primary ──
+  // ── METRO COUNCIL (nonpartisan) — only show if there's actually a primary ──
   if (isOdd && hasPrimary) {
     const councilRaceId = 'race' + (++raceCounter);
     const endorsed = ENDORSEMENTS.council[council_district] || [];
@@ -840,6 +901,17 @@ function buildBallot({ council_district, commissioner_district, state_house_dist
       <div class="race-title">Louisville Metro Council — District ${council_district} (Select One) <span class="nonpartisan-tag">Nonpartisan</span></div>
       <div class="candidate-list">${
         COUNCIL_CANDIDATES[council_district].map(c => candidateHTML(c, endorsed.includes(c.name), councilRaceId)).join('')
+      }</div>
+    </div>`;
+  }
+
+  // ── JEFFERSONTOWN CITY COUNCIL (J-town precincts only, nonpartisan, select up to 8) ──
+  if (isJtown) {
+    const jtownRaceId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">City of Jeffersontown — Councilmember (Select up to 8) <span class="nonpartisan-tag">Nonpartisan</span></div>
+      <div class="candidate-list">${
+        JTOWN_COUNCIL_CANDIDATES.map(name => candidateHTML({ name, party: null }, false, jtownRaceId, 8)).join('')
       }</div>
     </div>`;
   }
