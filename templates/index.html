@@ -759,6 +759,31 @@ const JTOWN_COUNCIL_CANDIDATES = [
   'Mark Russell',
 ];
 
+// Shively Mayor & City Council — nonpartisan
+const SHIVELY_PRECINCTS = new Set([
+  'K122','K123','K131','K180',
+  'O117','O119','O121','O124','O126','O150','O154',
+]);
+const SHIVELY_MAYOR_CANDIDATES = [
+  'Shanell Thompson',
+  'Maria D. Johnson',
+];
+const SHIVELY_COUNCIL_CANDIDATES = [
+  'Kelly Gibson',
+  'Pamela Chapman Pitts',
+  'Tiffany Burton-McBroom',
+  'Daphne Batey',
+  'Dinah Moorman',
+  'Earnestine Barbour',
+  'Monica M. Bizzle',
+  'Dwendolyn I. Chester',
+  'Danielle Wakaba',
+  'Saundra K. Gibson',
+  'Wendell Vincent',
+  'Simeon Pullum Jr.',
+  'Denzel Walker',
+];
+
 // ══════════════════════════════════════════════════════════════════════
 //  HTML BUILDERS
 // ══════════════════════════════════════════════════════════════════════
@@ -827,7 +852,8 @@ function buildBallot({ council_district, commissioner_district, state_house_dist
   const commScope = 'comm' + commissioner_district.toUpperCase();
   const isOdd = council_district % 2 !== 0;
   const hasPrimary = !!COUNCIL_CANDIDATES[council_district];
-  const isJtown = JTOWN_PRECINCTS.has(precinct);
+  const isJtown    = JTOWN_PRECINCTS.has(precinct);
+  const isShively  = SHIVELY_PRECINCTS.has(precinct);
 
   // Correct column order (left column first, then right column — matching official ballot):
   // LEFT  (partisan):    US Senator → US Representative (CD-2 only) → KY State Senator → KY State Rep → County Attorney → County Clerk → Sheriff
@@ -902,6 +928,24 @@ function buildBallot({ council_district, commissioner_district, state_house_dist
       <div class="race-title">Louisville Metro Council — District ${council_district} (Select One) <span class="nonpartisan-tag">Nonpartisan</span></div>
       <div class="candidate-list">${
         COUNCIL_CANDIDATES[council_district].map(c => candidateHTML(c, endorsed.includes(c.name), councilRaceId)).join('')
+      }</div>
+    </div>`;
+  }
+
+  // ── SHIVELY MAYOR & CITY COUNCIL (Shively precincts only, nonpartisan) ──
+  if (isShively) {
+    const shivelyMayorId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">City of Shively — Mayor (Select One) <span class="nonpartisan-tag">Nonpartisan</span></div>
+      <div class="candidate-list">${
+        SHIVELY_MAYOR_CANDIDATES.map(name => candidateHTML({ name, party: null }, false, shivelyMayorId)).join('')
+      }</div>
+    </div>`;
+    const shivelyCouncilId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">City of Shively — Councilmember (Select up to 6) <span class="nonpartisan-tag">Nonpartisan</span></div>
+      <div class="candidate-list">${
+        SHIVELY_COUNCIL_CANDIDATES.map(name => candidateHTML({ name, party: null }, false, shivelyCouncilId, 6)).join('')
       }</div>
     </div>`;
   }
