@@ -745,6 +745,8 @@ const TRANSLATIONS = {
     'save.overlay_close': '\u2715 Close',
     'share.share_title': '2026 Louisville Democratic Party Voter Guide',
     'share.share_text': 'My voter guide for the May 19, 2026 Democratic Primary',
+    'modal.error_required': 'Please enter an email address or phone number.',
+    'modal.error_network': 'Something went wrong. Please try again.',
   },
   es: {
     'page.title': 'Partido Dem\u00f3crata de Louisville \u2014 Gu\u00eda de Votantes 2026',
@@ -835,6 +837,8 @@ const TRANSLATIONS = {
     'save.overlay_close': '\u2715 Cerrar',
     'share.share_title': 'Gu\u00eda de Votantes 2026 del Partido Dem\u00f3crata de Louisville',
     'share.share_text': 'Mi gu\u00eda de votantes para la Primaria Dem\u00f3crata del 19 de mayo de 2026',
+    'modal.error_required': 'Por favor ingresa un correo electr\u00f3nico o n\u00famero de tel\u00e9fono.',
+    'modal.error_network': 'Algo sali\u00f3 mal. Por favor int\u00e9ntalo de nuevo.',
   }
 };
 
@@ -1582,7 +1586,7 @@ async function submitContact() {
   const errEl     = document.getElementById('modalError');
 
   if (!email && !phone) {
-    errEl.textContent = 'Please enter an email address or phone number.';
+    errEl.textContent = t('modal.error_required');
     errEl.style.display = 'block';
     return;
   }
@@ -1597,7 +1601,7 @@ async function submitContact() {
     document.getElementById('modalForm').style.display = 'none';
     document.getElementById('modalSuccess').style.display = 'block';
   } catch {
-    errEl.textContent = 'Something went wrong. Please try again.';
+    errEl.textContent = t('modal.error_network');
     errEl.style.display = 'block';
   }
 }
