@@ -394,7 +394,7 @@
 
     /* ── Language toggle ── */
     .lang-toggle {
-      display: flex; align-items: center; gap: 4px; margin-left: auto;
+      display: none; /* hidden pending copy review */
     }
     .lang-btn {
       background: transparent; border: 1px solid rgba(255,255,255,0.35);
@@ -446,6 +446,10 @@
       <button class="lang-btn active" id="langBtnEn" onclick="setLanguage('en')">EN</button>
       <span>|</span>
       <button class="lang-btn" id="langBtnEs" onclick="setLanguage('es')">ES</button>
+      <span>|</span>
+      <button class="lang-btn" id="langBtnSo" onclick="setLanguage('so')">SO</button>
+      <span>|</span>
+      <button class="lang-btn" id="langBtnSw" onclick="setLanguage('sw')">SW</button>
     </div>
   </div>
   <div class="header-bar"></div>
@@ -632,17 +636,17 @@ function applyTranslations() {
     if (val !== undefined) el.placeholder = val;
   });
   document.title = t('page.title');
-  const btnEn = document.getElementById('langBtnEn');
-  const btnEs = document.getElementById('langBtnEs');
-  if (btnEn) btnEn.classList.toggle('active', currentLang === 'en');
-  if (btnEs) btnEs.classList.toggle('active', currentLang === 'es');
+  ['en','es','so','sw'].forEach(code => {
+    const btn = document.getElementById('langBtn' + code.charAt(0).toUpperCase() + code.slice(1));
+    if (btn) btn.classList.toggle('active', currentLang === code);
+  });
 }
 
 function setLanguage(lang) {
   currentLang = lang;
   try { localStorage.setItem('lang', lang); } catch(e) {}
   const params = new URLSearchParams(window.location.search);
-  if (lang === 'es') params.set('lang', 'es'); else params.delete('lang');
+  if (lang !== 'en') params.set('lang', lang); else params.delete('lang');
   const q = params.toString();
   history.replaceState(null, '', window.location.pathname + (q ? '?' + q : ''));
   applyTranslations();
@@ -839,6 +843,190 @@ const TRANSLATIONS = {
     'share.share_text': 'Mi gu\u00eda de votantes para la Primaria Dem\u00f3crata del 19 de mayo de 2026',
     'modal.error_required': 'Por favor ingresa un correo electr\u00f3nico o n\u00famero de tel\u00e9fono.',
     'modal.error_network': 'Algo sali\u00f3 mal. Por favor int\u00e9ntalo de nuevo.',
+  },
+  so: {
+    'page.title': 'Xisbiga Dimuqraadiga ee Louisville \u2014 Hagaha Cod-bixiyaha 2026',
+    'header.title': 'Xisbiga Dimuqraadiga ee Louisville<br>Hagaha Codbixinta Doorashada Hore',
+    'header.subtitle': 'Doorashada Hore ee Dimuqraadiga &mdash; 19 Maajo 2026 &nbsp;|&nbsp; Degmada Jefferson, KY',
+    'warning.headline': 'Kani MA AHA warqad codeyn rasmi ah. Waxaad u baahan tahay inaad codsato!',
+    'warning.sub': 'Hagaha cod-bixiyaha aan rasmi ahayn ee uu sameeyay Xisbiga Dimuqraadiga ee Louisville \u2014 Keydi hagahaaga codbixinta hoos. Waad la qaadan kartaa marka aad tagto codbixinta.',
+    'explainer.heading': 'Ku saabsan Doorashada Hore ee 19 Maajo 2026',
+    'explainer.new2026': 'CUSUB 2026',
+    'explainer.p1': 'Sababtoo ah sharci-dejinta gobolka, tartanka Duqa Metro ee Louisville iyo Golaha Metro waxay noqon doonaan doorashooyin aan xisbiyeysan sannadkan. Sidaas awgeed, Xisbiga Dimuqraadiga ee Louisville wuxuu taageeraya musharrixiinta tartannahaas. Xeerarka gudaha ee Xisbiga Dimuqraadiga waxay naga celisaa inaan taageerino doorashooyinka hore ee Dimuqraadiga xisbiga.',
+    'explainer.p2': 'Maadaama tartammadan ay yihiin kuwo aan xisbiyeysan, xubinnimada xisbiga <strong>MA</strong> muuqan doonto warqadaada codeynta rasmiga ah. Waxaan ku daray xisbiga musharriixa halkan si aad u samayn karto codbixin wargeysan.',
+    'explainer.privacy': '\ud83d\udd12 Doorashadaada musharrixiinta <strong>lama duubiyo ama lama kaydinin</strong> Xisbiga Dimuqraadiga ee Louisville. Qalabkan wuxuu si buuxda uga shaqeeyaa browserkaaga.',
+    'lookup.heading': 'Raadi Hagahaaga Codbixinta',
+    'lookup.desc': 'Geli ciwaankaaga gudaha Louisville si aad u aragto tartanmaha ku yaal warqadaada, leh taageerayaasha Xisbiga Dimuqraadiga ee Louisville oo la soo muujiyay.',
+    'lookup.placeholder': 'Tusaale. 527 W Jefferson St',
+    'lookup.btn': 'Raadi Hagahayga Codbixinta',
+    'lookup.help': 'Mararka qaarkood, ciwaanka xaqa ah ee Louisville ma muuqdo raadinta. Fadlan email u dir <a href="mailto:info@louisvilledems.com">info@louisvilledems.com</a> ciwaankaaga waxaanan kugu soo diri doonaa doorashooyinka iyo musharrixiinta ku yaal warqadaada.',
+    'precinct.label': 'Degaanka',
+    'precinct.council': 'Golaha Metro',
+    'precinct.house': 'Aqalka Gobolka',
+    'precinct.senate': 'Golaha Senatorada',
+    'precinct.congress': 'Kongireska Mareykanka',
+    'voting.ed_label': '\ud83d\udccd Xarunta Codbixinta Maalinta Doorashada',
+    'voting.ed_note': '19 Maajo 2026 \u2014 waa inaad ku codaysaa meeshan Maalinta Doorashada',
+    'voting.clerk_link': 'Xaqiiji websaydka Katibka \u2192',
+    'voting.clerk_fallback': 'Arag websaydka Katibka',
+    'voting.ev_label': '\ud83d\uddf3\ufe0f Xarunta Ugu Dhow ee Codbixinta Hore',
+    'voting.ev_note': '<strong>14\u201316 Maajo 2026 oo kaliya.</strong> Ku cod bixi <strong>xarunta kasta</strong> ee codbixinta hore \u2014 xaddidaad degaan malaha',
+    'voting.other_ev_closed': '\u25bc Xarumaha kale ee codbixinta hore (23)',
+    'voting.other_ev_open': '\u25b2 Qari xarumaha kale',
+    'ballot.heading': 'Hagahaaga Codbixinta Doorashada Hore ee Xisbiga Dimuqraadiga ee Louisville',
+    'ballot.polls_note': '<strong>\ud83d\udccb Taabo musharrixi si aad u calaamadiso doorashadaada, kadibna keydi sawirka si aad ugu qaadato meeshii la codayn jiray.</strong> Calaamadaha xisbiga ee tartanmaha aan xisbiyeysan (Duqa, Golaha Metro) <em>ma</em> muuqan doonaan warqadaada rasmiga ah \u2014 <strong>keen hagahaaga codbixinta</strong> si aad u garanayso cidda aad u codeynayso.',
+    'legend.title': 'Sharaxaad:',
+    'legend.endorsed': 'LDP waa taageersan tahay',
+    'legend.dem': 'Dimuqraadi',
+    'legend.rep': 'Jamhuuriyad',
+    'legend.lib': 'Xoriyad',
+    'legend.other': 'Kale / aan la xaqiijin',
+    'save.btn': '\u2193 Keydi Hagahaaga Codbixinta',
+    'save.saving': 'La keydiyaa\u2026',
+    'save.done': 'KEYDI WARQADAADA CODBIXINTA!',
+    'reminders.title': '\ud83d\udccc Xusuus-gelin',
+    'reminders.html': '<li>Waxaad u baahan tahay inaad codsato! Raadi xarumaha codbixinta, taariikhaha, iyo waqtyada hagahayaga cod-bixiyaha: <a href="https://www.louisvilledems.com/2026-voter-guide" target="_blank" rel="noopener"><strong>louisvilledems.com/2026-voter-guide</strong></a></li><li style="margin-top:6px">Haddaad su\'aalo qabto ama caawimaad u baahan tahay, nala xiriir <a href="mailto:info@louisvilledems.com">info@louisvilledems.com</a></li>',
+    'footer.help': 'Haddaad dhibaato ku qabto keydinta hagahaaga codbixinta oo aad naga caawimaad rabtid, fadlan email nagu soo dir <a href="mailto:info@louisvilledems.com">info@louisvilledems.com</a>.',
+    'footer.party_labels': 'Calaamadaha xisbiga waxaa lagu xaqiijiyay ka dib markii xilligii diiwaan-gelinta musharrixiinta xidhmay 9 January 2026, iyada oo loo marayo Codsi Diiwaannada Dadweynaha.',
+    'share.heading': 'Ma taqaanaa qof u baahan kan?',
+    'share.desc': 'La wadaag xiriirkan \u2014 qof kasta ayaa geli kara ciwaankiisa si uu u helo hagihiisa codbixinta shakhsiga ah.',
+    'share.copy': 'Koobiyee Xiriirka',
+    'share.copied': '\u2713 Waa la koobiyeeyay!',
+    'share.voter_guide': 'Ma qabto su\'aalo marka aad codaynayso ama halkii aad codayn lahayd? <a href="https://www.louisvilledems.com/2026-voter-guide" target="_blank" rel="noopener"><strong>Riix halkan!</strong></a>',
+    'modal.heading': 'Macluumaadka doorashada iyo xusuus-gelinta!',
+    'modal.desc': 'Hel xarumaha Codbixinta Hore iyo Maalinta Doorashada, iyo cusboonaanshaha Xisbiga Dimuqraadiga ee Louisville.',
+    'modal.first_name': 'Magaca koowaad',
+    'modal.last_name': 'Magaca dambe',
+    'modal.email': 'Ciwaanka iimaylka',
+    'modal.phone': 'Lambarka telefoonka (ikhtiyaari)',
+    'modal.submit': 'I diiwaangeli!',
+    'modal.skip': 'Mahadsanid, maya',
+    'modal.success': '\u2705 Mahadsanid! Kula xiriiri doonnaa ka hor 19 Maajo.',
+    'modal.close': 'Xir',
+    'ballot.partisan_header': 'Doorashada Hore ee Dimuqraadiga \u2014 19 Maajo 2026',
+    'ballot.partisan_section_note': 'Dimuqraadiyiinta la diiwaangeliyay oo kaliya \u00a0\u00b7\u00a0 Tartanmaha la tartamaya oo kaliya ayaa ku muuqda warqadda doorashada hore',
+    'ballot.partisan_note_ldp': 'Cagaaran = LDP waa taageersan tahay',
+    'ballot.nonpartisan_header': 'Tartanmaha Aan Xisbiyeysan \u2014 Dhammaan Cod-bixiyayaasha Waxay Ka Qaybgeli Karaan',
+    'ballot.nonpartisan_section_note': 'Calaamadaha xisbiga ee diiwaanka codbaadiyayaasha waxaa halkan lagu soo bandhigay si xog ugu noqoto \u2014 <strong>MA</strong> muuqan doonaan warqadaada rasmiga ah',
+    'race.us_senator': 'Senatarka Mareykanka (Dooro Hal)',
+    'race.us_congress': 'Wakiilka Mareykanka ee Kongireska \u2014 Degmada Kongireska {N} (Dooro Hal)',
+    'race.ky_senator': 'Senatarka Gobolka \u2014 Degmada Senatada {N} (Dooro Hal)',
+    'race.ky_house': 'Wakiilka Gobolka \u2014 Degmada Wakiilka {N} (Dooro Hal)',
+    'race.note_dem_primary': 'Doorashada Hore ee Dimuqraadiga',
+    'race.metro_mayor': 'Duqa Metro ee Louisville (Dooro Hal)',
+    'race.nonpartisan_tag': 'Aan Xisbiyeysan',
+    'race.metro_council': 'Golaha Metro ee Louisville \u2014 Degmo {N} (Dooro Hal)',
+    'race.shively_mayor': 'Magaalada Shively \u2014 Duqa (Dooro Hal)',
+    'race.shively_council': 'Magaalada Shively \u2014 Xubin Golaha (Dooro Ilaa 6)',
+    'race.jtown_council': 'Magaalada Jeffersontown \u2014 Xubin Golaha (Dooro Ilaa 8)',
+    'race.endorsed_badge': 'LDP Taageersan',
+    'ballot.party_labels_footer': 'Calaamadaha xisbiga waxaa lagu xaqiijiyay ka dib markii xilligii diiwaan-gelinta musharrixiinta xidhmay 9 January iyada oo loo marayo Codsi Diiwaannada Dadweynaha.',
+    'ballot.subhead': 'Doorashada Hore ee Dimuqraadiga \u2014 19 Maajo 2026 \u00b7 Degaanka {P} \u00b7 Degmada Golaha Metro {D}',
+    'error.no_address': 'Fadlan geli ciwaankaaga.',
+    'error.looking_up': 'Ciwaankaaga la raadiyaa\u2026',
+    'error.not_found': 'Ciwaanka lama helin \u2014 isku day inaad ku darsato magaalada, ama email noo soo dir <a href="mailto:info@louisvilledems.com">info@louisvilledems.com</a>.',
+    'error.network': 'Khalad shabakad. Server ma socdo?',
+    'save.alert_no_ballot': 'Fadlan marka hore raadi ciwaankaaga si aad u sameysato hagahaaga cod-bixiyaha.',
+    'save.alert_error': 'Sawirka lama kaydisan karin. Isku day mar kale.',
+    'save.overlay_title': 'Keydi Hagahaaga Codbixinta',
+    'save.overlay_instruction': '\ud83d\udce5 <strong>Sawirka hoose riix oo hayso</strong>, kadibna taabo<br><strong>"Ku keydi Sawirrada"</strong> ama <strong>"Keydi Sawirka"</strong>',
+    'save.overlay_close': '\u2715 Xir',
+    'share.share_title': 'Hagaha Cod-bixiyaha 2026 ee Xisbiga Dimuqraadiga ee Louisville',
+    'share.share_text': 'Hagahayga codbixinta Doorashada Hore ee Dimuqraadiga 19 Maajo 2026',
+    'modal.error_required': 'Fadlan geli ciwaanka iimaylka ama lambarka telefoonka.',
+    'modal.error_network': 'Wax baa qaldamay. Fadlan isku day mar kale.',
+  },
+  sw: {
+    'page.title': 'Chama cha Democratic cha Louisville \u2014 Mwongozo wa Mpiga Kura 2026',
+    'header.title': 'Chama cha Democratic cha Louisville<br>Mwongozo wa Kura ya Uchaguzi wa Awali',
+    'header.subtitle': 'Uchaguzi wa Awali wa Democratic &mdash; 19 Mei 2026 &nbsp;|&nbsp; Kaunti ya Jefferson, KY',
+    'warning.headline': 'Hii SI kura rasmi. Bado unahitaji kwenda kupiga kura!',
+    'warning.sub': 'Mwongozo usio rasmi wa mpiga kura uliozalishwa na Chama cha Democratic cha Louisville \u2014 Hifadhi mwongozo wako wa kura hapa chini. Unaweza kuuchukua nawe ukienda kupiga kura.',
+    'explainer.heading': 'Kuhusu Uchaguzi wa Awali wa Mei 19, 2026',
+    'explainer.new2026': 'MPYA KWA 2026',
+    'explainer.p1': 'Kutokana na bunge la serikali ya jimbo, mashindano ya Meya wa Metro wa Louisville na Baraza la Metro yatakuwa uchaguzi usio na vyama kuanzia mwaka huu. Kwa sababu hiyo, Chama cha Democratic cha Louisville kinaungana na wagombea katika mashindano haya. Sheria za Chama cha Democratic zinazuia kuungana na wengine katika uchaguzi wa awali wa Democratic wa vyama.',
+    'explainer.p2': 'Kwa sababu mashindano haya hayahusiani na vyama, uhusiano wa chama <strong>HAUTAONEKANA</strong> kwenye kura yako rasmi. Tumejumuisha chama cha mgombea hapa ili uweze kupiga kura kwa ufahamu.',
+    'explainer.privacy': '\ud83d\udd12 Uchaguzi wako wa wagombea <strong>haurekodiwa wala kuhifadhiwa</strong> na Chama cha Democratic cha Louisville. Chombo hiki kinafanya kazi kabisa kwenye kivinjari chako.',
+    'lookup.heading': 'Tafuta Mwongozo Wako wa Kura',
+    'lookup.desc': 'Ingiza anwani yako ya mtaa wa Louisville kuona mashindano kwenye kura yako, yenye madokezo ya Chama cha Democratic cha Louisville yaliyoangaziwa.',
+    'lookup.placeholder': 'mf. 527 W Jefferson St',
+    'lookup.btn': 'Tafuta Mwongozo Wangu wa Kura',
+    'lookup.help': 'Mara kwa mara, anwani halali ya Louisville haitaonekana katika utafutaji. Tafadhali tuma barua pepe kwa <a href="mailto:info@louisvilledems.com">info@louisvilledems.com</a> na anwani yako na tutakutumia uchaguzi na wagombea kwenye kura yako.',
+    'precinct.label': 'Kata',
+    'precinct.council': 'Baraza la Metro',
+    'precinct.house': 'Bunge la Jimbo',
+    'precinct.senate': 'Seneti ya Jimbo',
+    'precinct.congress': 'Bunge la Marekani',
+    'voting.ed_label': '\ud83d\udccd Kituo cha Kupiga Kura Siku ya Uchaguzi',
+    'voting.ed_note': '19 Mei 2026 \u2014 lazima upige kura mahali hapa Siku ya Uchaguzi',
+    'voting.clerk_link': 'Thibitisha kwenye tovuti ya Katibu \u2192',
+    'voting.clerk_fallback': 'Angalia tovuti ya Katibu',
+    'voting.ev_label': '\ud83d\uddf3\ufe0f Kituo cha Karibu Zaidi cha Kupiga Kura Mapema',
+    'voting.ev_note': '<strong>Mei 14\u201316, 2026 tu.</strong> Piga kura katika <strong>kituo chochote</strong> cha kupiga kura mapema \u2014 hakuna vizuizi vya kata',
+    'voting.other_ev_closed': '\u25bc Vituo vingine vya kupiga kura mapema (23)',
+    'voting.other_ev_open': '\u25b2 Ficha vituo vingine',
+    'ballot.heading': 'Mwongozo Wako wa Kura ya Uchaguzi wa Awali wa Chama cha Democratic cha Louisville',
+    'ballot.polls_note': '<strong>\ud83d\udccb Gusa mgombea yeyote kuashiria chaguo lako, kisha hifadhi picha ili uichukue kwenye sanduku la kura.</strong> Lebo za vyama katika mashindano yasiyo na vyama (Meya, Baraza la Metro) <em>hazitaonekana</em> kwenye kura yako rasmi \u2014 <strong>chukua mwongozo wako wa kura</strong> nawe ili ujue unayempigia kura.',
+    'legend.title': 'Maelezo:',
+    'legend.endorsed': 'Imeidhinishwa na LDP',
+    'legend.dem': 'Democratic',
+    'legend.rep': 'Republican',
+    'legend.lib': 'Libertarian',
+    'legend.other': 'Nyingine / haijathibitishwa',
+    'save.btn': '\u2193 Hifadhi Mwongozo Wako wa Kura',
+    'save.saving': 'Inahifadhi\u2026',
+    'save.done': 'HIFADHI KURA YAKO!',
+    'reminders.title': '\ud83d\udccc Vikumbusho',
+    'reminders.html': '<li>Bado unahitaji kupiga kura! Tafuta vituo vya kupiga kura, tarehe, na nyakati katika mwongozo wetu wa mpiga kura: <a href="https://www.louisvilledems.com/2026-voter-guide" target="_blank" rel="noopener"><strong>louisvilledems.com/2026-voter-guide</strong></a></li><li style="margin-top:6px">Ikiwa una maswali au unahitaji msaada, wasiliana nasi kwa <a href="mailto:info@louisvilledems.com">info@louisvilledems.com</a></li>',
+    'footer.help': 'Ikiwa una tatizo kuhifadhi mwongozo wako wa kura na ungependa msaada wetu, tafadhali tutumie barua pepe kwa <a href="mailto:info@louisvilledems.com">info@louisvilledems.com</a>.',
+    'footer.party_labels': 'Lebo za vyama zilithibitishwa baada ya tarehe ya kufungwa kwa usajili wa wagombea tarehe 9 Januari 2026 kupitia Ombi la Rekodi za Umma.',
+    'share.heading': 'Unajua mtu anayehitaji hii?',
+    'share.desc': 'Shiriki kiungo hiki \u2014 mtu yeyote anaweza kuingiza anwani yao kupata mwongozo wao binafsi wa mpiga kura.',
+    'share.copy': 'Nakili Kiungo',
+    'share.copied': '\u2713 Imenakiliwa!',
+    'share.voter_guide': 'Una maswali kuhusu wakati au mahali pa kupiga kura? <a href="https://www.louisvilledems.com/2026-voter-guide" target="_blank" rel="noopener"><strong>Bofya hapa!</strong></a>',
+    'modal.heading': 'Taarifa za uchaguzi na vikumbusho!',
+    'modal.desc': 'Pata vituo vya Kupiga Kura Mapema na Siku ya Uchaguzi, na sasisho kutoka kwa Chama cha Democratic cha Louisville.',
+    'modal.first_name': 'Jina la kwanza',
+    'modal.last_name': 'Jina la mwisho',
+    'modal.email': 'Anwani ya barua pepe',
+    'modal.phone': 'Nambari ya simu (hiari)',
+    'modal.submit': 'Nikiandikishe!',
+    'modal.skip': 'Hapana, asante',
+    'modal.success': '\u2705 Asante! Tutawasiliana nawe kabla ya Mei 19.',
+    'modal.close': 'Funga',
+    'ballot.partisan_header': 'Uchaguzi wa Awali wa Democratic \u2014 19 Mei 2026',
+    'ballot.partisan_section_note': 'Wanachama waliosajiliwa wa Democratic pekee \u00a0\u00b7\u00a0 Mashindano yenye ushindani tu yanaonekana kwenye kura ya awali',
+    'ballot.partisan_note_ldp': 'Kijani = Imeidhinishwa na LDP',
+    'ballot.nonpartisan_header': 'Mashindano Yasiyo na Vyama \u2014 Wapiga Kura Wote Wanaweza Kushiriki',
+    'ballot.nonpartisan_section_note': 'Lebo za vyama kutoka usajili wa mpiga kura zinaonyeshwa hapa kwa taarifa yako \u2014 <strong>HAZITAONEKANA</strong> kwenye kura yako rasmi',
+    'race.us_senator': 'Seneta wa Marekani (Chagua Mmoja)',
+    'race.us_congress': 'Mwakilishi wa Marekani katika Bunge \u2014 Wilaya ya {N} ya Bunge (Chagua Mmoja)',
+    'race.ky_senator': 'Seneta wa Jimbo \u2014 Wilaya ya {N} ya Seneti (Chagua Mmoja)',
+    'race.ky_house': 'Mwakilishi wa Jimbo \u2014 Wilaya ya {N} ya Wawakilishi (Chagua Mmoja)',
+    'race.note_dem_primary': 'Uchaguzi wa Awali wa Democratic',
+    'race.metro_mayor': 'Meya wa Metro wa Louisville (Chagua Mmoja)',
+    'race.nonpartisan_tag': 'Bila Vyama',
+    'race.metro_council': 'Baraza la Metro la Louisville \u2014 Wilaya {N} (Chagua Mmoja)',
+    'race.shively_mayor': 'Mji wa Shively \u2014 Meya (Chagua Mmoja)',
+    'race.shively_council': 'Mji wa Shively \u2014 Mjumbe wa Baraza (Chagua hadi 6)',
+    'race.jtown_council': 'Mji wa Jeffersontown \u2014 Mjumbe wa Baraza (Chagua hadi 8)',
+    'race.endorsed_badge': 'LDP Imeidhinisha',
+    'ballot.party_labels_footer': 'Lebo za vyama zilithibitishwa baada ya tarehe ya kufungwa kwa usajili wa wagombea tarehe 9 Januari kupitia Ombi la Rekodi za Umma.',
+    'ballot.subhead': 'Uchaguzi wa Awali wa Democratic \u2014 19 Mei 2026 \u00b7 Kata {P} \u00b7 Wilaya ya Baraza la Metro {D}',
+    'error.no_address': 'Tafadhali ingiza anwani yako ya mtaa.',
+    'error.looking_up': 'Inatafuta anwani yako\u2026',
+    'error.not_found': 'Anwani haikupatikana \u2014 jaribu kuongeza mji wako, au tutumie barua pepe kwa <a href="mailto:info@louisvilledems.com">info@louisvilledems.com</a>.',
+    'error.network': 'Hitilafu ya mtandao. Je, seva inafanya kazi?',
+    'save.alert_no_ballot': 'Tafadhali tafuta anwani yako kwanza kuzalisha mwongozo wako wa mpiga kura.',
+    'save.alert_error': 'Haikuweza kuhifadhi picha. Jaribu tena.',
+    'save.overlay_title': 'Hifadhi Mwongozo Wako wa Kura',
+    'save.overlay_instruction': '\ud83d\udce5 <strong>Shika picha hapa chini kwa muda mrefu</strong>, kisha gusa<br><strong>"Hifadhi kwenye Picha"</strong> au <strong>"Hifadhi Picha"</strong>',
+    'save.overlay_close': '\u2715 Funga',
+    'share.share_title': 'Mwongozo wa Mpiga Kura 2026 wa Chama cha Democratic cha Louisville',
+    'share.share_text': 'Mwongozo wangu wa kura kwa Uchaguzi wa Awali wa Democratic wa Mei 19, 2026',
+    'modal.error_required': 'Tafadhali ingiza anwani ya barua pepe au nambari ya simu.',
+    'modal.error_network': 'Kitu kilienda vibaya. Tafadhali jaribu tena.',
   }
 };
 
@@ -1328,10 +1516,11 @@ document.getElementById('addrInput').addEventListener('keydown', e => {
 window.addEventListener('DOMContentLoaded', () => {
   // Initialize language from URL param, then localStorage
   const langParam = new URLSearchParams(window.location.search).get('lang');
-  if (langParam === 'es' || langParam === 'en') {
+  const validLangs = ['en','es','so','sw'];
+  if (validLangs.includes(langParam)) {
     currentLang = langParam;
   } else {
-    try { const stored = localStorage.getItem('lang'); if (stored === 'es' || stored === 'en') currentLang = stored; } catch(e) {}
+    try { const stored = localStorage.getItem('lang'); if (validLangs.includes(stored)) currentLang = stored; } catch(e) {}
   }
   applyTranslations();
 
