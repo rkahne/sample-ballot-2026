@@ -450,6 +450,8 @@
       <button class="lang-btn" id="langBtnSo" onclick="setLanguage('so')">SO</button>
       <span>|</span>
       <button class="lang-btn" id="langBtnSw" onclick="setLanguage('sw')">SW</button>
+      <span>|</span>
+      <button class="lang-btn" id="langBtnHt" onclick="setLanguage('ht')">HT</button>
     </div>
   </div>
   <div class="header-bar"></div>
@@ -636,7 +638,7 @@ function applyTranslations() {
     if (val !== undefined) el.placeholder = val;
   });
   document.title = t('page.title');
-  ['en','es','so','sw'].forEach(code => {
+  ['en','es','so','sw','ht'].forEach(code => {
     const btn = document.getElementById('langBtn' + code.charAt(0).toUpperCase() + code.slice(1));
     if (btn) btn.classList.toggle('active', currentLang === code);
   });
@@ -1027,6 +1029,98 @@ const TRANSLATIONS = {
     'share.share_text': 'Mwongozo wangu wa kura kwa Uchaguzi wa Awali wa Democratic wa Mei 19, 2026',
     'modal.error_required': 'Tafadhali ingiza anwani ya barua pepe au nambari ya simu.',
     'modal.error_network': 'Kitu kilienda vibaya. Tafadhali jaribu tena.',
+  },
+  ht: {
+    'page.title': 'Pati Demokratik Louisville \u2014 Gid Elektè 2026',
+    'header.title': 'Pati Demokratik Louisville<br>Gid Bilten Eleksyon Prenè',
+    'header.subtitle': 'Prenè Demokratik &mdash; 19 Me 2026 &nbsp;|&nbsp; Konte Jefferson, KY',
+    'warning.headline': 'Sa a PA yon bilten ofisyèl. Ou toujou bezwen ale vote!',
+    'warning.sub': 'Gid elektè ki pa ofisyèl ki pwodwi pa Pati Demokratik Louisville \u2014 Sovgade gid bilten ou anba a. Ou ka pote li avèk ou lè w al vote.',
+    'explainer.heading': 'Konsènan Prenè 19 Me 2026 la',
+    'explainer.new2026': 'NOUVO POU 2026',
+    'explainer.p1': 'Akòz lejislatif eta a, kous pou Majistra Metro Louisville ak Konsèy Metro yo pral vin eleksyon ki pa patizan kòmanse ane sa a. Poutèt sa, Pati Demokratik Louisville ap fè endòsman nan kous sa yo. Règleman Pati Demokratik la entèdi nou fè endòsman nan prenè Demokratik patizan yo.',
+    'explainer.p2': 'Paske kous sa yo pa patizan, afiliasyon pati <strong>PA</strong> pral parèt sou bilten ofisyèl ou. Nou te enkli pati kandida a isit la pou ou ka fè yon vòt enfòme.',
+    'explainer.privacy': '\ud83d\udd12 Chwa kandida ou yo <strong>pa anrejistre ni estoke</strong> pa Pati Demokratik Louisville. Zouti sa a fonksyone nèt nan navigatè ou.',
+    'lookup.heading': 'Jwenn Gid Bilten Ou',
+    'lookup.desc': 'Antre adrès ri Louisville ou pou wè kous ki sou bilten ou, avèk endòsman Pati Demokratik Louisville yo mete an evidans.',
+    'lookup.placeholder': 'egz. 527 W Jefferson St',
+    'lookup.btn': 'Jwenn Gid Bilten Mwen',
+    'lookup.help': 'Pafwa, yon adrès Louisville valab pa parèt nan rechèch la. Tanpri voye imel nan <a href="mailto:info@louisvilledems.com">info@louisvilledems.com</a> ak adrès ou epi n ap voye eleksyon ak kandida ki sou bilten ou!',
+    'precinct.label': 'Presinik',
+    'precinct.council': 'Konsèy Metro',
+    'precinct.house': 'Chanm Eta',
+    'precinct.senate': 'Sena Eta',
+    'precinct.congress': 'Kongrè Etazini',
+    'voting.ed_label': '\ud83d\udccd Biwo Vòt Jou Eleksyon an',
+    'voting.ed_note': '19 Me 2026 \u2014 ou dwe vote nan kote sa a Jou Eleksyon an',
+    'voting.clerk_link': 'Verifye sou sit wèb Greffye a \u2192',
+    'voting.clerk_fallback': 'Gade sit wèb Greffye a',
+    'voting.ev_label': '\ud83d\uddf3\ufe0f Sit Vòt Bonè ki Pi Pre',
+    'voting.ev_note': '<strong>14\u201316 Me 2026 sèlman.</strong> Vote nan <strong>nenpòt</strong> sit vòt bonè \u2014 pa gen restriksyon presinik',
+    'voting.other_ev_closed': '\u25bc Lòt kote pou vote bonè (23)',
+    'voting.other_ev_open': '\u25b2 Kache lòt kote yo',
+    'ballot.heading': 'Gid Bilten Prenè Eleksyon Pati Demokratik Louisville Ou',
+    'ballot.polls_note': '<strong>\ud83d\udccb Tape nenpòt kandida pou make chwa ou, epi sovgade imaj la pou pote li nan biwo vòt.</strong> Etikèt pati nan kous ki pa patizan (Majistra, Konsèy Metro) <em>pap</em> parèt sou bilten ofisyèl ou \u2014 <strong>pote gid bilten ou</strong> avèk ou pou ou konnen pou ki moun w ap vote.',
+    'legend.title': 'Lejann:',
+    'legend.endorsed': 'Endose pa LDP',
+    'legend.dem': 'Demokrat',
+    'legend.rep': 'Repibliken',
+    'legend.lib': 'Libèrtaryen',
+    'legend.other': 'Lòt / pa verifye',
+    'save.btn': '\u2193 Sovgade Gid Bilten Ou',
+    'save.saving': 'Ap sovgade\u2026',
+    'save.done': 'SOVGADE BILTEN OU!',
+    'reminders.title': '\ud83d\udccc Rapèl',
+    'reminders.html': '<li>Ou toujou bezwen vote! Jwenn kote vòt yo, dat yo, ak lè yo nan gid elektè nou an: <a href="https://www.louisvilledems.com/2026-voter-guide" target="_blank" rel="noopener"><strong>louisvilledems.com/2026-voter-guide</strong></a></li><li style="margin-top:6px">Si ou gen kesyon oswa bezwen èd, kontakte nou nan <a href="mailto:info@louisvilledems.com">info@louisvilledems.com</a></li>',
+    'footer.help': 'Si ou gen pwoblèm pou sovgade gid bilten ou epi ou ta renmen èd nou, tanpri voye imel ban nou nan <a href="mailto:info@louisvilledems.com">info@louisvilledems.com</a>.',
+    'footer.party_labels': 'Etikèt pati yo te verifye apre dat depozisyon kandida a te fèmen 9 Janvye 2026 via yon Demann Dosye Piblik.',
+    'share.heading': 'Ou konnen yon moun ki bezwen sa a?',
+    'share.desc': 'Pataje lyen sa a \u2014 nenpòt moun ka antre adrès yo pou jwenn gid elektè pèsonèl pa yo.',
+    'share.copy': 'Kopye Lyen',
+    'share.copied': '\u2713 Kopye!',
+    'share.voter_guide': 'Ou gen kesyon sou ki lè oswa ki kote pou vote? <a href="https://www.louisvilledems.com/2026-voter-guide" target="_blank" rel="noopener"><strong>Klike isit la!</strong></a>',
+    'modal.heading': 'Enfòmasyon eleksyon ak rapèl!',
+    'modal.desc': 'Jwenn kote Vòt Bonè ak Jou Eleksyon yo, ak mizajou soti nan Pati Demokratik Louisville.',
+    'modal.first_name': 'Prenon',
+    'modal.last_name': 'Siyati',
+    'modal.email': 'Adrès imel',
+    'modal.phone': 'Nimewo telefòn (opsyonèl)',
+    'modal.submit': 'Enskri mwen!',
+    'modal.skip': 'Non mèsi',
+    'modal.success': '\u2705 Mèsi! N ap kontakte ou anvan 19 Me.',
+    'modal.close': 'Fèmen',
+    'ballot.partisan_header': 'Prenè Demokratik \u2014 19 Me 2026',
+    'ballot.partisan_section_note': 'Demokrat enskri sèlman \u00a0\u00b7\u00a0 Sèlman kous konpetitif parèt sou bilten prenè a',
+    'ballot.partisan_note_ldp': 'Vèt = Endose pa LDP',
+    'ballot.nonpartisan_header': 'Kous Ki Pa Patizan \u2014 Tout Elektè Yo Ka Patisipe',
+    'ballot.nonpartisan_section_note': 'Etikèt pati soti nan enskripsyon elektè yo montre isit la pou enfòmasyon ou \u2014 yo <strong>PA</strong> pral parèt sou bilten ofisyèl ou',
+    'race.us_senator': 'Senatè Etazini (Chwazi Youn)',
+    'race.us_congress': 'Reprezantan Etazini nan Kongrè \u2014 Distri Kongrès {N} (Chwazi Youn)',
+    'race.ky_senator': 'Senatè Eta \u2014 Distri Senatoryèl {N} (Chwazi Youn)',
+    'race.ky_house': 'Reprezantan Eta \u2014 Distri Reprezantatif {N} (Chwazi Youn)',
+    'race.note_dem_primary': 'Prenè Demokratik',
+    'race.metro_mayor': 'Majistra Metro Louisville (Chwazi Youn)',
+    'race.nonpartisan_tag': 'Ki Pa Patizan',
+    'race.metro_council': 'Konsèy Metro Louisville \u2014 Distri {N} (Chwazi Youn)',
+    'race.shively_mayor': 'Vil Shively \u2014 Majistra (Chwazi Youn)',
+    'race.shively_council': 'Vil Shively \u2014 Manm Konsèy (Chwazi jiska 6)',
+    'race.jtown_council': 'Vil Jeffersontown \u2014 Manm Konsèy (Chwazi jiska 8)',
+    'race.endorsed_badge': 'Endose pa LDP',
+    'ballot.party_labels_footer': 'Etikèt pati yo te verifye apre dat depozisyon kandida a te fèmen 9 Janvye via yon Demann Dosye Piblik.',
+    'ballot.subhead': 'Prenè Demokratik \u2014 19 Me 2026 \u00b7 Presinik {P} \u00b7 Distri Konsèy Metro {D}',
+    'error.no_address': 'Tanpri antre adrès ri ou.',
+    'error.looking_up': 'Ap rechèche adrès ou\u2026',
+    'error.not_found': 'Adrès pa jwenn \u2014 eseye ajoute vil ou, oswa voye imel ban nou nan <a href="mailto:info@louisvilledems.com">info@louisvilledems.com</a>.',
+    'error.network': 'Erè rezo. Èske sèvè a ap mache?',
+    'save.alert_no_ballot': 'Tanpri rechèche adrès ou premye pou jenere gid elektè ou.',
+    'save.alert_error': 'Pa kapab sovgade imaj. Eseye ankò.',
+    'save.overlay_title': 'Sovgade Gid Bilten Ou',
+    'save.overlay_instruction': '\ud83d\udce5 <strong>Peze epi kenbe imaj ki anba a</strong>, epi tape<br><strong>"Sovgade nan Foto"</strong> oswa <strong>"Sovgade Imaj"</strong>',
+    'save.overlay_close': '\u2715 Fèmen',
+    'share.share_title': 'Gid Elektè 2026 Pati Demokratik Louisville',
+    'share.share_text': 'Gid bilten mwen pou Prenè Demokratik 19 Me 2026 la',
+    'modal.error_required': 'Tanpri antre yon adrès imel oswa nimewo telefòn.',
+    'modal.error_network': 'Yon bagay te mal pase. Tanpri eseye ankò.',
   }
 };
 
@@ -1516,7 +1610,7 @@ document.getElementById('addrInput').addEventListener('keydown', e => {
 window.addEventListener('DOMContentLoaded', () => {
   // Initialize language from URL param, then localStorage
   const langParam = new URLSearchParams(window.location.search).get('lang');
-  const validLangs = ['en','es','so','sw'];
+  const validLangs = ['en','es','so','sw','ht'];
   if (validLangs.includes(langParam)) {
     currentLang = langParam;
   } else {
