@@ -1661,7 +1661,6 @@ async function doLookup() {
     // Build ballot
     document.getElementById('ballotBody').innerHTML = buildBallot(data);
     document.getElementById('ballot').classList.add('visible');
-    document.getElementById('ballot').scrollIntoView({ behavior: 'smooth', block: 'start' });
 
     // Share prompt
     document.getElementById('sharePrompt').style.display = 'block';
