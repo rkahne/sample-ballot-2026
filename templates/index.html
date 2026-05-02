@@ -1518,6 +1518,66 @@ function buildBallot({ council_district, commissioner_district, state_house_dist
 
 let currentAddress = '';
 
+// Returns true if the geocoder's matched address looks meaningfully different
+// from what the user typed — catches street name typos/transpositions even
+// when the user omits their zip code.
+function addressMismatch(input, matched) {
+  const SUFFIXES = /\b(street|st|court|ct|avenue|ave|road|rd|drive|dr|boulevard|blvd|lane|ln|place|pl|way|circle|cir|trail|trl|parkway|pkwy|terrace|ter|highway|hwy)\b\.?/gi;
+
+  function normalize(s) {
+    return s.toLowerCase()
+            .replace(/[^\w\s]/g, ' ')  // strip punctuation
+            .replace(/\s+/g, ' ')
+            .trim();
+  }
+
+  function extractStreetName(s) {
+    return normalize(s)
+      .replace(/^\d+\s*/, '')                                     // strip house number
+      .replace(/\b(louisville|jefferson|kentucky|ky)\b.*/i, '')  // strip city/state
+      .replace(/\b\d{5}\b.*/, '')                                 // strip zip+rest
+      .replace(/,.*$/, '')                                        // strip after comma
+      .replace(SUFFIXES, ' ')                                     // strip street suffixes
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  function levenshtein(a, b) {
+    const m = a.length, n = b.length;
+    const dp = Array.from({length: m + 1}, (_, i) =>
+      Array.from({length: n + 1}, (_, j) => i ? (j ? 0 : i) : j));
+    for (let i = 1; i <= m; i++)
+      for (let j = 1; j <= n; j++)
+        dp[i][j] = a[i-1] === b[j-1]
+          ? dp[i-1][j-1]
+          : 1 + Math.min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]);
+    return dp[m][n];
+  }
+
+  // 1. House number mismatch
+  const numIn  = (normalize(input).match(/^\d+/) || [''])[0];
+  const numOut = (normalize(matched).match(/^\d+/) || [''])[0];
+  if (numIn && numOut && numIn !== numOut) return true;
+
+  // 2. Zip code mismatch (when user provided one)
+  const zipIn  = (input.match(/\b(\d{5})\b/) || [])[1];
+  const zipOut = (matched.match(/\b(\d{5})\b/) || [])[1];
+  if (zipIn && zipOut && zipIn !== zipOut) return true;
+
+  // 3. Street name fuzzy match — compare first significant word after stripping suffixes
+  const streetIn  = extractStreetName(input);
+  const streetOut = extractStreetName(matched);
+  if (!streetIn || !streetOut) return false;
+
+  const wordIn  = streetIn.split(' ')[0];
+  const wordOut = streetOut.split(' ')[0];
+  if (wordIn === wordOut) return false;
+
+  const dist = levenshtein(wordIn, wordOut);
+  const maxLen = Math.max(wordIn.length, wordOut.length);
+  return (dist / maxLen) > 0.3;  // warn if first street word differs by >30%
+}
+
 async function doLookup() {
   const input = document.getElementById('addrInput');
   const btn   = document.getElementById('lookupBtn');
@@ -1565,11 +1625,9 @@ async function doLookup() {
     document.getElementById('piCongress').textContent  = 'KY-' + data.congressional_district;
     document.getElementById('precinctBar').classList.add('visible');
 
-    // Warn if geocoder returned a different zip than the user typed
-    const inputZip   = (addr.match(/\b(\d{5})\b/) || [])[1];
-    const matchedZip = (data.matched_address.match(/\b(\d{5})\b/) || [])[1];
-    const warning    = document.getElementById('addrMismatchWarning');
-    if (inputZip && matchedZip && inputZip !== matchedZip) {
+    // Warn if geocoder may have matched the wrong address
+    const warning = document.getElementById('addrMismatchWarning');
+    if (addressMismatch(addr, data.matched_address)) {
       document.getElementById('addrInput_display').textContent   = addr;
       document.getElementById('addrMatched_display').textContent = data.matched_address;
       warning.style.display = 'block';
