@@ -394,7 +394,7 @@
 
     /* ── Language toggle ── */
     .lang-toggle {
-      display: none; /* hidden pending copy review */
+      display: flex; align-items: center; gap: 4px; margin-left: auto;
     }
     .lang-btn {
       background: transparent; border: 1px solid rgba(255,255,255,0.35);
@@ -448,10 +448,10 @@
       <button class="lang-btn" id="langBtnEs" onclick="setLanguage('es')">ES</button>
       <span>|</span>
       <button class="lang-btn" id="langBtnSo" onclick="setLanguage('so')">SO</button>
-      <span>|</span>
-      <button class="lang-btn" id="langBtnSw" onclick="setLanguage('sw')">SW</button>
-      <span>|</span>
-      <button class="lang-btn" id="langBtnHt" onclick="setLanguage('ht')">HT</button>
+      <span id="langSepSw" style="display:none">|</span>
+      <button class="lang-btn" id="langBtnSw" onclick="setLanguage('sw')" style="display:none">SW</button>
+      <span id="langSepHt" style="display:none">|</span>
+      <button class="lang-btn" id="langBtnHt" onclick="setLanguage('ht')" style="display:none">HT</button>
     </div>
   </div>
   <div class="header-bar"></div>
