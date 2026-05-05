@@ -650,6 +650,30 @@ function applyTranslations() {
     const btn = document.getElementById('langBtn' + code.charAt(0).toUpperCase() + code.slice(1));
     if (btn) btn.classList.toggle('active', currentLang === code);
   });
+
+  // Re-translate dynamically-written voting card strings (set during lookup, not via data-i18n)
+  const otherEvBtn  = document.getElementById('otherEvBtn');
+  const otherEvList = document.getElementById('otherEvList');
+  if (otherEvBtn && otherEvList) {
+    const isOpen = otherEvList.style.display !== 'none';
+    otherEvBtn.textContent = t(isOpen ? 'voting.other_ev_open' : 'voting.other_ev_closed');
+  }
+
+  // Re-translate polling place fallback text if it was set to a translated fallback
+  const pollingName = document.getElementById('pollingPlaceName');
+  if (pollingName && !pollingName.dataset.hasRealValue) {
+    pollingName.textContent = t('voting.clerk_fallback');
+  }
+
+  // Re-translate ballot subhead if ballot is visible
+  if (window._lastLookupData) {
+    const subhead = document.getElementById('ballotSubhead');
+    if (subhead) {
+      subhead.textContent = t('ballot.subhead')
+        .replace('{P}', window._lastLookupData.precinct)
+        .replace('{D}', window._lastLookupData.council_district);
+    }
+  }
 }
 
 function setLanguage(lang) {
@@ -1647,7 +1671,9 @@ async function doLookup() {
 
     // Voting location cards
     const votingRow = document.getElementById('votingCardsRow');
-    document.getElementById('pollingPlaceName').textContent    = data.polling_place_name    || t('voting.clerk_fallback');
+    const pollingNameEl = document.getElementById('pollingPlaceName');
+    pollingNameEl.textContent = data.polling_place_name || t('voting.clerk_fallback');
+    pollingNameEl.dataset.hasRealValue = data.polling_place_name ? 'true' : '';
     document.getElementById('pollingPlaceAddress').textContent = data.polling_place_address || '';
     if (typeof data.closest_ev_index === 'number') {
       const ev = EARLY_VOTING_LOCATIONS[data.closest_ev_index];
