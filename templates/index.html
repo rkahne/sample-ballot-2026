@@ -227,7 +227,7 @@
     }
     .candidate.selected { border-color: var(--navy) !important; background: #eef2ff !important; }
     .candidate.selected.endorsed { border-color: var(--navy) !important; background: #d8e8ff !important; }
-    .cand-name { font-weight: 600; font-size: 0.94rem; flex: 1; }
+    .cand-name { font-weight: 600; font-size: 0.94rem; }
 
     /* Party badge */
     .party-badge {
@@ -1414,8 +1414,10 @@ function candidateHTML(cand, endorsed, raceId, maxSelect = 1) {
   return `
     <div class="candidate${endorsed ? ' endorsed' : ''}" onclick="selectCandidate(this, '${raceId}', ${maxSelect})">
       <div class="bubble"></div>
-      <span class="cand-name">${esc(name)}</span>
-      ${note ? `<button class="cand-info-btn" onclick="showCandInfo(event, '${note}')">⚠️ More info</button>` : ''}
+      <span style="flex:1;display:inline-flex;align-items:center;gap:6px;min-width:0">
+        <span class="cand-name">${esc(name)}</span>
+        ${note ? `<button class="cand-info-btn" onclick="showCandInfo(event, '${note}')">⚠️ More info</button>` : ''}
+      </span>
       ${partyBadge(party)}
       ${endorsed ? `<span class="endorsed-badge">${starSvg()} ${t('race.endorsed_badge')}</span>` : ''}
     </div>`;
