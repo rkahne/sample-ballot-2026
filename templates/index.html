@@ -240,6 +240,16 @@
     .party-badge.L { background: #fef9c3; color: #92700a; }
     .party-badge.U { background: #f0f0f0; color: #888; font-weight: 500; font-style: italic; }
 
+    .cand-info-btn {
+      display: inline-flex; align-items: center; gap: 3px;
+      background: #fff3e0; color: #b45309; border: 1px solid #f9a825;
+      font-size: 0.66rem; font-weight: 700; padding: 2px 6px; border-radius: 4px;
+      cursor: pointer; white-space: nowrap; flex-shrink: 0;
+      transition: background .15s;
+    }
+    .cand-info-btn:hover { background: #ffe0b2; }
+    #ballot.capture-mode .cand-info-btn { display: none; }
+
     .endorsed-badge {
       display: flex; align-items: center; gap: 3px;
       background: var(--endorse); color: #fff;
@@ -586,6 +596,14 @@
   </div>
 
 </main>
+
+<!-- ── Candidate info modal ── -->
+<div class="modal-overlay" id="candInfoModal" onclick="closeCandInfo(event)">
+  <div class="modal-box" style="max-width:520px" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeCandInfo()">×</button>
+    <div id="candInfoBody" style="font-size:0.92rem;line-height:1.65;color:var(--text);padding-top:4px"></div>
+  </div>
+</div>
 
 <!-- ── Contact modal ── -->
 <div class="modal-overlay" id="contactModal">
@@ -1160,6 +1178,25 @@ const TRANSLATIONS = {
 //  DATA
 // ══════════════════════════════════════════════════════════════════════
 
+// Additional context for specific candidates, keyed by the 'note' field on the candidate object
+const CANDIDATE_NOTES = {
+  grossberg: `<strong style="font-size:1rem">⚠️ Additional Information: Daniel Grossberg</strong>
+    <p style="margin-top:10px">Daniel Grossberg has been credibly accused of sexual assault by <a href="https://www.wave3.com/2024/09/20/hed-manhandle-hed-grab-louisville-club-bans-rep-grossberg-after-alleged-conduct-toward-dancers/" target="_blank" rel="noopener" style="color:var(--blue)">women working at a Louisville strip club</a> and <a href="https://www.wdrb.com/news/politics/kentucky-rep-daniel-grossberg-accused-of-assault-by-former-college-classmate/article_b53f085c-4cb6-40cb-8138-207c4850929d.html" target="_blank" rel="noopener" style="color:var(--blue)">a classmate from college</a>, and <a href="https://kentuckylantern.com/2026/02/02/embattled-louisville-democrat-agrees-to-pay-2k-in-fines-to-ethics-commission/" target="_blank" rel="noopener" style="color:var(--blue)">paid multiple $1,000 fines</a> related to a sexual harassment scandal that occurred during his time as a state representative.</p>`,
+};
+
+function showCandInfo(event, noteKey) {
+  event.stopPropagation();
+  const content = CANDIDATE_NOTES[noteKey];
+  if (!content) return;
+  document.getElementById('candInfoBody').innerHTML = content;
+  document.getElementById('candInfoModal').classList.add('open');
+}
+
+function closeCandInfo(event) {
+  if (event && event.target !== document.getElementById('candInfoModal')) return;
+  document.getElementById('candInfoModal').classList.remove('open');
+}
+
 const ENDORSEMENTS = {
   mayor: ['Craig Greenberg'],
   council: { 1:['Tammy Hawkins'], 3:['Kumar Rashad'], 5:['Aprile Hearn'], 7:['Paula McCraney'],
@@ -1245,7 +1282,7 @@ const KY_HOUSE_CANDIDATES = {
     { name: 'Cassie Lyles',     party: 'D' },
     { name: 'Mitra Subedi',     party: 'D' },
     { name: 'Max Morley',       party: 'D' },
-    { name: 'Daniel Grossberg', party: 'D' },
+    { name: 'Daniel Grossberg', party: 'D', note: 'grossberg' },
   ],
   33: [{ name: 'Tarah LeBlanc',        party: 'D' }, { name: 'Jennifer Hardin',       party: 'D' }],
   40: [{ name: 'Nima Kulkarni',        party: 'D' }, { name: 'Patrick Dunegan',       party: 'D' }],
@@ -1371,13 +1408,15 @@ function partyBadge(party) {
 let raceCounter = 0;
 
 function candidateHTML(cand, endorsed, raceId, maxSelect = 1) {
-  const name = cand.name || cand;
+  const name  = cand.name || cand;
   const party = cand.party !== undefined ? cand.party : null;
+  const note  = cand.note || null;
   return `
     <div class="candidate${endorsed ? ' endorsed' : ''}" onclick="selectCandidate(this, '${raceId}', ${maxSelect})">
       <div class="bubble"></div>
       <span class="cand-name">${esc(name)}</span>
       ${partyBadge(party)}
+      ${note ? `<button class="cand-info-btn" onclick="showCandInfo(event, '${note}')">⚠️ More info</button>` : ''}
       ${endorsed ? `<span class="endorsed-badge">${starSvg()} ${t('race.endorsed_badge')}</span>` : ''}
     </div>`;
 }
