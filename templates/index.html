@@ -242,12 +242,12 @@
 
     .cand-info-btn {
       display: inline-flex; align-items: center; gap: 3px;
-      background: #fff3e0; color: #b45309; border: 1px solid #f9a825;
+      background: #c0392b; color: #fff; border: none;
       font-size: 0.66rem; font-weight: 700; padding: 2px 6px; border-radius: 4px;
       cursor: pointer; white-space: nowrap; flex-shrink: 0;
       transition: background .15s;
     }
-    .cand-info-btn:hover { background: #ffe0b2; }
+    .cand-info-btn:hover { background: #a93226; }
     #ballot.capture-mode .cand-info-btn { display: none; }
 
     .endorsed-badge {
@@ -1415,8 +1415,8 @@ function candidateHTML(cand, endorsed, raceId, maxSelect = 1) {
     <div class="candidate${endorsed ? ' endorsed' : ''}" onclick="selectCandidate(this, '${raceId}', ${maxSelect})">
       <div class="bubble"></div>
       <span class="cand-name">${esc(name)}</span>
-      ${partyBadge(party)}
       ${note ? `<button class="cand-info-btn" onclick="showCandInfo(event, '${note}')">⚠️ More info</button>` : ''}
+      ${partyBadge(party)}
       ${endorsed ? `<span class="endorsed-badge">${starSvg()} ${t('race.endorsed_badge')}</span>` : ''}
     </div>`;
 }
