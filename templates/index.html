@@ -251,6 +251,23 @@
     .cand-info-btn:hover { background: #a93226; }
     #ballot.capture-mode .cand-info-btn { display: none; }
 
+    /* ── Withdrawn candidates ── */
+    .candidate.withdrawn { opacity: 0.55; cursor: default; }
+    .candidate.withdrawn .cand-name { text-decoration: line-through; color: var(--muted); }
+    .candidate.withdrawn:hover { background: inherit; }
+    .candidate.withdrawn.endorsed:hover { background: var(--endorse-bg); }
+    .cand-withdrawn-badge {
+      display: inline-flex; align-items: center;
+      background: #f5f5f5; color: #888; border: 1px solid #ccc;
+      font-size: 0.66rem; font-weight: 700; padding: 2px 6px; border-radius: 4px;
+      white-space: nowrap; flex-shrink: 0; font-style: italic;
+    }
+    .withdrawn-notice {
+      font-size: 0.75rem; color: var(--muted); font-style: italic;
+      margin-bottom: 6px; padding: 5px 10px; background: #f9f9f9;
+      border-left: 3px solid #ccc; border-radius: 0 4px 4px 0;
+    }
+
     .endorsed-badge {
       display: flex; align-items: center; gap: 3px;
       background: var(--endorse); color: #fff;
@@ -1217,12 +1234,12 @@ const ENDORSEMENTS = {
 const MAYOR_CANDIDATES = [
   { name: 'Jody Hurt',                  party: 'L'  },  // Libertarian
   { name: 'Douglas Lattimore',          party: null },  // Other Party
-  { name: 'Bill Wells',                 party: 'D'  },
+  { name: 'Bill Wells',                 party: 'D',  withdrawn: true },
   { name: 'Craig Greenberg',            party: 'D'  },
   { name: 'Tina Burnell',              party: 'R'  },
   { name: 'Bob DeVore',                party: 'R'  },
   { name: 'Lisa M. Holliday Harris',   party: 'R'  },
-  { name: 'Jeffrey Yocum',             party: 'R'  },
+  { name: 'Jeffrey Yocum',             party: 'R',  withdrawn: true },
   { name: 'Matthew Solomon Bailey',    party: 'D'  },
   { name: 'S. "The D" Dattilo',        party: 'R'  },
   { name: 'Shameka L. Parrish-Wright', party: 'D'  },
@@ -1266,6 +1283,11 @@ const COUNCIL_CANDIDATES = {
     { name: 'Ainsley Jones',  party: 'D' },
     { name: 'David R. Steff', party: 'R' },
   ],
+  // Districts with withdrawn candidates — names still appear on official ballot
+  8:  [{ name: 'LavOn Z. Clack',     party: 'D', withdrawn: true }],
+  15: [{ name: 'Brandon Brooks',     party: 'D', withdrawn: true }, { name: 'Jennifer Chappell', party: 'D' }],
+  19: [{ name: 'Davanta R. Scruggs', party: 'D', withdrawn: true }],
+  25: [{ name: 'Kimberly Abrams',    party: 'D', withdrawn: true }],
 };
 
 // US Senate — applies to every precinct (order matches official Jefferson County ballot)
@@ -1417,14 +1439,16 @@ function partyBadge(party) {
 let raceCounter = 0;
 
 function candidateHTML(cand, endorsed, raceId, maxSelect = 1) {
-  const name  = cand.name || cand;
-  const party = cand.party !== undefined ? cand.party : null;
-  const note  = cand.note || null;
+  const name      = cand.name || cand;
+  const party     = cand.party !== undefined ? cand.party : null;
+  const note      = cand.note || null;
+  const withdrawn = cand.withdrawn || false;
   return `
-    <div class="candidate${endorsed ? ' endorsed' : ''}" onclick="selectCandidate(this, '${raceId}', ${maxSelect})">
+    <div class="candidate${endorsed ? ' endorsed' : ''}${withdrawn ? ' withdrawn' : ''}" onclick="selectCandidate(this, '${raceId}', ${maxSelect})">
       <div class="bubble"></div>
       <span style="flex:1;display:inline-flex;align-items:center;gap:6px;min-width:0">
         <span class="cand-name">${esc(name)}</span>
+        ${withdrawn ? `<span class="cand-withdrawn-badge">Withdrawn</span>` : ''}
         ${note ? `<button class="cand-info-btn" onclick="showCandInfo(event, '${note}')">⚠️ More info</button>` : ''}
       </span>
       ${partyBadge(party)}
@@ -1442,6 +1466,7 @@ function raceHTML(title, rows, note, extraClass) {
 }
 
 function selectCandidate(el, raceId, maxSelect = 1) {
+  if (el.classList.contains('withdrawn')) return;
   if (maxSelect === 1) {
     // Single-select: deselect all others, select this one
     document.querySelectorAll(`.candidate[onclick*="'${raceId}'"]`).forEach(c => c.classList.remove('selected'));
@@ -1533,17 +1558,20 @@ function buildBallot({ council_district, commissioner_district, state_house_dist
   const mayorRaceId = 'race' + (++raceCounter);
   html += `<div class="race nonpartisan-race">
     <div class="race-title">${t('race.metro_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+    <div class="withdrawn-notice">⚠️ Strikethrough candidates have voluntarily withdrawn from this race. This does not reflect a party recommendation.</div>
     <div class="candidate-list mayor-list">${
       MAYOR_CANDIDATES.map(c => candidateHTML(c, ENDORSEMENTS.mayor.includes(c.name), mayorRaceId)).join('')
     }</div>
   </div>`;
 
-  // ── METRO COUNCIL (nonpartisan) — only show if there's actually a primary ──
-  if (isOdd && hasPrimary) {
+  // ── METRO COUNCIL (nonpartisan) — show if there's a candidate list for this district ──
+  if (hasPrimary) {
     const councilRaceId = 'race' + (++raceCounter);
     const endorsed = ENDORSEMENTS.council[council_district] || [];
+    const hasWithdrawn = COUNCIL_CANDIDATES[council_district].some(c => c.withdrawn);
     html += `<div class="race nonpartisan-race">
       <div class="race-title">${t('race.metro_council').replace('{N}', council_district)} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      ${hasWithdrawn ? `<div class="withdrawn-notice">⚠️ Strikethrough candidates have voluntarily withdrawn from this race. This does not reflect a party recommendation.</div>` : ''}
       <div class="candidate-list">${
         COUNCIL_CANDIDATES[council_district].map(c => candidateHTML(c, endorsed.includes(c.name), councilRaceId)).join('')
       }</div>
