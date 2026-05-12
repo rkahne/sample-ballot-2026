@@ -42,9 +42,10 @@
       max-width: 880px; margin: 0 auto;
       padding: 18px 20px 14px;
       display: flex; align-items: center; gap: 14px;
+      flex-wrap: wrap;
     }
     .ldp-logo { flex-shrink: 0; width: 68px; height: 68px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(255,255,255,.3); }
-    .header-text { flex: 1; }
+    .header-text { flex: 1; min-width: 0; }
     .header-text h1 { font-size: 1.35rem; font-weight: 800; line-height: 1.2; }
     .header-text p  { font-size: 0.82rem; opacity: .78; margin-top: 3px; }
     .header-bar { background: var(--blue); height: 4px; }
@@ -405,6 +406,14 @@
     /* ── Language toggle ── */
     .lang-toggle {
       display: flex; align-items: center; gap: 4px; margin-left: auto;
+      flex-wrap: nowrap;
+    }
+    @media (max-width: 560px) {
+      .lang-toggle {
+        width: 100%; margin-left: 0;
+        padding-top: 4px; padding-bottom: 2px;
+        border-top: 1px solid rgba(255,255,255,.15);
+      }
     }
     .lang-btn {
       background: transparent; border: 1px solid rgba(255,255,255,0.35);
