@@ -1381,25 +1381,25 @@ const JTOWN_PRECINCTS = new Set([
   'V101','V106','V116','V133','V134',
 ]);
 const JTOWN_COUNCIL_CANDIDATES = [
-  'Debi Pridemore Sanning',
-  'Pamela Thomas Hickey',
-  'Donald Lee Hickey',
-  'Cynthia Kinnard',
-  'Matt Bowdy',
-  'Vincent Grisanti',
-  'Jeff Hensel',
-  'Pam Ware',
-  'Mark Blum',
-  'Ruth Gao',
-  'Ray "Chubby Ray" Perkins',
-  'Nita Cox',
-  'Randy Lawson',
-  'Dan Wright',
-  'Bryan K. Wimsatt',
-  'Trena Smith',
-  'Allison Neal Head',
-  'Richard "Dickie" Dunn',
-  'Mark Russell',
+  { name: 'Debi Pridemore Sanning', party: 'D'   },
+  { name: 'Pamela Thomas Hickey',   party: null  },
+  { name: 'Donald Lee Hickey',      party: null  },
+  { name: 'Cynthia Kinnard',        party: null  },
+  { name: 'Matt Bowdy',             party: 'D'   },
+  { name: 'Vincent Grisanti',       party: null  },
+  { name: 'Jeff Hensel',            party: null  },
+  { name: 'Pam Ware',               party: null  },
+  { name: 'Mark Blum',              party: null  },
+  { name: 'Ruth Gao',               party: 'D'   },
+  { name: 'Ray "Chubby Ray" Perkins', party: null },
+  { name: 'Nita Cox',               party: 'D'   },
+  { name: 'Randy Lawson',           party: null  },
+  { name: 'Dan Wright',             party: 'D'   },
+  { name: 'Bryan K. Wimsatt',       party: null  },
+  { name: 'Trena Smith',            party: null  },
+  { name: 'Allison Neal Head',      party: null  },
+  { name: 'Richard "Dickie" Dunn',  party: null  },
+  { name: 'Mark Russell',           party: 'D'   },
 ];
 
 // Shively Mayor & City Council — nonpartisan
@@ -1609,7 +1609,7 @@ function buildBallot({ council_district, commissioner_district, state_house_dist
     html += `<div class="race nonpartisan-race">
       <div class="race-title">${t('race.jtown_council')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
       <div class="candidate-list">${
-        JTOWN_COUNCIL_CANDIDATES.map(name => candidateHTML({ name, party: null }, false, jtownRaceId, 8)).join('')
+        JTOWN_COUNCIL_CANDIDATES.map(c => candidateHTML(c, false, jtownRaceId, 8)).join('')
       }</div>
     </div>`;
   }
