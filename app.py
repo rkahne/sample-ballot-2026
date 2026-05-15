@@ -162,7 +162,16 @@ def lookup():
     if not address:
         return jsonify({"error": "Please enter an address."}), 400
     # Always geocode within Louisville, KY
-    if "louisville" not in address.lower() and "jefferson" not in address.lower():
+    # Only skip appending city if the address already contains a state/zip indicator —
+    # don't key off "jefferson" since that appears in street names like "W Jefferson St"
+    import re as _re
+    already_located = (
+        "louisville" in address.lower()
+        or "jefferson county" in address.lower()
+        or _re.search(r'\bky\b', address, _re.IGNORECASE)
+        or _re.search(r'\b4\d{4}\b', address)  # Kentucky zip codes start with 4
+    )
+    if not already_located:
         address = address + ", Louisville, KY"
 
     # 1. Geocode — Census Bureau first, ArcGIS fallback (both free, no API key)
