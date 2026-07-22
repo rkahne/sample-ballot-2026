@@ -475,8 +475,8 @@
   <div class="header-inner">
     <img src="/static/logo.jpg" alt="Louisville Democratic Party" class="ldp-logo" />
     <div class="header-text">
-      <h1 data-i18n-html="header.title">Louisville Democratic Party<br>Primary Election Ballot Guide</h1>
-      <p data-i18n-html="header.subtitle">Democratic Primary &mdash; May 19, 2026 &nbsp;|&nbsp; Jefferson County, KY</p>
+      <h1 data-i18n-html="header.title">Louisville Democratic Party<br>General Election Ballot Guide</h1>
+      <p data-i18n-html="header.subtitle">General Election &mdash; November 3, 2026 &nbsp;|&nbsp; Jefferson County, KY</p>
     </div>
     <div class="lang-toggle">
       <button class="lang-btn active" id="langBtnEn" onclick="setLanguage('en')">EN</button>
@@ -502,11 +502,11 @@
 
   <!-- Explainer -->
   <div class="explainer-card">
-    <h2 data-i18n="explainer.heading">About the May 19, 2026 Primary Election</h2>
+    <h2 data-i18n="explainer.heading">About the November 3, 2026 General Election</h2>
     <div class="explainer-item" style="border:none;padding:0">
       <h3 data-i18n="explainer.new2026">NEW FOR 2026</h3>
-      <p data-i18n="explainer.p1">Due to the state legislature, Louisville Metro Mayor and Metro Council races will be non-partisan elections beginning this year. Because of this, the Louisville Democratic Party is making endorsements in these races. Democratic Party bylaws prevent us from endorsing in partisan Democratic primaries.</p>
-      <p style="margin-top:10px" data-i18n-html="explainer.p2">Because these races are nonpartisan, party affiliation will <strong>NOT</strong> appear on your official ballot. We have included the candidate's party here so you can make an informed vote.</p>
+      <p data-i18n="explainer.p1">Louisville Metro Mayor and Metro Council races are nonpartisan elections — party labels will not appear on your official ballot for these races. The Louisville Democratic Party endorses candidates in these nonpartisan races and supports all registered Democrats in partisan races.</p>
+      <p style="margin-top:10px" data-i18n-html="explainer.p2">For partisan races (federal, state, and county offices), party labels <strong>WILL</strong> appear on your official ballot. For nonpartisan races (Mayor and Metro Council), candidate party registration is shown here for your information but will <strong>NOT</strong> appear on the official ballot.</p>
       <p style="margin-top:10px;font-size:0.82rem;color:var(--muted)" data-i18n-html="explainer.privacy">🔒 Your candidate selections are <strong>not recorded or stored</strong> by the Louisville Democratic Party. This tool runs entirely in your browser.</p>
     </div>
   </div>
@@ -548,7 +548,7 @@
         <!-- Election Day polling place -->
         <div class="voting-card election-day">
           <div class="vc-label" data-i18n="voting.ed_label">📍 Election Day Polling Place</div>
-          <div class="vc-note" data-i18n="voting.ed_note">May 19, 2026 — you must vote at this location on Election Day</div>
+          <div class="vc-note" data-i18n="voting.ed_note">November 3, 2026 — you must vote at this location on Election Day</div>
           <div class="vc-name" id="pollingPlaceName"></div>
           <div class="vc-addr" id="pollingPlaceAddress"></div>
           <a href="https://jeffersoncountyclerk.org/wheredoivote/" target="_blank" rel="noopener" class="vc-link" data-i18n="voting.clerk_link">Verify on Clerk's website →</a>
@@ -557,7 +557,7 @@
         <!-- Closest early voting site -->
         <div class="voting-card early-voting">
           <div class="vc-label" data-i18n="voting.ev_label">🗳️ Closest Early Voting Site</div>
-          <div class="vc-note" data-i18n-html="voting.ev_note"><strong>May 14–16, 2026 only.</strong> Vote at <strong>any</strong> early voting site — no precinct restriction</div>
+          <div class="vc-note" data-i18n-html="voting.ev_note"><strong>October 29–31, 2026 only.</strong> Vote at <strong>any</strong> early voting site — no precinct restriction</div>
           <div class="vc-name" id="evClosestName"></div>
           <div class="vc-addr" id="evClosestAddr"></div>
           <button class="other-ev-btn" id="otherEvBtn" onclick="toggleOtherEV()">▼ Other early voting locations</button>
@@ -571,8 +571,8 @@
   <!-- Ballot -->
   <div id="ballot">
     <div class="ballot-header">
-      <h2 data-i18n="ballot.heading">Your Louisville Democratic Party Primary Election Ballot Guide</h2>
-      <p id="ballotSubhead">Democratic Primary &mdash; May 19, 2026</p>
+      <h2 data-i18n="ballot.heading">Your Louisville Democratic Party General Election Ballot Guide</h2>
+      <p id="ballotSubhead">General Election &mdash; November 3, 2026</p>
     </div>
 
     <div class="polls-note" data-i18n-html="ballot.polls_note">
@@ -650,7 +650,7 @@
       <button class="modal-skip"  onclick="closeModal()" data-i18n="modal.skip">No thanks</button>
     </div>
     <div class="modal-success" id="modalSuccess" style="display:none">
-      <p data-i18n="modal.success">✅ Thanks! We'll be in touch before May 19.</p>
+      <p data-i18n="modal.success">✅ Thanks! We'll be in touch before November 3.</p>
       <button class="modal-skip" onclick="closeModal()" data-i18n="modal.close">Close</button>
     </div>
     <div style="background:#f0f4ff;border:1px solid #c5d0e8;border-radius:8px;margin-top:18px;padding:14px 16px;font-size:0.84rem;line-height:1.6">
@@ -739,15 +739,15 @@ function setLanguage(lang) {
 
 const TRANSLATIONS = {
   en: {
-    'page.title': 'Louisville Democratic Party — 2026 Voter Guide',
-    'header.title': 'Louisville Democratic Party<br>Primary Election Ballot Guide',
-    'header.subtitle': 'Democratic Primary &mdash; May 19, 2026 &nbsp;|&nbsp; Jefferson County, KY',
+    'page.title': 'Louisville Democratic Party — 2026 General Election Voter Guide',
+    'header.title': 'Louisville Democratic Party<br>General Election Ballot Guide',
+    'header.subtitle': 'General Election &mdash; November 3, 2026  |  Jefferson County, KY',
     'warning.headline': 'This is NOT an official ballot. You still need to go vote!',
-    'warning.sub': 'Unofficial voter guide produced by the Louisville Democratic Party \u2014 Save your ballot guide below. You may bring it with you when you go vote.',
-    'explainer.heading': 'About the May 19, 2026 Primary Election',
-    'explainer.new2026': 'NEW FOR 2026',
-    'explainer.p1': 'Due to the state legislature, Louisville Metro Mayor and Metro Council races will be non-partisan elections beginning this year. Because of this, the Louisville Democratic Party is making endorsements in these races. Democratic Party bylaws prevent us from endorsing in partisan Democratic primaries.',
-    'explainer.p2': 'Because these races are nonpartisan, party affiliation will <strong>NOT</strong> appear on your official ballot. We have included the candidate\'s party here so you can make an informed vote.',
+    'warning.sub': 'Unofficial voter guide produced by the Louisville Democratic Party — Save your ballot guide below. You may bring it with you when you go vote.',
+    'explainer.heading': 'About the November 3, 2026 General Election',
+    'explainer.new2026': 'NEW IN 2026',
+    'explainer.p1': 'Louisville Metro Mayor and Metro Council races are nonpartisan elections — party labels will not appear on your official ballot for these races. The Louisville Democratic Party endorses candidates in these nonpartisan races and supports all registered Democrats in partisan races.',
+    'explainer.p2': 'For partisan races (federal, state, and county offices), party labels <strong>WILL</strong> appear on your official ballot. For nonpartisan races (Mayor and Metro Council), candidate party registration is shown here for your information but will <strong>NOT</strong> appear on the official ballot.',
     'explainer.privacy': '🔒 Your candidate selections are <strong>not recorded or stored</strong> by the Louisville Democratic Party. This tool runs entirely in your browser.',
     'lookup.heading': 'Find Your Ballot Guide',
     'lookup.desc': 'Enter your Louisville street address to see the races on your ballot, with Louisville Democratic Party endorsements highlighted.',
@@ -760,32 +760,32 @@ const TRANSLATIONS = {
     'precinct.senate': 'State Senate',
     'precinct.congress': 'US Congress',
     'voting.ed_label': '📍 Election Day Polling Place',
-    'voting.ed_note': 'May 19, 2026 — you must vote at this location on Election Day',
-    'voting.clerk_link': 'Verify on Clerk\'s website \u2192',
+    'voting.ed_note': 'November 3, 2026 — you must vote at this location on Election Day',
+    'voting.clerk_link': 'Verify on Clerk\'s website →',
     'voting.clerk_fallback': 'See Clerk\'s website',
     'voting.ev_label': '🗳️ Closest Early Voting Site',
-    'voting.ev_note': '<strong>May 14\u201316, 2026 only.</strong> Vote at <strong>any</strong> early voting site \u2014 no precinct restriction',
-    'voting.other_ev_closed': '\u25bc Other early voting locations (23)',
-    'voting.other_ev_open': '\u25b2 Hide other locations',
-    'ballot.heading': 'Your Louisville Democratic Party Primary Election Ballot Guide',
-    'ballot.polls_note': '<strong>📋 Tap any candidate to mark your choice, then save the image to bring to the polls.</strong> Party labels in nonpartisan races (Mayor, Metro Council) will <em>not</em> appear on your official ballot \u2014 <strong>bring your ballot guide</strong> with you so you know who you\'re voting for. If you would like to confirm your ballot with the Jefferson County Clerk, <a href="https://jeffersoncountyclerk.org/wheredoivote/" target="_blank" rel="noopener">click here</a>.',
+    'voting.ev_note': '<strong>October 29–31, 2026 only.</strong> Vote at <strong>any</strong> early voting site — no precinct restriction',
+    'voting.other_ev_closed': '▼ Other early voting locations (23)',
+    'voting.other_ev_open': '▲ Hide other locations',
+    'ballot.heading': 'Your Louisville Democratic Party General Election Ballot Guide',
+    'ballot.polls_note': '<strong>📋 Tap any candidate to mark your choice, then save the image to bring to the polls.</strong> Party labels in nonpartisan races will <em>not</em> appear on your official ballot — <strong>bring your ballot guide</strong> with you. If you would like to confirm your ballot with the Jefferson County Clerk, <a href="https://jeffersoncountyclerk.org/wheredoivote/" target="_blank" rel="noopener">click here</a>.',
     'legend.title': 'Legend:',
     'legend.endorsed': 'LDP Endorsed',
     'legend.dem': 'Democrat',
     'legend.rep': 'Republican',
     'legend.lib': 'Libertarian',
     'legend.other': 'Other / unverified',
-    'save.btn': '\u2193 Save Your Ballot Guide',
-    'save.saving': 'Saving\u2026',
+    'save.btn': '↓ Save Your Ballot Guide',
+    'save.saving': 'Saving…',
     'save.done': 'SAVE YOUR BALLOT!',
     'reminders.title': '📌 Reminders',
     'reminders.html': '<li>You still need to vote! Find voting locations, dates, and times in our voter guide: <a href="https://www.louisvilledems.com/2026-voter-guide" target="_blank" rel="noopener"><strong>louisvilledems.com/2026-voter-guide</strong></a></li><li style="margin-top:6px">If you have questions or need help, reach out to <a href="mailto:info@louisvilledems.com">info@louisvilledems.com</a></li>',
     'footer.help': 'If you have trouble saving your ballot guide and would like our help, please email us at <a href="mailto:info@louisvilledems.com">info@louisvilledems.com</a>.',
-    'footer.party_labels': 'Party labels were verified after the candidate filing date closed on January 9, 2026 via Open Records Request.',
+    'footer.party_labels': 'Party labels for nonpartisan races verified via Open Records Request. Partisan candidate information from the Kentucky Secretary of State.',
     'share.heading': 'Know someone who needs this?',
-    'share.desc': 'Share this link \u2014 anyone can enter their address to get their own personalized voter guide.',
+    'share.desc': 'Share this link — anyone can enter their address to get their own personalized voter guide.',
     'share.copy': 'Copy Link',
-    'share.copied': '\u2713 Copied!',
+    'share.copied': '✓ Copied!',
     'share.voter_guide': 'Have questions on when or where to vote? <a href="https://www.louisvilledems.com/2026-voter-guide" target="_blank" rel="noopener"><strong>Click here!</strong></a>',
     'modal.heading': 'Election info and reminders!',
     'modal.desc': 'Get Early Voting and Election Day locations and updates from the Louisville Democratic Party.',
@@ -795,144 +795,152 @@ const TRANSLATIONS = {
     'modal.phone': 'Phone number (optional)',
     'modal.submit': 'Sign me up!',
     'modal.skip': 'No thanks',
-    'modal.success': '\u2705 Thanks! We\'ll be in touch before May 19.',
+    'modal.success': '\u2705 Thanks! We\'ll be in touch before November 3.',
     'modal.close': 'Close',
-    'ballot.partisan_header': 'Democratic Primary \u2014 May 19, 2026',
-    'ballot.partisan_section_note': 'Registered Democrats only \u00a0\u00b7\u00a0 Only contested races appear on the primary ballot',
-    'ballot.partisan_note_ldp': 'Green = LDP Endorsed',
-    'ballot.nonpartisan_header': 'Nonpartisan Races \u2014 All Voters May Participate',
-    'ballot.nonpartisan_section_note': 'Party labels from voter registration are shown here for your information \u2014 they will <strong>NOT</strong> appear on your official ballot',
+    'ballot.partisan_header': 'General Election — November 3, 2026',
+    'ballot.partisan_section_note': 'All registered voters  ·  Green = Democrat endorsed by LDP',
+    'ballot.partisan_note_ldp': 'Green = Democrat / LDP Endorsed',
+    'ballot.nonpartisan_header': 'Nonpartisan Races — All Voters May Participate',
+    'ballot.nonpartisan_section_note': 'Party labels from voter registration are shown here for your information — they will <strong>NOT</strong> appear on your official ballot',
     'race.us_senator': 'United States Senator (Select One)',
-    'race.us_congress': 'United States Representative in Congress \u2014 {N}nd Congressional District (Select One)',
-    'race.ky_senator': 'State Senator \u2014 {N}th Senatorial District (Select One)',
-    'race.ky_house': 'State Representative \u2014 {N}th Representative District (Select One)',
-    'race.note_dem_primary': 'Democratic Primary',
+    'race.us_congress': 'United States Representative in Congress — District {N} (Select One)',
+    'race.ky_senator': 'State Senator — District {N} (Select One)',
+    'race.ky_house': 'State Representative — District {N} (Select One)',
     'race.metro_mayor': 'Louisville Metro Mayor (Select One)',
     'race.nonpartisan_tag': 'Nonpartisan',
-    'race.metro_council': 'Louisville Metro Council \u2014 District {N} (Select One)',
-    'race.shively_mayor': 'City of Shively \u2014 Mayor (Select One)',
-    'race.shively_council': 'City of Shively \u2014 Councilmember (Select up to 6)',
-    'race.jtown_council': 'City of Jeffersontown \u2014 Councilmember (Select up to 8)',
+    'race.metro_council': 'Louisville Metro Council — District {N} (Select One)',
+    'race.shively_mayor': 'City of Shively — Mayor (Select One)',
+    'race.shively_council': 'City of Shively — Councilmember (Select up to 6)',
+    'race.jtown_mayor': 'City of Jeffersontown — Mayor (Select One)',
+    'race.jtown_council': 'City of Jeffersontown — Councilmember (Select up to 8)',
+    'race.district_judge': 'Jefferson County District Judge — Division {N} (Select One)',
+    'race.court_of_appeals': 'KY Court of Appeals — District {DIST}, Division {DIV} (Select One)',
+    'race.school_board': 'Jefferson County School Board — Division {N} (Select One)',
+    'race.soil_water': 'Soil & Water Conservation District Supervisor (Select up to 3)',
     'race.endorsed_badge': 'LDP Endorsed',
-    'ballot.party_labels_footer': 'Party labels were verified after the candidate filing date closed on January 9 via Open Records Request.',
-    'ballot.subhead': 'Democratic Primary \u2014 May 19, 2026  \u00b7  Precinct {P}  \u00b7  Metro Council District {D}',
+    'ballot.party_labels_footer': 'Party labels for nonpartisan races verified via Open Records Request. Partisan race information from the Kentucky Secretary of State.',
+    'ballot.subhead': 'General Election — November 3, 2026  ·  Precinct {P}  ·  Metro Council District {D}',
     'error.no_address': 'Please enter your street address.',
-    'error.looking_up': 'Looking up your address\u2026',
-    'error.not_found': 'Address not found \u2014 please try adding your city, or email us at <a href="mailto:info@louisvilledems.com">info@louisvilledems.com</a>.',
+    'error.looking_up': 'Looking up your address…',
+    'error.not_found': 'Address not found — please try adding your city, or email us at <a href="mailto:info@louisvilledems.com">info@louisvilledems.com</a>.',
     'error.network': 'Network error. Is the server running?',
     'save.alert_no_ballot': 'Please look up your address first to generate your voter guide.',
     'save.alert_error': 'Could not save image. Try again.',
     'save.overlay_title': 'Save Your Ballot Guide',
     'save.overlay_instruction': '📥 <strong>Press and hold the image below</strong>, then tap<br><strong>"Save to Photos"</strong> or <strong>"Save Image"</strong>',
-    'save.overlay_close': '\u2715 Close',
+    'save.overlay_close': '✕ Close',
     'share.share_title': '2026 Louisville Democratic Party Voter Guide',
-    'share.share_text': 'My voter guide for the May 19, 2026 Democratic Primary',
+    'share.share_text': 'My voter guide for the November 3, 2026 General Election',
     'modal.error_required': 'Please enter an email address or phone number.',
     'modal.error_network': 'Something went wrong. Please try again.',
   },
   es: {
-    'page.title': 'Partido Dem\u00f3crata de Louisville \u2014 Gu\u00eda de Votantes 2026',
-    'header.title': 'Partido Dem\u00f3crata de Louisville<br>Gu\u00eda de Boleta de la Elecci\u00f3n Primaria',
-    'header.subtitle': 'Primaria Dem\u00f3crata &mdash; 19 de mayo de 2026 &nbsp;|&nbsp; Condado de Jefferson, KY',
-    'warning.headline': '\u00a1Esta NO es una boleta oficial. \u00a1A\u00fan necesitas ir a votar!',
-    'warning.sub': 'Gu\u00eda de votantes no oficial producida por el Partido Dem\u00f3crata de Louisville \u2014 Guarda tu gu\u00eda de boleta abajo. Puedes llevarla contigo cuando vayas a votar.',
-    'explainer.heading': 'Sobre la Elecci\u00f3n Primaria del 19 de mayo de 2026',
-    'explainer.new2026': 'NUEVO PARA 2026',
-    'explainer.p1': 'Debido a la legislatura estatal, las contiendas para Alcalde del Metro de Louisville y el Concejo Metropolitano ser\u00e1n elecciones no partidistas a partir de este a\u00f1o. Por ello, el Partido Dem\u00f3crata de Louisville est\u00e1 haciendo endosos en estas contiendas. Los estatutos del Partido Dem\u00f3crata nos impiden hacer endosos en las primarias dem\u00f3cratas partidistas.',
-    'explainer.p2': 'Dado que estas contiendas son no partidistas, la afiliaci\u00f3n de partido <strong>NO</strong> aparecer\u00e1 en tu boleta oficial. Hemos incluido el partido del candidato aqu\u00ed para que puedas hacer un voto informado.',
-    'explainer.privacy': '🔒 Tus selecciones de candidatos <strong>no son registradas ni almacenadas</strong> por el Partido Dem\u00f3crata de Louisville. Esta herramienta funciona completamente en tu navegador.',
-    'lookup.heading': 'Encuentra tu Gu\u00eda de Boleta',
-    'lookup.desc': 'Ingresa tu direcci\u00f3n de Louisville para ver las contiendas en tu boleta, con los endosos del Partido Dem\u00f3crata de Louisville resaltados.',
+    'page.title': 'Partido Demócrata de Louisville — Guía de Votantes Elección General 2026',
+    'header.title': 'Partido Demócrata de Louisville<br>Guía de Boleta de la Elección General',
+    'header.subtitle': 'Elección General &mdash; 3 de noviembre de 2026  |  Condado de Jefferson, KY',
+    'warning.headline': '¡Esta NO es una boleta oficial. ¡Aún necesitas ir a votar!',
+    'warning.sub': 'Guía de votantes no oficial producida por el Partido Demócrata de Louisville — Guarda tu guía de boleta abajo. Puedes llevarla contigo cuando vayas a votar.',
+    'explainer.heading': 'Sobre la Elección General del 3 de noviembre de 2026',
+    'explainer.new2026': 'NUEVO EN 2026',
+    'explainer.p1': 'Las contiendas para Alcalde del Metro de Louisville y el Concejo Metropolitano son elecciones no partidistas — las etiquetas de partido no aparecerán en tu boleta oficial para estas contiendas. El Partido Demócrata de Louisville hace endosos en estas contiendas no partidistas y apoya a todos los demócratas registrados en las contiendas partidistas.',
+    'explainer.p2': 'Para las contiendas partidistas (cargos federales, estatales y del condado), las etiquetas de partido <strong>SÍ</strong> aparecerán en tu boleta oficial. Para las contiendas no partidistas (Alcalde y Concejo Metro), la afiliación de partido se muestra aquí para tu información pero <strong>NO</strong> aparecerá en la boleta oficial.',
+    'explainer.privacy': '🔒 Tus selecciones de candidatos <strong>no son registradas ni almacenadas</strong> por el Partido Demócrata de Louisville. Esta herramienta funciona completamente en tu navegador.',
+    'lookup.heading': 'Encuentra tu Guía de Boleta',
+    'lookup.desc': 'Ingresa tu dirección de Louisville para ver las contiendas en tu boleta, con los endosos del Partido Demócrata de Louisville resaltados.',
     'lookup.placeholder': 'ej. 527 W Jefferson St',
-    'lookup.btn': 'Encuentra Mi Gu\u00eda de Boleta',
-    'lookup.help': 'Ocasionalmente, una direcci\u00f3n v\u00e1lida de Louisville puede no aparecer en la b\u00fasqueda. Por favor env\u00eda un correo a <a href="mailto:info@louisvilledems.com">info@louisvilledems.com</a> con tu direcci\u00f3n y te enviaremos las elecciones y candidatos en tu boleta.',
+    'lookup.btn': 'Encuentra Mi Guía de Boleta',
+    'lookup.help': 'Ocasionalmente, una dirección válida de Louisville puede no aparecer en la búsqueda. Por favor envía un correo a <a href="mailto:info@louisvilledems.com">info@louisvilledems.com</a> con tu dirección y te enviaremos las elecciones y candidatos en tu boleta.',
     'precinct.label': 'Precinto',
     'precinct.council': 'Concejo Metro',
-    'precinct.house': 'C\u00e1mara Estatal',
+    'precinct.house': 'Cámara Estatal',
     'precinct.senate': 'Senado Estatal',
     'precinct.congress': 'Congreso EE.UU.',
-    'voting.ed_label': '📍 Centro de Votaci\u00f3n del D\u00eda de Elecci\u00f3n',
-    'voting.ed_note': '19 de mayo de 2026 \u2014 debes votar en este lugar el D\u00eda de Elecci\u00f3n',
-    'voting.clerk_link': 'Verificar en el sitio web del Secretario \u2192',
+    'voting.ed_label': '📍 Centro de Votación del Día de Elección',
+    'voting.ed_note': '3 de noviembre de 2026 — debes votar en este lugar el Día de Elección',
+    'voting.clerk_link': 'Verificar en el sitio web del Secretario →',
     'voting.clerk_fallback': 'Ver sitio web del Secretario',
-    'voting.ev_label': '🗳️ Centro de Votaci\u00f3n Anticipada M\u00e1s Cercano',
-    'voting.ev_note': '<strong>Solo del 14 al 16 de mayo de 2026.</strong> Vota en <strong>cualquier</strong> centro de votaci\u00f3n anticipada \u2014 sin restricci\u00f3n de precinto',
-    'voting.other_ev_closed': '\u25bc Otros centros de votaci\u00f3n anticipada (23)',
-    'voting.other_ev_open': '\u25b2 Ocultar otros centros',
-    'ballot.heading': 'Tu Gu\u00eda de Boleta de la Elecci\u00f3n Primaria del Partido Dem\u00f3crata de Louisville',
-    'ballot.polls_note': '<strong>📋 Toca cualquier candidato para marcar tu selecci\u00f3n, luego guarda la imagen para llevarla a las urnas.</strong> Las etiquetas de partido en las contiendas no partidistas (Alcalde, Concejo Metro) <em>no</em> aparecer\u00e1n en tu boleta oficial \u2014 <strong>lleva tu gu\u00eda de boleta</strong> contigo para saber por qui\u00e9n votas. Si deseas confirmar tu boleta con el Secretario del Condado de Jefferson, <a href="https://jeffersoncountyclerk.org/wheredoivote/" target="_blank" rel="noopener">haz clic aqu\u00ed</a>.',
+    'voting.ev_label': '🗳️ Centro de Votación Anticipada Más Cercano',
+    'voting.ev_note': '<strong>Solo del 29 al 31 de octubre de 2026.</strong> Vota en <strong>cualquier</strong> centro de votación anticipada — sin restricción de precinto',
+    'voting.other_ev_closed': '▼ Otros centros de votación anticipada (23)',
+    'voting.other_ev_open': '▲ Ocultar otros centros',
+    'ballot.heading': 'Tu Guía de Boleta de la Elección General del Partido Demócrata de Louisville',
+    'ballot.polls_note': '<strong>📋 Toca cualquier candidato para marcar tu selección, luego guarda la imagen para llevarla a las urnas.</strong> Las etiquetas de partido en las contiendas no partidistas <em>no</em> aparecerán en tu boleta oficial — <strong>lleva tu guía de boleta</strong> contigo. Si deseas confirmar tu boleta con el Secretario del Condado de Jefferson, <a href="https://jeffersoncountyclerk.org/wheredoivote/" target="_blank" rel="noopener">haz clic aquí</a>.',
     'legend.title': 'Leyenda:',
     'legend.endorsed': 'Respaldado por el LDP',
-    'legend.dem': 'Dem\u00f3crata',
+    'legend.dem': 'Demócrata',
     'legend.rep': 'Republicano',
     'legend.lib': 'Libertario',
     'legend.other': 'Otro / no verificado',
-    'save.btn': '\u2193 Guardar tu Gu\u00eda de Boleta',
-    'save.saving': 'Guardando\u2026',
-    'save.done': '\u00a1GUARDA TU BOLETA!',
+    'save.btn': '↓ Guardar tu Guía de Boleta',
+    'save.saving': 'Guardando…',
+    'save.done': '¡GUARDA TU BOLETA!',
     'reminders.title': '📌 Recordatorios',
-    'reminders.html': '<li>\u00a1A\u00fan necesitas votar! Encuentra los centros de votaci\u00f3n, fechas y horarios en nuestra gu\u00eda de votantes: <a href="https://www.louisvilledems.com/2026-voter-guide" target="_blank" rel="noopener"><strong>louisvilledems.com/2026-voter-guide</strong></a></li><li style="margin-top:6px">Si tienes preguntas o necesitas ayuda, cont\u00e1ctanos en <a href="mailto:info@louisvilledems.com">info@louisvilledems.com</a></li>',
-    'footer.help': 'Si tienes problemas para guardar tu gu\u00eda de boleta y deseas nuestra ayuda, env\u00edanos un correo a <a href="mailto:info@louisvilledems.com">info@louisvilledems.com</a>.',
-    'footer.party_labels': 'Las etiquetas de partido fueron verificadas despu\u00e9s del cierre de inscripci\u00f3n de candidatos el 9 de enero de 2026, mediante una Solicitud de Registros P\u00fablicos.',
-    'share.heading': '\u00bfConoces a alguien que necesite esto?',
-    'share.desc': 'Comparte este enlace \u2014 cualquier persona puede ingresar su direcci\u00f3n para obtener su propia gu\u00eda de votantes personalizada.',
+    'reminders.html': '<li>¡Aún necesitas votar! Encuentra los centros de votación, fechas y horarios en nuestra guía de votantes: <a href="https://www.louisvilledems.com/2026-voter-guide" target="_blank" rel="noopener"><strong>louisvilledems.com/2026-voter-guide</strong></a></li><li style="margin-top:6px">Si tienes preguntas o necesitas ayuda, contáctanos en <a href="mailto:info@louisvilledems.com">info@louisvilledems.com</a></li>',
+    'footer.help': 'Si tienes problemas para guardar tu guía de boleta y deseas nuestra ayuda, envíanos un correo a <a href="mailto:info@louisvilledems.com">info@louisvilledems.com</a>.',
+    'footer.party_labels': 'Las etiquetas de partido para contiendas no partidistas fueron verificadas mediante Solicitud de Registros Públicos. Información de candidatos partidistas del Secretario de Estado de Kentucky.',
+    'share.heading': '¿Conoces a alguien que necesite esto?',
+    'share.desc': 'Comparte este enlace — cualquier persona puede ingresar su dirección para obtener su propia guía de votantes personalizada.',
     'share.copy': 'Copiar Enlace',
-    'share.copied': '\u2713 \u00a1Copiado!',
-    'share.voter_guide': '\u00bfTienes preguntas sobre cu\u00e1ndo o d\u00f3nde votar? <a href="https://www.louisvilledems.com/2026-voter-guide" target="_blank" rel="noopener"><strong>\u00a1Haz clic aqu\u00ed!</strong></a>',
-    'modal.heading': '\u00a1Informaci\u00f3n electoral y recordatorios!',
-    'modal.desc': 'Recibe los centros de Votaci\u00f3n Anticipada y del D\u00eda de Elecci\u00f3n, y actualizaciones del Partido Dem\u00f3crata de Louisville.',
+    'share.copied': '✓ ¡Copiado!',
+    'share.voter_guide': '¿Tienes preguntas sobre cuándo o dónde votar? <a href="https://www.louisvilledems.com/2026-voter-guide" target="_blank" rel="noopener"><strong>¡Haz clic aquí!</strong></a>',
+    'modal.heading': '¡Información electoral y recordatorios!',
+    'modal.desc': 'Recibe los centros de Votación Anticipada y del Día de Elección, y actualizaciones del Partido Demócrata de Louisville.',
     'modal.first_name': 'Nombre',
     'modal.last_name': 'Apellido',
-    'modal.email': 'Correo electr\u00f3nico',
-    'modal.phone': 'N\u00famero de tel\u00e9fono (opcional)',
-    'modal.submit': '\u00a1Inscr\u00edbeme!',
+    'modal.email': 'Correo electrónico',
+    'modal.phone': 'Número de teléfono (opcional)',
+    'modal.submit': '¡Inscríbeme!',
     'modal.skip': 'No, gracias',
-    'modal.success': '\u2705 \u00a1Gracias! Nos pondremos en contacto contigo antes del 19 de mayo.',
+    'modal.success': '\u2705 ¡Gracias! Nos pondremos en contacto contigo antes del 3 de noviembre.',
     'modal.close': 'Cerrar',
-    'ballot.partisan_header': 'Primaria Dem\u00f3crata \u2014 19 de mayo de 2026',
-    'ballot.partisan_section_note': 'Solo dem\u00f3cratas registrados \u00a0\u00b7\u00a0 Solo aparecen contiendas disputadas en la boleta primaria',
-    'ballot.partisan_note_ldp': 'Verde = Respaldado por el LDP',
-    'ballot.nonpartisan_header': 'Contiendas No Partidistas \u2014 Todos los votantes pueden participar',
-    'ballot.nonpartisan_section_note': 'Las etiquetas de partido del registro de votantes se muestran aqu\u00ed para tu informaci\u00f3n \u2014 <strong>NO</strong> aparecer\u00e1n en tu boleta oficial',
+    'ballot.partisan_header': 'Elección General — 3 de noviembre de 2026',
+    'ballot.partisan_section_note': 'Todos los votantes registrados  ·  Verde = Demócrata respaldado por LDP',
+    'ballot.partisan_note_ldp': 'Verde = Demócrata / Respaldado por LDP',
+    'ballot.nonpartisan_header': 'Contiendas No Partidistas — Todos los votantes pueden participar',
+    'ballot.nonpartisan_section_note': 'Las etiquetas de partido del registro de votantes se muestran aquí para tu información — <strong>NO</strong> aparecerán en tu boleta oficial',
     'race.us_senator': 'Senador de los Estados Unidos (Seleccione uno)',
-    'race.us_congress': 'Representante de los EE.UU. en el Congreso \u2014 Distrito Congressional {N} (Seleccione uno)',
-    'race.ky_senator': 'Senador Estatal \u2014 Distrito Senatorial {N} (Seleccione uno)',
-    'race.ky_house': 'Representante Estatal \u2014 Distrito Representativo {N} (Seleccione uno)',
-    'race.note_dem_primary': 'Primaria Dem\u00f3crata',
+    'race.us_congress': 'Representante de los EE.UU. en el Congreso — Distrito {N} (Seleccione uno)',
+    'race.ky_senator': 'Senador Estatal — Distrito {N} (Seleccione uno)',
+    'race.ky_house': 'Representante Estatal — Distrito {N} (Seleccione uno)',
     'race.metro_mayor': 'Alcalde del Metro de Louisville (Seleccione uno)',
     'race.nonpartisan_tag': 'No Partidista',
-    'race.metro_council': 'Concejo Metropolitano de Louisville \u2014 Distrito {N} (Seleccione uno)',
-    'race.shively_mayor': 'Ciudad de Shively \u2014 Alcalde (Seleccione uno)',
-    'race.shively_council': 'Ciudad de Shively \u2014 Miembro del Concejo (Seleccione hasta 6)',
-    'race.jtown_council': 'Ciudad de Jeffersontown \u2014 Miembro del Concejo (Seleccione hasta 8)',
+    'race.metro_council': 'Concejo Metropolitano de Louisville — Distrito {N} (Seleccione uno)',
+    'race.shively_mayor': 'Ciudad de Shively — Alcalde (Seleccione uno)',
+    'race.shively_council': 'Ciudad de Shively — Miembro del Concejo (Seleccione hasta 6)',
+    'race.jtown_mayor': 'Ciudad de Jeffersontown — Alcalde (Seleccione uno)',
+    'race.jtown_council': 'Ciudad de Jeffersontown — Miembro del Concejo (Seleccione hasta 8)',
+    'race.district_judge': 'Juez de Distrito del Condado de Jefferson — División {N} (Seleccione uno)',
+    'race.court_of_appeals': 'Tribunal de Apelaciones de KY — Distrito {DIST}, División {DIV} (Seleccione uno)',
+    'race.school_board': 'Junta Escolar del Condado de Jefferson — División {N} (Seleccione uno)',
+    'race.soil_water': 'Supervisor del Distrito de Conservación de Suelo y Agua (Seleccione hasta 3)',
     'race.endorsed_badge': 'Respaldado por LDP',
-    'ballot.party_labels_footer': 'Las etiquetas de partido fueron verificadas despu\u00e9s del cierre de inscripci\u00f3n de candidatos el 9 de enero mediante una Solicitud de Registros P\u00fablicos.',
-    'ballot.subhead': 'Primaria Dem\u00f3crata \u2014 19 de mayo de 2026  \u00b7  Precinto {P}  \u00b7  Distrito del Concejo Metro {D}',
-    'error.no_address': 'Por favor ingresa tu direcci\u00f3n.',
-    'error.looking_up': 'Buscando tu direcci\u00f3n\u2026',
-    'error.not_found': 'Direcci\u00f3n no encontrada \u2014 intenta agregar tu ciudad, o env\u00edanos un correo a <a href="mailto:info@louisvilledems.com">info@louisvilledems.com</a>.',
-    'error.network': 'Error de red. \u00bfEst\u00e1 funcionando el servidor?',
-    'save.alert_no_ballot': 'Por favor busca tu direcci\u00f3n primero para generar tu gu\u00eda de votantes.',
-    'save.alert_error': 'No se pudo guardar la imagen. Int\u00e9ntalo de nuevo.',
-    'save.overlay_title': 'Guardar tu Gu\u00eda de Boleta',
-    'save.overlay_instruction': '📥 <strong>Mant\u00e9n presionada la imagen de abajo</strong>, luego toca<br><strong>"Guardar en Fotos"</strong> o <strong>"Guardar Imagen"</strong>',
-    'save.overlay_close': '\u2715 Cerrar',
-    'share.share_title': 'Gu\u00eda de Votantes 2026 del Partido Dem\u00f3crata de Louisville',
-    'share.share_text': 'Mi gu\u00eda de votantes para la Primaria Dem\u00f3crata del 19 de mayo de 2026',
-    'modal.error_required': 'Por favor ingresa un correo electr\u00f3nico o n\u00famero de tel\u00e9fono.',
-    'modal.error_network': 'Algo sali\u00f3 mal. Por favor int\u00e9ntalo de nuevo.',
+    'ballot.party_labels_footer': 'Etiquetas de partido para contiendas no partidistas verificadas mediante Solicitud de Registros Públicos.',
+    'ballot.subhead': 'Elección General — 3 de noviembre de 2026  ·  Precinto {P}  ·  Distrito del Concejo Metro {D}',
+    'error.no_address': 'Por favor ingresa tu dirección.',
+    'error.looking_up': 'Buscando tu dirección…',
+    'error.not_found': 'Dirección no encontrada — intenta agregar tu ciudad, o envíanos un correo a <a href="mailto:info@louisvilledems.com">info@louisvilledems.com</a>.',
+    'error.network': 'Error de red. ¿Está funcionando el servidor?',
+    'save.alert_no_ballot': 'Por favor busca tu dirección primero para generar tu guía de votantes.',
+    'save.alert_error': 'No se pudo guardar la imagen. Inténtalo de nuevo.',
+    'save.overlay_title': 'Guardar tu Guía de Boleta',
+    'save.overlay_instruction': '📥 <strong>Mantén presionada la imagen de abajo</strong>, luego toca<br><strong>"Guardar en Fotos"</strong> o <strong>"Guardar Imagen"</strong>',
+    'save.overlay_close': '✕ Cerrar',
+    'share.share_title': 'Guía de Votantes 2026 del Partido Demócrata de Louisville',
+    'share.share_text': 'Mi guía de votantes para la Elección General del 3 de noviembre de 2026',
+    'modal.error_required': 'Por favor ingresa un correo electrónico o número de teléfono.',
+    'modal.error_network': 'Algo salió mal. Por favor inténtalo de nuevo.',
   },
   so: {
-    'page.title': 'Xisbiga Dimuqraadiga ee Louisville \u2014 Hagaha Cod-bixiyaha 2026',
-    'header.title': 'Xisbiga Dimuqraadiga ee Louisville<br>Hagaha Codbixinta Doorashada Hore',
-    'header.subtitle': 'Doorashada Hore ee Dimuqraadiga &mdash; 19 Maajo 2026 &nbsp;|&nbsp; Degmada Jefferson, KY',
+    'page.title': 'Xisbiga Dimuqraadiga ee Louisville — Hagaha Cod-bixiyaha Doorashada Guud 2026',
+    'header.title': 'Xisbiga Dimuqraadiga ee Louisville<br>Hagaha Codbixinta Doorashada Guud',
+    'header.subtitle': 'Doorashada Guud &mdash; 3 Noofember 2026  |  Degmada Jefferson, KY',
     'warning.headline': 'Kani MA AHA warqad codeyn rasmi ah. Waxaad u baahan tahay inaad codsato!',
-    'warning.sub': 'Hagaha cod-bixiyaha aan rasmi ahayn ee uu sameeyay Xisbiga Dimuqraadiga ee Louisville \u2014 Keydi hagahaaga codbixinta hoos. Waad la qaadan kartaa marka aad tagto codbixinta.',
-    'explainer.heading': 'Ku saabsan Doorashada Hore ee 19 Maajo 2026',
+    'warning.sub': 'Hagaha cod-bixiyaha aan rasmi ahayn ee uu sameeyay Xisbiga Dimuqraadiga ee Louisville — Keydi hagahaaga codbixinta hoos. Waad la qaadan kartaa marka aad tagto codbixinta.',
+    'explainer.heading': 'Ku saabsan Doorashada Guud ee 3 Noofember 2026',
     'explainer.new2026': 'CUSUB 2026',
-    'explainer.p1': 'Sababtoo ah sharci-dejinta gobolka, tartanka Duqa Metro ee Louisville iyo Golaha Metro waxay noqon doonaan doorashooyin aan xisbiyeysan sannadkan. Sidaas awgeed, Xisbiga Dimuqraadiga ee Louisville wuxuu taageeraya musharrixiinta tartannahaas. Xeerarka gudaha ee Xisbiga Dimuqraadiga waxay naga celisaa inaan taageerino doorashooyinka hore ee Dimuqraadiga xisbiga.',
-    'explainer.p2': 'Maadaama tartammadan ay yihiin kuwo aan xisbiyeysan, xubinnimada xisbiga <strong>MA</strong> muuqan doonto warqadaada codeynta rasmiga ah. Waxaan ku daray xisbiga musharriixa halkan si aad u samayn karto codbixin wargeysan.',
-    'explainer.privacy': '\ud83d\udd12 Doorashadaada musharrixiinta <strong>lama duubiyo ama lama kaydinin</strong> Xisbiga Dimuqraadiga ee Louisville. Qalabkan wuxuu si buuxda uga shaqeeyaa browserkaaga.',
+    'explainer.p1': 'Tartanka Duqa Metro ee Louisville iyo Golaha Metro waa doorashoyin aan xisbiyeysan — calaamadaha xisbiga kuma muuqan doonaan warqadaada codeynta rasmiga ah. Xisbiga Dimuqraadiga ee Louisville wuxuu taageeraya musharrixiinta tartannahaas aan xisbiyeysan wuxuuna taageersanyahay Dimuqraadiyiinta la diiwaangeliyay ee tartanmaha xisbiga.',
+    'explainer.p2': 'Tartanmaha xisbiyeysan (xukunno federaal, gobol, iyo degmo), calaamadaha xisbiga <strong>WAA</strong> muuqan doonaan warqadaada rasmiga ah. Tartanmaha aan xisbiyeysan (Duqa iyo Golaha Metro), xubinnimada xisbiga waxaa halkan lagu soo bandhigay si xog ugu noqoto laakiin <strong>MA</strong> muuqan doonto warqadda rasmiga ah.',
+    'explainer.privacy': '🔒 Doorashadaada musharrixiinta <strong>lama duubiyo ama lama kaydinin</strong> Xisbiga Dimuqraadiga ee Louisville. Qalabkan wuxuu si buuxda uga shaqeeyaa browserkaaga.',
     'lookup.heading': 'Raadi Hagahaaga Codbixinta',
     'lookup.desc': 'Geli ciwaankaaga gudaha Louisville si aad u aragto tartanmaha ku yaal warqadaada, leh taageerayaasha Xisbiga Dimuqraadiga ee Louisville oo la soo muujiyay.',
     'lookup.placeholder': 'Tusaale. 527 W Jefferson St',
@@ -943,33 +951,33 @@ const TRANSLATIONS = {
     'precinct.house': 'Aqalka Gobolka',
     'precinct.senate': 'Golaha Senatorada',
     'precinct.congress': 'Kongireska Mareykanka',
-    'voting.ed_label': '\ud83d\udccd Xarunta Codbixinta Maalinta Doorashada',
-    'voting.ed_note': '19 Maajo 2026 \u2014 waa inaad ku codaysaa meeshan Maalinta Doorashada',
-    'voting.clerk_link': 'Xaqiiji websaydka Katibka \u2192',
+    'voting.ed_label': '📍 Xarunta Codbixinta Maalinta Doorashada',
+    'voting.ed_note': '3 Noofember 2026 — waa inaad ku codaysaa meeshan Maalinta Doorashada',
+    'voting.clerk_link': 'Xaqiiji websaydka Katibka →',
     'voting.clerk_fallback': 'Arag websaydka Katibka',
-    'voting.ev_label': '\ud83d\uddf3\ufe0f Xarunta Ugu Dhow ee Codbixinta Hore',
-    'voting.ev_note': '<strong>14\u201316 Maajo 2026 oo kaliya.</strong> Ku cod bixi <strong>xarunta kasta</strong> ee codbixinta hore \u2014 xaddidaad degaan malaha',
-    'voting.other_ev_closed': '\u25bc Xarumaha kale ee codbixinta hore (23)',
-    'voting.other_ev_open': '\u25b2 Qari xarumaha kale',
-    'ballot.heading': 'Hagahaaga Codbixinta Doorashada Hore ee Xisbiga Dimuqraadiga ee Louisville',
-    'ballot.polls_note': '<strong>\ud83d\udccb Taabo musharrixi si aad u calaamadiso doorashadaada, kadibna keydi sawirka si aad ugu qaadato meeshii la codayn jiray.</strong> Calaamadaha xisbiga ee tartanmaha aan xisbiyeysan (Duqa, Golaha Metro) <em>ma</em> muuqan doonaan warqadaada rasmiga ah \u2014 <strong>keen hagahaaga codbixinta</strong> si aad u garanayso cidda aad u codeynayso.',
+    'voting.ev_label': '🗳️ Xarunta Ugu Dhow ee Codbixinta Hore',
+    'voting.ev_note': '<strong>29–31 Oktobar 2026 oo kaliya.</strong> Ku cod bixi <strong>xarunta kasta</strong> ee codbixinta hore — xaddidaad degaan malaha',
+    'voting.other_ev_closed': '▼ Xarumaha kale ee codbixinta hore (23)',
+    'voting.other_ev_open': '▲ Qari xarumaha kale',
+    'ballot.heading': 'Hagahaaga Codbixinta Doorashada Guud ee Xisbiga Dimuqraadiga ee Louisville',
+    'ballot.polls_note': '<strong>📋 Taabo musharrixi si aad u calaamadiso doorashadaada, kadibna keydi sawirka si aad ugu qaadato meeshii la codayn jiray.</strong> Calaamadaha xisbiga ee tartanmaha aan xisbiyeysan <em>ma</em> muuqan doonaan warqadaada rasmiga ah — <strong>keen hagahaaga codbixinta</strong> si aad u garanayso cidda aad u codeynayso.',
     'legend.title': 'Sharaxaad:',
     'legend.endorsed': 'LDP waa taageersan tahay',
     'legend.dem': 'Dimuqraadi',
     'legend.rep': 'Jamhuuriyad',
     'legend.lib': 'Xoriyad',
     'legend.other': 'Kale / aan la xaqiijin',
-    'save.btn': '\u2193 Keydi Hagahaaga Codbixinta',
-    'save.saving': 'La keydiyaa\u2026',
+    'save.btn': '↓ Keydi Hagahaaga Codbixinta',
+    'save.saving': 'La keydiyaa…',
     'save.done': 'KEYDI WARQADAADA CODBIXINTA!',
-    'reminders.title': '\ud83d\udccc Xusuus-gelin',
+    'reminders.title': '📌 Xusuus-gelin',
     'reminders.html': '<li>Waxaad u baahan tahay inaad codsato! Raadi xarumaha codbixinta, taariikhaha, iyo waqtyada hagahayaga cod-bixiyaha: <a href="https://www.louisvilledems.com/2026-voter-guide" target="_blank" rel="noopener"><strong>louisvilledems.com/2026-voter-guide</strong></a></li><li style="margin-top:6px">Haddaad su\'aalo qabto ama caawimaad u baahan tahay, nala xiriir <a href="mailto:info@louisvilledems.com">info@louisvilledems.com</a></li>',
     'footer.help': 'Haddaad dhibaato ku qabto keydinta hagahaaga codbixinta oo aad naga caawimaad rabtid, fadlan email nagu soo dir <a href="mailto:info@louisvilledems.com">info@louisvilledems.com</a>.',
-    'footer.party_labels': 'Calaamadaha xisbiga waxaa lagu xaqiijiyay ka dib markii xilligii diiwaan-gelinta musharrixiinta xidhmay 9 January 2026, iyada oo loo marayo Codsi Diiwaannada Dadweynaha.',
+    'footer.party_labels': 'Calaamadaha xisbiga ee tartanmaha aan xisbiyeysan waxaa lagu xaqiijiyay Codsi Diiwaannada Dadweynaha. Macluumaadka musharrixiinta xisbiga waxaa ka yimid Xoghayaha Gobolka Kentucky.',
     'share.heading': 'Ma taqaanaa qof u baahan kan?',
-    'share.desc': 'La wadaag xiriirkan \u2014 qof kasta ayaa geli kara ciwaankiisa si uu u helo hagihiisa codbixinta shakhsiga ah.',
+    'share.desc': 'La wadaag xiriirkan — qof kasta ayaa geli kara ciwaankiisa si uu u helo hagihiisa codbixinta shakhsiga ah.',
     'share.copy': 'Koobiyee Xiriirka',
-    'share.copied': '\u2713 Waa la koobiyeeyay!',
+    'share.copied': '✓ Waa la koobiyeeyay!',
     'share.voter_guide': 'Ma qabto su\'aalo marka aad codaynayso ama halkii aad codayn lahayd? <a href="https://www.louisvilledems.com/2026-voter-guide" target="_blank" rel="noopener"><strong>Riix halkan!</strong></a>',
     'modal.heading': 'Macluumaadka doorashada iyo xusuus-gelinta!',
     'modal.desc': 'Hel xarumaha Codbixinta Hore iyo Maalinta Doorashada, iyo cusboonaanshaha Xisbiga Dimuqraadiga ee Louisville.',
@@ -979,52 +987,56 @@ const TRANSLATIONS = {
     'modal.phone': 'Lambarka telefoonka (ikhtiyaari)',
     'modal.submit': 'I diiwaangeli!',
     'modal.skip': 'Mahadsanid, maya',
-    'modal.success': '\u2705 Mahadsanid! Kula xiriiri doonnaa ka hor 19 Maajo.',
+    'modal.success': '\u2705 Mahadsanid! Kula xiriiri doonnaa ka hor 3 Noofember.',
     'modal.close': 'Xir',
-    'ballot.partisan_header': 'Doorashada Hore ee Dimuqraadiga \u2014 19 Maajo 2026',
-    'ballot.partisan_section_note': 'Dimuqraadiyiinta la diiwaangeliyay oo kaliya \u00a0\u00b7\u00a0 Tartanmaha la tartamaya oo kaliya ayaa ku muuqda warqadda doorashada hore',
-    'ballot.partisan_note_ldp': 'Cagaaran = LDP waa taageersan tahay',
-    'ballot.nonpartisan_header': 'Tartanmaha Aan Xisbiyeysan \u2014 Dhammaan Cod-bixiyayaasha Waxay Ka Qaybgeli Karaan',
-    'ballot.nonpartisan_section_note': 'Calaamadaha xisbiga ee diiwaanka codbaadiyayaasha waxaa halkan lagu soo bandhigay si xog ugu noqoto \u2014 <strong>MA</strong> muuqan doonaan warqadaada rasmiga ah',
+    'ballot.partisan_header': 'Doorashada Guud — 3 Noofember 2026',
+    'ballot.partisan_section_note': 'Dhammaan ciddiyaasha diiwaan-geliyay  ·  Cagaaran = Dimuqraadi LDP oo taageersan',
+    'ballot.partisan_note_ldp': 'Cagaaran = Dimuqraadi / LDP waa taageersan tahay',
+    'ballot.nonpartisan_header': 'Tartanmaha Aan Xisbiyeysan — Dhammaan Cod-bixiyayaasha Waxay Ka Qaybgeli Karaan',
+    'ballot.nonpartisan_section_note': 'Calaamadaha xisbiga ee diiwaanka codbaadiyayaasha waxaa halkan lagu soo bandhigay si xog ugu noqoto — <strong>MA</strong> muuqan doonaan warqadaada rasmiga ah',
     'race.us_senator': 'Senatarka Mareykanka (Dooro Hal)',
-    'race.us_congress': 'Wakiilka Mareykanka ee Kongireska \u2014 Degmada Kongireska {N} (Dooro Hal)',
-    'race.ky_senator': 'Senatarka Gobolka \u2014 Degmada Senatada {N} (Dooro Hal)',
-    'race.ky_house': 'Wakiilka Gobolka \u2014 Degmada Wakiilka {N} (Dooro Hal)',
-    'race.note_dem_primary': 'Doorashada Hore ee Dimuqraadiga',
+    'race.us_congress': 'Wakiilka Mareykanka ee Kongireska — Degmada {N} (Dooro Hal)',
+    'race.ky_senator': 'Senatarka Gobolka — Degmada {N} (Dooro Hal)',
+    'race.ky_house': 'Wakiilka Gobolka — Degmada {N} (Dooro Hal)',
     'race.metro_mayor': 'Duqa Metro ee Louisville (Dooro Hal)',
     'race.nonpartisan_tag': 'Aan Xisbiyeysan',
-    'race.metro_council': 'Golaha Metro ee Louisville \u2014 Degmo {N} (Dooro Hal)',
-    'race.shively_mayor': 'Magaalada Shively \u2014 Duqa (Dooro Hal)',
-    'race.shively_council': 'Magaalada Shively \u2014 Xubin Golaha (Dooro Ilaa 6)',
-    'race.jtown_council': 'Magaalada Jeffersontown \u2014 Xubin Golaha (Dooro Ilaa 8)',
+    'race.metro_council': 'Golaha Metro ee Louisville — Degmo {N} (Dooro Hal)',
+    'race.shively_mayor': 'Magaalada Shively — Duqa (Dooro Hal)',
+    'race.shively_council': 'Magaalada Shively — Xubin Golaha (Dooro Ilaa 6)',
+    'race.jtown_mayor': 'Magaalada Jeffersontown — Duqa (Dooro Hal)',
+    'race.jtown_council': 'Magaalada Jeffersontown — Xubin Golaha (Dooro Ilaa 8)',
+    'race.district_judge': 'Xaakim Degaanka Degmada Jefferson — Qaybta {N} (Dooro Hal)',
+    'race.court_of_appeals': 'Maxkamadda Shaabaaddyada KY — Degmo {DIST}, Qaybta {DIV} (Dooro Hal)',
+    'race.school_board': 'Golaha Waxbarashada Degmada Jefferson — Qaybta {N} (Dooro Hal)',
+    'race.soil_water': 'Waaxda Xifaalinta Ciidda iyo Biyaha (Dooro Ilaa 3)',
     'race.endorsed_badge': 'LDP Taageersan',
-    'ballot.party_labels_footer': 'Calaamadaha xisbiga waxaa lagu xaqiijiyay ka dib markii xilligii diiwaan-gelinta musharrixiinta xidhmay 9 January iyada oo loo marayo Codsi Diiwaannada Dadweynaha.',
-    'ballot.subhead': 'Doorashada Hore ee Dimuqraadiga \u2014 19 Maajo 2026 \u00b7 Degaanka {P} \u00b7 Degmada Golaha Metro {D}',
+    'ballot.party_labels_footer': 'Calaamadaha xisbiga ee tartanmaha aan xisbiyeysan waxaa lagu xaqiijiyay Codsi Diiwaannada Dadweynaha.',
+    'ballot.subhead': 'Doorashada Guud — 3 Noofember 2026 · Degaanka {P} · Degmada Golaha Metro {D}',
     'error.no_address': 'Fadlan geli ciwaankaaga.',
-    'error.looking_up': 'Ciwaankaaga la raadiyaa\u2026',
-    'error.not_found': 'Ciwaanka lama helin \u2014 isku day inaad ku darsato magaalada, ama email noo soo dir <a href="mailto:info@louisvilledems.com">info@louisvilledems.com</a>.',
+    'error.looking_up': 'Ciwaankaaga la raadiyaa…',
+    'error.not_found': 'Ciwaanka lama helin — isku day inaad ku darsato magaalada, ama email noo soo dir <a href="mailto:info@louisvilledems.com">info@louisvilledems.com</a>.',
     'error.network': 'Khalad shabakad. Server ma socdo?',
     'save.alert_no_ballot': 'Fadlan marka hore raadi ciwaankaaga si aad u sameysato hagahaaga cod-bixiyaha.',
     'save.alert_error': 'Sawirka lama kaydisan karin. Isku day mar kale.',
     'save.overlay_title': 'Keydi Hagahaaga Codbixinta',
-    'save.overlay_instruction': '\ud83d\udce5 <strong>Sawirka hoose riix oo hayso</strong>, kadibna taabo<br><strong>"Ku keydi Sawirrada"</strong> ama <strong>"Keydi Sawirka"</strong>',
-    'save.overlay_close': '\u2715 Xir',
+    'save.overlay_instruction': '📥 <strong>Sawirka hoose riix oo hayso</strong>, kadibna taabo<br><strong>"Ku keydi Sawirrada"</strong> ama <strong>"Keydi Sawirka"</strong>',
+    'save.overlay_close': '✕ Xir',
     'share.share_title': 'Hagaha Cod-bixiyaha 2026 ee Xisbiga Dimuqraadiga ee Louisville',
-    'share.share_text': 'Hagahayga codbixinta Doorashada Hore ee Dimuqraadiga 19 Maajo 2026',
+    'share.share_text': 'Hagahayga codbixinta Doorashada Guud 3 Noofember 2026',
     'modal.error_required': 'Fadlan geli ciwaanka iimaylka ama lambarka telefoonka.',
     'modal.error_network': 'Wax baa qaldamay. Fadlan isku day mar kale.',
   },
   sw: {
-    'page.title': 'Chama cha Democratic cha Louisville \u2014 Mwongozo wa Mpiga Kura 2026',
-    'header.title': 'Chama cha Democratic cha Louisville<br>Mwongozo wa Kura ya Uchaguzi wa Awali',
-    'header.subtitle': 'Uchaguzi wa Awali wa Democratic &mdash; 19 Mei 2026 &nbsp;|&nbsp; Kaunti ya Jefferson, KY',
+    'page.title': 'Chama cha Democratic cha Louisville — Mwongozo wa Mpiga Kura wa Uchaguzi Mkuu 2026',
+    'header.title': 'Chama cha Democratic cha Louisville<br>Mwongozo wa Kura ya Uchaguzi Mkuu',
+    'header.subtitle': 'Uchaguzi Mkuu &mdash; 3 Novemba 2026  |  Kaunti ya Jefferson, KY',
     'warning.headline': 'Hii SI kura rasmi. Bado unahitaji kwenda kupiga kura!',
-    'warning.sub': 'Mwongozo usio rasmi wa mpiga kura uliozalishwa na Chama cha Democratic cha Louisville \u2014 Hifadhi mwongozo wako wa kura hapa chini. Unaweza kuuchukua nawe ukienda kupiga kura.',
-    'explainer.heading': 'Kuhusu Uchaguzi wa Awali wa Mei 19, 2026',
+    'warning.sub': 'Mwongozo usio rasmi wa mpiga kura uliozalishwa na Chama cha Democratic cha Louisville — Hifadhi mwongozo wako wa kura hapa chini. Unaweza kuuchukua nawe ukienda kupiga kura.',
+    'explainer.heading': 'Kuhusu Uchaguzi Mkuu wa Novemba 3, 2026',
     'explainer.new2026': 'MPYA KWA 2026',
-    'explainer.p1': 'Kutokana na bunge la serikali ya jimbo, mashindano ya Meya wa Metro wa Louisville na Baraza la Metro yatakuwa uchaguzi usio na vyama kuanzia mwaka huu. Kwa sababu hiyo, Chama cha Democratic cha Louisville kinaungana na wagombea katika mashindano haya. Sheria za Chama cha Democratic zinazuia kuungana na wengine katika uchaguzi wa awali wa Democratic wa vyama.',
-    'explainer.p2': 'Kwa sababu mashindano haya hayahusiani na vyama, uhusiano wa chama <strong>HAUTAONEKANA</strong> kwenye kura yako rasmi. Tumejumuisha chama cha mgombea hapa ili uweze kupiga kura kwa ufahamu.',
-    'explainer.privacy': '\ud83d\udd12 Uchaguzi wako wa wagombea <strong>haurekodiwa wala kuhifadhiwa</strong> na Chama cha Democratic cha Louisville. Chombo hiki kinafanya kazi kabisa kwenye kivinjari chako.',
+    'explainer.p1': 'Mashindano ya Meya wa Metro wa Louisville na Baraza la Metro ni uchaguzi usio na vyama — lebo za vyama hazitaonekana kwenye kura yako rasmi kwa mashindano haya. Chama cha Democratic cha Louisville kinaungana na wagombea katika mashindano haya yasiyo na vyama na kinaunga mkono Wanademocratic wote waliojisajili katika mashindano ya vyama.',
+    'explainer.p2': 'Kwa mashindano ya vyama (vyeo vya shirikisho, jimbo, na kaunti), lebo za vyama <strong>ZITAONEKANA</strong> kwenye kura yako rasmi. Kwa mashindano yasiyo na vyama (Meya na Baraza la Metro), usajili wa chama cha mgombea unaonyeshwa hapa kwa taarifa yako lakini <strong>HAUTAONEKANA</strong> kwenye kura rasmi.',
+    'explainer.privacy': '🔒 Uchaguzi wako wa wagombea <strong>haurekodiwa wala kuhifadhiwa</strong> na Chama cha Democratic cha Louisville. Chombo hiki kinafanya kazi kabisa kwenye kivinjari chako.',
     'lookup.heading': 'Tafuta Mwongozo Wako wa Kura',
     'lookup.desc': 'Ingiza anwani yako ya mtaa wa Louisville kuona mashindano kwenye kura yako, yenye madokezo ya Chama cha Democratic cha Louisville yaliyoangaziwa.',
     'lookup.placeholder': 'mf. 527 W Jefferson St',
@@ -1035,33 +1047,33 @@ const TRANSLATIONS = {
     'precinct.house': 'Bunge la Jimbo',
     'precinct.senate': 'Seneti ya Jimbo',
     'precinct.congress': 'Bunge la Marekani',
-    'voting.ed_label': '\ud83d\udccd Kituo cha Kupiga Kura Siku ya Uchaguzi',
-    'voting.ed_note': '19 Mei 2026 \u2014 lazima upige kura mahali hapa Siku ya Uchaguzi',
-    'voting.clerk_link': 'Thibitisha kwenye tovuti ya Katibu \u2192',
+    'voting.ed_label': '📍 Kituo cha Kupiga Kura Siku ya Uchaguzi',
+    'voting.ed_note': '3 Novemba 2026 — lazima upige kura mahali hapa Siku ya Uchaguzi',
+    'voting.clerk_link': 'Thibitisha kwenye tovuti ya Katibu →',
     'voting.clerk_fallback': 'Angalia tovuti ya Katibu',
-    'voting.ev_label': '\ud83d\uddf3\ufe0f Kituo cha Karibu Zaidi cha Kupiga Kura Mapema',
-    'voting.ev_note': '<strong>Mei 14\u201316, 2026 tu.</strong> Piga kura katika <strong>kituo chochote</strong> cha kupiga kura mapema \u2014 hakuna vizuizi vya kata',
-    'voting.other_ev_closed': '\u25bc Vituo vingine vya kupiga kura mapema (23)',
-    'voting.other_ev_open': '\u25b2 Ficha vituo vingine',
-    'ballot.heading': 'Mwongozo Wako wa Kura ya Uchaguzi wa Awali wa Chama cha Democratic cha Louisville',
-    'ballot.polls_note': '<strong>\ud83d\udccb Gusa mgombea yeyote kuashiria chaguo lako, kisha hifadhi picha ili uichukue kwenye sanduku la kura.</strong> Lebo za vyama katika mashindano yasiyo na vyama (Meya, Baraza la Metro) <em>hazitaonekana</em> kwenye kura yako rasmi \u2014 <strong>chukua mwongozo wako wa kura</strong> nawe ili ujue unayempigia kura.',
+    'voting.ev_label': '🗳️ Kituo cha Karibu Zaidi cha Kupiga Kura Mapema',
+    'voting.ev_note': '<strong>Oktoba 29–31, 2026 tu.</strong> Piga kura katika <strong>kituo chochote</strong> cha kupiga kura mapema — hakuna vizuizi vya kata',
+    'voting.other_ev_closed': '▼ Vituo vingine vya kupiga kura mapema (23)',
+    'voting.other_ev_open': '▲ Ficha vituo vingine',
+    'ballot.heading': 'Mwongozo Wako wa Kura ya Uchaguzi Mkuu wa Chama cha Democratic cha Louisville',
+    'ballot.polls_note': '<strong>📋 Gusa mgombea yeyote kuashiria chaguo lako, kisha hifadhi picha ili uichukue kwenye sanduku la kura.</strong> Lebo za vyama katika mashindano yasiyo na vyama <em>hazitaonekana</em> kwenye kura yako rasmi — <strong>chukua mwongozo wako wa kura</strong> nawe.',
     'legend.title': 'Maelezo:',
     'legend.endorsed': 'Imeidhinishwa na LDP',
     'legend.dem': 'Democratic',
     'legend.rep': 'Republican',
     'legend.lib': 'Libertarian',
     'legend.other': 'Nyingine / haijathibitishwa',
-    'save.btn': '\u2193 Hifadhi Mwongozo Wako wa Kura',
-    'save.saving': 'Inahifadhi\u2026',
+    'save.btn': '↓ Hifadhi Mwongozo Wako wa Kura',
+    'save.saving': 'Inahifadhi…',
     'save.done': 'HIFADHI KURA YAKO!',
-    'reminders.title': '\ud83d\udccc Vikumbusho',
+    'reminders.title': '📌 Vikumbusho',
     'reminders.html': '<li>Bado unahitaji kupiga kura! Tafuta vituo vya kupiga kura, tarehe, na nyakati katika mwongozo wetu wa mpiga kura: <a href="https://www.louisvilledems.com/2026-voter-guide" target="_blank" rel="noopener"><strong>louisvilledems.com/2026-voter-guide</strong></a></li><li style="margin-top:6px">Ikiwa una maswali au unahitaji msaada, wasiliana nasi kwa <a href="mailto:info@louisvilledems.com">info@louisvilledems.com</a></li>',
     'footer.help': 'Ikiwa una tatizo kuhifadhi mwongozo wako wa kura na ungependa msaada wetu, tafadhali tutumie barua pepe kwa <a href="mailto:info@louisvilledems.com">info@louisvilledems.com</a>.',
-    'footer.party_labels': 'Lebo za vyama zilithibitishwa baada ya tarehe ya kufungwa kwa usajili wa wagombea tarehe 9 Januari 2026 kupitia Ombi la Rekodi za Umma.',
+    'footer.party_labels': 'Lebo za vyama kwa mashindano yasiyo na vyama zilithibitishwa kupitia Ombi la Rekodi za Umma. Taarifa za wagombea wa vyama kutoka kwa Katibu wa Jimbo wa Kentucky.',
     'share.heading': 'Unajua mtu anayehitaji hii?',
-    'share.desc': 'Shiriki kiungo hiki \u2014 mtu yeyote anaweza kuingiza anwani yao kupata mwongozo wao binafsi wa mpiga kura.',
+    'share.desc': 'Shiriki kiungo hiki — mtu yeyote anaweza kuingiza anwani yao kupata mwongozo wao binafsi wa mpiga kura.',
     'share.copy': 'Nakili Kiungo',
-    'share.copied': '\u2713 Imenakiliwa!',
+    'share.copied': '✓ Imenakiliwa!',
     'share.voter_guide': 'Una maswali kuhusu wakati au mahali pa kupiga kura? <a href="https://www.louisvilledems.com/2026-voter-guide" target="_blank" rel="noopener"><strong>Bofya hapa!</strong></a>',
     'modal.heading': 'Taarifa za uchaguzi na vikumbusho!',
     'modal.desc': 'Pata vituo vya Kupiga Kura Mapema na Siku ya Uchaguzi, na sasisho kutoka kwa Chama cha Democratic cha Louisville.',
@@ -1071,52 +1083,56 @@ const TRANSLATIONS = {
     'modal.phone': 'Nambari ya simu (hiari)',
     'modal.submit': 'Nikiandikishe!',
     'modal.skip': 'Hapana, asante',
-    'modal.success': '\u2705 Asante! Tutawasiliana nawe kabla ya Mei 19.',
+    'modal.success': '\u2705 Asante! Tutawasiliana nawe kabla ya Novemba 3.',
     'modal.close': 'Funga',
-    'ballot.partisan_header': 'Uchaguzi wa Awali wa Democratic \u2014 19 Mei 2026',
-    'ballot.partisan_section_note': 'Wanachama waliosajiliwa wa Democratic pekee \u00a0\u00b7\u00a0 Mashindano yenye ushindani tu yanaonekana kwenye kura ya awali',
-    'ballot.partisan_note_ldp': 'Kijani = Imeidhinishwa na LDP',
-    'ballot.nonpartisan_header': 'Mashindano Yasiyo na Vyama \u2014 Wapiga Kura Wote Wanaweza Kushiriki',
-    'ballot.nonpartisan_section_note': 'Lebo za vyama kutoka usajili wa mpiga kura zinaonyeshwa hapa kwa taarifa yako \u2014 <strong>HAZITAONEKANA</strong> kwenye kura yako rasmi',
+    'ballot.partisan_header': 'Uchaguzi Mkuu — 3 Novemba 2026',
+    'ballot.partisan_section_note': 'Wapiga kura wote waliosajiliwa  ·  Kijani = Democratic aliyeidhinishwa na LDP',
+    'ballot.partisan_note_ldp': 'Kijani = Democratic / Imeidhinishwa na LDP',
+    'ballot.nonpartisan_header': 'Mashindano Yasiyo na Vyama — Wapiga Kura Wote Wanaweza Kushiriki',
+    'ballot.nonpartisan_section_note': 'Lebo za vyama kutoka usajili wa mpiga kura zinaonyeshwa hapa kwa taarifa yako — <strong>HAZITAONEKANA</strong> kwenye kura yako rasmi',
     'race.us_senator': 'Seneta wa Marekani (Chagua Mmoja)',
-    'race.us_congress': 'Mwakilishi wa Marekani katika Bunge \u2014 Wilaya ya {N} ya Bunge (Chagua Mmoja)',
-    'race.ky_senator': 'Seneta wa Jimbo \u2014 Wilaya ya {N} ya Seneti (Chagua Mmoja)',
-    'race.ky_house': 'Mwakilishi wa Jimbo \u2014 Wilaya ya {N} ya Wawakilishi (Chagua Mmoja)',
-    'race.note_dem_primary': 'Uchaguzi wa Awali wa Democratic',
+    'race.us_congress': 'Mwakilishi wa Marekani katika Bunge — Wilaya {N} (Chagua Mmoja)',
+    'race.ky_senator': 'Seneta wa Jimbo — Wilaya {N} (Chagua Mmoja)',
+    'race.ky_house': 'Mwakilishi wa Jimbo — Wilaya {N} (Chagua Mmoja)',
     'race.metro_mayor': 'Meya wa Metro wa Louisville (Chagua Mmoja)',
     'race.nonpartisan_tag': 'Bila Vyama',
-    'race.metro_council': 'Baraza la Metro la Louisville \u2014 Wilaya {N} (Chagua Mmoja)',
-    'race.shively_mayor': 'Mji wa Shively \u2014 Meya (Chagua Mmoja)',
-    'race.shively_council': 'Mji wa Shively \u2014 Mjumbe wa Baraza (Chagua hadi 6)',
-    'race.jtown_council': 'Mji wa Jeffersontown \u2014 Mjumbe wa Baraza (Chagua hadi 8)',
+    'race.metro_council': 'Baraza la Metro la Louisville — Wilaya {N} (Chagua Mmoja)',
+    'race.shively_mayor': 'Mji wa Shively — Meya (Chagua Mmoja)',
+    'race.shively_council': 'Mji wa Shively — Mjumbe wa Baraza (Chagua hadi 6)',
+    'race.jtown_mayor': 'Mji wa Jeffersontown — Meya (Chagua Mmoja)',
+    'race.jtown_council': 'Mji wa Jeffersontown — Mjumbe wa Baraza (Chagua hadi 8)',
+    'race.district_judge': 'Hakimu wa Wilaya ya Jefferson — Mgawanyo {N} (Chagua Mmoja)',
+    'race.court_of_appeals': 'Mahakama ya Rufaa ya KY — Wilaya {DIST}, Mgawanyo {DIV} (Chagua Mmoja)',
+    'race.school_board': 'Bodi ya Shule ya Kaunti ya Jefferson — Mgawanyo {N} (Chagua Mmoja)',
+    'race.soil_water': 'Msimamizi wa Wilaya ya Uhifadhi wa Udongo na Maji (Chagua hadi 3)',
     'race.endorsed_badge': 'LDP Imeidhinisha',
-    'ballot.party_labels_footer': 'Lebo za vyama zilithibitishwa baada ya tarehe ya kufungwa kwa usajili wa wagombea tarehe 9 Januari kupitia Ombi la Rekodi za Umma.',
-    'ballot.subhead': 'Uchaguzi wa Awali wa Democratic \u2014 19 Mei 2026 \u00b7 Kata {P} \u00b7 Wilaya ya Baraza la Metro {D}',
+    'ballot.party_labels_footer': 'Lebo za vyama kwa mashindano yasiyo na vyama zilithibitishwa kupitia Ombi la Rekodi za Umma.',
+    'ballot.subhead': 'Uchaguzi Mkuu — 3 Novemba 2026 · Kata {P} · Wilaya ya Baraza la Metro {D}',
     'error.no_address': 'Tafadhali ingiza anwani yako ya mtaa.',
-    'error.looking_up': 'Inatafuta anwani yako\u2026',
-    'error.not_found': 'Anwani haikupatikana \u2014 jaribu kuongeza mji wako, au tutumie barua pepe kwa <a href="mailto:info@louisvilledems.com">info@louisvilledems.com</a>.',
+    'error.looking_up': 'Inatafuta anwani yako…',
+    'error.not_found': 'Anwani haikupatikana — jaribu kuongeza mji wako, au tutumie barua pepe kwa <a href="mailto:info@louisvilledems.com">info@louisvilledems.com</a>.',
     'error.network': 'Hitilafu ya mtandao. Je, seva inafanya kazi?',
     'save.alert_no_ballot': 'Tafadhali tafuta anwani yako kwanza kuzalisha mwongozo wako wa mpiga kura.',
     'save.alert_error': 'Haikuweza kuhifadhi picha. Jaribu tena.',
     'save.overlay_title': 'Hifadhi Mwongozo Wako wa Kura',
-    'save.overlay_instruction': '\ud83d\udce5 <strong>Shika picha hapa chini kwa muda mrefu</strong>, kisha gusa<br><strong>"Hifadhi kwenye Picha"</strong> au <strong>"Hifadhi Picha"</strong>',
-    'save.overlay_close': '\u2715 Funga',
+    'save.overlay_instruction': '📥 <strong>Shika picha hapa chini kwa muda mrefu</strong>, kisha gusa<br><strong>"Hifadhi kwenye Picha"</strong> au <strong>"Hifadhi Picha"</strong>',
+    'save.overlay_close': '✕ Funga',
     'share.share_title': 'Mwongozo wa Mpiga Kura 2026 wa Chama cha Democratic cha Louisville',
-    'share.share_text': 'Mwongozo wangu wa kura kwa Uchaguzi wa Awali wa Democratic wa Mei 19, 2026',
+    'share.share_text': 'Mwongozo wangu wa kura kwa Uchaguzi Mkuu wa Novemba 3, 2026',
     'modal.error_required': 'Tafadhali ingiza anwani ya barua pepe au nambari ya simu.',
     'modal.error_network': 'Kitu kilienda vibaya. Tafadhali jaribu tena.',
   },
   ht: {
-    'page.title': 'Pati Demokratik Louisville \u2014 Gid Elektè 2026',
-    'header.title': 'Pati Demokratik Louisville<br>Gid Bilten Eleksyon Prenè',
-    'header.subtitle': 'Prenè Demokratik &mdash; 19 Me 2026 &nbsp;|&nbsp; Konte Jefferson, KY',
+    'page.title': 'Pati Demokratik Louisville — Gid Elektè Eleksyon Jeneral 2026',
+    'header.title': 'Pati Demokratik Louisville<br>Gid Bilten Eleksyon Jeneral',
+    'header.subtitle': 'Eleksyon Jeneral &mdash; 3 Novanm 2026  |  Konte Jefferson, KY',
     'warning.headline': 'Sa a PA yon bilten ofisyèl. Ou toujou bezwen ale vote!',
-    'warning.sub': 'Gid elektè ki pa ofisyèl ki pwodwi pa Pati Demokratik Louisville \u2014 Sovgade gid bilten ou anba a. Ou ka pote li avèk ou lè w al vote.',
-    'explainer.heading': 'Konsènan Prenè 19 Me 2026 la',
+    'warning.sub': 'Gid elektè ki pa ofisyèl ki pwodwi pa Pati Demokratik Louisville — Sovgade gid bilten ou anba a. Ou ka pote li avèk ou lè w al vote.',
+    'explainer.heading': 'Konsènan Eleksyon Jeneral 3 Novanm 2026 la',
     'explainer.new2026': 'NOUVO POU 2026',
-    'explainer.p1': 'Akòz lejislatif eta a, kous pou Majistra Metro Louisville ak Konsèy Metro yo pral vin eleksyon ki pa patizan kòmanse ane sa a. Poutèt sa, Pati Demokratik Louisville ap fè endòsman nan kous sa yo. Règleman Pati Demokratik la entèdi nou fè endòsman nan prenè Demokratik patizan yo.',
-    'explainer.p2': 'Paske kous sa yo pa patizan, afiliasyon pati <strong>PA</strong> pral parèt sou bilten ofisyèl ou. Nou te enkli pati kandida a isit la pou ou ka fè yon vòt enfòme.',
-    'explainer.privacy': '\ud83d\udd12 Chwa kandida ou yo <strong>pa anrejistre ni estoke</strong> pa Pati Demokratik Louisville. Zouti sa a fonksyone nèt nan navigatè ou.',
+    'explainer.p1': 'Kous pou Majistra Metro Louisville ak Konsèy Metro yo se eleksyon ki pa patizan — etikèt pati pa pral parèt sou bilten ofisyèl ou pou kous sa yo. Pati Demokratik Louisville ap fè endòsman nan kous ki pa patizan sa yo epi li sipòte tout Demokrat enskri nan kous patizan yo.',
+    'explainer.p2': 'Pou kous patizan yo (pòs federal, eta, ak konte), etikèt pati <strong>WA</strong> parèt sou bilten ofisyèl ou. Pou kous ki pa patizan (Majistra ak Konsèy Metro), afiliasyon pati kandida a montre isit la pou enfòmasyon ou men li <strong>PA</strong> pral parèt sou bilten ofisyèl la.',
+    'explainer.privacy': '🔒 Chwa kandida ou yo <strong>pa anrejistre ni estoke</strong> pa Pati Demokratik Louisville. Zouti sa a fonksyone nèt nan navigatè ou.',
     'lookup.heading': 'Jwenn Gid Bilten Ou',
     'lookup.desc': 'Antre adrès ri Louisville ou pou wè kous ki sou bilten ou, avèk endòsman Pati Demokratik Louisville yo mete an evidans.',
     'lookup.placeholder': 'egz. 527 W Jefferson St',
@@ -1127,33 +1143,33 @@ const TRANSLATIONS = {
     'precinct.house': 'Chanm Eta',
     'precinct.senate': 'Sena Eta',
     'precinct.congress': 'Kongrè Etazini',
-    'voting.ed_label': '\ud83d\udccd Biwo Vòt Jou Eleksyon an',
-    'voting.ed_note': '19 Me 2026 \u2014 ou dwe vote nan kote sa a Jou Eleksyon an',
-    'voting.clerk_link': 'Verifye sou sit wèb Greffye a \u2192',
+    'voting.ed_label': '📍 Biwo Vòt Jou Eleksyon an',
+    'voting.ed_note': '3 Novanm 2026 — ou dwe vote nan kote sa a Jou Eleksyon an',
+    'voting.clerk_link': 'Verifye sou sit wèb Greffye a →',
     'voting.clerk_fallback': 'Gade sit wèb Greffye a',
-    'voting.ev_label': '\ud83d\uddf3\ufe0f Sit Vòt Bonè ki Pi Pre',
-    'voting.ev_note': '<strong>14\u201316 Me 2026 sèlman.</strong> Vote nan <strong>nenpòt</strong> sit vòt bonè \u2014 pa gen restriksyon presinik',
-    'voting.other_ev_closed': '\u25bc Lòt kote pou vote bonè (23)',
-    'voting.other_ev_open': '\u25b2 Kache lòt kote yo',
-    'ballot.heading': 'Gid Bilten Prenè Eleksyon Pati Demokratik Louisville Ou',
-    'ballot.polls_note': '<strong>\ud83d\udccb Tape nenpòt kandida pou make chwa ou, epi sovgade imaj la pou pote li nan biwo vòt.</strong> Etikèt pati nan kous ki pa patizan (Majistra, Konsèy Metro) <em>pap</em> parèt sou bilten ofisyèl ou \u2014 <strong>pote gid bilten ou</strong> avèk ou pou ou konnen pou ki moun w ap vote.',
+    'voting.ev_label': '🗳️ Sit Vòt Bonè ki Pi Pre',
+    'voting.ev_note': '<strong>29–31 Oktòb 2026 sèlman.</strong> Vote nan <strong>nenpòt</strong> sit vòt bonè — pa gen restriksyon presinik',
+    'voting.other_ev_closed': '▼ Lòt kote pou vote bonè (23)',
+    'voting.other_ev_open': '▲ Kache lòt kote yo',
+    'ballot.heading': 'Gid Bilten Eleksyon Jeneral Pati Demokratik Louisville Ou',
+    'ballot.polls_note': '<strong>📋 Tape nenpòt kandida pou make chwa ou, epi sovgade imaj la pou pote li nan biwo vòt.</strong> Etikèt pati nan kous ki pa patizan <em>pap</em> parèt sou bilten ofisyèl ou — <strong>pote gid bilten ou</strong> avèk ou.',
     'legend.title': 'Lejann:',
     'legend.endorsed': 'Endose pa LDP',
     'legend.dem': 'Demokrat',
     'legend.rep': 'Repibliken',
     'legend.lib': 'Libèrtaryen',
     'legend.other': 'Lòt / pa verifye',
-    'save.btn': '\u2193 Sovgade Gid Bilten Ou',
-    'save.saving': 'Ap sovgade\u2026',
+    'save.btn': '↓ Sovgade Gid Bilten Ou',
+    'save.saving': 'Ap sovgade…',
     'save.done': 'SOVGADE BILTEN OU!',
-    'reminders.title': '\ud83d\udccc Rapèl',
+    'reminders.title': '📌 Rapèl',
     'reminders.html': '<li>Ou toujou bezwen vote! Jwenn kote vòt yo, dat yo, ak lè yo nan gid elektè nou an: <a href="https://www.louisvilledems.com/2026-voter-guide" target="_blank" rel="noopener"><strong>louisvilledems.com/2026-voter-guide</strong></a></li><li style="margin-top:6px">Si ou gen kesyon oswa bezwen èd, kontakte nou nan <a href="mailto:info@louisvilledems.com">info@louisvilledems.com</a></li>',
     'footer.help': 'Si ou gen pwoblèm pou sovgade gid bilten ou epi ou ta renmen èd nou, tanpri voye imel ban nou nan <a href="mailto:info@louisvilledems.com">info@louisvilledems.com</a>.',
-    'footer.party_labels': 'Etikèt pati yo te verifye apre dat depozisyon kandida a te fèmen 9 Janvye 2026 via yon Demann Dosye Piblik.',
+    'footer.party_labels': 'Etikèt pati pou kous ki pa patizan yo te verifye via yon Demann Dosye Piblik. Enfòmasyon kandida patizan soti nan Sekretè Eta Kentucky a.',
     'share.heading': 'Ou konnen yon moun ki bezwen sa a?',
-    'share.desc': 'Pataje lyen sa a \u2014 nenpòt moun ka antre adrès yo pou jwenn gid elektè pèsonèl pa yo.',
+    'share.desc': 'Pataje lyen sa a — nenpòt moun ka antre adrès yo pou jwenn gid elektè pèsonèl pa yo.',
     'share.copy': 'Kopye Lyen',
-    'share.copied': '\u2713 Kopye!',
+    'share.copied': '✓ Kopye!',
     'share.voter_guide': 'Ou gen kesyon sou ki lè oswa ki kote pou vote? <a href="https://www.louisvilledems.com/2026-voter-guide" target="_blank" rel="noopener"><strong>Klike isit la!</strong></a>',
     'modal.heading': 'Enfòmasyon eleksyon ak rapèl!',
     'modal.desc': 'Jwenn kote Vòt Bonè ak Jou Eleksyon yo, ak mizajou soti nan Pati Demokratik Louisville.',
@@ -1163,52 +1179,52 @@ const TRANSLATIONS = {
     'modal.phone': 'Nimewo telefòn (opsyonèl)',
     'modal.submit': 'Enskri mwen!',
     'modal.skip': 'Non mèsi',
-    'modal.success': '\u2705 Mèsi! N ap kontakte ou anvan 19 Me.',
+    'modal.success': '\u2705 Mèsi! N ap kontakte ou anvan 3 Novanm.',
     'modal.close': 'Fèmen',
-    'ballot.partisan_header': 'Prenè Demokratik \u2014 19 Me 2026',
-    'ballot.partisan_section_note': 'Demokrat enskri sèlman \u00a0\u00b7\u00a0 Sèlman kous konpetitif parèt sou bilten prenè a',
-    'ballot.partisan_note_ldp': 'Vèt = Endose pa LDP',
-    'ballot.nonpartisan_header': 'Kous Ki Pa Patizan \u2014 Tout Elektè Yo Ka Patisipe',
-    'ballot.nonpartisan_section_note': 'Etikèt pati soti nan enskripsyon elektè yo montre isit la pou enfòmasyon ou \u2014 yo <strong>PA</strong> pral parèt sou bilten ofisyèl ou',
+    'ballot.partisan_header': 'Eleksyon Jeneral — 3 Novanm 2026',
+    'ballot.partisan_section_note': 'Tout elektè enskri  ·  Vèt = Demokrat endose pa LDP',
+    'ballot.partisan_note_ldp': 'Vèt = Demokrat / Endose pa LDP',
+    'ballot.nonpartisan_header': 'Kous Ki Pa Patizan — Tout Elektè Yo Ka Patisipe',
+    'ballot.nonpartisan_section_note': 'Etikèt pati soti nan enskripsyon elektè yo montre isit la pou enfòmasyon ou — yo <strong>PA</strong> pral parèt sou bilten ofisyèl ou',
     'race.us_senator': 'Senatè Etazini (Chwazi Youn)',
-    'race.us_congress': 'Reprezantan Etazini nan Kongrè \u2014 Distri Kongrès {N} (Chwazi Youn)',
-    'race.ky_senator': 'Senatè Eta \u2014 Distri Senatoryèl {N} (Chwazi Youn)',
-    'race.ky_house': 'Reprezantan Eta \u2014 Distri Reprezantatif {N} (Chwazi Youn)',
-    'race.note_dem_primary': 'Prenè Demokratik',
+    'race.us_congress': 'Reprezantan Etazini nan Kongrè — Distri {N} (Chwazi Youn)',
+    'race.ky_senator': 'Senatè Eta — Distri {N} (Chwazi Youn)',
+    'race.ky_house': 'Reprezantan Eta — Distri {N} (Chwazi Youn)',
     'race.metro_mayor': 'Majistra Metro Louisville (Chwazi Youn)',
     'race.nonpartisan_tag': 'Ki Pa Patizan',
-    'race.metro_council': 'Konsèy Metro Louisville \u2014 Distri {N} (Chwazi Youn)',
-    'race.shively_mayor': 'Vil Shively \u2014 Majistra (Chwazi Youn)',
-    'race.shively_council': 'Vil Shively \u2014 Manm Konsèy (Chwazi jiska 6)',
-    'race.jtown_council': 'Vil Jeffersontown \u2014 Manm Konsèy (Chwazi jiska 8)',
+    'race.metro_council': 'Konsèy Metro Louisville — Distri {N} (Chwazi Youn)',
+    'race.shively_mayor': 'Vil Shively — Majistra (Chwazi Youn)',
+    'race.shively_council': 'Vil Shively — Manm Konsèy (Chwazi jiska 6)',
+    'race.jtown_mayor': 'Vil Jeffersontown — Majistra (Chwazi Youn)',
+    'race.jtown_council': 'Vil Jeffersontown — Manm Konsèy (Chwazi jiska 8)',
+    'race.district_judge': 'Jij Distri Konte Jefferson — Divizyon {N} (Chwazi Youn)',
+    'race.court_of_appeals': 'Tribinal Apèl KY — Distri {DIST}, Divizyon {DIV} (Chwazi Youn)',
+    'race.school_board': 'Konsèy Lekòl Konte Jefferson — Divizyon {N} (Chwazi Youn)',
+    'race.soil_water': 'Sipèvizè Distri Konservasymon Tè ak Dlo (Chwazi jiska 3)',
     'race.endorsed_badge': 'Endose pa LDP',
-    'ballot.party_labels_footer': 'Etikèt pati yo te verifye apre dat depozisyon kandida a te fèmen 9 Janvye via yon Demann Dosye Piblik.',
-    'ballot.subhead': 'Prenè Demokratik \u2014 19 Me 2026 \u00b7 Presinik {P} \u00b7 Distri Konsèy Metro {D}',
+    'ballot.party_labels_footer': 'Etikèt pati pou kous ki pa patizan yo te verifye via yon Demann Dosye Piblik.',
+    'ballot.subhead': 'Eleksyon Jeneral — 3 Novanm 2026 · Presinik {P} · Distri Konsèy Metro {D}',
     'error.no_address': 'Tanpri antre adrès ri ou.',
-    'error.looking_up': 'Ap rechèche adrès ou\u2026',
-    'error.not_found': 'Adrès pa jwenn \u2014 eseye ajoute vil ou, oswa voye imel ban nou nan <a href="mailto:info@louisvilledems.com">info@louisvilledems.com</a>.',
+    'error.looking_up': 'Ap rechèche adrès ou…',
+    'error.not_found': 'Adrès pa jwenn — eseye ajoute vil ou, oswa voye imel ban nou nan <a href="mailto:info@louisvilledems.com">info@louisvilledems.com</a>.',
     'error.network': 'Erè rezo. Èske sèvè a ap mache?',
     'save.alert_no_ballot': 'Tanpri rechèche adrès ou premye pou jenere gid elektè ou.',
     'save.alert_error': 'Pa kapab sovgade imaj. Eseye ankò.',
     'save.overlay_title': 'Sovgade Gid Bilten Ou',
-    'save.overlay_instruction': '\ud83d\udce5 <strong>Peze epi kenbe imaj ki anba a</strong>, epi tape<br><strong>"Sovgade nan Foto"</strong> oswa <strong>"Sovgade Imaj"</strong>',
-    'save.overlay_close': '\u2715 Fèmen',
+    'save.overlay_instruction': '📥 <strong>Peze epi kenbe imaj ki anba a</strong>, epi tape<br><strong>"Sovgade nan Foto"</strong> oswa <strong>"Sovgade Imaj"</strong>',
+    'save.overlay_close': '✕ Fèmen',
     'share.share_title': 'Gid Elektè 2026 Pati Demokratik Louisville',
-    'share.share_text': 'Gid bilten mwen pou Prenè Demokratik 19 Me 2026 la',
+    'share.share_text': 'Gid bilten mwen pou Eleksyon Jeneral 3 Novanm 2026 la',
     'modal.error_required': 'Tanpri antre yon adrès imel oswa nimewo telefòn.',
     'modal.error_network': 'Yon bagay te mal pase. Tanpri eseye ankò.',
-  }
+  },
 };
 
 // ══════════════════════════════════════════════════════════════════════
 //  DATA
 // ══════════════════════════════════════════════════════════════════════
 
-// Additional context for specific candidates, keyed by the 'note' field on the candidate object
-const CANDIDATE_NOTES = {
-  grossberg: `<strong style="font-size:1rem">⚠️ Additional Information: Daniel Grossberg</strong>
-    <p style="margin-top:10px">Daniel Grossberg has been accused of sexual assault by <a href="https://www.wave3.com/2024/09/20/hed-manhandle-hed-grab-louisville-club-bans-rep-grossberg-after-alleged-conduct-toward-dancers/" target="_blank" rel="noopener" style="color:var(--blue)">women working at a Louisville strip club</a> and <a href="https://www.wdrb.com/news/politics/kentucky-rep-daniel-grossberg-accused-of-assault-by-former-college-classmate/article_b53f085c-4cb6-40cb-8138-207c4850929d.html" target="_blank" rel="noopener" style="color:var(--blue)">a classmate from college</a>, and <a href="https://kentuckylantern.com/2026/02/02/embattled-louisville-democrat-agrees-to-pay-2k-in-fines-to-ethics-commission/" target="_blank" rel="noopener" style="color:var(--blue)">paid multiple $1,000 fines</a> related to a sexual harassment scandal that occurred during his time as a state representative.</p>`,
-};
+const CANDIDATE_NOTES = {};
 
 function showCandInfo(event, noteKey) {
   event.stopPropagation();
@@ -1225,154 +1241,117 @@ function closeCandInfo(event) {
 
 const ENDORSEMENTS = {
   mayor: ['Craig Greenberg'],
-  council: { 1:['Tammy Hawkins'], 3:['Kumar Rashad'], 5:['Aprile Hearn'], 7:['Paula McCraney'],
-    11:['Melina Hettiaratchi'], 15:['Jennifer Chappell'], 17:['Markus Winkler'],
-    21:['Betsy Ruhe'], 23:['Ainsley Jones'] }
+  council: {
+    1:  ['Tammy Hawkins'],
+    3:  ['Kumar Rashad'],
+    7:  ['Paula McCraney'],
+    11: ['Melina Hettiaratchi'],
+    15: ['Jennifer Chappell'],
+    17: ['Markus Winkler'],
+    21: ['Betsy Ruhe'],
+    23: ['Ainsley Jones'],
+  },
 };
 
-// Mayor: nonpartisan — party = voter registration ('D','R', or null = unverified)
+// Metro Mayor — nonpartisan general election (top 2 from primary)
 const MAYOR_CANDIDATES = [
-  { name: 'Jody Hurt',                  party: 'L'  },  // Libertarian
-  { name: 'Douglas Lattimore',          party: null },  // Other Party
-  { name: 'Bill Wells',                 party: 'D',  withdrawn: true },
-  { name: 'Craig Greenberg',            party: 'D'  },
-  { name: 'Tina Burnell',              party: 'R'  },
-  { name: 'Bob DeVore',                party: 'R'  },
-  { name: 'Lisa M. Holliday Harris',   party: 'R'  },
-  { name: 'Jeffrey Yocum',             party: 'R',  withdrawn: true },
-  { name: 'Matthew Solomon Bailey',    party: 'D'  },
-  { name: 'S. "The D" Dattilo',        party: 'R'  },
-  { name: 'Shameka L. Parrish-Wright', party: 'D'  },
+  { name: 'Shameka L. Parrish-Wright', party: 'D' },
+  { name: 'Craig Greenberg',           party: 'D' },
 ];
 
-// Metro Council: only districts with 3+ candidates have a primary
-// Candidates are objects { name, party }
+// Metro Council — all odd districts (general election, nonpartisan)
 const COUNCIL_CANDIDATES = {
-  3:  [
-    { name: 'Kumar Rashad',  party: 'D' },
-    { name: 'Keisha Dorsey', party: 'D' },
-    { name: 'Shaun Spencer', party: 'D' },
-  ],
-  5:  [
-    { name: 'Betty Bailey',              party: 'D'   },
-    { name: 'Dave Duncan',               party: 'D'   },
-    { name: 'Wallace Garner III',        party: null  },  // Independent
-    { name: 'Ray "Sir Friendly" Barker', party: 'D'   },
-    { name: 'Aprile Hearn',              party: 'D'   },
-    { name: 'Donna Lyvette Purvis',      party: 'D'   },
-    { name: 'Lavon Z. Clack',            party: 'D',  withdrawn: true },
-  ],
-  9:  [
-    { name: 'Charles Todd',         party: 'D' },
-    { name: 'Alison Brotzge-Elder', party: 'D' },
-    { name: 'Andrea R. Parr',       party: 'D' },
-    { name: 'Mark England',         party: 'D' },
-  ],
-  17: [
-    { name: 'Merideth Booth',      party: 'D' },
-    { name: 'Markus Winkler',      party: 'D' },
-    { name: 'Nancy-Lynne Walters', party: 'R' },
-  ],
-  21: [
-    { name: 'Ben Spalding',    party: 'D' },
-    { name: 'Betsy Ruhe',      party: 'D' },
-    { name: 'Lonnie Joseph',   party: 'R' },
-    { name: 'Savannah Hughes', party: 'D' },
-  ],
-  23: [
-    { name: 'Jeff Hudson',    party: 'R' },
-    { name: 'Ainsley Jones',  party: 'D' },
-    { name: 'David R. Steff', party: 'R' },
-  ],
-  // Districts with withdrawn candidates — names still appear on official ballot
-  15: [{ name: 'Brandon Brooks',     party: 'D', withdrawn: true }, { name: 'Jennifer Chappell', party: 'D' }],
-  19: [
-    { name: 'Davanta R. Scruggs',  party: 'D', withdrawn: true },
-    { name: 'Alex Feria',          party: 'D' },
-    { name: 'Anthony Piagentini',  party: 'R' },
-  ],
-  25: [
-    { name: 'Khalil "Charlie" Batshon', party: 'R' },
-    { name: 'Kimberly Abrams',          party: 'D', withdrawn: true },
-  ],
+  1:  [{ name: 'JaRee Gardner',               party: null }, { name: 'Tammy Hawkins',              party: null }],
+  3:  [{ name: 'Keisha Dorsey',               party: 'D'  }, { name: 'Kumar Rashad',               party: 'D'  }],
+  5:  [{ name: 'Donna Lyvette Purvis',        party: 'D'  }, { name: 'Ray "Sir Friendly" Barker',  party: 'D'  }],
+  7:  [{ name: 'Paula McCraney',              party: 'D'  }, { name: 'Catherine "Cat" Timmerman',  party: null }],
+  9:  [{ name: 'Andrea R. Parr',              party: 'D'  }, { name: 'Alison Brotzge-Elder',       party: 'D'  }],
+  11: [{ name: 'Melina Hettiaratchi',         party: 'D'  }, { name: 'Kevin Kramer',               party: 'R'  }],
+  13: [{ name: 'Dan Seum Jr.',                party: 'R'  }],
+  15: [{ name: 'Jennifer Chappell',           party: 'D'  }],
+  17: [{ name: 'Markus Winkler',              party: 'D'  }, { name: 'Nancy-Lynne Walters',        party: 'R'  }],
+  19: [{ name: 'Alex Feria',                  party: 'D'  }, { name: 'Anthony Piagentini',         party: 'R'  }],
+  21: [{ name: 'Lonnie Joseph',               party: 'R'  }, { name: 'Betsy Ruhe',                 party: 'D'  }],
+  23: [{ name: 'Jeff Hudson',                 party: 'R'  }, { name: 'Ainsley Jones',              party: 'D'  }],
+  25: [{ name: 'Khalil "Charlie" Batshon',    party: 'R'  }],
 };
 
-// US Senate — applies to every precinct (order matches official Jefferson County ballot)
+// US Senator — all Jefferson County precincts
 const US_SENATE_CANDIDATES = [
-  { name: 'Joshua Blanton',   party: 'D' },
-  { name: 'Vincent Thompson', party: 'D' },
-  { name: 'Amy McGrath',      party: 'D' },
-  { name: 'Pamela Stevenson', party: 'D' },
-  { name: 'Logan Forsythe',   party: 'D' },
-  { name: 'Charles Booker',   party: 'D' },
-  { name: 'Dale Romans',      party: 'D' },
+  { name: 'Andy Barr',             party: 'R'  },
+  { name: 'Charles Booker',        party: 'D'  },
+  { name: 'Christopher Campbell',  party: null },
 ];
 
-// KY State Senate — only Jefferson County districts with contested Dem primaries
+// KY State Senate — Jefferson County districts with general election candidates
 const KY_SENATE_CANDIDATES = {
-  6:  [{ name: 'Chaz Stoess',      party: 'D' }, { name: 'Christian Furman',   party: 'D' }],
-  36: [{ name: 'Luke Whitehead',   party: 'D' }, { name: 'Sarah McIntosh',     party: 'D' }],
+  6:  [{ name: 'Lindsey Tichenor',    party: 'R' }, { name: 'Christian Furman',   party: 'D' }],
+  10: [{ name: 'Matt Deneen',         party: 'R' }, { name: 'Christopher Gatrost', party: 'D' }],
+  26: [{ name: 'Everett C. Corley',   party: 'R' }, { name: 'Karen A. Berg',       party: 'D' }],
+  36: [{ name: 'Julie Raque Adams',   party: 'R' }, { name: 'Sarah Cole McIntosh', party: 'D' }],
 };
 
-// KY State House — only Jefferson County districts with contested Dem primaries
+// KY State House — Jefferson County districts
 const KY_HOUSE_CANDIDATES = {
-  30: [
-    { name: 'Cassie Lyles',     party: 'D' },
-    { name: 'Mitra Subedi',     party: 'D' },
-    { name: 'Max Morley',       party: 'D', withdrawn: true },
-    { name: 'Daniel Grossberg', party: 'D', note: 'grossberg' },
-  ],
-  33: [{ name: 'Tarah LeBlanc',        party: 'D' }, { name: 'Jennifer Hardin',       party: 'D' }],
-  40: [{ name: 'Nima Kulkarni',        party: 'D' }, { name: 'Patrick Dunegan',       party: 'D' }],
-  43: [{ name: 'Joi McAtee',           party: 'D' }, { name: 'Robert Bell',           party: 'D' }],
-  44: [{ name: 'Jesten Slaw',          party: 'D' }, { name: 'Kenya Wade',            party: 'D' }, { name: 'Beverly Chester-Burton', party: 'D' }],
-  48: [{ name: 'Nathan Bellows',       party: 'D' }, { name: 'Suhas Kulkarni',        party: 'D' }],
+  30: [{ name: 'Mitra Subedi',             party: 'D' }],
+  33: [{ name: 'Jason Michael Nemes',      party: 'R' }, { name: 'Jennifer Hardin',      party: 'D' }],
+  35: [{ name: 'Bret Shultz',             party: 'R' }, { name: 'Lisa Willner',          party: 'D' }],
+  36: [{ name: 'John F. Hodgson',         party: 'R' }, { name: 'William "Woody" Zorn',  party: 'D' }],
+  40: [{ name: 'Nima Kulkarni',           party: 'D' }],
+  43: [{ name: 'Robert LeVertis Bell',    party: 'D' }],
+  44: [{ name: 'Kenya Wade',              party: 'D' }],
+  48: [{ name: 'Ken Fleming',             party: 'R' }, { name: 'Suhas Kulkarni',        party: 'D' }],
 };
 
-// County partisan: only contested Democrat-vs-Democrat races (2+ D candidates)
-// Single-candidate partisan races have no primary
-const PARTISAN_RACES = [
-  {
-    title: 'County Attorney',
-    scope: 'countywide',
-    note: 'Select One — Democratic Primary',
-    candidates: [
-      { name: 'Sarah Martin', party: 'D' },
-      { name: 'Karl Price',   party: 'D' },
-    ],
-  },
-  {
-    title: 'County Clerk',
-    scope: 'countywide',
-    note: 'Select One — Democratic Primary',
-    candidates: [
-      { name: 'Rosalind "Roz" Welch', party: 'D' },
-      { name: 'David Yates',          party: 'D' },
-    ],
-  },
-  {
-    title: 'County Sheriff',
-    scope: 'countywide',
-    note: 'Select One — Democratic Primary',
-    candidates: [
-      { name: 'Richard Breen',  party: 'D' },
-      { name: 'Steve Healey',   party: 'D' },
-      { name: 'Stephen Yancey', party: 'D' },
-    ],
-  },
-];
-
-// US Representative in Congress — only CD-2 has a contested Dem primary
+// US Congress — CD-2 and CD-3 cover Jefferson County
 const KY_CONGRESS_CANDIDATES = {
   2: [
-    { name: 'David S. Hatfield',      party: 'D' },
-    { name: 'Megan Wingfield',        party: 'D' },
-    { name: 'Hank Linderman',         party: 'D' },
-    { name: 'William Dakota Compton', party: 'D' },
+    { name: 'Megan Wingfield',       party: 'D' },
+    { name: 'S. Brett Guthrie',      party: 'R' },
+    { name: 'Thomas A. Loecken',     party: null },
+  ],
+  3: [
+    { name: 'Morgan McGarvey',        party: 'D' },
+    { name: 'Maria Teresa Rodriguez', party: 'R' },
   ],
 };
 
-// Jeffersontown City Council — nonpartisan, select up to 8
+// County & other partisan races (shown to all or scoped)
+const PARTISAN_RACES = [
+  { title: 'Property Valuation Administrator',   candidates: [{ name: 'Colleen Younger',          party: 'D' }] },
+  { title: 'County Judge Executive',             candidates: [{ name: 'Queenie Louise Averette',  party: 'D' }] },
+  { title: 'County Attorney',                    candidates: [{ name: 'Sarah Martin',             party: 'D' }] },
+  { title: 'County Clerk',                       candidates: [{ name: 'David Yates',              party: 'D' }] },
+  { title: 'County Sheriff',                     candidates: [{ name: 'Stephen Yancey',           party: 'D' }, { name: 'Alexander William Marson', party: 'R' }] },
+  { title: 'County Commissioner — “A” District', scope: 'commA', candidates: [{ name: 'Sarah Provancher', party: 'R' }] },
+  { title: 'County Coroner',                     candidates: [{ name: 'Jo-Ann Farmer',            party: 'D' }] },
+  { title: 'Justice of the Peace — District 1',  candidates: [{ name: 'Mera Kathryn Corlett', party: 'D' }] },
+  { title: 'Justice of the Peace — District 2',  candidates: [{ name: 'Gary Fields',          party: 'D' }] },
+  { title: 'Constable — District 1',             candidates: [{ name: 'Christopher James Bayer', party: 'D' }, { name: 'John D. Zehnder',           party: 'R' }] },
+  { title: 'Constable — District 2',             candidates: [{ name: 'Shannon T. Leach',     party: 'D' }, { name: 'Rick “Vet” Strohmeier', party: 'R' }] },
+  { title: 'Constable — District 3',             candidates: [{ name: 'Monica Flowers',       party: 'D' }, { name: 'Ken “Jake Starr” Pagano', party: 'R' }] },
+  { title: 'County Surveyor',                    candidates: [{ name: 'William D. Schroll III',   party: 'R' }] },
+];
+
+// Shively — Mayor is partisan (D vs R) in the general
+const SHIVELY_PRECINCTS = new Set([
+  'K122','K123','K131','K180',
+  'O117','O119','O121','O124','O126','O150','O154',
+]);
+const SHIVELY_MAYOR_CANDIDATES = [
+  { name: 'Maria D. Johnson',     party: 'D' },
+  { name: 'Daniel Staudenheimer', party: 'R' },
+];
+const SHIVELY_COUNCIL_CANDIDATES = [
+  { name: 'Wendell Vincent',        party: 'D' },
+  { name: 'Saundra K. Gibson',      party: 'D' },
+  { name: 'Denzel Walker',          party: 'D' },
+  { name: 'Danielle Wakaba',        party: 'D' },
+  { name: 'Tiffany Burton-McBroom', party: 'D' },
+  { name: 'Kelly Gibson',           party: 'D' },
+];
+
+// Jeffersontown — Mayor (uncontested) + Council (15 candidates, select up to 8)
 const JTOWN_PRECINCTS = new Set([
   'D116','D117','D120','D122','D137','D139','D141','D142',
   'D146','D147','D148','D149','D152','D158','D159','D160',
@@ -1380,52 +1359,102 @@ const JTOWN_PRECINCTS = new Set([
   'Q163','Q164','Q168',
   'V101','V106','V116','V133','V134',
 ]);
+const JTOWN_MAYOR_CANDIDATES = [
+  { name: 'Carol Pike', party: null },
+];
 const JTOWN_COUNCIL_CANDIDATES = [
-  { name: 'Debi Pridemore Sanning', party: 'D'   },
-  { name: 'Pamela Thomas Hickey',   party: null  },
-  { name: 'Donald Lee Hickey',      party: null  },
-  { name: 'Cynthia Kinnard',        party: null  },
-  { name: 'Matt Bowdy',             party: 'D'   },
-  { name: 'Vincent Grisanti',       party: null  },
-  { name: 'Jeff Hensel',            party: null  },
-  { name: 'Pam Ware',               party: null  },
-  { name: 'Mark Blum',              party: null  },
-  { name: 'Ruth Gao',               party: 'D'   },
-  { name: 'Ray "Chubby Ray" Perkins', party: null },
-  { name: 'Nita Cox',               party: 'D'   },
-  { name: 'Randy Lawson',           party: null  },
-  { name: 'Dan Wright',             party: 'D'   },
-  { name: 'Bryan K. Wimsatt',       party: null  },
-  { name: 'Trena Smith',            party: null  },
-  { name: 'Allison Neal Head',      party: null  },
-  { name: 'Richard "Dickie" Dunn',  party: null  },
-  { name: 'Mark Russell',           party: 'D'   },
+  { name: 'Matt Bowdy',               party: 'D'   },
+  { name: 'Mark Blum',                party: null  },
+  { name: 'Randy Lawson',             party: null  },
+  { name: 'Trena Smith',              party: null  },
+  { name: 'Nita Cox',                 party: 'D'   },
+  { name: 'Debi Pridemore Sanning',   party: 'D'   },
+  { name: 'Cynthia Kinnard',          party: null  },
+  { name: 'Ruth Gao',                 party: 'D'   },
+  { name: 'Pamela Thomas Hickey',     party: null  },
+  { name: 'Pam Ware',                 party: null  },
+  { name: 'Vincent Grisanti',         party: null  },
+  { name: 'Richard "Dickie" Dunn',    party: null  },
+  { name: 'Mark Russell',             party: 'D'   },
+  { name: 'Ray "Chubby Ray" Perkins', party: null  },
+  { name: 'Allison Neal Head',        party: null  },
 ];
 
-// Shively Mayor & City Council — nonpartisan
-const SHIVELY_PRECINCTS = new Set([
-  'K122','K123','K131','K180',
-  'O117','O119','O121','O124','O126','O150','O154',
-]);
-const SHIVELY_MAYOR_CANDIDATES = [
-  'Shanell Thompson',
-  'Maria D. Johnson',
+// District Judge — District 30 (Jefferson County), all 16 divisions
+const DISTRICT_JUDGE_RACES = [
+  { div: 1,  candidates: [{ name: 'Anthony Lewis Jones',     party: null }] },
+  { div: 2,  candidates: [{ name: 'Amber B. Wolf',           party: null }] },
+  { div: 3,  candidates: [{ name: 'Kristina Marie Garvey',   party: null }] },
+  { div: 4,  candidates: [{ name: 'Yvette De La Guardia',    party: null }] },
+  { div: 5,  candidates: [{ name: 'Jennifer H. Leibson',     party: null }] },
+  { div: 6,  candidates: [{ name: 'Teddy B. Gordon',         party: null }, { name: 'Lisa L. Langford',          party: null }] },
+  { div: 7,  candidates: [{ name: 'Megan McDonald',          party: null }] },
+  { div: 8,  candidates: [{ name: 'Jonathan Max Allen',      party: null }, { name: 'Karen Faulkner',            party: null }] },
+  { div: 9,  candidates: [{ name: 'Tanisha Ann Hickerson',   party: null }] },
+  { div: 10, candidates: [{ name: 'Sara Michael Nicholson',  party: null }] },
+  { div: 11, candidates: [{ name: 'Jessica Ann Moore',       party: null }] },
+  { div: 12, candidates: [{ name: 'Josephine Layne Buckner', party: null }] },
+  { div: 13, candidates: [{ name: 'Anne Delahanty',          party: null }] },
+  { div: 14, candidates: [{ name: 'Stephanie Pearce Burke',  party: null }] },
+  { div: 15, candidates: [{ name: 'Mary Jude Wolford',       party: null }] },
+  { div: 16, candidates: [{ name: 'Katie King',              party: null }] },
 ];
-const SHIVELY_COUNCIL_CANDIDATES = [
-  'Kelly Gibson',
-  'Pamela Chapman Pitts',
-  'Tiffany Burton-McBroom',
-  'Daphne Batey',
-  'Dinah Moorman',
-  'Earnestine Barbour',
-  'Monica M. Bizzle',
-  'Dwendolyn I. Chester',
-  'Danielle Wakaba',
-  'Saundra K. Gibson',
-  'Wendell Vincent',
-  'Simeon Pullum Jr.',
-  'Denzel Walker',
+
+// KY Court of Appeals — District 5 contested race (covers Jefferson County)
+const COURT_OF_APPEALS_RACES = [
+  { dist: 5, div: 1, candidates: [{ name: 'Will Moynahan', party: null }, { name: 'Lucy Ferguson VanMeter', party: null }] },
 ];
+
+// Soil & Water Conservation District Supervisors (3 seats, 2 candidates)
+const SOIL_WATER_CANDIDATES = [
+  { name: 'Tyler Rooney',         party: null },
+  { name: 'William Donald Mayes', party: null },
+];
+
+// School Board — precinct sets by division
+const SCHOOL_BOARD_PRECINCTS = {
+  1: new Set(['G140','G141','G143','G144','G145','G146','G150','G156','G161','G169','G174','G177','G186','G189','G190','G191','G192','G193','J173','J174','K110','K111','K112','K113','K114','K116','K117','K122','K123','K125','K140','K142','K150','K155','K159','K160','K161','K162','K163','K164','K165','K167','K169','K170','K171','K172','K173','K176','K177','K178','K179','L169','L170','L171','L172','L173','L174','L175','L176','L195','L203','L204','L205','L206','L207','L208','L216','L217','L218','L219','L220','M107','M110','M121','M129','M181','M185','M186','M188','M189','M191','M192','M193','M194','M195','M196','M197','M198','M199','M201','M202','M203','N101','N102','N103','N104','N105','N106','N107','N115','N117','N128','N134','N135','N136','N145','N147','N148','N152','N157','N162','N163','N164','N165','N167','N171','N173','N179','O105','O107','O112','O117','O119','O121','O127','O135','O136','O145','O146','O147','O150','O151','O152','O153','O154']),
+  2: new Set(['C123','C124','C128','C130','C131','C137','C138','D114','D116','D117','D120','D122','D132','D137','D139','D141','D142','D146','D147','D148','D149','D150','D151','D155','D156','D157','D158','D159','D160','D161','D163','D164','D165','D166','D167','E139','E141','E142','E143','E144','E154','E155','E157','E162','E171','E173','E175','E176','E183','E185','E188','E189','G157','G158','G159','G160','G163','G164','G165','G170','G171','G172','G173','G178','G179','G180','G181','G182','G183','G184','G185','G187','G188','G194','G195','G196','H117','H120','H121','H164','K153','L165','L167','L168','L177','L178','L179','L180','L181','L182','L183','L184','L186','L187','L188','L189','L192','L193','L194','L196','L197','L198','L199','L201','L209','L210','L211','L212','L213','L215','M159','M176','M177','M178','M179','M210','M213','N151','N153','N170','N174','N177','N181','Q107','Q137','Q138','Q140','Q142','Q146','Q150','Q151','Q156','Q162','Q163','Q164','Q165','Q166','Q167','Q168','Q169','V101','V106','V133','V134']),
+  3: new Set(['B153','B158','B159','B161','B172','B183','B191','B192','B193','B198','B199','B201','B202','D152','D153','D154','D168','D169','D171','D172','D173','E145','E181','E190','E191','E192','E193','E194','E195','E196','E197','E198','E199','E201','E202','E203','E204','E205','E206','E207','F106','F145','F151','F152','F153','F158','F163','F164','F167','F169','F170','F171','F172','F176','F179','F180','F184','F188','F189','F190','F191','F192','G175','G176','N130','N178','S116','S118','S125','S126','S128','S129','S130','S139','S140','S143','S144','S153','S160','S161','S165','S166','S167','S168','S169','S170','S171','S172','S173','S174','S175','S176','S177','S178','S179','V104','V105','V107','V108','V109','V110','V111','V112','V113','V114','V116','V118','V120','V121','V123','V125','V126','V127','V129','V130','V131','V136','V137','V138','V139','V140','V141','V142','V143','V144','V145','V146']),
+  4: new Set(['A146','A147','A148','A149','A150','A151','A154','C101','C102','C103','C104','C105','C106','C108','C109','C110','C111','C113','C115','C126','C129','C134','C152','C153','C154','C155','C156','C157','H123','H124','H125','H126','H130','H154','H155','H163','H165','H166','H167','H168','H171','H176','H177','H178','H180','H181','H182','H185','I169','J105','J108','J111','J113','J117','J119','J120','J140','J163','J165','J166','J168','J169','J170','J171','J172','K118','K119','K131','K134','K135','K137','K141','K143','K151','K152','K154','K156','K157','K158','K166','K168','K174','K175','K180','L166','L185','M123','M124','M131','M168','M180','M182','M183','M184','M211','M212','N154','N155','N156','N158','N160','N161','N166','N168','N169','N172','N175','N176','N180','O109','O111','O113','O124','O126','O130','O131','O138','O148','O149','Q103','Q127','Q148','Q153','Q154','Q155','Q161','Q170']),
+  5: new Set(['A107','A108','A111','A113','A114','A115','A118','A119','A121','A124','A125','A126','A127','A128','A129','A134','A136','A139','A142','A145','A152','A153','B124','B134','B149','B154','B160','B162','B163','B166','B168','B169','B173','B175','B177','B184','B187','B188','B189','B190','B194','B195','B196','B197','H138','H144','H147','H169','H173','H175','H183','H184','I126','I130','I133','I135','I141','I144','I145','I146','I151','I152','I153','I154','I157','I158','I159','I160','I161','I162','I163','I164','I165','I166','I167','I168','I170','I171','I172','I173','I174','I175','J122','J123','J135','J137','J138','J145','J150','J152','J153','J156','J157','J158','J159','J160','J162','J164','O141','O144','Q109','Q115','Q125','Q132','Q141','Q143','Q144','Q145','Q171','Q172']),
+};
+
+// School Board candidates by division (nonpartisan, select one)
+const SCHOOL_BOARD_CANDIDATES = {
+  1: [
+    { name: 'Jody Hurt',            party: null },
+    { name: 'Gail Logan Strange',   party: null },
+    { name: 'Amina Shale',          party: null },
+  ],
+  2: [
+    { name: 'Tim Shaughnessy',      party: null },
+    { name: "Alanée J. Gaines", party: null },
+    { name: 'Robert Kahne',         party: null },
+    { name: 'Lillian Brents',       party: null },
+    { name: 'Phil Haming',          party: null },
+  ],
+  3: [
+    { name: 'Gay P. Adelmann',      party: null },
+    { name: 'Veda Pendleton',       party: null },
+    { name: 'Taylor Everett',       party: null },
+    { name: 'Neil Seftor',          party: null },
+  ],
+  4: [
+    { name: 'Kimberly Ann Vinegar', party: null },
+    { name: 'Michelle E. Patrick',  party: null },
+    { name: 'Trevin Bass',          party: null },
+    { name: 'Deja B. Jackson',      party: null },
+  ],
+  5: [
+    { name: 'William E. Snawder',   party: null },
+    { name: 'TraShaun Spencer',     party: null },
+    { name: 'Troy Gardner',         party: null },
+    { name: 'Kyle N. Killebrew',    party: null },
+    { name: 'Carrie Donovan',       party: null },
+    { name: 'Bob DeVore',           party: null },
+  ],
+};
 
 // ══════════════════════════════════════════════════════════════════════
 //  HTML BUILDERS
@@ -1499,59 +1528,66 @@ function esc(s) {
 function buildBallot({ council_district, commissioner_district, state_house_district, state_senate_district, congressional_district, precinct }) {
   let html = '';
   raceCounter = 0;
-  const commScope = 'comm' + commissioner_district.toUpperCase();
-  const isOdd = council_district % 2 !== 0;
-  const hasPrimary = !!COUNCIL_CANDIDATES[council_district];
+  const commScope  = 'comm' + commissioner_district.toUpperCase();
+  const isOdd      = council_district % 2 !== 0;
   const isJtown    = JTOWN_PRECINCTS.has(precinct);
   const isShively  = SHIVELY_PRECINCTS.has(precinct);
 
-  // Correct column order (left column first, then right column — matching official ballot):
-  // LEFT  (partisan):    US Senator → US Representative (CD-2 only) → KY State Senator → KY State Rep → County Attorney → County Clerk → Sheriff
-  // RIGHT (nonpartisan): Louisville Metro Mayor → Louisville Metro Council → J-town City Council (J-town precincts only)
+  // Find school board division for this precinct
+  let schoolBoardDiv = null;
+  for (const [div, precs] of Object.entries(SCHOOL_BOARD_PRECINCTS)) {
+    if (precs.has(precinct)) { schoolBoardDiv = parseInt(div); break; }
+  }
+
+  // In the general election, all Democrats in partisan races are auto-endorsed by LDP
+  function isDemEndorsed(cand) { return cand.party === 'D'; }
 
   // ══ PARTISAN SECTION ══
   html += `<div class="ballot-section">
     <div class="section-header partisan">${t('ballot.partisan_header')}</div>
     <div class="section-note">${t('ballot.partisan_section_note')} &nbsp;·&nbsp; <span style="color:var(--endorse);font-weight:600">${starSvg()} ${t('ballot.partisan_note_ldp')}</span></div>`;
 
-  // ── 1. US SENATOR ──
+  // 1. US SENATOR
   const usSenRaceId = 'race' + (++raceCounter);
   html += raceHTML(t('race.us_senator'),
-    US_SENATE_CANDIDATES.map(c => candidateHTML(c, false, usSenRaceId)),
-    t('race.note_dem_primary'));
+    US_SENATE_CANDIDATES.map(c => candidateHTML(c, isDemEndorsed(c), usSenRaceId)));
 
-  // ── 2. US REPRESENTATIVE IN CONGRESS (CD-2 only, if contested Dem primary) ──
+  // 2. US REPRESENTATIVE IN CONGRESS
   if (KY_CONGRESS_CANDIDATES[congressional_district]) {
     const congressRaceId = 'race' + (++raceCounter);
     html += raceHTML(
       t('race.us_congress').replace('{N}', congressional_district),
-      KY_CONGRESS_CANDIDATES[congressional_district].map(c => candidateHTML(c, false, congressRaceId)),
-      t('race.note_dem_primary'));
+      KY_CONGRESS_CANDIDATES[congressional_district].map(c => candidateHTML(c, isDemEndorsed(c), congressRaceId)));
   }
 
-  // ── 3. KY STATE SENATOR (if contested Dem primary in this district) ──
+  // 3. KY STATE SENATOR
   if (KY_SENATE_CANDIDATES[state_senate_district]) {
     const kysenRaceId = 'race' + (++raceCounter);
     html += raceHTML(
       t('race.ky_senator').replace('{N}', state_senate_district),
-      KY_SENATE_CANDIDATES[state_senate_district].map(c => candidateHTML(c, false, kysenRaceId)),
-      t('race.note_dem_primary'));
+      KY_SENATE_CANDIDATES[state_senate_district].map(c => candidateHTML(c, isDemEndorsed(c), kysenRaceId)));
   }
 
-  // ── 4. KY STATE REPRESENTATIVE (if contested Dem primary in this district) ──
+  // 4. KY STATE REPRESENTATIVE
   if (KY_HOUSE_CANDIDATES[state_house_district]) {
     const kyhouseRaceId = 'race' + (++raceCounter);
     html += raceHTML(
       t('race.ky_house').replace('{N}', state_house_district),
-      KY_HOUSE_CANDIDATES[state_house_district].map(c => candidateHTML(c, false, kyhouseRaceId)),
-      t('race.note_dem_primary'));
+      KY_HOUSE_CANDIDATES[state_house_district].map(c => candidateHTML(c, isDemEndorsed(c), kyhouseRaceId)));
   }
 
-  // ── 5. COUNTY ATTORNEY  6. COUNTY CLERK  7. SHERIFF ──
+  // 5. COUNTY & OTHER PARTISAN RACES
   for (const race of PARTISAN_RACES) {
-    if (race.scope !== 'countywide' && race.scope !== commScope) continue;
+    if (race.scope && race.scope !== commScope) continue;
     const raceId = 'race' + (++raceCounter);
-    html += raceHTML(race.title, race.candidates.map(c => candidateHTML(c, false, raceId)), t('race.note_dem_primary'));
+    html += raceHTML(race.title, race.candidates.map(c => candidateHTML(c, isDemEndorsed(c), raceId)));
+  }
+
+  // 6. SHIVELY MAYOR — partisan in general (Shively precincts only)
+  if (isShively) {
+    const shivelyMayorId = 'race' + (++raceCounter);
+    html += raceHTML(t('race.shively_mayor'),
+      SHIVELY_MAYOR_CANDIDATES.map(c => candidateHTML(c, isDemEndorsed(c), shivelyMayorId)));
   }
 
   html += '</div>';
@@ -1561,50 +1597,81 @@ function buildBallot({ council_district, commissioner_district, state_house_dist
     <div class="section-header nonpartisan">${t('ballot.nonpartisan_header')}</div>
     <div class="section-note">${t('ballot.nonpartisan_section_note')}</div>`;
 
-  // ── Louisville Metro Mayor ──
+  // 7. METRO MAYOR
   const mayorRaceId = 'race' + (++raceCounter);
   html += `<div class="race nonpartisan-race">
     <div class="race-title">${t('race.metro_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-    <div class="withdrawn-notice">⚠️ Strikethrough candidates have voluntarily withdrawn from this race. This does not reflect a party recommendation.</div>
     <div class="candidate-list mayor-list">${
       MAYOR_CANDIDATES.map(c => candidateHTML(c, ENDORSEMENTS.mayor.includes(c.name), mayorRaceId)).join('')
     }</div>
   </div>`;
 
-  // ── METRO COUNCIL (nonpartisan) — show if there's a candidate list for this district ──
-  if (hasPrimary) {
+  // 8. METRO COUNCIL (all odd districts)
+  if (isOdd && COUNCIL_CANDIDATES[council_district]) {
     const councilRaceId = 'race' + (++raceCounter);
     const endorsed = ENDORSEMENTS.council[council_district] || [];
-    const hasWithdrawn = COUNCIL_CANDIDATES[council_district].some(c => c.withdrawn);
     html += `<div class="race nonpartisan-race">
       <div class="race-title">${t('race.metro_council').replace('{N}', council_district)} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      ${hasWithdrawn ? `<div class="withdrawn-notice">⚠️ Strikethrough candidates have voluntarily withdrawn from this race. This does not reflect a party recommendation.</div>` : ''}
       <div class="candidate-list">${
         COUNCIL_CANDIDATES[council_district].map(c => candidateHTML(c, endorsed.includes(c.name), councilRaceId)).join('')
       }</div>
     </div>`;
   }
 
-  // ── SHIVELY MAYOR & CITY COUNCIL (Shively precincts only, nonpartisan) ──
-  if (isShively) {
-    const shivelyMayorId = 'race' + (++raceCounter);
+  // 9. KY COURT OF APPEALS
+  for (const race of COURT_OF_APPEALS_RACES) {
+    const raceId = 'race' + (++raceCounter);
     html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.shively_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${
-        SHIVELY_MAYOR_CANDIDATES.map(name => candidateHTML({ name, party: null }, false, shivelyMayorId)).join('')
-      }</div>
+      <div class="race-title">${t('race.court_of_appeals').replace('{DIST}', race.dist).replace('{DIV}', race.div)} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${race.candidates.map(c => candidateHTML(c, false, raceId)).join('')}</div>
     </div>`;
-    const shivelyCouncilId = 'race' + (++raceCounter);
+  }
+
+  // 10. JEFFERSON COUNTY DISTRICT JUDGE (all 16 divisions)
+  for (const race of DISTRICT_JUDGE_RACES) {
+    const raceId = 'race' + (++raceCounter);
     html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.shively_council')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="race-title">${t('race.district_judge').replace('{N}', race.div)} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${race.candidates.map(c => candidateHTML(c, false, raceId)).join('')}</div>
+    </div>`;
+  }
+
+  // 11. SOIL & WATER CONSERVATION (3 seats, 2 candidates)
+  const soilWaterId = 'race' + (++raceCounter);
+  html += `<div class="race nonpartisan-race">
+    <div class="race-title">${t('race.soil_water')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+    <div class="candidate-list">${SOIL_WATER_CANDIDATES.map(c => candidateHTML(c, false, soilWaterId, 3)).join('')}</div>
+  </div>`;
+
+  // 12. SCHOOL BOARD (precinct-gated by division)
+  if (schoolBoardDiv !== null) {
+    const sbRaceId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.school_board').replace('{N}', schoolBoardDiv)} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
       <div class="candidate-list">${
-        SHIVELY_COUNCIL_CANDIDATES.map(name => candidateHTML({ name, party: null }, false, shivelyCouncilId, 6)).join('')
+        SCHOOL_BOARD_CANDIDATES[schoolBoardDiv].map(c => candidateHTML(c, false, sbRaceId)).join('')
       }</div>
     </div>`;
   }
 
-  // ── JEFFERSONTOWN CITY COUNCIL (J-town precincts only, nonpartisan, select up to 8) ──
+  // 13. SHIVELY COUNCIL (Shively precincts only)
+  if (isShively) {
+    const shivelyCouncilId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.shively_council')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${
+        SHIVELY_COUNCIL_CANDIDATES.map(c => candidateHTML(c, false, shivelyCouncilId, 6)).join('')
+      }</div>
+    </div>`;
+  }
+
+  // 14. JEFFERSONTOWN MAYOR & COUNCIL (J-town precincts only)
   if (isJtown) {
+    const jtownMayorId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.jtown_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${JTOWN_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, jtownMayorId)).join('')}</div>
+    </div>`;
     const jtownRaceId = 'race' + (++raceCounter);
     html += `<div class="race nonpartisan-race">
       <div class="race-title">${t('race.jtown_council')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
