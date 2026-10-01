@@ -16,12 +16,19 @@ app = Flask(__name__)
 # ---------------------------------------------------------------------------
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 GEOJSON = os.path.join(BASE_DIR, "precincts.geojson")
+CITIES_GEOJSON = os.path.join(BASE_DIR, "cities.geojson")
 
 print("Loading precinct data…")
 precincts_gdf = gpd.read_file(GEOJSON)
 if precincts_gdf.crs and precincts_gdf.crs.to_epsg() != 4326:
     precincts_gdf = precincts_gdf.to_crs(epsg=4326)
 print(f"Loaded {len(precincts_gdf)} precincts.")
+
+print("Loading city boundary data…")
+cities_gdf = gpd.read_file(CITIES_GEOJSON)
+if cities_gdf.crs and cities_gdf.crs.to_epsg() != 4326:
+    cities_gdf = cities_gdf.to_crs(epsg=4326)
+print(f"Loaded {len(cities_gdf)} city boundaries.")
 
 
 # ---------------------------------------------------------------------------
@@ -223,7 +230,7 @@ def lookup():
             )
         }), 404
 
-    # 2. Point-in-polygon – which precinct contains this point?
+    # 2. Point-in-polygon – which precinct and city contain this point?
     point = Point(lon, lat)
     hits = precincts_gdf[precincts_gdf.contains(point)]
 
@@ -237,7 +244,11 @@ def lookup():
 
     row = hits.iloc[0]
 
-    # 3. Polling place lookup (non-fatal — returns None values if it fails)
+    # 3. City lookup — which incorporated city (if any) contains this point?
+    city_hits = cities_gdf[cities_gdf.contains(point)]
+    city_code = str(city_hits.iloc[0]["ballot_code"]) if not city_hits.empty else None
+
+    # 4. Polling place lookup (non-fatal — returns None values if it fails)
     polling = get_polling_place(matched_address or address)
 
     return jsonify({
@@ -248,6 +259,7 @@ def lookup():
         "state_house_district":  int(row["LEGISDIST"]),
         "state_senate_district": int(row["SENDIST"]),
         "commissioner_district": str(row["COMMDIST"]),
+        "city_code":             city_code,
         "polling_place_name":    polling.get("polling_place_name"),
         "polling_place_address": polling.get("polling_place_address"),
         "closest_ev_index":      closest_ev_index(lat, lon),
