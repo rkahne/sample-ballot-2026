@@ -3327,7 +3327,9 @@ const isWorthingtonHills         = cityCode === 'WOH';
   html += '</div>';
 
   // ══ NONPARTISAN SECTION ══
-  html += `<div class="ballot-section">`;
+  html += `<div class="ballot-section">
+    <div class="section-header nonpartisan">${t('ballot.nonpartisan_header')}</div>
+    <div class="section-note">${t('ballot.nonpartisan_section_note')}</div>`;
 
   // 11. SOIL & WATER CONSERVATION (3 seats, 2 candidates)
   const soilWaterId = 'race' + (++raceCounter);
