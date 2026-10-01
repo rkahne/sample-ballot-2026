@@ -1619,12 +1619,13 @@ function buildBallot({ council_district, commissioner_district, state_house_dist
     US_SENATE_CANDIDATES.map(c => candidateHTML(c, isDemEndorsed(c), usSenRaceId)));
 
   // 1b. CONSTITUTIONAL AMENDMENT NO. 1 (appears on ballot right after US Senator)
+  const amendmentId = 'race' + (++raceCounter);
   html += `<div class="race">
     <div class="race-title">${t('race.ky_amendment_1')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
     <div style="font-size:0.82rem;color:var(--muted);padding:4px 8px 10px">${t('ballot.amendment_1_text')}</div>
     <div class="candidate-list">
-      <div class="candidate">${t('ballot.amendment_yes')}</div>
-      <div class="candidate">${t('ballot.amendment_no')}</div>
+      ${candidateHTML({ name: t('ballot.amendment_yes'), party: null }, false, amendmentId)}
+      ${candidateHTML({ name: t('ballot.amendment_no'), party: null }, false, amendmentId)}
     </div>
   </div>`;
 
