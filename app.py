@@ -74,7 +74,7 @@ def closest_ev_index(lat, lon):
 # ---------------------------------------------------------------------------
 # Polling place lookup (Jefferson County Clerk scraper)
 # ---------------------------------------------------------------------------
-_CLERK_URL = "https://jeffersoncountyclerk.org/wheredoivote/"
+_CLERK_URL = "https://strap.jeffersoncountyclerk.org/WhereDoIVote/"
 _CLERK_HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
     "Referer": _CLERK_URL,

@@ -551,7 +551,7 @@
           <div class="vc-note" data-i18n="voting.ed_note">November 3, 2026 — you must vote at this location on Election Day</div>
           <div class="vc-name" id="pollingPlaceName"></div>
           <div class="vc-addr" id="pollingPlaceAddress"></div>
-          <a href="https://jeffersoncountyclerk.org/wheredoivote/" target="_blank" rel="noopener" class="vc-link" data-i18n="voting.clerk_link">Verify on Clerk's website →</a>
+          <a href="https://strap.jeffersoncountyclerk.org/WhereDoIVote/" target="_blank" rel="noopener" class="vc-link" data-i18n="voting.clerk_link">Verify on Clerk's website →</a>
         </div>
 
         <!-- Closest early voting site -->
@@ -576,7 +576,7 @@
     </div>
 
     <div class="polls-note" data-i18n-html="ballot.polls_note">
-      <strong>📋 Tap any candidate to mark your choice, then save the image to bring to the polls.</strong> Party labels in nonpartisan races (Mayor, Metro Council) will <em>not</em> appear on your official ballot — <strong>bring your ballot guide</strong> with you so you know who you're voting for. If you would like to confirm your ballot with the Jefferson County Clerk, <a href="https://jeffersoncountyclerk.org/wheredoivote/" target="_blank" rel="noopener">click here</a>.
+      <strong>📋 Tap any candidate to mark your choice, then save the image to bring to the polls.</strong> Party labels in nonpartisan races (Mayor, Metro Council) will <em>not</em> appear on your official ballot — <strong>bring your ballot guide</strong> with you so you know who you're voting for. If you would like to confirm your ballot with the Jefferson County Clerk, <a href="https://strap.jeffersoncountyclerk.org/WhereDoIVote/" target="_blank" rel="noopener">click here</a>.
     </div>
 
     <div class="legend">
@@ -768,7 +768,7 @@ const TRANSLATIONS = {
     'voting.other_ev_closed': '▼ Other early voting locations (23)',
     'voting.other_ev_open': '▲ Hide other locations',
     'ballot.heading': 'Your Louisville Democratic Party General Election Ballot Guide',
-    'ballot.polls_note': '<strong>📋 Tap any candidate to mark your choice, then save the image to bring to the polls.</strong> Party labels in nonpartisan races will <em>not</em> appear on your official ballot — <strong>bring your ballot guide</strong> with you. If you would like to confirm your ballot with the Jefferson County Clerk, <a href="https://jeffersoncountyclerk.org/wheredoivote/" target="_blank" rel="noopener">click here</a>.',
+    'ballot.polls_note': '<strong>📋 Tap any candidate to mark your choice, then save the image to bring to the polls.</strong> Party labels in nonpartisan races will <em>not</em> appear on your official ballot — <strong>bring your ballot guide</strong> with you. If you would like to confirm your ballot with the Jefferson County Clerk, <a href="https://strap.jeffersoncountyclerk.org/WhereDoIVote/" target="_blank" rel="noopener">click here</a>.',
     'legend.title': 'Legend:',
     'legend.endorsed': 'LDP Endorsed',
     'legend.dem': 'Democrat',
@@ -817,6 +817,13 @@ const TRANSLATIONS = {
     'race.court_of_appeals': 'KY Court of Appeals — District {DIST}, Division {DIV} (Select One)',
     'race.school_board': 'Jefferson County School Board — Division {N} (Select One)',
     'race.soil_water': 'Soil & Water Conservation District Supervisor (Select up to 3)',
+    'race.lyndon_mayor': 'City of Lyndon — Mayor (Select One)',
+    'race.lyndon_council': 'City of Lyndon — Councilmember (Select up to 7)',
+    'race.ky_amendment_1': 'Constitutional Amendment No. 1',
+    'ballot.ballot_questions_header': 'Ballot Questions',
+    'ballot.amendment_1_text': 'Are you in favor of limiting a Governor\'s ability to grant pardons or commute sentences by prohibiting him or her from granting pardons or commuting sentences during the time period beginning 60 days prior to the general election at which the Governor is elected, and ending when the Governor is sworn in for that term by amending the Constitution of Kentucky as stated below?',
+    'ballot.amendment_yes': 'Yes',
+    'ballot.amendment_no': 'No',
     'race.endorsed_badge': 'LDP Endorsed',
     'ballot.party_labels_footer': 'Party labels for nonpartisan races verified via Open Records Request. Partisan race information from the Kentucky Secretary of State.',
     'ballot.subhead': 'General Election — November 3, 2026  ·  Precinct {P}  ·  Metro Council District {D}',
@@ -864,7 +871,7 @@ const TRANSLATIONS = {
     'voting.other_ev_closed': '▼ Otros centros de votación anticipada (23)',
     'voting.other_ev_open': '▲ Ocultar otros centros',
     'ballot.heading': 'Tu Guía de Boleta de la Elección General del Partido Demócrata de Louisville',
-    'ballot.polls_note': '<strong>📋 Toca cualquier candidato para marcar tu selección, luego guarda la imagen para llevarla a las urnas.</strong> Las etiquetas de partido en las contiendas no partidistas <em>no</em> aparecerán en tu boleta oficial — <strong>lleva tu guía de boleta</strong> contigo. Si deseas confirmar tu boleta con el Secretario del Condado de Jefferson, <a href="https://jeffersoncountyclerk.org/wheredoivote/" target="_blank" rel="noopener">haz clic aquí</a>.',
+    'ballot.polls_note': '<strong>📋 Toca cualquier candidato para marcar tu selección, luego guarda la imagen para llevarla a las urnas.</strong> Las etiquetas de partido en las contiendas no partidistas <em>no</em> aparecerán en tu boleta oficial — <strong>lleva tu guía de boleta</strong> contigo. Si deseas confirmar tu boleta con el Secretario del Condado de Jefferson, <a href="https://strap.jeffersoncountyclerk.org/WhereDoIVote/" target="_blank" rel="noopener">haz clic aquí</a>.',
     'legend.title': 'Leyenda:',
     'legend.endorsed': 'Respaldado por el LDP',
     'legend.dem': 'Demócrata',
@@ -913,6 +920,13 @@ const TRANSLATIONS = {
     'race.court_of_appeals': 'Tribunal de Apelaciones de KY — Distrito {DIST}, División {DIV} (Seleccione uno)',
     'race.school_board': 'Junta Escolar del Condado de Jefferson — División {N} (Seleccione uno)',
     'race.soil_water': 'Supervisor del Distrito de Conservación de Suelo y Agua (Seleccione hasta 3)',
+    'race.lyndon_mayor': 'Ciudad de Lyndon — Alcalde (Seleccione uno)',
+    'race.lyndon_council': 'Ciudad de Lyndon — Miembro del Concejo (Seleccione hasta 7)',
+    'race.ky_amendment_1': 'Enmienda Constitucional No. 1',
+    'ballot.ballot_questions_header': 'Preguntas en la Boleta',
+    'ballot.amendment_1_text': '¿Está usted a favor de limitar la capacidad del Gobernador para otorgar indultos o conmutar sentencias?',
+    'ballot.amendment_yes': 'Sí',
+    'ballot.amendment_no': 'No',
     'race.endorsed_badge': 'Respaldado por LDP',
     'ballot.party_labels_footer': 'Etiquetas de partido para contiendas no partidistas verificadas mediante Solicitud de Registros Públicos.',
     'ballot.subhead': 'Elección General — 3 de noviembre de 2026  ·  Precinto {P}  ·  Distrito del Concejo Metro {D}',
@@ -1009,6 +1023,13 @@ const TRANSLATIONS = {
     'race.court_of_appeals': 'Maxkamadda Shaabaaddyada KY — Degmo {DIST}, Qaybta {DIV} (Dooro Hal)',
     'race.school_board': 'Golaha Waxbarashada Degmada Jefferson — Qaybta {N} (Dooro Hal)',
     'race.soil_water': 'Waaxda Xifaalinta Ciidda iyo Biyaha (Dooro Ilaa 3)',
+    'race.lyndon_mayor': 'Magaalada Lyndon — Duqa (Dooro Hal)',
+    'race.lyndon_council': 'Magaalada Lyndon — Xubin Golaha (Dooro Ilaa 7)',
+    'race.ky_amendment_1': 'Waxsoosaarka Dastuuriga Ah No. 1',
+    'ballot.ballot_questions_header': 'Su\'aalaha Warqadda',
+    'ballot.amendment_1_text': 'Ma taageersantahay in la xaddido awoodda Guburnaha si uu u bixiyo cafis ama uu u yareeyoo xukuumadaha?',
+    'ballot.amendment_yes': 'Haa',
+    'ballot.amendment_no': 'Maya',
     'race.endorsed_badge': 'LDP Taageersan',
     'ballot.party_labels_footer': 'Calaamadaha xisbiga ee tartanmaha aan xisbiyeysan waxaa lagu xaqiijiyay Codsi Diiwaannada Dadweynaha.',
     'ballot.subhead': 'Doorashada Guud — 3 Noofember 2026 · Degaanka {P} · Degmada Golaha Metro {D}',
@@ -1105,6 +1126,13 @@ const TRANSLATIONS = {
     'race.court_of_appeals': 'Mahakama ya Rufaa ya KY — Wilaya {DIST}, Mgawanyo {DIV} (Chagua Mmoja)',
     'race.school_board': 'Bodi ya Shule ya Kaunti ya Jefferson — Mgawanyo {N} (Chagua Mmoja)',
     'race.soil_water': 'Msimamizi wa Wilaya ya Uhifadhi wa Udongo na Maji (Chagua hadi 3)',
+    'race.lyndon_mayor': 'Mji wa Lyndon — Meya (Chagua Mmoja)',
+    'race.lyndon_council': 'Mji wa Lyndon — Mjumbe wa Baraza (Chagua hadi 7)',
+    'race.ky_amendment_1': 'Marekebisho ya Katiba Na. 1',
+    'ballot.ballot_questions_header': 'Maswali ya Kura',
+    'ballot.amendment_1_text': 'Je, unaunga mkono kupunguza uwezo wa Gavana kutoa msamaha au kupunguza vifungo?',
+    'ballot.amendment_yes': 'Ndiyo',
+    'ballot.amendment_no': 'Hapana',
     'race.endorsed_badge': 'LDP Imeidhinisha',
     'ballot.party_labels_footer': 'Lebo za vyama kwa mashindano yasiyo na vyama zilithibitishwa kupitia Ombi la Rekodi za Umma.',
     'ballot.subhead': 'Uchaguzi Mkuu — 3 Novemba 2026 · Kata {P} · Wilaya ya Baraza la Metro {D}',
@@ -1201,6 +1229,13 @@ const TRANSLATIONS = {
     'race.court_of_appeals': 'Tribinal Apèl KY — Distri {DIST}, Divizyon {DIV} (Chwazi Youn)',
     'race.school_board': 'Konsèy Lekòl Konte Jefferson — Divizyon {N} (Chwazi Youn)',
     'race.soil_water': 'Sipèvizè Distri Konservasymon Tè ak Dlo (Chwazi jiska 3)',
+    'race.lyndon_mayor': 'Vil Lyndon — Majistra (Chwazi Youn)',
+    'race.lyndon_council': 'Vil Lyndon — Manm Konsèy (Chwazi jiska 7)',
+    'race.ky_amendment_1': 'Amannman Konstitisyonèl No. 1',
+    'ballot.ballot_questions_header': 'Kesyon Bilten',
+    'ballot.amendment_1_text': 'Èske ou dakò pou limite kapasite Gouvènè a pou bay grès oswa rédwi pèn prizon?',
+    'ballot.amendment_yes': 'Wi',
+    'ballot.amendment_no': 'Non',
     'race.endorsed_badge': 'Endose pa LDP',
     'ballot.party_labels_footer': 'Etikèt pati pou kous ki pa patizan yo te verifye via yon Demann Dosye Piblik.',
     'ballot.subhead': 'Eleksyon Jeneral — 3 Novanm 2026 · Presinik {P} · Distri Konsèy Metro {D}',
@@ -1294,9 +1329,11 @@ const KY_SENATE_CANDIDATES = {
 // KY State House — Jefferson County districts
 const KY_HOUSE_CANDIDATES = {
   30: [{ name: 'Mitra Subedi',             party: 'D' }],
+  32: [{ name: 'Tina Bojanowski',          party: 'D' }],
   33: [{ name: 'Jason Michael Nemes',      party: 'R' }, { name: 'Jennifer Hardin',      party: 'D' }],
   35: [{ name: 'Bret Shultz',             party: 'R' }, { name: 'Lisa Willner',          party: 'D' }],
   36: [{ name: 'John F. Hodgson',         party: 'R' }, { name: 'William "Woody" Zorn',  party: 'D' }],
+  38: [{ name: 'Carrie Sanders McKeehan', party: 'R' }, { name: 'Rachel Roarx',          party: 'D' }],
   40: [{ name: 'Nima Kulkarni',           party: 'D' }],
   43: [{ name: 'Robert LeVertis Bell',    party: 'D' }],
   44: [{ name: 'Kenya Wade',              party: 'D' }],
@@ -1380,6 +1417,36 @@ const JTOWN_COUNCIL_CANDIDATES = [
   { name: 'Allison Neal Head',        party: null  },
 ];
 
+// Lyndon — Mayor + Council (14 precincts)
+const LYNDON_PRECINCTS = new Set([
+  'D154',
+  'E144','E145','E155','E173','E176','E202','E203',
+  'F106','F151','F171','F172','F179','F180',
+]);
+const LYNDON_MAYOR_CANDIDATES = [
+  { name: 'Andy Benner',  party: null },
+  { name: 'Brent Hagan', party: null },
+];
+const LYNDON_COUNCIL_CANDIDATES = [
+  { name: 'Jeni Church',           party: null },
+  { name: 'Ann Towles',            party: null },
+  { name: 'Carrie N. Popham',      party: null },
+  { name: 'Linda L. Cambron',      party: null },
+  { name: 'James Kapp',            party: null },
+  { name: 'Becky Baxter Ricketts', party: null },
+  { name: 'Dave Wegman',           party: null },
+  { name: 'Dana Isbell',           party: null },
+  { name: 'Larry Owens',           party: null },
+  { name: 'Amanda L. Haskovec',    party: null },
+  { name: 'Erika Allen',           party: null },
+  { name: 'Jim Yates',             party: null },
+  { name: 'Carla S. Nalley',       party: null },
+  { name: 'Amy Lynn Stuber',       party: null },
+  { name: 'Vicki Garmel Stanley',  party: null },
+  { name: 'Dean Samsel',           party: null },
+  { name: 'Sharon R. Morris',      party: null },
+];
+
 // District Judge — District 30 (Jefferson County), all 16 divisions
 const DISTRICT_JUDGE_RACES = [
   { div: 1,  candidates: [{ name: 'Anthony Lewis Jones',     party: null }] },
@@ -1400,10 +1467,8 @@ const DISTRICT_JUDGE_RACES = [
   { div: 16, candidates: [{ name: 'Katie King',              party: null }] },
 ];
 
-// KY Court of Appeals — District 5 contested race (covers Jefferson County)
-const COURT_OF_APPEALS_RACES = [
-  { dist: 5, div: 1, candidates: [{ name: 'Will Moynahan', party: null }, { name: 'Lucy Ferguson VanMeter', party: null }] },
-];
+// KY Court of Appeals — no Jefferson County race in 2026 general
+const COURT_OF_APPEALS_RACES = [];
 
 // Soil & Water Conservation District Supervisors (3 seats, 2 candidates)
 const SOIL_WATER_CANDIDATES = [
@@ -1532,6 +1597,7 @@ function buildBallot({ council_district, commissioner_district, state_house_dist
   const isOdd      = council_district % 2 !== 0;
   const isJtown    = JTOWN_PRECINCTS.has(precinct);
   const isShively  = SHIVELY_PRECINCTS.has(precinct);
+  const isLyndon   = LYNDON_PRECINCTS.has(precinct);
 
   // Find school board division for this precinct
   let schoolBoardDiv = null;
@@ -1681,6 +1747,35 @@ function buildBallot({ council_district, commissioner_district, state_house_dist
     </div>`;
   }
 
+  // 15. LYNDON MAYOR & COUNCIL (Lyndon precincts only)
+  if (isLyndon) {
+    const lyndonMayorId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.lyndon_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${LYNDON_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, lyndonMayorId)).join('')}</div>
+    </div>`;
+    const lyndonCouncilId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.lyndon_council')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${
+        LYNDON_COUNCIL_CANDIDATES.map(c => candidateHTML(c, false, lyndonCouncilId, 7)).join('')
+      }</div>
+    </div>`;
+  }
+
+  html += '</div>';
+
+  // CONSTITUTIONAL AMENDMENT (all voters)
+  html += `<div class="ballot-section">
+    <div class="section-header nonpartisan">${t('ballot.ballot_questions_header')}</div>`;
+  html += `<div class="race nonpartisan-race">
+    <div class="race-title">${t('race.ky_amendment_1')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+    <div style="font-size:0.82rem;color:var(--muted);padding:4px 8px 10px">${t('ballot.amendment_1_text')}</div>
+    <div class="candidate-list">
+      <div class="candidate">${t('ballot.amendment_yes')}</div>
+      <div class="candidate">${t('ballot.amendment_no')}</div>
+    </div>
+  </div>`;
   html += '</div>';
 
   html += `<div class="race" style="padding:10px 16px">
