@@ -556,8 +556,8 @@
 
         <!-- Closest early voting site -->
         <div class="voting-card early-voting">
-          <div class="vc-label" data-i18n="voting.ev_label">🗳️ Closest Early Voting Site</div>
-          <div class="vc-note" data-i18n-html="voting.ev_note"><strong>October 29–31, 2026 only.</strong> Vote at <strong>any</strong> early voting site — no precinct restriction</div>
+          <div class="vc-label" data-i18n="voting.ev_label">🗳️ Nearest Early Voting Site (you may vote at ANY location)</div>
+          <div class="vc-note" data-i18n-html="voting.ev_note"><strong>October 29–31, 2026 only.</strong> You may vote at <strong>any</strong> early voting site — you are not restricted to the nearest one</div>
           <div class="vc-name" id="evClosestName"></div>
           <div class="vc-addr" id="evClosestAddr"></div>
           <button class="other-ev-btn" id="otherEvBtn" onclick="toggleOtherEV()">▼ Other early voting locations</button>
@@ -763,8 +763,8 @@ const TRANSLATIONS = {
     'voting.ed_note': 'November 3, 2026 — you must vote at this location on Election Day',
     'voting.clerk_link': 'Verify on Clerk\'s website →',
     'voting.clerk_fallback': 'See Clerk\'s website',
-    'voting.ev_label': '🗳️ Closest Early Voting Site',
-    'voting.ev_note': '<strong>October 29–31, 2026 only.</strong> Vote at <strong>any</strong> early voting site — no precinct restriction',
+    'voting.ev_label': '🗳️ Nearest Early Voting Site (you may vote at ANY location)',
+    'voting.ev_note': '<strong>October 29–31, 2026 only.</strong> You may vote at <strong>any</strong> early voting site — you are not restricted to the nearest one',
     'voting.other_ev_closed': '▼ Other early voting locations (23)',
     'voting.other_ev_open': '▲ Hide other locations',
     'ballot.heading': 'Your Louisville Democratic Party General Election Ballot Guide',
@@ -866,8 +866,8 @@ const TRANSLATIONS = {
     'voting.ed_note': '3 de noviembre de 2026 — debes votar en este lugar el Día de Elección',
     'voting.clerk_link': 'Verificar en el sitio web del Secretario →',
     'voting.clerk_fallback': 'Ver sitio web del Secretario',
-    'voting.ev_label': '🗳️ Centro de Votación Anticipada Más Cercano',
-    'voting.ev_note': '<strong>Solo del 29 al 31 de octubre de 2026.</strong> Vota en <strong>cualquier</strong> centro de votación anticipada — sin restricción de precinto',
+    'voting.ev_label': '🗳️ Centro de Votación Anticipada Más Cercano (puedes votar en CUALQUIER sede)',
+    'voting.ev_note': '<strong>Solo del 29 al 31 de octubre de 2026.</strong> Puedes votar en <strong>cualquier</strong> centro de votación anticipada — no estás restringido al más cercano',
     'voting.other_ev_closed': '▼ Otros centros de votación anticipada (23)',
     'voting.other_ev_open': '▲ Ocultar otros centros',
     'ballot.heading': 'Tu Guía de Boleta de la Elección General del Partido Demócrata de Louisville',
@@ -969,8 +969,8 @@ const TRANSLATIONS = {
     'voting.ed_note': '3 Noofember 2026 — waa inaad ku codaysaa meeshan Maalinta Doorashada',
     'voting.clerk_link': 'Xaqiiji websaydka Katibka →',
     'voting.clerk_fallback': 'Arag websaydka Katibka',
-    'voting.ev_label': '🗳️ Xarunta Ugu Dhow ee Codbixinta Hore',
-    'voting.ev_note': '<strong>29–31 Oktobar 2026 oo kaliya.</strong> Ku cod bixi <strong>xarunta kasta</strong> ee codbixinta hore — xaddidaad degaan malaha',
+    'voting.ev_label': '🗳️ Xarunta Ugu Dhow ee Codbixinta Hore (waxaad ku codayn kartaa XARUN KASTABA)',
+    'voting.ev_note': '<strong>29–31 Oktobar 2026 oo kaliya.</strong> Waxaad ku codayn kartaa <strong>xarunta kasta</strong> ee codbixinta hore — laguma xaddidna xarunta ugu dhow',
     'voting.other_ev_closed': '▼ Xarumaha kale ee codbixinta hore (23)',
     'voting.other_ev_open': '▲ Qari xarumaha kale',
     'ballot.heading': 'Hagahaaga Codbixinta Doorashada Guud ee Xisbiga Dimuqraadiga ee Louisville',
@@ -1072,8 +1072,8 @@ const TRANSLATIONS = {
     'voting.ed_note': '3 Novemba 2026 — lazima upige kura mahali hapa Siku ya Uchaguzi',
     'voting.clerk_link': 'Thibitisha kwenye tovuti ya Katibu →',
     'voting.clerk_fallback': 'Angalia tovuti ya Katibu',
-    'voting.ev_label': '🗳️ Kituo cha Karibu Zaidi cha Kupiga Kura Mapema',
-    'voting.ev_note': '<strong>Oktoba 29–31, 2026 tu.</strong> Piga kura katika <strong>kituo chochote</strong> cha kupiga kura mapema — hakuna vizuizi vya kata',
+    'voting.ev_label': '🗳️ Kituo cha Karibu Zaidi cha Kupiga Kura Mapema (unaweza kupiga kura MAHALI POPOTE)',
+    'voting.ev_note': '<strong>Oktoba 29–31, 2026 tu.</strong> Unaweza kupiga kura katika <strong>kituo chochote</strong> cha kupiga kura mapema — huhitajika kwenda kituo cha karibu zaidi',
     'voting.other_ev_closed': '▼ Vituo vingine vya kupiga kura mapema (23)',
     'voting.other_ev_open': '▲ Ficha vituo vingine',
     'ballot.heading': 'Mwongozo Wako wa Kura ya Uchaguzi Mkuu wa Chama cha Democratic cha Louisville',
@@ -1175,8 +1175,8 @@ const TRANSLATIONS = {
     'voting.ed_note': '3 Novanm 2026 — ou dwe vote nan kote sa a Jou Eleksyon an',
     'voting.clerk_link': 'Verifye sou sit wèb Greffye a →',
     'voting.clerk_fallback': 'Gade sit wèb Greffye a',
-    'voting.ev_label': '🗳️ Sit Vòt Bonè ki Pi Pre',
-    'voting.ev_note': '<strong>29–31 Oktòb 2026 sèlman.</strong> Vote nan <strong>nenpòt</strong> sit vòt bonè — pa gen restriksyon presinik',
+    'voting.ev_label': '🗳️ Sit Vòt Bonè ki Pi Pre (ou ka vote nan NENPÒT kote)',
+    'voting.ev_note': '<strong>29–31 Oktòb 2026 sèlman.</strong> Ou ka vote nan <strong>nenpòt</strong> sit vòt bonè — ou pa oblije ale nan sit ki pi pre a',
     'voting.other_ev_closed': '▼ Lòt kote pou vote bonè (23)',
     'voting.other_ev_open': '▲ Kache lòt kote yo',
     'ballot.heading': 'Gid Bilten Eleksyon Jeneral Pati Demokratik Louisville Ou',
@@ -1454,7 +1454,7 @@ const DISTRICT_JUDGE_RACES = [
   { div: 3,  candidates: [{ name: 'Kristina Marie Garvey',   party: null }] },
   { div: 4,  candidates: [{ name: 'Yvette De La Guardia',    party: null }] },
   { div: 5,  candidates: [{ name: 'Jennifer H. Leibson',     party: null }] },
-  { div: 6,  candidates: [{ name: 'Teddy B. Gordon',         party: null }, { name: 'Lisa L. Langford',          party: null }] },
+  { div: 6,  candidates: [{ name: 'Lisa L. Langford',         party: null }, { name: 'Teddy B. Gordon',           party: null }] },
   { div: 7,  candidates: [{ name: 'Megan McDonald',          party: null }] },
   { div: 8,  candidates: [{ name: 'Jonathan Max Allen',      party: null }, { name: 'Karen Faulkner',            party: null }] },
   { div: 9,  candidates: [{ name: 'Tanisha Ann Hickerson',   party: null }] },
@@ -1618,6 +1618,16 @@ function buildBallot({ council_district, commissioner_district, state_house_dist
   html += raceHTML(t('race.us_senator'),
     US_SENATE_CANDIDATES.map(c => candidateHTML(c, isDemEndorsed(c), usSenRaceId)));
 
+  // 1b. CONSTITUTIONAL AMENDMENT NO. 1 (appears on ballot right after US Senator)
+  html += `<div class="race">
+    <div class="race-title">${t('race.ky_amendment_1')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+    <div style="font-size:0.82rem;color:var(--muted);padding:4px 8px 10px">${t('ballot.amendment_1_text')}</div>
+    <div class="candidate-list">
+      <div class="candidate">${t('ballot.amendment_yes')}</div>
+      <div class="candidate">${t('ballot.amendment_no')}</div>
+    </div>
+  </div>`;
+
   // 2. US REPRESENTATIVE IN CONGRESS
   if (KY_CONGRESS_CANDIDATES[congressional_district]) {
     const congressRaceId = 'race' + (++raceCounter);
@@ -1763,19 +1773,6 @@ function buildBallot({ council_district, commissioner_district, state_house_dist
     </div>`;
   }
 
-  html += '</div>';
-
-  // CONSTITUTIONAL AMENDMENT (all voters)
-  html += `<div class="ballot-section">
-    <div class="section-header nonpartisan">${t('ballot.ballot_questions_header')}</div>`;
-  html += `<div class="race nonpartisan-race">
-    <div class="race-title">${t('race.ky_amendment_1')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-    <div style="font-size:0.82rem;color:var(--muted);padding:4px 8px 10px">${t('ballot.amendment_1_text')}</div>
-    <div class="candidate-list">
-      <div class="candidate">${t('ballot.amendment_yes')}</div>
-      <div class="candidate">${t('ballot.amendment_no')}</div>
-    </div>
-  </div>`;
   html += '</div>';
 
   html += `<div class="race" style="padding:10px 16px">
