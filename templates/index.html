@@ -3319,6 +3319,441 @@ const isWorthingtonHills         = cityCode === 'WOH';
       SHIVELY_MAYOR_CANDIDATES.map(c => candidateHTML(c, isDemEndorsed(c), shivelyMayorId)));
   }
 
+  html += '</div>';
+
+  // ══ NONPARTISAN SECTION ══
+  html += `<div class="ballot-section">
+    <div class="section-header nonpartisan">${t('ballot.nonpartisan_header')}</div>
+    <div class="section-note">${t('ballot.nonpartisan_section_note')}</div>`;
+
+  // 11. SOIL & WATER CONSERVATION (3 seats, 2 candidates)
+  const soilWaterId = 'race' + (++raceCounter);
+  html += `<div class="race nonpartisan-race">
+    <div class="race-title">${t('race.soil_water')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+    <div class="candidate-list">${SOIL_WATER_CANDIDATES.map(c => candidateHTML(c, false, soilWaterId, 3)).join('')}</div>
+  </div>`;
+
+  // 7. METRO MAYOR
+  const mayorRaceId = 'race' + (++raceCounter);
+  html += `<div class="race nonpartisan-race">
+    <div class="race-title">${t('race.metro_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+    <div class="candidate-list mayor-list">${
+      MAYOR_CANDIDATES.map(c => candidateHTML(c, ENDORSEMENTS.mayor.includes(c.name), mayorRaceId)).join('')
+    }</div>
+  </div>`;
+
+  // 8. METRO COUNCIL (all odd districts)
+  if (isOdd && COUNCIL_CANDIDATES[council_district]) {
+    const councilRaceId = 'race' + (++raceCounter);
+    const endorsed = ENDORSEMENTS.council[council_district] || [];
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.metro_council').replace('{N}', council_district)} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${
+        COUNCIL_CANDIDATES[council_district].map(c => candidateHTML(c, endorsed.includes(c.name), councilRaceId)).join('')
+      }</div>
+    </div>`;
+  }
+
+  // 12. SCHOOL BOARD (precinct-gated by division)
+  if (schoolBoardDiv !== null) {
+    const sbRaceId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.school_board').replace('{N}', schoolBoardDiv)} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${
+        SCHOOL_BOARD_CANDIDATES[schoolBoardDiv].map(c => candidateHTML(c, false, sbRaceId)).join('')
+      }</div>
+    </div>`;
+  }
+
+  // 13. SHIVELY COUNCIL (Shively precincts only)
+  if (isShively) {
+    const shivelyCouncilId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.shively_council')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${
+        SHIVELY_COUNCIL_CANDIDATES.map(c => candidateHTML(c, false, shivelyCouncilId, 6)).join('')
+      }</div>
+    </div>`;
+  }
+
+  // 14. JEFFERSONTOWN MAYOR & COUNCIL (J-town precincts only)
+  if (isJtown) {
+    const jtownMayorId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.jtown_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${JTOWN_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, jtownMayorId)).join('')}</div>
+    </div>`;
+    const jtownRaceId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.jtown_council')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${
+        JTOWN_COUNCIL_CANDIDATES.map(c => candidateHTML(c, false, jtownRaceId, 8)).join('')
+      }</div>
+    </div>`;
+  }
+
+  // 15. LYNDON MAYOR & COUNCIL (Lyndon precincts only)
+  if (isLyndon) {
+    const lyndonMayorId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.lyndon_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${LYNDON_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, lyndonMayorId)).join('')}</div>
+    </div>`;
+    const lyndonCouncilId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.lyndon_council')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${
+        LYNDON_COUNCIL_CANDIDATES.map(c => candidateHTML(c, false, lyndonCouncilId, 7)).join('')
+      }</div>
+    </div>`;
+  }
+
+  // 16. DRUID HILLS MAYOR & COMMISSIONER (Druid Hills precincts only)
+  if (isDruidHills) {
+    const drhMayorId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.drh_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${DRH_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, drhMayorId)).join('')}</div>
+    </div>`;
+    const drhCommId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.drh_commissioner')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${DRH_COMMISSIONER_CANDIDATES.map(c => candidateHTML(c, false, drhCommId, 4)).join('')}</div>
+    </div>`;
+  }
+
+  // 17. INDIAN HILLS MAYOR & COUNCIL (Indian Hills precincts only)
+  if (isIndianHills) {
+    const inhMayorId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.inh_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${INH_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, inhMayorId)).join('')}</div>
+    </div>`;
+    const inhCouncilId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.inh_council')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${INH_COUNCIL_CANDIDATES.map(c => candidateHTML(c, false, inhCouncilId, 9)).join('')}</div>
+    </div>`;
+  }
+
+  // 18. WINDY HILLS MAYOR & COUNCIL (Windy Hills precincts only)
+  if (isWindyHills) {
+    const wdhMayorId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.wdh_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${WDH_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, wdhMayorId)).join('')}</div>
+    </div>`;
+    const wdhCouncilId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.wdh_council')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${WDH_COUNCIL_CANDIDATES.map(c => candidateHTML(c, false, wdhCouncilId, 6)).join('')}</div>
+    </div>`;
+  }
+
+  // 19. BARBOURMEADE MAYOR & COMMISSIONER (Barbourmeade precincts only)
+  if (isBarbourmeade) {
+    const barMayorId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.bar_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${BAR_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, barMayorId)).join('')}</div>
+    </div>`;
+    const barCommId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.bar_commissioner')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${BAR_COMMISSIONER_CANDIDATES.map(c => candidateHTML(c, false, barCommId, 4)).join('')}</div>
+    </div>`;
+  }
+
+  // 20. COLDSTREAM MAYOR & COUNCIL (Coldstream precincts only)
+  if (isColdstream) {
+    const colMayorId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.col_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${COL_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, colMayorId)).join('')}</div>
+    </div>`;
+    const colCouncilId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.col_council')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${COL_COUNCIL_CANDIDATES.map(c => candidateHTML(c, false, colCouncilId, 6)).join('')}</div>
+    </div>`;
+  }
+  // 21. SAINT MATTHEWS MAYOR & COUNCIL
+  if (isSaintMatthews) {
+    const stmMayorId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.stm_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${STM_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, stmMayorId)).join('')}</div>
+    </div>`;
+    const stmCouncilId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.stm_council')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${STM_COUNCIL_CANDIDATES.map(c => candidateHTML(c, false, stmCouncilId, 8)).join('')}</div>
+    </div>`;
+  }
+
+  // 22. SAINT REGIS PARK MAYOR & COUNCIL
+  if (isSaintRegis) {
+    const srpMayorId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.srp_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${SRP_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, srpMayorId)).join('')}</div>
+    </div>`;
+    const srpCouncilId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.srp_council')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${SRP_COUNCIL_CANDIDATES.map(c => candidateHTML(c, false, srpCouncilId, 7)).join('')}</div>
+    </div>`;
+  }
+
+  // 23. HURSTBOURNE MAYOR & COMMISSIONER
+  if (isHurstbourne) {
+    const hubMayorId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.hub_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${HUB_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, hubMayorId)).join('')}</div>
+    </div>`;
+    const hubCommId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.hub_commissioner')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${HUB_COMMISSIONER_CANDIDATES.map(c => candidateHTML(c, false, hubCommId, 4)).join('')}</div>
+    </div>`;
+  }
+
+  // 24. DOUGLASS HILLS MAYOR & COUNCIL
+  if (isDouglassHills) {
+    const dohMayorId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.doh_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${DOH_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, dohMayorId)).join('')}</div>
+    </div>`;
+    const dohCouncilId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.doh_council')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${DOH_COUNCIL_CANDIDATES.map(c => candidateHTML(c, false, dohCouncilId, 6)).join('')}</div>
+    </div>`;
+  }
+
+  // 25. BEECHWOOD VILLAGE MAYOR & COUNCIL
+  if (isBeechwoodVillage) {
+    const bwvMayorId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.bwv_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${BWV_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, bwvMayorId)).join('')}</div>
+    </div>`;
+    const bwvCouncilId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.bwv_council')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${BWV_COUNCIL_CANDIDATES.map(c => candidateHTML(c, false, bwvCouncilId, 6)).join('')}</div>
+    </div>`;
+  }
+
+  // 26. GRAYMOOR-DEVONDALE MAYOR & COUNCIL
+  if (isGraymoor) {
+    const grdMayorId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.grd_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${GRD_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, grdMayorId)).join('')}</div>
+    </div>`;
+    const grdCouncilId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.grd_council')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${GRD_COUNCIL_CANDIDATES.map(c => candidateHTML(c, false, grdCouncilId, 6)).join('')}</div>
+    </div>`;
+  }
+
+  // 27. NORBOURNE ESTATES MAYOR & COMMISSIONER (write-in only)
+  if (isNorbourneEstates) {
+    const nbeMayorId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.nbe_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+    </div>`;
+    const nbeCommId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.nbe_commissioner')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+    </div>`;
+  }
+
+  // 28. RICHLAWN MAYOR & COMMISSIONER
+  if (isRichlawn) {
+    const rchMayorId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.rch_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${RCH_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, rchMayorId)).join('')}</div>
+    </div>`;
+    const rchCommId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.rch_commissioner')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${RCH_COMMISSIONER_CANDIDATES.map(c => candidateHTML(c, false, rchCommId, 4)).join('')}</div>
+    </div>`;
+  }
+
+  // 29. AUDUBON PARK MAYOR & COUNCIL
+  if (isAudubonPark) {
+    const apkMayorId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.apk_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${APK_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, apkMayorId)).join('')}</div>
+    </div>`;
+    const apkCouncilId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.apk_council')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${APK_COUNCIL_CANDIDATES.map(c => candidateHTML(c, false, apkCouncilId, 6)).join('')}</div>
+    </div>`;
+  }
+
+  // 30. STRATHMOOR MANOR MAYOR & COMMISSIONER
+  if (isStrathmoorManor) {
+    const smmMayorId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.smm_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${SMM_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, smmMayorId)).join('')}</div>
+    </div>`;
+    const smmCommId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.smm_commissioner')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${SMM_COMMISSIONER_CANDIDATES.map(c => candidateHTML(c, false, smmCommId, 4)).join('')}</div>
+    </div>`;
+  }
+
+  // 31. MIDDLETOWN MAYOR & COMMISSIONER
+  if (isMiddletown) {
+    const midMayorId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.mid_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${MID_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, midMayorId)).join('')}</div>
+    </div>`;
+    const midCommId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.mid_commissioner')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${MID_COMMISSIONER_CANDIDATES.map(c => candidateHTML(c, false, midCommId, 4)).join('')}</div>
+    </div>`;
+  }
+
+  // 32. PROSPECT MAYOR & COUNCIL
+  if (isProspect) {
+    const pspMayorId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.psp_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${PSP_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, pspMayorId)).join('')}</div>
+    </div>`;
+    const pspCouncilId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.psp_council')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${PSP_COUNCIL_CANDIDATES.map(c => candidateHTML(c, false, pspCouncilId, 6)).join('')}</div>
+    </div>`;
+  }
+
+  // 33. WOODLAND HILLS MAYOR & COMMISSIONER
+  if (isWoodlandHills) {
+    const wlhMayorId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.wlh_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${WLH_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, wlhMayorId)).join('')}</div>
+    </div>`;
+    const wlhCommId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.wlh_commissioner')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${WLH_COMMISSIONER_CANDIDATES.map(c => candidateHTML(c, false, wlhCommId, 4)).join('')}</div>
+    </div>`;
+  }
+
+  // 34. LYNNVIEW MAYOR & COUNCIL
+  if (isLynnview) {
+    const lnvMayorId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.lnv_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${LNV_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, lnvMayorId)).join('')}</div>
+    </div>`;
+    const lnvCouncilId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.lnv_council')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${LNV_COUNCIL_CANDIDATES.map(c => candidateHTML(c, false, lnvCouncilId, 6)).join('')}</div>
+    </div>`;
+  }
+
+  // 35. HERITAGE CREEK MAYOR & COUNCIL
+  if (isHeritageCk) {
+    const hckMayorId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.hck_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${HCK_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, hckMayorId)).join('')}</div>
+    </div>`;
+    const hckCouncilId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.hck_council')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${HCK_COUNCIL_CANDIDATES.map(c => candidateHTML(c, false, hckCouncilId, 6)).join('')}</div>
+    </div>`;
+  }
+
+  // 36. SENECA GARDENS MAYOR & COMMISSIONER
+  if (isSenecaGardens) {
+    const sngMayorId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.sng_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${SNG_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, sngMayorId)).join('')}</div>
+    </div>`;
+    const sngCommId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.sng_commissioner')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${SNG_COMMISSIONER_CANDIDATES.map(c => candidateHTML(c, false, sngCommId, 4)).join('')}</div>
+    </div>`;
+  }
+
+  // 37. STRATHMOOR VILLAGE MAYOR & COMMISSIONER (commissioners write-in only)
+  if (isStrathmoorVlg) {
+    const smvMayorId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.smv_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${SMV_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, smvMayorId)).join('')}</div>
+    </div>`;
+    const smvCommId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.smv_commissioner')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+    </div>`;
+  }
+
+  // 38. WELLINGTON MAYOR & COMMISSIONER
+  if (isWellington) {
+    const welMayorId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.wel_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${WEL_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, welMayorId)).join('')}</div>
+    </div>`;
+    const welCommId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.wel_commissioner')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${WEL_COMMISSIONER_CANDIDATES.map(c => candidateHTML(c, false, welCommId, 4)).join('')}</div>
+    </div>`;
+  }
+
+  // 39. NORWOOD MAYOR & COMMISSIONER
+  if (isNorwood) {
+    const norMayorId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.nor_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${NOR_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, norMayorId)).join('')}</div>
+    </div>`;
+    const norCommId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.nor_commissioner')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${NOR_COMMISSIONER_CANDIDATES.map(c => candidateHTML(c, false, norCommId, 4)).join('')}</div>
+    </div>`;
+  }
+
+  // 40. KINGSLEY MAYOR & COMMISSIONER
+  if (isKingsley) {
+    const kglMayorId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.kgl_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${KGL_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, kglMayorId)).join('')}</div>
+    </div>`;
+    const kglCommId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.kgl_commissioner')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${KGL_COMMISSIONER_CANDIDATES.map(c => candidateHTML(c, false, kglCommId, 4)).join('')}</div>
+    </div>`;
+  }
+
   // 41. ANCHORAGE MAYOR & COUNCIL MEMBER
   if (isAnchorage) {
     const ansMayorId = 'race' + (++raceCounter);
@@ -4054,27 +4489,6 @@ const isWorthingtonHills         = cityCode === 'WOH';
     <div class="section-header nonpartisan">${t('ballot.nonpartisan_header')}</div>
     <div class="section-note">${t('ballot.nonpartisan_section_note')}</div>`;
 
-  // 7. METRO MAYOR
-  const mayorRaceId = 'race' + (++raceCounter);
-  html += `<div class="race nonpartisan-race">
-    <div class="race-title">${t('race.metro_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-    <div class="candidate-list mayor-list">${
-      MAYOR_CANDIDATES.map(c => candidateHTML(c, ENDORSEMENTS.mayor.includes(c.name), mayorRaceId)).join('')
-    }</div>
-  </div>`;
-
-  // 8. METRO COUNCIL (all odd districts)
-  if (isOdd && COUNCIL_CANDIDATES[council_district]) {
-    const councilRaceId = 'race' + (++raceCounter);
-    const endorsed = ENDORSEMENTS.council[council_district] || [];
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.metro_council').replace('{N}', council_district)} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${
-        COUNCIL_CANDIDATES[council_district].map(c => candidateHTML(c, endorsed.includes(c.name), councilRaceId)).join('')
-      }</div>
-    </div>`;
-  }
-
   // 9. KY COURT OF APPEALS
   for (const race of COURT_OF_APPEALS_RACES) {
     const raceId = 'race' + (++raceCounter);
@@ -4090,413 +4504,6 @@ const isWorthingtonHills         = cityCode === 'WOH';
     html += `<div class="race nonpartisan-race">
       <div class="race-title">${t('race.district_judge').replace('{N}', race.div)} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
       <div class="candidate-list">${race.candidates.map(c => candidateHTML(c, false, raceId)).join('')}</div>
-    </div>`;
-  }
-
-  // 11. SOIL & WATER CONSERVATION (3 seats, 2 candidates)
-  const soilWaterId = 'race' + (++raceCounter);
-  html += `<div class="race nonpartisan-race">
-    <div class="race-title">${t('race.soil_water')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-    <div class="candidate-list">${SOIL_WATER_CANDIDATES.map(c => candidateHTML(c, false, soilWaterId, 3)).join('')}</div>
-  </div>`;
-
-  // 12. SCHOOL BOARD (precinct-gated by division)
-  if (schoolBoardDiv !== null) {
-    const sbRaceId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.school_board').replace('{N}', schoolBoardDiv)} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${
-        SCHOOL_BOARD_CANDIDATES[schoolBoardDiv].map(c => candidateHTML(c, false, sbRaceId)).join('')
-      }</div>
-    </div>`;
-  }
-
-  // 13. SHIVELY COUNCIL (Shively precincts only)
-  if (isShively) {
-    const shivelyCouncilId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.shively_council')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${
-        SHIVELY_COUNCIL_CANDIDATES.map(c => candidateHTML(c, false, shivelyCouncilId, 6)).join('')
-      }</div>
-    </div>`;
-  }
-
-  // 14. JEFFERSONTOWN MAYOR & COUNCIL (J-town precincts only)
-  if (isJtown) {
-    const jtownMayorId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.jtown_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${JTOWN_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, jtownMayorId)).join('')}</div>
-    </div>`;
-    const jtownRaceId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.jtown_council')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${
-        JTOWN_COUNCIL_CANDIDATES.map(c => candidateHTML(c, false, jtownRaceId, 8)).join('')
-      }</div>
-    </div>`;
-  }
-
-  // 15. LYNDON MAYOR & COUNCIL (Lyndon precincts only)
-  if (isLyndon) {
-    const lyndonMayorId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.lyndon_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${LYNDON_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, lyndonMayorId)).join('')}</div>
-    </div>`;
-    const lyndonCouncilId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.lyndon_council')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${
-        LYNDON_COUNCIL_CANDIDATES.map(c => candidateHTML(c, false, lyndonCouncilId, 7)).join('')
-      }</div>
-    </div>`;
-  }
-
-  // 16. DRUID HILLS MAYOR & COMMISSIONER (Druid Hills precincts only)
-  if (isDruidHills) {
-    const drhMayorId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.drh_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${DRH_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, drhMayorId)).join('')}</div>
-    </div>`;
-    const drhCommId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.drh_commissioner')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${DRH_COMMISSIONER_CANDIDATES.map(c => candidateHTML(c, false, drhCommId, 4)).join('')}</div>
-    </div>`;
-  }
-
-  // 17. INDIAN HILLS MAYOR & COUNCIL (Indian Hills precincts only)
-  if (isIndianHills) {
-    const inhMayorId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.inh_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${INH_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, inhMayorId)).join('')}</div>
-    </div>`;
-    const inhCouncilId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.inh_council')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${INH_COUNCIL_CANDIDATES.map(c => candidateHTML(c, false, inhCouncilId, 9)).join('')}</div>
-    </div>`;
-  }
-
-  // 18. WINDY HILLS MAYOR & COUNCIL (Windy Hills precincts only)
-  if (isWindyHills) {
-    const wdhMayorId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.wdh_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${WDH_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, wdhMayorId)).join('')}</div>
-    </div>`;
-    const wdhCouncilId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.wdh_council')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${WDH_COUNCIL_CANDIDATES.map(c => candidateHTML(c, false, wdhCouncilId, 6)).join('')}</div>
-    </div>`;
-  }
-
-  // 19. BARBOURMEADE MAYOR & COMMISSIONER (Barbourmeade precincts only)
-  if (isBarbourmeade) {
-    const barMayorId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.bar_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${BAR_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, barMayorId)).join('')}</div>
-    </div>`;
-    const barCommId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.bar_commissioner')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${BAR_COMMISSIONER_CANDIDATES.map(c => candidateHTML(c, false, barCommId, 4)).join('')}</div>
-    </div>`;
-  }
-
-  // 20. COLDSTREAM MAYOR & COUNCIL (Coldstream precincts only)
-  if (isColdstream) {
-    const colMayorId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.col_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${COL_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, colMayorId)).join('')}</div>
-    </div>`;
-    const colCouncilId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.col_council')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${COL_COUNCIL_CANDIDATES.map(c => candidateHTML(c, false, colCouncilId, 6)).join('')}</div>
-    </div>`;
-  }
-  // 21. SAINT MATTHEWS MAYOR & COUNCIL
-  if (isSaintMatthews) {
-    const stmMayorId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.stm_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${STM_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, stmMayorId)).join('')}</div>
-    </div>`;
-    const stmCouncilId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.stm_council')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${STM_COUNCIL_CANDIDATES.map(c => candidateHTML(c, false, stmCouncilId, 8)).join('')}</div>
-    </div>`;
-  }
-
-  // 22. SAINT REGIS PARK MAYOR & COUNCIL
-  if (isSaintRegis) {
-    const srpMayorId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.srp_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${SRP_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, srpMayorId)).join('')}</div>
-    </div>`;
-    const srpCouncilId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.srp_council')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${SRP_COUNCIL_CANDIDATES.map(c => candidateHTML(c, false, srpCouncilId, 7)).join('')}</div>
-    </div>`;
-  }
-
-  // 23. HURSTBOURNE MAYOR & COMMISSIONER
-  if (isHurstbourne) {
-    const hubMayorId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.hub_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${HUB_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, hubMayorId)).join('')}</div>
-    </div>`;
-    const hubCommId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.hub_commissioner')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${HUB_COMMISSIONER_CANDIDATES.map(c => candidateHTML(c, false, hubCommId, 4)).join('')}</div>
-    </div>`;
-  }
-
-  // 24. DOUGLASS HILLS MAYOR & COUNCIL
-  if (isDouglassHills) {
-    const dohMayorId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.doh_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${DOH_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, dohMayorId)).join('')}</div>
-    </div>`;
-    const dohCouncilId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.doh_council')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${DOH_COUNCIL_CANDIDATES.map(c => candidateHTML(c, false, dohCouncilId, 6)).join('')}</div>
-    </div>`;
-  }
-
-  // 25. BEECHWOOD VILLAGE MAYOR & COUNCIL
-  if (isBeechwoodVillage) {
-    const bwvMayorId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.bwv_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${BWV_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, bwvMayorId)).join('')}</div>
-    </div>`;
-    const bwvCouncilId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.bwv_council')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${BWV_COUNCIL_CANDIDATES.map(c => candidateHTML(c, false, bwvCouncilId, 6)).join('')}</div>
-    </div>`;
-  }
-
-  // 26. GRAYMOOR-DEVONDALE MAYOR & COUNCIL
-  if (isGraymoor) {
-    const grdMayorId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.grd_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${GRD_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, grdMayorId)).join('')}</div>
-    </div>`;
-    const grdCouncilId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.grd_council')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${GRD_COUNCIL_CANDIDATES.map(c => candidateHTML(c, false, grdCouncilId, 6)).join('')}</div>
-    </div>`;
-  }
-
-  // 27. NORBOURNE ESTATES MAYOR & COMMISSIONER (write-in only)
-  if (isNorbourneEstates) {
-    const nbeMayorId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.nbe_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-    </div>`;
-    const nbeCommId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.nbe_commissioner')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-    </div>`;
-  }
-
-  // 28. RICHLAWN MAYOR & COMMISSIONER
-  if (isRichlawn) {
-    const rchMayorId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.rch_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${RCH_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, rchMayorId)).join('')}</div>
-    </div>`;
-    const rchCommId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.rch_commissioner')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${RCH_COMMISSIONER_CANDIDATES.map(c => candidateHTML(c, false, rchCommId, 4)).join('')}</div>
-    </div>`;
-  }
-
-  // 29. AUDUBON PARK MAYOR & COUNCIL
-  if (isAudubonPark) {
-    const apkMayorId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.apk_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${APK_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, apkMayorId)).join('')}</div>
-    </div>`;
-    const apkCouncilId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.apk_council')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${APK_COUNCIL_CANDIDATES.map(c => candidateHTML(c, false, apkCouncilId, 6)).join('')}</div>
-    </div>`;
-  }
-
-  // 30. STRATHMOOR MANOR MAYOR & COMMISSIONER
-  if (isStrathmoorManor) {
-    const smmMayorId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.smm_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${SMM_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, smmMayorId)).join('')}</div>
-    </div>`;
-    const smmCommId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.smm_commissioner')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${SMM_COMMISSIONER_CANDIDATES.map(c => candidateHTML(c, false, smmCommId, 4)).join('')}</div>
-    </div>`;
-  }
-
-  // 31. MIDDLETOWN MAYOR & COMMISSIONER
-  if (isMiddletown) {
-    const midMayorId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.mid_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${MID_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, midMayorId)).join('')}</div>
-    </div>`;
-    const midCommId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.mid_commissioner')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${MID_COMMISSIONER_CANDIDATES.map(c => candidateHTML(c, false, midCommId, 4)).join('')}</div>
-    </div>`;
-  }
-
-  // 32. PROSPECT MAYOR & COUNCIL
-  if (isProspect) {
-    const pspMayorId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.psp_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${PSP_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, pspMayorId)).join('')}</div>
-    </div>`;
-    const pspCouncilId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.psp_council')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${PSP_COUNCIL_CANDIDATES.map(c => candidateHTML(c, false, pspCouncilId, 6)).join('')}</div>
-    </div>`;
-  }
-
-  // 33. WOODLAND HILLS MAYOR & COMMISSIONER
-  if (isWoodlandHills) {
-    const wlhMayorId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.wlh_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${WLH_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, wlhMayorId)).join('')}</div>
-    </div>`;
-    const wlhCommId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.wlh_commissioner')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${WLH_COMMISSIONER_CANDIDATES.map(c => candidateHTML(c, false, wlhCommId, 4)).join('')}</div>
-    </div>`;
-  }
-
-  // 34. LYNNVIEW MAYOR & COUNCIL
-  if (isLynnview) {
-    const lnvMayorId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.lnv_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${LNV_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, lnvMayorId)).join('')}</div>
-    </div>`;
-    const lnvCouncilId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.lnv_council')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${LNV_COUNCIL_CANDIDATES.map(c => candidateHTML(c, false, lnvCouncilId, 6)).join('')}</div>
-    </div>`;
-  }
-
-  // 35. HERITAGE CREEK MAYOR & COUNCIL
-  if (isHeritageCk) {
-    const hckMayorId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.hck_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${HCK_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, hckMayorId)).join('')}</div>
-    </div>`;
-    const hckCouncilId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.hck_council')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${HCK_COUNCIL_CANDIDATES.map(c => candidateHTML(c, false, hckCouncilId, 6)).join('')}</div>
-    </div>`;
-  }
-
-  // 36. SENECA GARDENS MAYOR & COMMISSIONER
-  if (isSenecaGardens) {
-    const sngMayorId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.sng_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${SNG_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, sngMayorId)).join('')}</div>
-    </div>`;
-    const sngCommId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.sng_commissioner')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${SNG_COMMISSIONER_CANDIDATES.map(c => candidateHTML(c, false, sngCommId, 4)).join('')}</div>
-    </div>`;
-  }
-
-  // 37. STRATHMOOR VILLAGE MAYOR & COMMISSIONER (commissioners write-in only)
-  if (isStrathmoorVlg) {
-    const smvMayorId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.smv_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${SMV_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, smvMayorId)).join('')}</div>
-    </div>`;
-    const smvCommId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.smv_commissioner')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-    </div>`;
-  }
-
-  // 38. WELLINGTON MAYOR & COMMISSIONER
-  if (isWellington) {
-    const welMayorId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.wel_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${WEL_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, welMayorId)).join('')}</div>
-    </div>`;
-    const welCommId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.wel_commissioner')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${WEL_COMMISSIONER_CANDIDATES.map(c => candidateHTML(c, false, welCommId, 4)).join('')}</div>
-    </div>`;
-  }
-
-  // 39. NORWOOD MAYOR & COMMISSIONER
-  if (isNorwood) {
-    const norMayorId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.nor_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${NOR_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, norMayorId)).join('')}</div>
-    </div>`;
-    const norCommId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.nor_commissioner')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${NOR_COMMISSIONER_CANDIDATES.map(c => candidateHTML(c, false, norCommId, 4)).join('')}</div>
-    </div>`;
-  }
-
-  // 40. KINGSLEY MAYOR & COMMISSIONER
-  if (isKingsley) {
-    const kglMayorId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.kgl_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${KGL_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, kglMayorId)).join('')}</div>
-    </div>`;
-    const kglCommId = 'race' + (++raceCounter);
-    html += `<div class="race nonpartisan-race">
-      <div class="race-title">${t('race.kgl_commissioner')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
-      <div class="candidate-list">${KGL_COMMISSIONER_CANDIDATES.map(c => candidateHTML(c, false, kglCommId, 4)).join('')}</div>
     </div>`;
   }
 
