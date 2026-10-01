@@ -801,6 +801,7 @@ const TRANSLATIONS = {
     'ballot.partisan_section_note': 'All registered voters  ·  Green = Democrat endorsed by LDP',
     'ballot.partisan_note_ldp': 'Green = Democrat / LDP Endorsed',
     'ballot.nonpartisan_header': 'Nonpartisan Races — All Voters May Participate',
+    'ballot.judicial_header': 'Judicial Races',
     'ballot.nonpartisan_section_note': 'Party labels from voter registration are shown here for your information — they will <strong>NOT</strong> appear on your official ballot',
     'race.us_senator': 'United States Senator (Select One)',
     'race.us_congress': 'United States Representative in Congress — District {N} (Select One)',
@@ -1058,6 +1059,7 @@ const TRANSLATIONS = {
     'ballot.partisan_section_note': 'Todos los votantes registrados  ·  Verde = Demócrata respaldado por LDP',
     'ballot.partisan_note_ldp': 'Verde = Demócrata / Respaldado por LDP',
     'ballot.nonpartisan_header': 'Contiendas No Partidistas — Todos los votantes pueden participar',
+    'ballot.judicial_header': 'Contiendas Judiciales',
     'ballot.nonpartisan_section_note': 'Las etiquetas de partido del registro de votantes se muestran aquí para tu información — <strong>NO</strong> aparecerán en tu boleta oficial',
     'race.us_senator': 'Senador de los Estados Unidos (Seleccione uno)',
     'race.us_congress': 'Representante de los EE.UU. en el Congreso — Distrito {N} (Seleccione uno)',
@@ -1315,6 +1317,7 @@ const TRANSLATIONS = {
     'ballot.partisan_section_note': 'Dhammaan ciddiyaasha diiwaan-geliyay  ·  Cagaaran = Dimuqraadi LDP oo taageersan',
     'ballot.partisan_note_ldp': 'Cagaaran = Dimuqraadi / LDP waa taageersan tahay',
     'ballot.nonpartisan_header': 'Tartanmaha Aan Xisbiyeysan — Dhammaan Cod-bixiyayaasha Waxay Ka Qaybgeli Karaan',
+    'ballot.judicial_header': 'Tartanmaha Maxkamada',
     'ballot.nonpartisan_section_note': 'Calaamadaha xisbiga ee diiwaanka codbaadiyayaasha waxaa halkan lagu soo bandhigay si xog ugu noqoto — <strong>MA</strong> muuqan doonaan warqadaada rasmiga ah',
     'race.us_senator': 'Senatarka Mareykanka (Dooro Hal)',
     'race.us_congress': 'Wakiilka Mareykanka ee Kongireska — Degmada {N} (Dooro Hal)',
@@ -1572,6 +1575,7 @@ const TRANSLATIONS = {
     'ballot.partisan_section_note': 'Wapiga kura wote waliosajiliwa  ·  Kijani = Democratic aliyeidhinishwa na LDP',
     'ballot.partisan_note_ldp': 'Kijani = Democratic / Imeidhinishwa na LDP',
     'ballot.nonpartisan_header': 'Mashindano Yasiyo na Vyama — Wapiga Kura Wote Wanaweza Kushiriki',
+    'ballot.judicial_header': 'Mashindano ya Mahakama',
     'ballot.nonpartisan_section_note': 'Lebo za vyama kutoka usajili wa mpiga kura zinaonyeshwa hapa kwa taarifa yako — <strong>HAZITAONEKANA</strong> kwenye kura yako rasmi',
     'race.us_senator': 'Seneta wa Marekani (Chagua Mmoja)',
     'race.us_congress': 'Mwakilishi wa Marekani katika Bunge — Wilaya {N} (Chagua Mmoja)',
@@ -1829,6 +1833,7 @@ const TRANSLATIONS = {
     'ballot.partisan_section_note': 'Tout elektè enskri  ·  Vèt = Demokrat endose pa LDP',
     'ballot.partisan_note_ldp': 'Vèt = Demokrat / Endose pa LDP',
     'ballot.nonpartisan_header': 'Kous Ki Pa Patizan — Tout Elektè Yo Ka Patisipe',
+    'ballot.judicial_header': 'Kous Jidisyè',
     'ballot.nonpartisan_section_note': 'Etikèt pati soti nan enskripsyon elektè yo montre isit la pou enfòmasyon ou — yo <strong>PA</strong> pral parèt sou bilten ofisyèl ou',
     'race.us_senator': 'Senatè Etazini (Chwazi Youn)',
     'race.us_congress': 'Reprezantan Etazini nan Kongrè — Distri {N} (Chwazi Youn)',
@@ -3322,9 +3327,7 @@ const isWorthingtonHills         = cityCode === 'WOH';
   html += '</div>';
 
   // ══ NONPARTISAN SECTION ══
-  html += `<div class="ballot-section">
-    <div class="section-header nonpartisan">${t('ballot.nonpartisan_header')}</div>
-    <div class="section-note">${t('ballot.nonpartisan_section_note')}</div>`;
+  html += `<div class="ballot-section">`;
 
   // 11. SOIL & WATER CONSERVATION (3 seats, 2 candidates)
   const soilWaterId = 'race' + (++raceCounter);
@@ -4484,10 +4487,9 @@ const isWorthingtonHills         = cityCode === 'WOH';
 
   html += '</div>';
 
-  // ══ NONPARTISAN SECTION ══
+  // ══ JUDICIAL SECTION ══
   html += `<div class="ballot-section">
-    <div class="section-header nonpartisan">${t('ballot.nonpartisan_header')}</div>
-    <div class="section-note">${t('ballot.nonpartisan_section_note')}</div>`;
+    <div class="section-header nonpartisan">${t('ballot.judicial_header')}</div>`;
 
   // 9. KY COURT OF APPEALS
   for (const race of COURT_OF_APPEALS_RACES) {
