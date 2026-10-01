@@ -867,6 +867,8 @@ const TRANSLATIONS = {
     'race.wel_commissioner': 'City of Wellington — Commissioner (Select up to 4)',
     'race.nor_mayor': 'City of Norwood — Mayor (Select One)',
     'race.nor_commissioner': 'City of Norwood — Commissioner (Select up to 4)',
+    'race.kgl_mayor': 'City of Kingsley — Mayor (Select One)',
+    'race.kgl_commissioner': 'City of Kingsley — Commissioner (Select up to 4)',
     'race.ky_amendment_1': 'Constitutional Amendment No. 1',
     'ballot.ballot_questions_header': 'Ballot Questions',
     'ballot.amendment_1_text': 'Are you in favor of limiting a Governor\'s ability to grant pardons or commute sentences by prohibiting him or her from granting pardons or commuting sentences during the time period beginning 60 days prior to the general election at which the Governor is elected, and ending when the Governor is sworn in for that term by amending the Constitution of Kentucky as stated below?',
@@ -1018,6 +1020,8 @@ const TRANSLATIONS = {
     'race.wel_commissioner': 'Ciudad de Wellington — Comisionado (Seleccione hasta 4)',
     'race.nor_mayor': 'Ciudad de Norwood — Alcalde (Seleccione uno)',
     'race.nor_commissioner': 'Ciudad de Norwood — Comisionado (Seleccione hasta 4)',
+    'race.kgl_mayor': 'Ciudad de Kingsley — Alcalde (Seleccione uno)',
+    'race.kgl_commissioner': 'Ciudad de Kingsley — Comisionado (Seleccione hasta 4)',
     'race.ky_amendment_1': 'Enmienda Constitucional No. 1',
     'ballot.ballot_questions_header': 'Preguntas en la Boleta',
     'ballot.amendment_1_text': '¿Está usted a favor de limitar la capacidad del Gobernador para otorgar indultos o conmutar sentencias?',
@@ -1169,6 +1173,8 @@ const TRANSLATIONS = {
     'race.wel_commissioner': 'Magaalada Wellington — Koomishane (Dooro Ilaa 4)',
     'race.nor_mayor': 'Magaalada Norwood — Duqa (Dooro Hal)',
     'race.nor_commissioner': 'Magaalada Norwood — Koomishane (Dooro Ilaa 4)',
+    'race.kgl_mayor': 'Magaalada Kingsley — Duqa (Dooro Hal)',
+    'race.kgl_commissioner': 'Magaalada Kingsley — Koomishane (Dooro Ilaa 4)',
     'race.ky_amendment_1': 'Waxsoosaarka Dastuuriga Ah No. 1',
     'ballot.ballot_questions_header': 'Su\'aalaha Warqadda',
     'ballot.amendment_1_text': 'Ma taageersantahay in la xaddido awoodda Guburnaha si uu u bixiyo cafis ama uu u yareeyoo xukuumadaha?',
@@ -1320,6 +1326,8 @@ const TRANSLATIONS = {
     'race.wel_commissioner': 'Mji wa Wellington — Mkurugenzi (Chagua hadi 4)',
     'race.nor_mayor': 'Mji wa Norwood — Meya (Chagua Mmoja)',
     'race.nor_commissioner': 'Mji wa Norwood — Mkurugenzi (Chagua hadi 4)',
+    'race.kgl_mayor': 'Mji wa Kingsley — Meya (Chagua Mmoja)',
+    'race.kgl_commissioner': 'Mji wa Kingsley — Mkurugenzi (Chagua hadi 4)',
     'race.ky_amendment_1': 'Marekebisho ya Katiba Na. 1',
     'ballot.ballot_questions_header': 'Maswali ya Kura',
     'ballot.amendment_1_text': 'Je, unaunga mkono kupunguza uwezo wa Gavana kutoa msamaha au kupunguza vifungo?',
@@ -1471,6 +1479,8 @@ const TRANSLATIONS = {
     'race.wel_commissioner': 'Vil Wellington — Komisyonè (Chwazi jiska 4)',
     'race.nor_mayor': 'Vil Norwood — Majistra (Chwazi Youn)',
     'race.nor_commissioner': 'Vil Norwood — Komisyonè (Chwazi jiska 4)',
+    'race.kgl_mayor': 'Vil Kingsley — Majistra (Chwazi Youn)',
+    'race.kgl_commissioner': 'Vil Kingsley — Komisyonè (Chwazi jiska 4)',
     'race.ky_amendment_1': 'Amannman Konstitisyonèl No. 1',
     'ballot.ballot_questions_header': 'Kesyon Bilten',
     'ballot.amendment_1_text': 'Èske ou dakò pou limite kapasite Gouvènè a pou bay grès oswa rédwi pèn prizon?',
@@ -1983,6 +1993,16 @@ const NOR_COMMISSIONER_CANDIDATES = [
   { name: 'Daniel Able', party: null },
 ];
 
+// Kingsley — Mayor + Commissioner (4 seats)
+const KGL_PRECINCTS = new Set(['L186']);
+const KGL_MAYOR_CANDIDATES = [{ name: 'Thomas A. Schlindwein', party: null }];
+const KGL_COMMISSIONER_CANDIDATES = [
+  { name: 'Andrew James Looney', party: null },
+  { name: 'Leslie Goldring', party: null },
+  { name: "James \"Jamie\" Klein", party: null },
+  { name: 'Dary Picken', party: null },
+];
+
 // District Judge — District 30 (Jefferson County), all 16 divisions
 const DISTRICT_JUDGE_RACES = [
   { div: 1,  candidates: [{ name: 'Anthony Lewis Jones',     party: null }] },
@@ -2158,6 +2178,7 @@ function buildBallot({ council_district, commissioner_district, state_house_dist
   const isStrathmoorVlg   = SMV_PRECINCTS.has(precinct);
   const isWellington      = WEL_PRECINCTS.has(precinct);
   const isNorwood         = NOR_PRECINCTS.has(precinct);
+  const isKingsley        = KGL_PRECINCTS.has(precinct);
 
   // Find school board division for this precinct
   let schoolBoardDiv = null;
@@ -2663,6 +2684,20 @@ function buildBallot({ council_district, commissioner_district, state_house_dist
     html += `<div class="race nonpartisan-race">
       <div class="race-title">${t('race.nor_commissioner')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
       <div class="candidate-list">${NOR_COMMISSIONER_CANDIDATES.map(c => candidateHTML(c, false, norCommId, 4)).join('')}</div>
+    </div>`;
+  }
+
+  // 40. KINGSLEY MAYOR & COMMISSIONER
+  if (isKingsley) {
+    const kglMayorId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.kgl_mayor')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${KGL_MAYOR_CANDIDATES.map(c => candidateHTML(c, false, kglMayorId)).join('')}</div>
+    </div>`;
+    const kglCommId = 'race' + (++raceCounter);
+    html += `<div class="race nonpartisan-race">
+      <div class="race-title">${t('race.kgl_commissioner')} <span class="nonpartisan-tag">${t('race.nonpartisan_tag')}</span></div>
+      <div class="candidate-list">${KGL_COMMISSIONER_CANDIDATES.map(c => candidateHTML(c, false, kglCommId, 4)).join('')}</div>
     </div>`;
   }
 
