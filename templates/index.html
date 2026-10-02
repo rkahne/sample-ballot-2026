@@ -2137,11 +2137,11 @@ const PARTISAN_RACES = [
   { title: 'County Sheriff',                     candidates: [{ name: 'Stephen Yancey',           party: 'D' }, { name: 'Alexander William Marson', party: 'R' }] },
   { title: 'County Commissioner — “A” District', scope: 'commA', candidates: [{ name: 'Sarah Provancher', party: 'R' }] },
   { title: 'County Coroner',                     candidates: [{ name: 'Jo-Ann Farmer',            party: 'D' }] },
-  { title: 'Justice of the Peace — District 1',  candidates: [{ name: 'Mera Kathryn Corlett', party: 'D' }] },
-  { title: 'Justice of the Peace — District 2',  candidates: [{ name: 'Gary Fields',          party: 'D' }] },
-  { title: 'Constable — District 1',             candidates: [{ name: 'Christopher James Bayer', party: 'D' }, { name: 'John D. Zehnder',           party: 'R' }] },
-  { title: 'Constable — District 2',             candidates: [{ name: 'Shannon T. Leach',     party: 'D' }, { name: 'Rick “Vet” Strohmeier', party: 'R' }] },
-  { title: 'Constable — District 3',             candidates: [{ name: 'Monica Flowers',       party: 'D' }, { name: 'Ken “Jake Starr” Pagano', party: 'R' }] },
+  { title: 'Justice of the Peace — District 1',  scope: 'commA', candidates: [{ name: 'Mera Kathryn Corlett', party: 'D' }] },
+  { title: 'Justice of the Peace — District 2',  scope: 'commB', candidates: [{ name: 'Gary Fields',          party: 'D' }] },
+  { title: 'Constable — District 1',             scope: 'commA', candidates: [{ name: 'Christopher James Bayer', party: 'D' }, { name: 'John D. Zehnder',           party: 'R' }] },
+  { title: 'Constable — District 2',             scope: 'commB', candidates: [{ name: 'Shannon T. Leach',     party: 'D' }, { name: 'Rick “Vet” Strohmeier', party: 'R' }] },
+  { title: 'Constable — District 3',             scope: 'commC', candidates: [{ name: 'Monica Flowers',       party: 'D' }, { name: 'Ken “Jake Starr” Pagano', party: 'R' }] },
   { title: 'County Surveyor',                    candidates: [{ name: 'William D. Schroll III',   party: 'R' }] },
 ];
 
@@ -4866,34 +4866,35 @@ async function saveAsImage() {
 
 // ══════════════════════════════════════════════════════════════════════
 //  EARLY VOTING DATA & TOGGLE
-//  Order must match EARLY_VOTING_LOCATIONS in app.py (index 0-23)
+//  Order must match EARLY_VOTING_LOCATIONS in app.py (index 0-24)
 // ══════════════════════════════════════════════════════════════════════
 
 const EARLY_VOTING_LOCATIONS = [
-  { name: 'Americana World Community Center',              address: '4801 Southside Drive, 40214' },
-  { name: 'The Arterburn',                                 address: '310 Ten Pin Ln., 40207' },
-  { name: 'Berrytown Recreation Center',                   address: '1300 Heafer Rd., 40223' },
-  { name: 'Cyril Allgeier Community Center',               address: '4101 Cadillac Ct., 40213' },
-  { name: 'Epiphany United Methodist Church',              address: '7032 Southside Dr., 40214' },
-  { name: 'Goodwill Opportunity Campus — Broadway',        address: '2820 W. Broadway, 40211' },
-  { name: 'Goodwill Opportunity Campus — Preston',         address: '6201 Preston Hwy., 40219' },
-  { name: 'The Heritage — Shively Park',                   address: '1901 Park Rd., 40216' },
-  { name: 'Immanuel United Church of Christ',              address: '2300 Taylorsville Rd., 40205' },
-  { name: 'The Jeffersonian',                              address: '10617 Taylorsville Rd., 40299' },
-  { name: "Jefferson County Clerk's Office — Downtown",    address: '200 S. Fifth St., Suite 228, 40202' },
-  { name: "Jefferson County Clerk's Office — East Branch", address: '12312-A Shelbyville Rd., 40243' },
-  { name: "Jefferson County Clerk's Office — Fairdale",    address: '10616 W. Manslick Rd., 40118' },
-  { name: "Jefferson County Clerk's Office — West Branch", address: 'French Plaza — 228 Amy Ave., 40212' },
-  { name: 'Kentucky Center for African American Heritage', address: '1701 W. Muhammad Ali Blvd., 40203' },
-  { name: 'Lyndon Elks Lodge #2052',                       address: '904 Ormsby Ln., 40242' },
-  { name: 'New Zion Baptist Church',                       address: '1501 Louis Coleman Jr. Dr., 40211' },
-  { name: "Old Forester's Paristown Hall",                 address: '724 Brent St., 40204' },
-  { name: 'St. Andrew United Church of Christ',            address: '2608 Browns Ln., 40220' },
-  { name: 'Sts. Simon and Jude Catholic Church',           address: '4335 Hazelwood Dr., 40215' },
-  { name: 'Sun Valley Community Center',                   address: '6505 Bethany Ln., 40272' },
-  { name: 'Teamsters Local Union #783',                    address: '7711 Beulah Church Rd., 40228' },
-  { name: 'Triple Crown Pavilion',                         address: '1780 Plantside Dr., 40299' },
-  { name: 'U of L Shelby Campus — Founders Union Bldg.',   address: '450 N. Whittington Pkwy., 40222' },
+  { name: 'Americana World Community Center',                      address: '4801 Southside Drive, 40214' },
+  { name: 'The Arterburn',                                         address: '310 Ten Pin Ln., 40207' },
+  { name: 'Berrytown Recreation Center',                           address: '1300 Heafer Rd., 40223' },
+  { name: 'Central Government Center',                             address: '7201 Outer Loop, 40228' },
+  { name: 'Cyril Allgeier Community Center',                       address: '4101 Cadillac Ct., 40213' },
+  { name: 'Epiphany United Methodist Church',                      address: '7032 Southside Dr., 40214' },
+  { name: 'Goodwill Opportunity Campus (South Louisville)',        address: '6201 Preston Hwy., 40219' },
+  { name: 'Goodwill Opportunity Campus (West Louisville)',         address: '2820 W. Broadway, 40211' },
+  { name: 'The Heritage — Shively Park',                           address: '1901 Park Rd., 40216' },
+  { name: 'Immanuel United Church of Christ',                      address: '2300 Taylorsville Rd., 40205' },
+  { name: 'The Jeffersonian',                                      address: '10617 Taylorsville Rd., 40299' },
+  { name: "Jefferson County Clerk's Office - East Branch",         address: '12312-A Shelbyville Rd., 40243' },
+  { name: "Jefferson County Clerk's Office - Fairdale Playtorium", address: '10616 W. Manslick Rd., 40118' },
+  { name: "Jefferson County Clerk's Office - West Branch",         address: 'French Plaza — 228 Amy Ave., 40212' },
+  { name: 'Kentucky Center for African American Heritage',         address: '1701 W. Muhammad Ali Blvd., 40203' },
+  { name: 'Kentucky Fair & Expo Center',                           address: '937 Phillips Ln., 40209' },
+  { name: 'Lyndon Elks Lodge #2052',                               address: '904 Ormsby Ln., 40242' },
+  { name: 'New Zion Baptist Church',                               address: '1501 Louis Coleman Jr. Dr., 40211' },
+  { name: 'Southwest Government Center',                           address: '7219 Dixie Hwy., 40258' },
+  { name: 'St. Andrew United Church of Christ',                    address: '2608 Browns Ln., 40220' },
+  { name: 'Sts. Simon and Jude Catholic Church',                   address: '4335 Hazelwood Dr., 40215' },
+  { name: 'Sun Valley Community Center',                           address: '6505 Bethany Ln., 40272' },
+  { name: 'Teamsters Local Union #783',                            address: '7711 Beulah Church Rd., 40228' },
+  { name: 'Triple Crown Pavilion',                                 address: '1780 Plantside Dr., 40299' },
+  { name: "U of L Shelby Campus — Founders Union Bldg.",           address: '450 N. Whittington Pkwy., 40222' },
 ];
 
 function toggleOtherEV() {
