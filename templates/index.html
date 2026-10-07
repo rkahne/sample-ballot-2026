@@ -4788,12 +4788,27 @@ async function saveAsImage() {
 
     const dataUrl = canvas.toDataURL('image/png');
     const ua = navigator.userAgent;
-    const isMobile  = /iphone|ipad|ipod|android/i.test(ua);
+    const isAndroid = /android/i.test(ua);
+    const isIOS     = /iphone|ipad|ipod/i.test(ua);
+    const isMobile  = isIOS || isAndroid;
     const isSafari  = /^((?!chrome|android).)*safari/i.test(ua);
     const isFBIAB   = /FBAN|FBAV|FB_IAB|Instagram|LinkedInApp/i.test(ua); // Facebook/IG in-app browser
 
-    // Mobile (non-FB-IAB): try Web Share API with file (native sheet → Save to Photos/Files)
-    if (isMobile && !isFBIAB && navigator.canShare && navigator.canShare({ files: [file] })) {
+    // Android Chrome: Web Share sheet only shows Copy/messaging apps, not "Save to Photos".
+    // Direct blob-URL download saves to the Downloads folder reliably.
+    if (isAndroid && !isFBIAB) {
+      const blobUrl = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.download = 'my-2026-voter-guide.png';
+      link.href = blobUrl;
+      link.click();
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 2000);
+      showModal();
+      return;
+    }
+
+    // iOS (non-FB-IAB): try Web Share API with file (native sheet → Save to Photos)
+    if (isIOS && !isFBIAB && navigator.canShare && navigator.canShare({ files: [file] })) {
       try {
         await navigator.share({
           title: t('share.share_title'),
@@ -4804,7 +4819,7 @@ async function saveAsImage() {
         return;
       } catch (shareErr) {
         if (shareErr.name === 'AbortError') return;
-        // Fall through to blob-URL method
+        // Fall through to overlay method
       }
     }
 
