@@ -4769,14 +4769,14 @@ async function saveAsImage() {
   ballot.classList.add('capture-mode');
   const origWidth    = ballot.style.width;
   const origMaxWidth = ballot.style.maxWidth;
-  ballot.style.width    = '390px';
-  ballot.style.maxWidth = '390px';
+  ballot.style.width    = '600px';
+  ballot.style.maxWidth = '600px';
 
   try {
     const canvas = await html2canvas(ballot, {
       scale: 3, useCORS: true, backgroundColor: '#ffffff',
       scrollX: 0, scrollY: -window.scrollY,
-      width: 390, windowWidth: 390,
+      width: 600, windowWidth: 600,
     });
 
     ballot.classList.remove('capture-mode');
