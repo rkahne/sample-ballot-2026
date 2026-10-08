@@ -477,18 +477,19 @@
     .btn-print:hover { background: #263238; }
 
     @media print {
-      /* Hide everything outside the ballot */
-      body > *:not(#ballot-print-wrapper) { display: none !important; }
-      #ballot-print-wrapper { display: block !important; }
-
       /* Page setup */
       @page { margin: 0.6in 0.55in; size: letter portrait; }
 
-      html, body { background: #fff !important; }
+      /* Hide everything except the ballot */
+      body { background: #fff !important; }
+      header.site-header, .not-ballot-headline, .not-ballot-sub,
+      main.container, #sharePrompt,
+      .modal-overlay, .btn-save-bottom, .btn-print { display: none !important; }
 
-      /* Ballot shell */
+      /* Ballot shell — always show, even before address lookup */
+      #ballot-print-wrapper { display: block !important; }
       #ballot {
-        display: block !important; visibility: visible !important;
+        display: block !important;
         width: 100% !important; max-width: 100% !important;
         border: none !important; box-shadow: none !important;
         margin: 0 !important; padding: 0 !important;
