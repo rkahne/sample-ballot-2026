@@ -469,10 +469,11 @@
 
     /* ── Print styles ─────────────────────────────────────────────── */
     .btn-print {
-      display: block; width: calc(100% - 24px); margin: 8px 12px 0;
-      padding: 13px; background: #37474f; color: #fff;
-      border: none; border-radius: 8px; font-size: 1rem; font-weight: 700;
-      cursor: pointer; text-align: center;
+      display: block; width: 100%; max-width: 340px;
+      margin: 8px auto 0; padding: 13px 20px;
+      background: #37474f; color: #fff; border: none; border-radius: 8px;
+      font-size: 1rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.04em; cursor: pointer; transition: background .2s;
     }
     .btn-print:hover { background: #263238; }
 
