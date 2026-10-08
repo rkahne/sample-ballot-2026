@@ -466,6 +466,117 @@
     #ballot.capture-mode .ballot-header  { padding: 10px 14px 8px; }
     #ballot.capture-mode .ballot-header h2 { font-size: 0.95rem; }
     #ballot.capture-mode .ballot-header p  { font-size: 0.7rem; }
+
+    /* ── Print styles ─────────────────────────────────────────────── */
+    .btn-print {
+      display: block; width: calc(100% - 24px); margin: 8px 12px 0;
+      padding: 13px; background: #37474f; color: #fff;
+      border: none; border-radius: 8px; font-size: 1rem; font-weight: 700;
+      cursor: pointer; text-align: center;
+    }
+    .btn-print:hover { background: #263238; }
+
+    @media print {
+      /* Hide everything outside the ballot */
+      body > *:not(#ballot-print-wrapper) { display: none !important; }
+      #ballot-print-wrapper { display: block !important; }
+
+      /* Page setup */
+      @page { margin: 0.6in 0.55in; size: letter portrait; }
+
+      html, body { background: #fff !important; }
+
+      /* Ballot shell */
+      #ballot {
+        display: block !important; visibility: visible !important;
+        width: 100% !important; max-width: 100% !important;
+        border: none !important; box-shadow: none !important;
+        margin: 0 !important; padding: 0 !important;
+      }
+
+      /* Print header */
+      .ballot-header {
+        background: #1a4a8a !important; -webkit-print-color-adjust: exact;
+        print-color-adjust: exact; color: #fff !important;
+        padding: 10px 14px !important; border-radius: 0 !important;
+        text-align: left !important;
+      }
+      .ballot-header h2 { font-size: 11pt !important; }
+      .ballot-header p  { font-size: 9pt !important; }
+
+      /* Hide screen-only chrome */
+      .polls-note, .legend, .btn-save-bottom, .btn-print,
+      .cand-info-btn, .section-note, footer,
+      [data-i18n="footer.help"], [data-i18n-html="footer.help"],
+      #ballot > div:last-child,          /* disclaimer line */
+      #ballot > div[style*="f0f4ff"],    /* reminders box */
+      #ballot > div[style*="padding:12"] /* help email note */
+      { display: none !important; }
+
+      /* Two-column race layout */
+      .ballot-body {
+        columns: 2; column-gap: 18pt;
+        column-fill: auto;
+      }
+      .ballot-section {
+        break-inside: avoid-column;
+        border-bottom: 1pt solid #ccc !important;
+        padding: 0 !important;
+      }
+      .section-header {
+        background: #37474f !important; -webkit-print-color-adjust: exact;
+        print-color-adjust: exact; color: #fff !important;
+        font-size: 7.5pt !important; padding: 3pt 8pt !important;
+        break-after: avoid;
+      }
+      .section-header.partisan { background: #1a4a8a !important; }
+
+      /* Races */
+      .race {
+        break-inside: avoid;
+        padding: 5pt 8pt !important;
+        border-bottom: 0.5pt solid #ddd !important;
+      }
+      .race-title {
+        font-size: 7pt !important; margin-bottom: 4pt !important;
+        color: #555 !important;
+      }
+      .race-note { font-size: 6.5pt !important; }
+      .race-no-primary { font-size: 7pt !important; padding: 4pt 6pt !important; }
+
+      /* Candidates */
+      .candidate-list { gap: 3pt !important; }
+      .candidate {
+        padding: 3pt 6pt !important; gap: 5pt !important;
+        border: 0.75pt solid #bbb !important; border-radius: 3pt !important;
+        cursor: default !important; break-inside: avoid;
+      }
+      .candidate.endorsed { border-color: #2e7d32 !important; background: #f1f8f2 !important; }
+      .candidate.selected { border-color: #1a4a8a !important; background: #e8eef8 !important; }
+
+      /* Bubble → print as an oval outline, filled when selected */
+      .bubble {
+        width: 14pt !important; height: 10pt !important;
+        border: 1.5pt solid #888 !important;
+        border-radius: 50% !important; flex-shrink: 0 !important;
+        background: #fff !important;
+        -webkit-print-color-adjust: exact; print-color-adjust: exact;
+      }
+      .candidate.selected .bubble {
+        background: #1a4a8a !important; border-color: #1a4a8a !important;
+      }
+      .candidate.selected .bubble::after { display: none !important; }
+
+      /* Candidate name / party */
+      .cand-name  { font-size: 8.5pt !important; }
+      .cand-extra { font-size: 7pt !important; }
+      .party-badge { font-size: 6.5pt !important; padding: 1pt 4pt !important; }
+      .endorsed-badge { font-size: 6.5pt !important; padding: 1pt 4pt !important; }
+      .nonpartisan-tag { font-size: 6pt !important; padding: 1pt 4pt !important; }
+
+      /* Mayor multi-select grid → single column for print */
+      .mayor-list { display: flex !important; flex-direction: column !important; gap: 3pt !important; }
+    }
   </style>
 </head>
 <body>
@@ -569,6 +680,7 @@
   </div>
 
   <!-- Ballot -->
+  <div id="ballot-print-wrapper" style="display:contents">
   <div id="ballot">
     <div class="ballot-header">
       <h2 data-i18n="ballot.heading">Your Louisville Democratic Party General Election Ballot Guide</h2>
@@ -597,6 +709,9 @@
     <button class="btn-save-bottom" id="saveImgBtn" onclick="saveAsImage()" data-i18n="save.btn">
       ↓ Save Your Ballot Guide
     </button>
+    <button class="btn-print" onclick="window.print()">
+      🖨 Print Your Ballot Guide
+    </button>
 
     <div style="background:#f0f4ff;border:1px solid #c5d0e8;border-radius:8px;margin:16px 12px 8px;padding:14px 16px;font-size:0.84rem;line-height:1.6">
       <strong data-i18n="reminders.title">📌 Reminders</strong>
@@ -610,6 +725,7 @@
       Party labels were verified after the candidate filing date closed on January 9, 2026 via Open Records Request.
     </div>
   </div>
+  </div><!-- /#ballot-print-wrapper -->
 
   <!-- Share prompt (shown after ballot loads) -->
   <div id="sharePrompt" class="share-prompt" style="display:none">
