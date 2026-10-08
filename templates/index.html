@@ -494,13 +494,18 @@
         width: 100% !important; max-width: 100% !important;
         border: none !important; box-shadow: none !important;
         margin: 0 !important; padding: 0 !important;
+        page-break-after: avoid; break-after: avoid;
+      }
+      /* Prevent the column container from overflowing into a blank page */
+      .ballot-body {
+        margin: 0 !important; padding: 0 !important;
+        page-break-after: avoid; break-after: avoid;
       }
 
-      /* Hide banner, polls note, legend, reminders, disclaimer, footer help text */
+      /* Hide everything inside #ballot except the race body */
       .ballot-header, .polls-note, .legend,
-      #ballot > div[style*="f0f4ff"],
-      #ballot > div[style*="text-align:center"],
-      #ballot > div[style*="padding:12px 16px 4px"] { display: none !important; }
+      #ballot > div:not(#ballotBody),
+      #ballot > button { display: none !important; }
 
       /* Hide screen-only chrome */
       .polls-note, .legend, .btn-save-bottom, .btn-print,
