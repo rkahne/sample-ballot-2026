@@ -2097,16 +2097,16 @@ const MAYOR_CANDIDATES = [
 
 // Metro Council — all odd districts (general election, nonpartisan)
 const COUNCIL_CANDIDATES = {
-  1:  [{ name: 'JaRee Gardner',               party: null }, { name: 'Tammy Hawkins',              party: null }],
+  1:  [{ name: 'JaRee Gardner', party: 'D' }, { name: 'Tammy Hawkins',              party: null }],
   3:  [{ name: 'Keisha Dorsey',               party: 'D'  }, { name: 'Kumar Rashad',               party: 'D'  }],
   5:  [{ name: 'Donna Lyvette Purvis',        party: 'D'  }, { name: 'Ray "Sir Friendly" Barker',  party: 'D'  }],
-  7:  [{ name: 'Paula McCraney',              party: 'D'  }, { name: 'Catherine "Cat" Timmerman',  party: null }],
+  7:  [{ name: 'Paula McCraney',              party: 'D'  }, { name: 'Catherine "Cat" Timmerman', party: 'R' }],
   9:  [{ name: 'Andrea R. Parr',              party: 'D'  }, { name: 'Alison Brotzge-Elder',       party: 'D'  }],
   11: [{ name: 'Melina Hettiaratchi',         party: 'D'  }, { name: 'Kevin Kramer',               party: 'R'  }],
   13: [{ name: 'Dan Seum Jr.',                party: 'R'  }],
   15: [{ name: 'Jennifer Chappell',           party: 'D'  }],
   17: [{ name: 'Markus Winkler',              party: 'D'  }, { name: 'Nancy-Lynne Walters',        party: 'R'  }],
-  19: [{ name: 'Alex Feria',                  party: null }, { name: 'Anthony Piagentini',         party: 'R'  }],
+  19: [{ name: 'Alex Feria', party: 'R' }, { name: 'Anthony Piagentini',         party: 'R'  }],
   21: [{ name: 'Lonnie Joseph',               party: 'R'  }, { name: 'Betsy Ruhe',                 party: 'D'  }],
   23: [{ name: 'Jeff Hudson',                 party: 'R'  }, { name: 'Ainsley Jones',              party: 'D'  }],
   25: [{ name: 'Khalil "Charlie" Batshon',    party: 'R'  }],
@@ -2116,7 +2116,7 @@ const COUNCIL_CANDIDATES = {
 const US_SENATE_CANDIDATES = [
   { name: 'Andy Barr',             party: 'R'  },
   { name: 'Charles Booker',        party: 'D'  },
-  { name: 'Christopher Campbell',  party: null },
+  { name: 'Christopher Campbell', party: 'O' },
 ];
 
 // KY State Senate — Jefferson County districts with general election candidates
@@ -2223,7 +2223,7 @@ const JTOWN_COUNCIL_CANDIDATES = [
   { name: 'Vincent Grisanti', party: 'R' },
   { name: 'Richard "Dickie" Dunn',    party: 'R'   },
   { name: 'Mark Russell',             party: 'D'   },
-  { name: 'Ray "Chubby Ray" Perkins', party: null  },
+  { name: 'Ray "Chubby Ray" Perkins', party: 'I' },
   { name: 'Allison Neal Head', party: 'R' },
 ];
 
@@ -2234,7 +2234,7 @@ const LYNDON_PRECINCTS = new Set([
   'F106','F151','F171','F172','F179','F180',
 ]);
 const LYNDON_MAYOR_CANDIDATES = [
-  { name: 'Andy Benner',  party: null },
+  { name: 'Andy Benner', party: 'I' },
   { name: 'Brent Hagan', party: 'R' },
 ];
 const LYNDON_COUNCIL_CANDIDATES = [
@@ -2260,7 +2260,7 @@ const LYNDON_COUNCIL_CANDIDATES = [
 // Druid Hills — Mayor + Commissioner (4 seats)
 const DRH_PRECINCTS = new Set(['G181']);
 const DRH_MAYOR_CANDIDATES = [
-  { name: 'Caroline R. Westfall', party: null },
+  { name: 'Caroline R. Westfall', party: 'D' },
 ];
 const DRH_COMMISSIONER_CANDIDATES = [
   { name: 'W. Charles Jobson',    party: null },
@@ -2275,7 +2275,7 @@ const INH_MAYOR_CANDIDATES = [
   { name: 'Chip Hancock', party: 'R' },
 ];
 const INH_COUNCIL_CANDIDATES = [
-  { name: 'Samuel "Chip" Hayward',  party: null },
+  { name: 'Samuel "Chip" Hayward', party: 'R' },
   { name: 'Laura J. Dunbar', party: 'R' },
   { name: 'W. Vance von Borries', party: 'R' },
   { name: 'Robert L. Astorino Sr.', party: 'I' },
@@ -2375,8 +2375,8 @@ const HUB_COMMISSIONER_CANDIDATES = [
 // Douglass Hills — Mayor + Councilmember (6 seats)
 const DOH_PRECINCTS = new Set(['D164','D168','D169','D171','D172','D173','F163','F170','F176']);
 const DOH_MAYOR_CANDIDATES = [
-  { name: 'Laura Herhold', party: null },
-  { name: 'Jeffrey J. Riddle Sr.', party: null },
+  { name: 'Laura Herhold', party: 'R' },
+  { name: 'Jeffrey J. Riddle Sr.', party: 'R' },
 ];
 const DOH_COUNCIL_CANDIDATES = [
   { name: 'Neil Sandefur', party: null },
@@ -2403,7 +2403,7 @@ const BWV_COUNCIL_CANDIDATES = [
 
 // Graymoor-Devondale — Mayor + Councilmember (6 seats)
 const GRD_PRECINCTS = new Set(['E154','E155','E171','E175','E183']);
-const GRD_MAYOR_CANDIDATES = [{ name: 'John Vaughan', party: null }];
+const GRD_MAYOR_CANDIDATES = [{ name: 'John Vaughan', party: 'D' }];
 const GRD_COUNCIL_CANDIDATES = [
   { name: 'Angela Coan', party: null },
   { name: 'Joseph F. Meiners', party: null },
@@ -2584,69 +2584,69 @@ const BLM_MAYOR_CANDIDATES = [
 const BLM_COMMISSIONER_CANDIDATES = [
   { name: 'Sandra Walker', party: 'R' },
   { name: 'Burt Deutsch', party: 'D' },
-  { name: 'Ralph Farsetti', party: null },
-  { name: 'Halle Brumleve', party: null },
+  { name: 'Ralph Farsetti', party: 'R' },
+  { name: 'Halle Brumleve', party: 'R' },
 ];
 
 const BLW_MAYOR_CANDIDATES = [
-  { name: 'Mark T. Klein', party: null },
+  { name: 'Mark T. Klein', party: 'R' },
 ];
 const BLW_COMMISSIONER_CANDIDATES = [
-  { name: 'Leslie Beam', party: null },
-  { name: 'Erin Quinnan', party: null },
-  { name: 'Nicole Walton', party: null },
-  { name: 'Kevin R. Orr', party: null },
+  { name: 'Leslie Beam', party: 'R' },
+  { name: 'Erin Quinnan', party: 'D' },
+  { name: 'Nicole Walton', party: 'D' },
+  { name: 'Kevin R. Orr', party: 'D' },
 ];
 
 const BRF_MAYOR_CANDIDATES = [
-  { name: 'Jimmy Stout', party: null },
+  { name: 'Jimmy Stout', party: 'D' },
 ];
 const BRF_COMMISSIONER_CANDIDATES = [
   { name: 'Katherine "Katie" Danner', party: 'D' },
-  { name: 'Amanda Colpo', party: null },
-  { name: 'Brian Augustine', party: null },
-  { name: 'Doug Walker', party: null },
+  { name: 'Amanda Colpo', party: 'D' },
+  { name: 'Brian Augustine', party: 'D' },
+  { name: 'Doug Walker', party: 'R' },
 ];
 
 const BRM_MAYOR_CANDIDATES = [
-  { name: 'Jacob P. Gross', party: null },
+  { name: 'Jacob P. Gross', party: 'D' },
 ];
 const BRM_COMMISSIONER_CANDIDATES = [
-  { name: 'Ross Parmly', party: null },
-  { name: 'Elizabeth Nicholson', party: null },
+  { name: 'Ross Parmly', party: 'R' },
+  { name: 'Elizabeth Nicholson', party: 'I' },
   { name: 'Monique L. LaVertu', party: 'D' },
   { name: 'Jesse S. Fraser', party: 'D' },
 ];
 
 const BRV_MAYOR_CANDIDATES = [
-  { name: 'Mark W. Joyce', party: null },
+  { name: 'Mark W. Joyce', party: 'R' },
 ];
 const BRV_COMMISSIONER_CANDIDATES = [
-  { name: 'Fay Dorval', party: null },
-  { name: 'Whitney Hankins', party: null },
-  { name: 'Maryellen Howley', party: null },
-  { name: 'Brian A. Willis', party: null },
+  { name: 'Fay Dorval', party: 'R' },
+  { name: 'Whitney Hankins', party: 'D' },
+  { name: 'Maryellen Howley', party: 'D' },
+  { name: 'Brian A. Willis', party: 'R' },
 ];
 
 const BRW_MAYOR_CANDIDATES = [
-  { name: 'Liz McGrath', party: null },
+  { name: 'Liz McGrath', party: 'R' },
   { name: 'Brian K. Sutton', party: 'D' },
 ];
 const BRW_COMMISSIONER_CANDIDATES = [
-  { name: 'Caroline Meiners', party: null },
-  { name: 'Debra R. Boone', party: null },
-  { name: 'Larry "Kody" Nalley III.', party: null },
+  { name: 'Caroline Meiners', party: 'R' },
+  { name: 'Debra R. Boone', party: 'D' },
+  { name: 'Larry "Kody" Nalley III.', party: 'L' },
   { name: 'Lauren Carter Becker', party: 'D' },
-  { name: 'Derrick A. Ailiff', party: null },
+  { name: 'Derrick A. Ailiff', party: 'R' },
 ];
 
 const CAM_MAYOR_CANDIDATES = [];
 const CAM_COMMISSIONER_CANDIDATES = [
-  { name: 'Gayle Wilhelmi', party: null },
+  { name: 'Gayle Wilhelmi', party: 'D' },
 ];
 
 const CKS_MAYOR_CANDIDATES = [
-  { name: 'Michael R. Cottman', party: null },
+  { name: 'Michael R. Cottman', party: 'R' },
 ];
 const CKS_COMMISSIONER_CANDIDATES = [
   { name: 'Richard Bean', party: 'D' },
@@ -2656,43 +2656,43 @@ const CKS_COMMISSIONER_CANDIDATES = [
 ];
 
 const CRG_MAYOR_CANDIDATES = [
-  { name: 'Chas Krish', party: null },
+  { name: 'Chas Krish', party: 'D' },
 ];
 const CRG_COMMISSIONER_CANDIDATES = [
-  { name: 'Will Steiden', party: null },
-  { name: 'Chris Baker', party: null },
-  { name: 'Brian Thatcher', party: null },
-  { name: 'Jamie Gerrish', party: null },
+  { name: 'Will Steiden', party: 'R' },
+  { name: 'Chris Baker', party: 'D' },
+  { name: 'Brian Thatcher', party: 'R' },
+  { name: 'Jamie Gerrish', party: 'R' },
 ];
 
 const FIN_MAYOR_CANDIDATES = [
-  { name: 'John S. Bell', party: null },
+  { name: 'John S. Bell', party: 'R' },
 ];
 const FIN_COMMISSIONER_CANDIDATES = [
-  { name: 'Gene Harris', party: null },
-  { name: 'Ollie D. White', party: null },
-  { name: 'Jerry Gregory', party: null },
-  { name: 'Samuel W. Jackson', party: null },
+  { name: 'Gene Harris', party: 'R' },
+  { name: 'Ollie D. White', party: 'D' },
+  { name: 'Jerry Gregory', party: 'R' },
+  { name: 'Samuel W. Jackson', party: 'D' },
 ];
 
 const FRH_MAYOR_CANDIDATES = [
-  { name: 'Kenneth W. Griffin', party: null },
+  { name: 'Kenneth W. Griffin', party: 'R' },
 ];
 const FRH_COMMISSIONER_CANDIDATES = [
-  { name: 'Sharon C. Doll', party: null },
+  { name: 'Sharon C. Doll', party: 'D' },
   { name: 'Robert Taylor IV.', party: 'D' },
-  { name: 'Gayle Knoop', party: null },
-  { name: 'Sharon Henry', party: null },
+  { name: 'Gayle Knoop', party: 'R' },
+  { name: 'Sharon Henry', party: 'D' },
 ];
 
 const GLV_MAYOR_CANDIDATES = [
-  { name: 'Jim Lehrer', party: null },
+  { name: 'Jim Lehrer', party: 'R' },
 ];
 const GLV_COMMISSIONER_CANDIDATES = [
-  { name: 'Alan Kamei', party: null },
-  { name: 'W. Thomas Halbleib', party: null },
+  { name: 'Alan Kamei', party: 'D' },
+  { name: 'W. Thomas Halbleib', party: 'D' },
   { name: 'Marylee Rothschild', party: 'D' },
-  { name: 'Bruce Merrick', party: null },
+  { name: 'Bruce Merrick', party: 'R' },
 ];
 
 const GRS_MAYOR_CANDIDATES = [
@@ -2706,23 +2706,23 @@ const GRS_COMMISSIONER_CANDIDATES = [
 ];
 
 const GSC_MAYOR_CANDIDATES = [
-  { name: 'Anita Edington', party: null },
+  { name: 'Anita Edington', party: 'D' },
 ];
 const GSC_COMMISSIONER_CANDIDATES = [
-  { name: 'Jessica Roth', party: null },
-  { name: 'Tj Combs', party: null },
+  { name: 'Jessica Roth', party: 'D' },
+  { name: 'Tj Combs', party: 'D' },
   { name: 'Norman Walker', party: 'D' },
-  { name: 'Eric Schweinhart', party: null },
+  { name: 'Eric Schweinhart', party: 'D' },
 ];
 
 const GVH_MAYOR_CANDIDATES = [
-  { name: 'Abigail Green', party: null },
+  { name: 'Abigail Green', party: 'D' },
 ];
 const GVH_COMMISSIONER_CANDIDATES = [
-  { name: 'Andrew Bird', party: null },
+  { name: 'Andrew Bird', party: 'R' },
   { name: 'Christopher Beaulieu', party: 'D' },
   { name: 'Emily White', party: 'D' },
-  { name: 'Brittany Wilson', party: null },
+  { name: 'Brittany Wilson', party: 'R' },
 ];
 
 const GVM_MAYOR_CANDIDATES = [];
@@ -2832,7 +2832,7 @@ const MDV_COMMISSIONER_CANDIDATES = [
   { name: 'Mike Jones', party: 'D' },
   { name: 'Tom Lucas', party: 'R' },
   { name: 'Kathryn Talbott', party: 'R' },
-  { name: 'William Pearce', party: null },
+  { name: 'William Pearce', party: 'R' },
 ];
 
 const MEF_MAYOR_CANDIDATES = [
@@ -2841,7 +2841,7 @@ const MEF_MAYOR_CANDIDATES = [
 const MEF_COMMISSIONER_CANDIDATES = [
   { name: 'Shelley Snow', party: 'R' },
   { name: 'Gregg Schumann', party: 'R' },
-  { name: 'Jackie Smith', party: null },
+  { name: 'Jackie Smith', party: 'R' },
   { name: 'William D. Cravens', party: 'D' },
 ];
 
@@ -2940,7 +2940,7 @@ const RLH_MAYOR_CANDIDATES = [
 ];
 const RLH_COMMISSIONER_CANDIDATES = [
   { name: 'Carolyn Lockard', party: 'O' },
-  { name: 'Margaret Ilunga Mwale', party: null },
+  { name: 'Margaret Ilunga Mwale', party: 'I' },
 ];
 
 const SPM_MAYOR_CANDIDATES = [
